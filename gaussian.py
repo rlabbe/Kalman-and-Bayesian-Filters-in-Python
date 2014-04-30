@@ -1,6 +1,6 @@
 import numpy as np
 import math
-
+import matplotlib.pyplot as plt
 
 def _to_array(x):
     """ returns any of a scalar, matrix, or array as a 1D numpy array
@@ -63,6 +63,14 @@ def multivariate_gaussian (x, mu, cov):
     fprime = (x - mu)**2
     return frac * np.exp(-0.5*np.dot(fprime, 1./np.diag(cov)))
 
+def norm_plot (mean, var):
+    min_x = mean - var * 1.5
+    max_x = mean + var * 1.5
+
+    xs = np.arange (min_x, max_x, 0.1)
+    ys = [gaussian (x,23,5) for x in xs]
+    plt.plot (xs,ys)
+    plt.show()
 
 if __name__ == '__main__':
     from scipy.stats import norm
