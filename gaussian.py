@@ -70,7 +70,6 @@ def norm_plot (mean, var):
     xs = np.arange (min_x, max_x, 0.1)
     ys = [gaussian (x,23,5) for x in xs]
     plt.plot (xs,ys)
-    plt.show()
 
 if __name__ == '__main__':
     from scipy.stats import norm
@@ -88,4 +87,3 @@ if __name__ == '__main__':
     assert rv.pdf(1.2) == x2
     assert abs(x2- x3) < 0.00000001
     print "all tests passed"
-
