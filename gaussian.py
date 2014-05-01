@@ -1,34 +1,11 @@
-import numpy as np
 import math
+import numpy as np
+import numpy.linalg as linalg
 import matplotlib.pyplot as plt
 
-def _to_array(x):
-    """ returns any of a scalar, matrix, or array as a 1D numpy array
-    Example:
-       _to_array(3) == array([3])
-    """
-    try:
-        x.shape
-        if type(x) != np.ndarray:
-            x = np.asarray(x)[0]
-        return x
-    except:
-        return np.array(np.mat(x)).reshape(1)
-
-def _to_cov(x,n):
-    """ If x is a scalar, returns a covariance matrix generated from it
-    as the identity matrix multiplied by x. The dimension will be nxn.
-    If x is already a numpy array then it is returned unchanged.
-    """
-    try:
-        x.shape
-        if type(x) != np.ndarray:
-            x = np.asarray(x)[0]
-        return x
-    except:
-        return np.eye(n) * x
 
 _two_pi = 2*math.pi
+
 
 def gaussian(x, mean, var):
     """returns normal distribution for x given a gaussian with the specified
@@ -70,6 +47,108 @@ def norm_plot(mean, var):
     xs = np.arange(min_x, max_x, 0.1)
     ys = [gaussian(x,23,5) for x in xs]
     plt.plot(xs,ys)
+
+
+def sigma_ellipse(cov, x=0, y=0, sigma=1, num_pts=100):
+    """ Takes a 2D covariance matrix and generates an ellipse showing the
+    contour plot at the specified sigma value. Ellipse is centered at (x,y).
+    num_pts specifies how many discrete points are used to generate the
+    ellipse.
+
+    Returns a tuple containing the ellipse,x, and y, in that order.
+    The ellipse is a 2D numpy array with shape (2, num_pts). Row 0 contains the
+    x components, and row 1 contains the y coordinates
+    """
+    L = linalg.cholesky(cov)
+    t = np.linspace(0, _two_pi, num_pts)
+    unit_circle = np.array([np.cos(t), np.sin(t)])
+
+    ellipse = sigma * L.dot(unit_circle)
+    ellipse[0] += x
+    ellipse[1] += y
+    return (ellipse,x,y)
+
+def sigma_ellipses(cov, x=0, y=0, sigma=[1,2], num_pts=100):
+    L = linalg.cholesky(cov)
+    t = np.linspace(0, _two_pi, num_pts)
+    unit_circle = np.array([np.cos(t), np.sin(t)])
+
+    e_list = []
+    for s in sigma:
+        ellipse = s * L.dot(unit_circle)
+        ellipse[0] += x
+        ellipse[1] += y
+        e_list.append (ellipse)
+    return (e_list,x,y)
+
+def plot_sigma_ellipse(ellipse,title=None):
+    """ plots the ellipse produced from sigma_ellipse."""
+
+    plt.axis('equal')
+    e = ellipse[0]
+    x = ellipse[1]
+    y = ellipse[2]
+
+    plt.plot(e[0], e[1])
+    plt.scatter(x,y,marker='+') # mark the center
+    if title is not None:
+        plt.title (title)
+    plt.show()
+
+def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=None):
+    """ plots the ellipse produced from sigma_ellipse."""
+
+    if x_lim is not None:
+        axis_equal = False
+        plt.xlim(x_lim)
+
+    if y_lim is not None:
+        axis_equal = False
+        plt.ylim(y_lim)
+
+    if axis_equal:
+        plt.axis('equal')
+
+    for ellipse in ellipses:
+        es = ellipse[0]
+        x = ellipse[1]
+        y = ellipse[2]
+
+        for e in es:
+            plt.plot(e[0], e[1], c='b')
+
+        plt.scatter(x,y,marker='+') # mark the center
+    if title is not None:
+        plt.title (title)
+    plt.show()
+
+
+def _to_array(x):
+    """ returns any of a scalar, matrix, or array as a 1D numpy array
+    Example:
+       _to_array(3) == array([3])
+    """
+    try:
+        x.shape
+        if type(x) != np.ndarray:
+            x = np.asarray(x)[0]
+        return x
+    except:
+        return np.array(np.mat(x)).reshape(1)
+
+def _to_cov(x,n):
+    """ If x is a scalar, returns a covariance matrix generated from it
+    as the identity matrix multiplied by x. The dimension will be nxn.
+    If x is already a numpy array then it is returned unchanged.
+    """
+    try:
+        x.shape
+        if type(x) != np.ndarray:
+            x = np.asarray(x)[0]
+        return x
+    except:
+        return np.eye(n) * x
+
 
 if __name__ == '__main__':
     from scipy.stats import norm
