@@ -93,10 +93,11 @@ def plot_sigma_ellipse(ellipse,title=None):
     plt.scatter(x,y,marker='+') # mark the center
     if title is not None:
         plt.title (title)
-    plt.show()
 
 def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=None):
     """ plots the ellipse produced from sigma_ellipse."""
+    isct = plt.Circle((2,2),1,color='b',fill=False)
+    plt.figure().gca().add_patch(isct)
 
     if x_lim is not None:
         axis_equal = False
@@ -120,8 +121,6 @@ def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=Non
         plt.scatter(x,y,marker='+') # mark the center
     if title is not None:
         plt.title (title)
-    plt.show()
-
 
 def _to_array(x):
     """ returns any of a scalar, matrix, or array as a 1D numpy array
@@ -165,4 +164,14 @@ if __name__ == '__main__':
 
     assert rv.pdf(1.2) == x2
     assert abs(x2- x3) < 0.00000001
+
+    cov = np.array([\
+    [1,1],\
+    [1,1.1]])
+
+    ev = sigma_ellipses(cov, x=2, y=2, sigma=sigma)
+    plot_sigma_ellipses([e1, e2, e3, ev], axis_equal=True,x_lim=[0,4],y_lim=[0,15])
+    #isct = plt.Circle((2,2),1,color='b',fill=False)
+    #plt.figure().gca().add_artist(isct)
+    plt.show()
     print "all tests passed"
