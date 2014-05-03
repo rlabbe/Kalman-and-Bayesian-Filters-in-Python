@@ -50,68 +50,9 @@ class KF1D(object):
         self.estimate = self.estimate + gaussian (U,var)
 
 
-measurements = [x+5 for x in range(100)]
 
 
 
-def fixed_error_kf(measurement_error, noise_factor = 1.0):
-    motion_sig = 2.
-    mu = 0
-    sig = 1000
-
-    f = KF1D (mu,sig)
-
-    ys = []
-    errs = []
-    xs = []
-
-    for i in range(len(measurements)):
-        r = random.randn() * noise_factor
-        m = measurements[i] + r
-        f.update (m, measurement_error)
-
-        xs.append(m)
-        ys.append(f.estimate.mu)
-        errs.append (f.estimate.sigma)
-
-        f.predict (1.0, motion_sig)
-
-    plt.clf()
-
-    plt.plot (measurements, 'r')
-    plt.plot (xs,'g')
-    plt.errorbar (x=range(len(ys)), color='b', y=ys, yerr=errs)
-    plt.show()
-
-def varying_error_kf(noise_factor=1.0):
-    motion_sig = 2.
-    mu = 0
-    sig = 1000
 
 
-    f = KF1D (mu,sig)
-    ys = []
-    us = []
-    errs = []
-    xs = []
-
-    for i in range(len(measurements)):
-        r = random.randn() * noise_factor
-        m = measurements[i] + r
-        print (r)
-        f.update (m, abs(r*10))
-        xs.append(m)
-        #print ("measure:" + str(f.estimate))
-        ys.append(f.estimate.mu)
-        errs.append (f.estimate.sigma)
-
-        f.predict (1.0, motion_sig)
-        #print ("predict:" + str(f.estimate))
-
-    plt.clf()
-    plt.plot (measurements, 'r')
-    plt.plot (xs,'g')
-    plt.errorbar (x=range(len(ys)), color='b', y=ys, yerr=errs)
-    plt.show()
-
-varying_error_kf( noise_factor=100)
+#varying_error_kf( noise_factor=100)

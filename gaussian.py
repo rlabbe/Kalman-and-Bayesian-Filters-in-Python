@@ -96,8 +96,6 @@ def plot_sigma_ellipse(ellipse,title=None):
 
 def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=None):
     """ plots the ellipse produced from sigma_ellipse."""
-    isct = plt.Circle((2,2),1,color='b',fill=False)
-    plt.figure().gca().add_patch(isct)
 
     if x_lim is not None:
         axis_equal = False
