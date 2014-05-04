@@ -4,12 +4,14 @@ Created on Thu May  1 16:56:49 2014
 
 @author: rlabbe
 """
+import matplotlib.pyplot as plt
 
 def show_residual_chart():
-    xlim([0.9,2.5]);ylim([0.5,2.5])
+    plt.xlim([0.9,2.5])
+    plt.ylim([0.5,2.5])
 
-    scatter ([1,2,2],[1,2,1.3])
-    scatter ([2],[1.8],marker='o')
+    plt.scatter ([1,2,2],[1,2,1.3])
+    plt.scatter ([2],[1.8],marker='o')
     ax = plt.axes()
     ax.annotate('', xy=(2,2), xytext=(1,1),
                 arrowprops=dict(arrowstyle='->', ec='b',shrinkA=3, shrinkB=4))
@@ -23,5 +25,5 @@ def show_residual_chart():
                 arrowprops=dict(arrowstyle="<->",
                                 ec="r",
                                 shrinkA=5, shrinkB=5))
-    title("Kalman Filter Prediction Update Step")
-    show()
+    plt.title("Kalman Filter Prediction Update Step")
+    plt.show()

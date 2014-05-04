@@ -13,6 +13,14 @@ def gaussian(x, mean, var):
     """
     return math.exp((-0.5*(x-mean)**2)/var) / math.sqrt(_two_pi*var)
 
+def mul (a_mu, a_var, b_mu, b_var):
+    m = (a_var*b_mu + b_var*a_mu) / (a_var + b_var)
+    v = 1. / (1./a_var + 1./b_var)
+    return (m, v)
+
+def add (a_mu, a_var, b_mu, b_var):
+    return (a_mu+b_mu, a_var+b_var)
+
 
 def multivariate_gaussian(x, mu, cov):
     """ This is designed to work the same as scipy.stats.multivariate_normal
