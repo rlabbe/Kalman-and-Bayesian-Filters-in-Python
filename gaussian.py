@@ -38,8 +38,9 @@ def multivariate_gaussian(x, mu, cov):
     """
 
     # force all to numpy.array type
-    x = _to_array(x)
-    mu = _to_array(mu)
+    x = np.asarray(x)
+    mu = np.asarray(mu)
+
     n = mu.size
     cov = _to_cov(cov, n)
 
@@ -128,18 +129,6 @@ def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=Non
     if title is not None:
         plt.title (title)
 
-def _to_array(x):
-    """ returns any of a scalar, matrix, or array as a 1D numpy array
-    Example:
-       _to_array(3) == array([3])
-    """
-    try:
-        x.shape
-        if type(x) != np.ndarray:
-            x = np.asarray(x)[0]
-        return x
-    except:
-        return np.array(np.mat(x)).reshape(1)
 
 def _to_cov(x,n):
     """ If x is a scalar, returns a covariance matrix generated from it
@@ -171,12 +160,12 @@ if __name__ == '__main__':
     assert rv.pdf(1.2) == x2
     assert abs(x2- x3) < 0.00000001
 
-    cov = np.array([\
-    [1,1],\
-    [1,1.1]])
+    cov = np.array([[1,1],
+                    [1,1.1]])
 
+    sigma = [1,1]
     ev = sigma_ellipses(cov, x=2, y=2, sigma=sigma)
-    plot_sigma_ellipses([e1, e2, e3, ev], axis_equal=True,x_lim=[0,4],y_lim=[0,15])
+    plot_sigma_ellipses([ev], axis_equal=True,x_lim=[0,4],y_lim=[0,15])
     #isct = plt.Circle((2,2),1,color='b',fill=False)
     #plt.figure().gca().add_artist(isct)
     plt.show()

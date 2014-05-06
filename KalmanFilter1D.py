@@ -9,13 +9,14 @@ import math
 import matplotlib.pyplot as plt
 import noise
 import numba
+import numpy.random as random
 
 class KalmanFilter1D(object):
 
     def __init__ (self, x0, var):
         self.mean = x0
         self.variance = var
-    @jit
+    
     def estimate(self, z, z_variance):
         self.mean = (self.variance*z + z_variance*self.mean) / (self.variance + z_variance)
         self.variance = 1. / (1./self.variance + 1./z_variance)
