@@ -2,7 +2,8 @@ import math
 import numpy as np
 import numpy.linalg as linalg
 import matplotlib.pyplot as plt
-
+import scipy.sparse as sp
+import scipy.sparse.linalg as spln
 
 _two_pi = 2*math.pi
 
@@ -36,19 +37,25 @@ def multivariate_gaussian(x, mu, cov):
     The function gaussian() implements the 1D (univariate)case, and is much
     faster than this function.
     """
-
+	
     # force all to numpy.array type
-    x = np.asarray(x)
-    mu = np.asarray(mu)
+    x   = np.array(x, copy=False, ndmin=1)
+    mu  = np.array(mu,copy=False, ndmin=1)
 
-    n = mu.size
-    cov = _to_cov(cov, n)
+    nx = len(mu)
+    cov = _to_cov(cov, nx)
 
-    det = np.sqrt(np.prod(np.diag(cov)))
-    frac = _two_pi**(-n/2.) * (1./det)
-    fprime = (x - mu)**2
-    return frac * np.exp(-0.5*np.dot(fprime, 1./np.diag(cov)))
+    norm_coeff = nx*math.log(2*math.pi) + np.linalg.slogdet(cov)[1]
 
+    err = x - mu
+    if (sp.issparse(cov)):
+        numerator = spln.spsolve(cov, err).T.dot(err)
+    else:
+        numerator = np.linalg.solve(cov, err).T.dot(err)
+
+    return math.exp(-0.5*(norm_coeff + numerator))
+	
+	
 def norm_plot(mean, var):
     min_x = mean - var * 1.5
     max_x = mean + var * 1.5
