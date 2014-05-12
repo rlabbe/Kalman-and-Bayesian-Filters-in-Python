@@ -37,7 +37,7 @@ def multivariate_gaussian(x, mu, cov):
     The function gaussian() implements the 1D (univariate)case, and is much
     faster than this function.
     """
-	
+
     # force all to numpy.array type
     x   = np.array(x, copy=False, ndmin=1)
     mu  = np.array(mu,copy=False, ndmin=1)
@@ -54,8 +54,8 @@ def multivariate_gaussian(x, mu, cov):
         numerator = np.linalg.solve(cov, err).T.dot(err)
 
     return math.exp(-0.5*(norm_coeff + numerator))
-	
-	
+
+
 def norm_plot(mean, var):
     min_x = mean - var * 1.5
     max_x = mean + var * 1.5
@@ -75,6 +75,8 @@ def sigma_ellipse(cov, x=0, y=0, sigma=1, num_pts=100):
     The ellipse is a 2D numpy array with shape (2, num_pts). Row 0 contains the
     x components, and row 1 contains the y coordinates
     """
+    cov = np.asarray(cov)
+
     L = linalg.cholesky(cov)
     t = np.linspace(0, _two_pi, num_pts)
     unit_circle = np.array([np.cos(t), np.sin(t)])
@@ -85,6 +87,8 @@ def sigma_ellipse(cov, x=0, y=0, sigma=1, num_pts=100):
     return (ellipse,x,y)
 
 def sigma_ellipses(cov, x=0, y=0, sigma=[1,2], num_pts=100):
+    cov = np.asarray(cov)
+
     L = linalg.cholesky(cov)
     t = np.linspace(0, _two_pi, num_pts)
     unit_circle = np.array([np.cos(t), np.sin(t)])
@@ -97,15 +101,17 @@ def sigma_ellipses(cov, x=0, y=0, sigma=[1,2], num_pts=100):
         e_list.append (ellipse)
     return (e_list,x,y)
 
-def plot_sigma_ellipse(ellipse,title=None):
+def plot_sigma_ellipse(ellipse, title=None, axis_equal=True):
     """ plots the ellipse produced from sigma_ellipse."""
 
-    plt.axis('equal')
+    if axis_equal:
+        plt.axis('equal')
+
     e = ellipse[0]
     x = ellipse[1]
     y = ellipse[2]
 
-    plt.plot(e[0], e[1])
+    plt.plot(e[0], e[1],c='b')
     plt.scatter(x,y,marker='+') # mark the center
     if title is not None:
         plt.title (title)
