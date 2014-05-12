@@ -1,6 +1,3 @@
-<link href='http://fonts.googleapis.com/css?family=Fenix' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:100,300,400,500,700,800,900,100italic,300italic,400italic,500italic,700italic,800italic,900italic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400' rel='stylesheet' type='text/css'>
 <style>
     @font-face {
         font-family: "Computer Modern";
@@ -8,54 +5,34 @@
     }
     div.cell{
         width:800px;
-        margin-left:16% !important;
+        margin-left:auto;
         margin-right:auto;
     }
     h1 {
-        font-family: 'Alegreya Sans', sans-serif;
+        font-family: "Charis SIL", Palatino, serif;
     }
-    h2 {
-        font-family: 'Fenix', serif;
-    }
-    h3{
-		font-family: 'Fenix', serif;
+    h4{
         margin-top:12px;
         margin-bottom: 3px;
        }
-	h4{
-		font-family: 'Fenix', serif;
-       }
-    h5 {
-        font-family: 'Alegreya Sans', sans-serif;
-    }	   
     div.text_cell_render{
-        font-family: 'Alegreya Sans',Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-        line-height: 135%;
+        font-family: Computer Modern, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+        line-height: 145%;
         font-size: 120%;
-        width:600px;
+        width:800px;
         margin-left:auto;
         margin-right:auto;
     }
     .CodeMirror{
-            font-family: "Source Code Pro";
-			font-size: 90%;
+            font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
     }
-/*    .prompt{
+    .prompt{
         display: None;
-    }*/
-    .text_cell_render h1 {
-        font-weight: 200;
-        font-size: 50pt;
-		line-height: 100%;
-        color:#CD2305;
-        margin-bottom: 0.5em;
-        margin-top: 0.5em;
-        display: block;
-    }	
+    }
     .text_cell_render h5 {
         font-weight: 300;
         font-size: 16pt;
-        color: #CD2305;
+        color: #4057A1;
         font-style: italic;
         margin-bottom: .5em;
         margin-top: 0.5em;
@@ -64,7 +41,7 @@
     
     .warning{
         color: rgb( 240, 20, 20 )
-        }  
+        }
 </style>
 <script>
     MathJax.Hub.Config({

@@ -1,0 +1,203 @@
+<style>
+    div.cell{
+        width: 850px;
+        margin-left: 10% !important;
+        margin-right: auto;
+    }
+    h1 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    div.input_area {
+        background: #F6F6F9;
+        border: 1px solid #586e75;
+    }
+
+    .text_cell_render h1 {
+        font-weight: 200;
+        font-size: 40pt;
+        line-height: 100%;
+        color:#c76c0c;
+        margin-bottom: 0em;
+        margin-top: 0em;
+        display: block;
+        white-space: nowrap;
+    } 
+    h2 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+        text-indent:1em;
+    }
+    .text_cell_render h2 {
+        font-weight: 200;
+        font-size: 20pt;
+        font-style: italic;
+        line-height: 100%;
+        color:#c76c0c;
+        margin-bottom: 1.5em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    } 
+    h3 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h3 {
+        font-weight: 300;
+        font-size: 18pt;
+        line-height: 100%;
+        color:#d77c0c;
+        margin-bottom: 0.5em;
+        margin-top: 2em;
+        display: block;
+        white-space: nowrap;
+    }
+    h4 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h4 {
+        font-weight: 300;
+        font-size: 16pt;
+        color:#d77c0c;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    h5 {
+        font-family: 'Open sans',verdana,arial,sans-serif;
+    }
+    .text_cell_render h5 {
+        font-weight: 300;
+        font-style: normal;
+        color: #1d3b84;
+        font-size: 16pt;
+        margin-bottom: 0em;
+        margin-top: 1.5em;
+        display: block;
+        white-space: nowrap;
+    }
+    div.text_cell_render{
+        font-family: 'Open sans',verdana,arial,sans-serif;
+        line-height: 135%;
+        font-size: 125%;
+        width:750px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:justify;
+        text-justify:inter-word;
+    }
+    div.output_subarea.output_text.output_pyout {
+        overflow-x: auto;
+        overflow-y: scroll;
+        max-height: 300px;
+    }
+    div.output_subarea.output_stream.output_stdout.output_text {
+        overflow-x: auto;
+        overflow-y: scroll;
+        max-height: 300px;
+    }
+    code{
+      font-size: 78%;
+    }
+    .rendered_html code{
+    background-color: transparent;
+    }
+    ul{
+        margin: 2em;
+    }
+    ul li{
+        padding-left: 0.5em; 
+        margin-bottom: 0.5em; 
+        margin-top: 0.5em; 
+    }
+    ul li li{
+        padding-left: 0.2em; 
+        margin-bottom: 0.2em; 
+        margin-top: 0.2em; 
+    }
+    ol{
+        margin: 2em;
+    }
+    ol li{
+        padding-left: 0.5em; 
+        margin-bottom: 0.5em; 
+        margin-top: 0.5em; 
+    }
+    ul li{
+        padding-left: 0.5em; 
+        margin-bottom: 0.5em; 
+        margin-top: 0.2em; 
+    }
+    a:link{
+       font-weight: bold;
+       color:#447adb;
+    }
+    a:visited{
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:hover{
+       font-weight: bold;
+       color: #1d3b84;
+    }
+    a:focus{
+       font-weight: bold;
+       color:#447adb;
+    }
+    a:active{
+       font-weight: bold;
+       color:#447adb;
+    }
+    .rendered_html :link {
+       text-decoration: none; 
+    }
+    .rendered_html :hover {
+       text-decoration: none; 
+    }
+    .rendered_html :visited {
+      text-decoration: none;
+    }
+    .rendered_html :focus {
+      text-decoration: none;
+    }
+    .rendered_html :active {
+      text-decoration: none;
+    }
+    .warning{
+        color: rgb( 240, 20, 20 )
+    } 
+    hr {
+      color: #f3f3f3;
+      background-color: #f3f3f3;
+      height: 1px;
+    }
+    blockquote{
+      display:block;
+      background: #fcfcfc;
+      border-left: 5px solid #c76c0c;
+      font-family: 'Open sans',verdana,arial,sans-serif;
+      width:680px;
+      padding: 10px 10px 10px 10px;
+      text-align:justify;
+      text-justify:inter-word;
+      }
+      blockquote p {
+        margin-bottom: 0;
+        line-height: 125%;
+        font-size: 100%;
+      }
+</style>
+<script>
+    MathJax.Hub.Config({
+                        TeX: {
+                           extensions: ["AMSmath.js"]
+                           },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+                },
+                displayAlign: 'center', // Change this to 'center' to center equations.
+                "HTML-CSS": {
+                    styles: {'.MathJax_Display': {"margin": 4}}
+                }
+        });
+</script>
