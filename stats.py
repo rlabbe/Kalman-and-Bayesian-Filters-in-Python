@@ -101,6 +101,13 @@ def sigma_ellipses(cov, x=0, y=0, sigma=[1,2], num_pts=100):
         e_list.append (ellipse)
     return (e_list,x,y)
 
+def plot_covariance_ellipse (cov, x=0, y=0, sigma=1,title=None, axis_equal=True):
+    """ Plots the ellipse of the provided 2x2 covariance matrix.
+    """
+    e = sigma_ellipse (cov, x, y, sigma)
+    plot_sigma_ellipse(e, title, axis_equal)
+    
+
 def plot_sigma_ellipse(ellipse, title=None, axis_equal=True):
     """ plots the ellipse produced from sigma_ellipse."""
 

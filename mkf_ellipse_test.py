@@ -41,6 +41,7 @@ def plot_track(noise, count, R, Q=0, plot_P=True, title='Kalman Filter'):
     p0, = plt.plot([0,count],[0,count],'g')
     p1, = plt.plot(range(1,count+1),zs,c='r', linestyle='dashed')
     p2, = plt.plot(range(1,count+1),ps, c='b')
+    plt.axis('equal')
     plt.legend([p0,p1,p2], ['actual','measurement', 'filter'], 2)
     plt.title(title)
 
@@ -52,4 +53,4 @@ def plot_track(noise, count, R, Q=0, plot_P=True, title='Kalman Filter'):
     plt.show()
 
 
-plot_track (noise=30, R=5, Q=2, count=5)
+plot_track (noise=30, R=5, Q=2, count=20)
