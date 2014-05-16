@@ -1,7 +1,7 @@
 <style>
     div.cell{
         width: 850px;
-        margin-left: 0% !important;
+        margin-left: 2% !important;
         margin-right: auto;
     }
     h1 {
