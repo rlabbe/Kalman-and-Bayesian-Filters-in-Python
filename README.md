@@ -12,7 +12,7 @@ Contents
     Introduction to the Kalman filter. Explanation of the idea behind this book.
 
 
-* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/blob/master/g-h_filter.ipynb)
+* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/master/g-h_filter.ipynb)
     Intuitive introduction to the g-h filter, which is a family of filters that includes the Kalman filter. Not filler - once you understand this chapter you will understand the concepts behind the Kalman filter. 
 
 
