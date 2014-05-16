@@ -6,7 +6,8 @@
     }
     h1 {
         font-family: 'Open sans',verdana,arial,sans-serif;
-    }
+	}
+	
     div.input_area {
         background: #F6F6F9;
         border: 1px solid #586e75;
@@ -17,8 +18,8 @@
         font-size: 40pt;
         line-height: 100%;
         color:#c76c0c;
-        margin-bottom: 0em;
-        margin-top: 0em;
+        margin-bottom: 0.5em;
+        margin-top: 1em;
         display: block;
         white-space: nowrap;
     } 
