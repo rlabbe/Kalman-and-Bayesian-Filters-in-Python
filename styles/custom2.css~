@@ -15,7 +15,7 @@
 
     .text_cell_render h1 {
         font-weight: 200;
-        font-size: 36pt;
+        font-size: 40pt;
         line-height: 100%;
         color:#c76c0c;
         margin-bottom: 0.5em;
