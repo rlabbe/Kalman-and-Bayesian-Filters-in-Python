@@ -18,23 +18,24 @@ def show_residual_chart():
     ax = plt.axes()
     ax.annotate('', xy=(2,2), xytext=(1,1),
                 arrowprops=dict(arrowstyle='->', ec='b',shrinkA=3, shrinkB=4))
-    ax.annotate('prediction', xy=(1.7,2), color='b')
+    ax.annotate('prediction', xy=(2.04,2.), color='b')
     ax.annotate('measurement', xy=(2.05, 1.28))
     ax.annotate('prior measurement', xy=(1, 0.9))
     ax.annotate('residual', xy=(2.04,1.6), color='r')
-    ax.annotate('new estimate', xy=(2,1.8),xytext=(2.15,1.9),
-                arrowprops=dict(arrowstyle='->', shrinkA=3, shrinkB=4))
+    ax.annotate('new estimate', xy=(2,1.8),xytext=(2.1,1.8),
+                arrowprops=dict(arrowstyle='->', ec="k", shrinkA=3, shrinkB=4))
     ax.annotate('', xy=(2,2), xytext=(2,1.3),
-                arrowprops=dict(arrowstyle="<->",
+                arrowprops=dict(arrowstyle="-",
                                 ec="r",
                                 shrinkA=5, shrinkB=5))
     plt.title("Kalman Filter Prediction Update Step")
     plt.show()
 
+
 def show_position_chart():
     """ Displays 3 measurements at t=1,2,3, with x=1,2,3"""
 
-    plt.scatter ([1,2,3],[1,2,3])
+    plt.scatter ([1,2,3], [1,2,3], s=128)
     plt.xlim([0,4]);
     plt.ylim([0,4])
 
@@ -48,7 +49,7 @@ def show_position_chart():
 def show_position_prediction_chart():
     """ displays 3 measurements, with the next position predicted"""
 
-    plt.scatter ([1,2,3],[1,2,3],s=128)
+    plt.scatter ([1,2,3], [1,2,3], s=128)
 
     plt.xlim([0,5])
     plt.ylim([0,5])
