@@ -2,7 +2,7 @@
 
 ### Version 0.0 - not ready for public consumption. In development.
 
-Read the static version [HERE](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/master/Preface.ipynb)
+Read the static version [HERE](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Preface.ipynb)
 
 ## Motivation
 
