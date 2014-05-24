@@ -13,27 +13,27 @@ import numpy.random as random
 class KalmanFilter:
 
     def __init__(self, dim):
-        self.x = 0 # estimate
+        """ Create a Kalman filter of dimension 'dim'"""
+        
+        self.x = 0 # state
         self.P = np.matrix(np.eye(dim)) # uncertainty covariance
         self.Q = np.matrix(np.eye(dim)) # process uncertainty
         self.u = np.matrix(np.zeros((dim,1))) # motion vector
+        self.B = 0
         self.F = 0 # state transition matrix
         self.H = 0 # Measurement function (maps state to measurements)
         self.R = np.matrix(np.eye(1)) # state uncertainty
         self.I = np.matrix(np.eye(dim))
 
 
-    def measure(self, Z, R=None):
+    def update(self, Z):
         """
-        Add a new measurement with an optional state uncertainty (R).
-        The state uncertainty does not alter the class's state uncertainty,
-        it is used only for this call.
+        Add a new measurement to the kalman filter.
         """
-        if R is None: R = self.R
 
         # measurement update
         y = Z - (self.H * self.x)                   # error (residual) between measurement and prediction
-        S = (self.H * self.P * self.H.T) + R       # project system uncertainty into measurment space + measurement noise(R)
+        S = (self.H * self.P * self.H.T) + self.R   # project system uncertainty into measurment space + measurement noise(R)
 
 
         K = self.P * self.H.T * linalg.inv(S) # map system uncertainty into kalman gain
