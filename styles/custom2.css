@@ -4,6 +4,10 @@
         margin-left: 0% !important;
         margin-right: auto;
     }
+    div.text_cell code {
+        background: #F6F6F9;
+        color: #0000FF;
+   }
     h1 {
         font-family: 'Open sans',verdana,arial,sans-serif;
 	}
@@ -97,7 +101,7 @@
         max-height: 300px;
     }
     code{
-      font-size: 78%;
+      font-size: 70%;
     }
     .rendered_html code{
     background-color: transparent;
