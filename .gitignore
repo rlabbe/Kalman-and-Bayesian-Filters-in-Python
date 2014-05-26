@@ -1,0 +1,9 @@
+*.aux
+*.html
+*.out
+*.pdf
+*.gz
+*.tex
+*.toc
+*_files/
+.ipynb_checkpoints/
