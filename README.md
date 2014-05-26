@@ -1,8 +1,11 @@
+Read the static version [HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb)
+
+http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb
+
 #[Kalman Filters and Random Signals in Python](http://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python)
 
 ### Version 0.0 - not ready for public consumption. In development.
 
-Read the static version [HERE](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Preface.ipynb)
 
 ## Motivation
 
