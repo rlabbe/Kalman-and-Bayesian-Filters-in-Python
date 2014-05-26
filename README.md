@@ -1,4 +1,4 @@
-Read the static version [HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/toc.ipynb)
+Read the static version [HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/blob/toc.ipynb)
 
 #[Kalman Filters and Random Signals in Python](http://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python)
 
