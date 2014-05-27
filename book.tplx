@@ -1,0 +1,27 @@
+%((* extends 'report.tplx' *))
+
+%===============================================================================
+% Latex Book
+%===============================================================================
+
+
+((* block predoc *))
+    ((( super() )))
+    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+((* endblock predoc *))
+
+
+((* block title *))
+\title{Kalman and Bayesian Filters in Python}
+((* endblock title *))
+
+% Define block headings
+% Note: latex will only number headings that aren't starred 
+% (i.e. \subsection , but not \subsection* )
+
+((* block h1 -*))\chapter((* endblock h1 -*))
+((* block h2 -*))\section((* endblock h2 -*))
+((* block h3 -*))\subsection((* endblock h3 -*))
+((* block h4 -*))\subsubsection((* endblock h4 -*))
+((* block h5 -*))\paragraph*((* endblock h5 -*))
+((* block h6 -*))\subparagraph*((* endblock h6 -*))
