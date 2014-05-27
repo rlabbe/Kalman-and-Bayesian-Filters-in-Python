@@ -13,6 +13,8 @@
 
 ((* block title *))
 \title{Kalman and Bayesian Filters in Python}
+\author{Roger R Labbe Jr}
+\date{}
 ((* endblock title *))
 
 % Define block headings
