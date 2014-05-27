@@ -1,7 +1,6 @@
 *.aux
 *.html
 *.out
-*.pdf
 *.gz
 *.tex
 *.toc
