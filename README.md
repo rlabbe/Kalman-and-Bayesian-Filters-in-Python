@@ -1,6 +1,8 @@
-Read the static version [HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb)
+This is the Github repository for my Kalman filtering book. It is written using IPython notebook.
 
-http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb
+You may read the most recent version online by using nbviewer.[HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb)
+
+It will usually be out of date because I have to generate it manually, but the PDF version is [HERE](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf).
 
 #[Kalman Filters and Random Signals in Python](http://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python)
 
