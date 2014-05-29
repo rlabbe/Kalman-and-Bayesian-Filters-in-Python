@@ -19,7 +19,7 @@
 
     .text_cell_render h1 {
         font-weight: 200;
-        font-size: 36pt;
+        font-size: 30pt;
         line-height: 100%;
         color:#c76c0c;
         margin-bottom: 0.5em;
@@ -36,8 +36,8 @@
         font-style: italic;
         line-height: 100%;
         color:#c76c0c;
-        margin-bottom: 1.5em;
-        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 1.5em;
         display: block;
         white-space: nowrap;
     } 

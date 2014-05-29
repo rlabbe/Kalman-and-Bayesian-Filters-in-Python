@@ -61,7 +61,7 @@ def norm_plot(mean, var):
     max_x = mean + var * 1.5
 
     xs = np.arange(min_x, max_x, 0.1)
-    ys = [gaussian(x,23,5) for x in xs]
+    ys = [gaussian(x,mean,var) for x in xs]
     plt.plot(xs,ys)
 
 
@@ -106,7 +106,7 @@ def plot_covariance_ellipse (cov, x=0, y=0, sigma=1,title=None, axis_equal=True)
     """
     e = sigma_ellipse (cov, x, y, sigma)
     plot_sigma_ellipse(e, title, axis_equal)
-    
+
 
 def plot_sigma_ellipse(ellipse, title=None, axis_equal=True):
     """ plots the ellipse produced from sigma_ellipse."""
