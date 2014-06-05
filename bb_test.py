@@ -103,7 +103,7 @@ def plot_ball_filter6 (f1, zs, skip_start=-1, skip_end=-1):
             m[3] = y
         #print ('skip', i, f1.x[2],f1.x[5])
 
-        f1.update_long_form (m)
+        f1.update(m)
 
         
         '''
@@ -123,14 +123,14 @@ def plot_ball_filter6 (f1, zs, skip_start=-1, skip_end=-1):
         
         if i > 0 and z[1] < 0:
             break;
-'''
+
     p1, = plt.plot (xs, ys, 'r--')
     p2, = plt.plot (pxs, pys)
     plt.axis('equal')
     plt.legend([p1,p2], ['filter', 'measurement'], 2)
     plt.xlim([0,xs[-1]])
     plt.show()
-'''    
+    
 
 
 def plot_ball_filter4 (f1, zs, skip_start=-1, skip_end=-1):
@@ -175,14 +175,14 @@ def plot_ball_filter4 (f1, zs, skip_start=-1, skip_end=-1):
         
         if i > 0 and z[1] < 0:
             break;
-'''
+
     plt.plot (xs, ys, 'r--')
     plt.plot (pxs, pys)
     plt.axis('equal')
     plt.legend([p1,p2], ['filter', 'measurement'], 2)
     plt.xlim([0,xs[-1]])
     plt.show()
-'''
+
 
 start_skip = 20
 end_skip = 60
