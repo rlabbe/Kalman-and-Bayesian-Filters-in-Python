@@ -155,7 +155,7 @@ def plot_ball_filter4 (f1, zs, skip_start=-1, skip_end=-1):
             m[0] = x
             m[2] = y
  
-        f1.update_long_form (m)
+        f1.update (m)
 
         
         '''
@@ -176,8 +176,8 @@ def plot_ball_filter4 (f1, zs, skip_start=-1, skip_end=-1):
         if i > 0 and z[1] < 0:
             break;
 
-    plt.plot (xs, ys, 'r--')
-    plt.plot (pxs, pys)
+    p1, = plt.plot (xs, ys, 'r--')
+    p2, = plt.plot (pxs, pys)
     plt.axis('equal')
     plt.legend([p1,p2], ['filter', 'measurement'], 2)
     plt.xlim([0,xs[-1]])
@@ -191,7 +191,7 @@ def run_6():
     dt = 1/30
     noise = 0.0
     f1 = ball_filter6(dt, R=.16, Q=0.1)
-    #plt.cla()
+    plt.cla()
     
     x,y = baseball.compute_trajectory(v_0_mph = 100., theta=50., dt=dt)
     
@@ -215,4 +215,4 @@ def run_4():
     plot_ball_filter4 (f1, znoise, start_skip, end_skip)
     
     
-run_6()
+run_4()

@@ -5,6 +5,7 @@ Created on Wed Apr 30 10:35:19 2014
 @author: rlabbe
 """
 import numpy.random as random
+import math
 
 class dog_sensor(object):
     def __init__(self, x0 = 0, motion=1, noise=0.0):
