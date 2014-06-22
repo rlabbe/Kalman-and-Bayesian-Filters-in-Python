@@ -1,16 +1,34 @@
+"""
+Author: Roger Labbe
+Copyright: 2014
+
+This code performs various basic statistics functions for the
+Kalman and Bayesian Filters in Python book. Much of this code
+is non-optimal; production code should call the equivalent scipy.stats
+functions. I wrote the code in this form to make explicit how the
+computations are done. The scipy.stats module has many more useful functions
+than what I have written here. In some cases, however, my code is significantly
+faster, at least on my machine. For example, gaussian average 794 ns, whereas
+stats.norm(), using the frozen form, averages 116 microseconds per call.
+"""
+
+
 import math
 import numpy as np
 import numpy.linalg as linalg
 import matplotlib.pyplot as plt
 import scipy.sparse as sp
 import scipy.sparse.linalg as spln
+from matplotlib.patches import Ellipse
 
 _two_pi = 2*math.pi
 
 
 def gaussian(x, mean, var):
     """returns normal distribution for x given a gaussian with the specified
-    mean and variance. All must be scalars
+    mean and variance. All must be scalars.
+
+    gaussian (1,2,3) is equivalent to scipy.stats.norm(2,math.sqrt(3)).pdf(1)
     """
     return math.exp((-0.5*(x-mean)**2)/var) / math.sqrt(_two_pi*var)
 
@@ -24,7 +42,7 @@ def add (a_mu, a_var, b_mu, b_var):
 
 
 def multivariate_gaussian(x, mu, cov):
-    """ This is designed to work the same as scipy.stats.multivariate_normal
+    """ This is designed to replace scipy.stats.multivariate_normal
     which is not available before version 0.14. You may either pass in a
     multivariate set of data:
        multivariate_gaussian (array([1,1]), array([3,4]), eye(2)*1.4)
@@ -36,6 +54,10 @@ def multivariate_gaussian(x, mu, cov):
 
     The function gaussian() implements the 1D (univariate)case, and is much
     faster than this function.
+
+    equivalent calls:
+       multivariate_gaussian(1, 2, 3)
+       scipy.stats.multivariate_normal(2,3).pdf(1)
     """
 
     # force all to numpy.array type
@@ -65,89 +87,71 @@ def norm_plot(mean, var):
     plt.plot(xs,ys)
 
 
-def sigma_ellipse(cov, x=0, y=0, sigma=1, num_pts=100):
-    """ Takes a 2D covariance matrix and generates an ellipse showing the
-    contour plot at the specified sigma value. Ellipse is centered at (x,y).
-    num_pts specifies how many discrete points are used to generate the
-    ellipse.
+def covariance_ellipse(P):
+    """ returns a tuple defining the ellipse representing the 2 dimensional
+    covariance matrix P.
 
-    Returns a tuple containing the ellipse,x, and y, in that order.
-    The ellipse is a 2D numpy array with shape (2, num_pts). Row 0 contains the
-    x components, and row 1 contains the y coordinates
+    Returns (angle_radians, width_radius, height_radius)
     """
-    cov = np.asarray(cov)
+    U,s,v = linalg.svd(P)
+    orientation = math.atan2(U[1,0],U[0,0])
+    width  = math.sqrt(s[0])
+    height = math.sqrt(s[1])
+    return (orientation, width, height)
 
-    L = linalg.cholesky(cov)
-    t = np.linspace(0, _two_pi, num_pts)
-    unit_circle = np.array([np.cos(t), np.sin(t)])
 
-    ellipse = sigma * L.dot(unit_circle)
-    ellipse[0] += x
-    ellipse[1] += y
-    return (ellipse,x,y)
 
-def sigma_ellipses(cov, x=0, y=0, sigma=[1,2], num_pts=100):
-    cov = np.asarray(cov)
+def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
+             ellipse=None, title=None, axis_equal=True,
+             facecolor='none', edgecolor='blue'):
+    """ plots the covariance ellipse where
 
-    L = linalg.cholesky(cov)
-    t = np.linspace(0, _two_pi, num_pts)
-    unit_circle = np.array([np.cos(t), np.sin(t)])
+    mean is a (x,y) tuple for the mean of the covariance (center of ellipse)
 
-    e_list = []
-    for s in sigma:
-        ellipse = s * L.dot(unit_circle)
-        ellipse[0] += x
-        ellipse[1] += y
-        e_list.append (ellipse)
-    return (e_list,x,y)
+    cov is a 2x2 covariance matrix.
 
-def plot_covariance_ellipse (cov, x=0, y=0, sigma=1,title=None, axis_equal=True):
-    """ Plots the ellipse of the provided 2x2 covariance matrix.
+    variance is the normal sigma^2 that we want to plot. If list-like,
+    ellipses for all ellipses will be ploted. E.g. [1,2] will plot the
+    \sigma^2 = 1 and \sigma^2 = 2 ellipses.
+
+    ellipse is a (angle,width,height) tuple containing the angle in radians,
+    and width and height radii.
+
+    You may provide either cov or ellipse, but not both.
+
+    plt.show() is not called, allowing you to plot multiple things on the
+    same figure.
     """
-    e = sigma_ellipse (cov, x, y, sigma)
-    plot_sigma_ellipse(e, title, axis_equal)
 
+    assert cov is None or ellipse is None
+    assert not (cov is None and ellipse is None)
 
-def plot_sigma_ellipse(ellipse, title=None, axis_equal=True):
-    """ plots the ellipse produced from sigma_ellipse."""
+    if cov is not None:
+        ellipse = covariance_ellipse(cov)
 
     if axis_equal:
         plt.axis('equal')
 
-    e = ellipse[0]
-    x = ellipse[1]
-    y = ellipse[2]
-
-    plt.plot(e[0], e[1],c='b')
-    plt.scatter(x,y,marker='+') # mark the center
     if title is not None:
         plt.title (title)
 
-def plot_sigma_ellipses(ellipses,title=None,axis_equal=True,x_lim=None,y_lim=None):
-    """ plots the ellipse produced from sigma_ellipse."""
 
-    if x_lim is not None:
-        axis_equal = False
-        plt.xlim(x_lim)
+    if np.isscalar(variance):
+        variance = [variance]
 
-    if y_lim is not None:
-        axis_equal = False
-        plt.ylim(y_lim)
+    ax = plt.gca()
 
-    if axis_equal:
-        plt.axis('equal')
+    angle = np.degrees(ellipse[0])
+    width = ellipse[1] * 2.
+    height = ellipse[2] * 2.
 
-    for ellipse in ellipses:
-        es = ellipse[0]
-        x = ellipse[1]
-        y = ellipse[2]
-
-        for e in es:
-            plt.plot(e[0], e[1], c='b')
-
-        plt.scatter(x,y,marker='+') # mark the center
-    if title is not None:
-        plt.title (title)
+    for var in variance:
+        e = Ellipse(xy=mean, width=var*width, height=var*height, angle=angle,
+                    facecolor=facecolor,
+                    edgecolor=edgecolor,
+                    lw=1)
+        ax.add_patch(e)
+    plt.scatter(mean[0], mean[1], marker='+') # mark the center
 
 
 def _to_cov(x,n):
@@ -164,8 +168,25 @@ def _to_cov(x,n):
         return np.eye(n) * x
 
 
+
+def test_gaussian():
+   import scipy.stats
+
+   mean = 3.
+   var = 1.5
+   std = var*0.5
+
+   for i in np.arange(-5,5,0.1):
+       p0 = scipy.stats.norm(mean, std).pdf(i)
+       p1 = gaussian(i, mean, var)
+
+       assert abs(p0-p1) < 1.e15
+
+
 if __name__ == '__main__':
     from scipy.stats import norm
+
+    test_gaussian()
 
     # test conversion of scalar to covariance matrix
     x  = multivariate_gaussian(np.array([1,1]), np.array([3,4]), np.eye(2)*1.4)
@@ -180,13 +201,11 @@ if __name__ == '__main__':
     assert rv.pdf(1.2) == x2
     assert abs(x2- x3) < 0.00000001
 
-    cov = np.array([[1,1],
-                    [1,1.1]])
+    cov = np.array([[1.0, 1.0],
+                    [1.0, 1.1]])
 
-    sigma = [1,1]
-    ev = sigma_ellipses(cov, x=2, y=2, sigma=sigma)
-    plot_sigma_ellipses([ev], axis_equal=True,x_lim=[0,4],y_lim=[0,15])
-    #isct = plt.Circle((2,2),1,color='b',fill=False)
-    #plt.figure().gca().add_artist(isct)
+    P = np.array([[2,0],[0,2]])
+    plot_covariance_ellipse((2,7), cov=cov, variance=[1,2], title='my title')
     plt.show()
+
     print "all tests passed"
