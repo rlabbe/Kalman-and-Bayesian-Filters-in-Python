@@ -12,6 +12,7 @@ faster, at least on my machine. For example, gaussian average 794 ns, whereas
 stats.norm(), using the frozen form, averages 116 microseconds per call.
 """
 
+from __future__ import division
 
 import math
 import numpy as np
@@ -19,6 +20,7 @@ import numpy.linalg as linalg
 import matplotlib.pyplot as plt
 import scipy.sparse as sp
 import scipy.sparse.linalg as spln
+import scipy.stats
 from matplotlib.patches import Ellipse
 
 _two_pi = 2*math.pi
@@ -29,16 +31,32 @@ def gaussian(x, mean, var):
     mean and variance. All must be scalars.
 
     gaussian (1,2,3) is equivalent to scipy.stats.norm(2,math.sqrt(3)).pdf(1)
+    It is quite a bit faster albeit much less flexible than the latter.
     """
     return math.exp((-0.5*(x-mean)**2)/var) / math.sqrt(_two_pi*var)
+    # return scipy.stats.norm(mean, math.sqrt(var)).pdf(x)
 
-def mul (a_mu, a_var, b_mu, b_var):
-    m = (a_var*b_mu + b_var*a_mu) / (a_var + b_var)
-    v = 1. / (1./a_var + 1./b_var)
-    return (m, v)
 
-def add (a_mu, a_var, b_mu, b_var):
-    return (a_mu+b_mu, a_var+b_var)
+def mul (mean1, var1, mean2, var2):
+    """ multiply Gaussians (mean1, var1) with (mean2, var2) and return the
+    results as a tuple (mean,var).
+
+    var1 and var2 are variances - sigma squared in the usual parlance.
+    """
+
+    mean = (var1*mean2 + var2*mean1) / (var1 + var2)
+    var = 1 / (1/var1 + 1/var2)
+    return (mean, var)
+
+
+def add (mean1, var1, mean2, var2):
+    """ add the Gaussians (mean1, var1) with (mean2, var2) and return the
+    results as a tuple (mean,var).
+
+    var1 and var2 are variances - sigma squared in the usual parlance.
+    """
+
+    return (mean1+mean2, var1+var2)
 
 
 def multivariate_gaussian(x, mu, cov):
@@ -78,13 +96,40 @@ def multivariate_gaussian(x, mu, cov):
     return math.exp(-0.5*(norm_coeff + numerator))
 
 
-def norm_plot(mean, var):
-    min_x = mean - var * 1.5
-    max_x = mean + var * 1.5
+def plot_gaussian(mean, variance,
+                  mean_line=False,
+                  xlim=None,
+                  xlabel=None,
+                  ylabel=None):
+    """ plots the normal distribution with the given mean and variance. x-axis
+    contains the mean, the y-axis shows the probability.
 
-    xs = np.arange(min_x, max_x, 0.1)
-    ys = [gaussian(x,mean,var) for x in xs]
-    plt.plot(xs,ys)
+    mean_line : draws a line at x=mean
+    xlim: optionally specify the limits for the x axis as tuple (low,high).
+          If not specified, limits will be automatically chosen to be 'nice'
+    xlabel : optional label for the x-axis
+    ylabel : optional label for the y-axis
+    """
+
+    sigma = math.sqrt(variance)
+    n = scipy.stats.norm(mean, sigma)
+
+    if xlim is None:
+        min_x = n.ppf(0.001)
+        max_x = n.ppf(0.999)
+    else:
+        min_x = xlim[0]
+        max_x = xlim[1]
+    xs = np.arange(min_x, max_x, (max_x - min_x) / 1000)
+    plt.plot(xs,n.pdf(xs))
+    plt.xlim((min_x, max_x))
+
+    if mean_line:
+        plt.axvline(mean)
+    if xlabel:
+       plt.xlabel(xlabel)
+    if ylabel:
+       plt.ylabel(ylabel)
 
 
 def covariance_ellipse(P):
@@ -100,7 +145,6 @@ def covariance_ellipse(P):
     return (orientation, width, height)
 
 
-
 def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
              ellipse=None, title=None, axis_equal=True,
              facecolor='none', edgecolor='blue'):
@@ -112,7 +156,7 @@ def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
 
     variance is the normal sigma^2 that we want to plot. If list-like,
     ellipses for all ellipses will be ploted. E.g. [1,2] will plot the
-    \sigma^2 = 1 and \sigma^2 = 2 ellipses.
+    sigma^2 = 1 and sigma^2 = 2 ellipses.
 
     ellipse is a (angle,width,height) tuple containing the angle in radians,
     and width and height radii.
@@ -168,7 +212,6 @@ def _to_cov(x,n):
         return np.eye(n) * x
 
 
-
 def test_gaussian():
    import scipy.stats
 
@@ -184,6 +227,7 @@ def test_gaussian():
 
 
 if __name__ == '__main__':
+
     from scipy.stats import norm
 
     test_gaussian()

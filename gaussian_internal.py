@@ -16,6 +16,7 @@ def plot_gaussian (mu, variance,
                    xlim=None,
                    xlabel=None,
                    ylabel=None):
+
     xs = np.arange(mu-variance*2,mu+variance*2,0.1)
     ys = [stats.gaussian (x, mu, variance)*100 for x in xs]
     plt.plot (xs, ys)
@@ -51,7 +52,6 @@ def display_stddev_plot():
     ax.xaxis.set_ticklabels(['$-\sigma$','$\mu$','$\sigma$'])
     ax.yaxis.set_ticks([])
     plt.show()
-    pylab.rcParams['figure.figsize'] = figsize
 
 if __name__ == '__main__':
     display_stddev_plot()
