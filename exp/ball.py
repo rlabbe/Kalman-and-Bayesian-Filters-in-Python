@@ -35,10 +35,18 @@ class BallPath(object):
 
 
 class BaseballPath(object):
-    def __init__(self, x0, y0, omega_deg, velocity, noise=[1.0,1.0]):
-        omega = radians(omega_deg)
-        self.v_x = velocity * cos(omega)
-        self.v_y = velocity * sin(omega)
+    def __init__(self, x0, y0, launch_angle_deg, velocity_ms, noise=(1.0,1.0)): 
+        """ Create baseball path object in 2D (y=height above ground)
+        
+        x0,y0 initial position
+        launch_angle_deg angle ball is travelling respective to ground plane
+        velocity_ms speeed of ball in meters/second
+        noise amount of noise to add to each reported position in (x,y)
+        """
+        
+        omega = radians(launch_angle_deg)
+        self.v_x = velocity_ms * cos(omega)
+        self.v_y = velocity_ms * sin(omega)
 
         self.x = x0
         self.y = y0
