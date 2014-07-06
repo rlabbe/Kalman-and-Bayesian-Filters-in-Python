@@ -41,8 +41,6 @@ def rk4(y, x, dx, f):
     dx is the difference in x (e.g. the time step)
     f is a callable function (y, x) that you supply to compute dy/dx for
       the specified values.
-      
-    
     """
     
     k1 = dx * f(y, x)
@@ -52,82 +50,73 @@ def rk4(y, x, dx, f):
     
     return y + (k1 + 2*k2 + 2*k3 + k4) / 6
 
-def fy(y, t):
-    """ returns velocity of ball at time t. """
-    return -9.8*t
-
-
-def fx(y, t):
-    """ returns velocity of ball. Need to set vx.vel prior to first call"""
+    
+    
+    
+def fx(x,t):
     return fx.vel
     
-    
-    
-def fx2(x,t):
-    return fx2.vel
-    
-def fy2(y,t):
-    return fy2.vel - 9.8*t
-        
+def fy(y,t):
+    return fy.vel - 9.8*t
+     
+     
 class BallRungeKutta(object):
-    def __init__(self, x=0, y=100., vel=10., omega = 0.0):
-        
-        self.omega = math.radians(omega)
-        self.vx = math.cos(self.omega) * vel
-        self.vy = math.sin(self.omega) * vel
+    def __init__(self, x=0, y=100., vel=10., omega = 0.0):   
         self.x = x
         self.y = y
         self.t = 0
         
-        fx2.vel = self.vx
-        fy2.vel = self.vy
+        omega = math.radians(omega)
 
+        fx.vel = math.cos(omega) * vel
+        fy.vel = math.sin(omega) * vel
 
     def step (self, dt):
-        self.x = rk4 (self.x, self.t, dt, fx2)
-        self.y = rk4 (self.y, self.t, dt, fy2)
-        self.t += dt
-
-        print self.x, self.y
+        self.x = rk4 (self.x, self.t, dt, fx)
+        self.y = rk4 (self.y, self.t, dt, fy)
+        self.t += dt  
 
 
+
+def ball_scipy(y0, vel, omega, dt):
     
+    vel_y = math.sin(math.radians(omega)) * vel
+     
+    def f(t,y):
+        return vel_y-9.8*t
+        
+    solver = ode(f).set_integrator('dopri5')
+    solver.set_initial_value(y0)
+ 
+    ys = [y0]
+    while brk.y >= 0:
+        t += dt
+        brk.step (dt)
 
+        ys.append(solver.integrate(t))
+        
+        
 if __name__ == "__main__":
 
     dt = 1./30
     y0 = 15.
     vel = 100.
-    omega = 10.
+    omega = 0.
     vel_y = math.sin(math.radians(omega)) * vel
-    print vel_y
     
     def f(t,y):
-        #print t,y
         return vel_y-9.8*t
         
     be = BallEuler (y=y0, vel=vel)
-    brk = BallRungeKutta (y=y0, vel=vel, omega=omega)
-
-
-    solver = ode(f).set_integrator('dopri5')
-    solver.set_initial_value(y0)
-    t = 0
-    y = y0
+    ball_rk = BallRungeKutta (y=y0, vel=vel, omega=omega)
 
     
     while be.y >= 0:
         be.step (dt)
-        #plt.scatter (be.x, be.y, color='red')
+        ball_rk.step(dt)
+        
+        plt.scatter (be.x, be.y, color='red')
 
-
-    while brk.y >= 0:
-        t += dt
-        brk.step (dt)
-
-        y = solver.integrate(t)
-
-
-        plt.scatter (brk.x, brk.y, color='blue', marker='v')
-        plt.scatter (brk.x, y[0], color='green', marker='+')
-        plt.axis('equal')
+        plt.scatter (ball_rk.x, ball_rk.y, color='blue', marker='v')
+        #plt.scatter (brk.x, y[0], color='green', marker='+')
+        #plt.axis('equal')
