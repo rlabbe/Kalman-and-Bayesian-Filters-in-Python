@@ -12,7 +12,7 @@ import numpy.random as random
 
 class KalmanFilter:
 
-    def __init__(self, dim, use_short_form=False):
+    def __init__(self, dim_x, dim_z, use_short_form=False):
         """ Create a Kalman filter of dimension 'dim', where dimension is the
         number of state variables.
         
@@ -29,14 +29,14 @@ class KalmanFilter:
         """
 
         self.x = 0 # state
-        self.P = np.matrix(np.eye(dim)) # uncertainty covariance
-        self.Q = np.matrix(np.eye(dim)) # process uncertainty
-        self.u = np.matrix(np.zeros((dim,1))) # motion vector
+        self.P = np.matrix(np.eye(dim_x)) # uncertainty covariance
+        self.Q = np.matrix(np.eye(dim_x)) # process uncertainty
+        self.u = np.matrix(np.zeros((dim_x,1))) # motion vector
         self.B = 0
         self.F = 0 # state transition matrix
         self.H = 0 # Measurement function (maps state to measurements)
-        self.R = np.matrix(np.eye(1)) # state uncertainty
-        self.I = np.matrix(np.eye(dim))
+        self.R = np.matrix(np.eye(dim_z)) # state uncertainty
+        self.I = np.matrix(np.eye(dim_x))
         
         if use_short_form:
             self.update = self.update_short_form
@@ -94,7 +94,7 @@ class KalmanFilter:
 
 
 if __name__ == "__main__":
-    f = KalmanFilter (dim=2)
+    f = KalmanFilter (dim_x=2, dim_z=2)
 
     f.x = np.matrix([[2.],
                      [0.]])       # initial state (location and velocity)
