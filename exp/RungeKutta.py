@@ -74,8 +74,8 @@ class BallRungeKutta(object):
     def step (self, dt):
         self.x = rk4 (self.x, self.t, dt, fx)
         self.y = rk4 (self.y, self.t, dt, fy)
-        self.t += dt  
-
+        self.t += dt 
+        return (self.x, self.y)
 
 
 def ball_scipy(y0, vel, omega, dt):
