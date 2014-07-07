@@ -1,12 +1,18 @@
 <style>
+@import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
+
     div.cell{
         width: 850px;
         margin-left: 0% !important;
         margin-right: auto;
     }
     div.text_cell code {
-        background: #F6F6F9;
-        color: #0000FF;
+        background: transparent;
+        color: #000000;
+        font-weight: 600;
+        font-size: 13pt;
+        font-style: bold;
+        font-family:  'Source Code Pro', Consolas, monocco, monospace;
    }
     h1 {
         font-family: 'Open sans',verdana,arial,sans-serif;
