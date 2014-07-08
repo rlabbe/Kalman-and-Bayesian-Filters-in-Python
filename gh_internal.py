@@ -77,6 +77,8 @@ def plot_estimate_chart_1():
                 arrowprops=dict(arrowstyle='->', ec='r',shrinkA=6, lw=3,shrinkB=5))
     plt.scatter ([0], [158], c='b')
     plt.scatter ([1], [159], c='r')
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')
     plt.show()
 
 
@@ -88,9 +90,11 @@ def plot_estimate_chart_2():
     plt.scatter ([0], [158.0], c='k',s=128)
     plt.scatter ([1], [164.2], c='b',s=128)
     plt.scatter ([1], [159], c='r', s=128)
-    plt.text (1.0, 158.8, "prediction ($\hat{x}_{t})$", ha='center',va='top',fontsize=18,color='red')
+    plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
     plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
     plt.text (0, 157.8, "estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')    
     plt.show()
 
 def plot_estimate_chart_3():
@@ -107,10 +111,12 @@ def plot_estimate_chart_3():
     plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
     plt.scatter ([1], [164.2], c='b',s=128)
     plt.scatter ([1], [159], c='r', s=128)
-    plt.text (1.0, 158.8, "prediction ($\hat{x}_{t})$", ha='center',va='top',fontsize=18,color='red')
+    plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
     plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
     plt.text (0, 157.8, "estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
     plt.text (0.95, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')
     plt.show()
 
 
