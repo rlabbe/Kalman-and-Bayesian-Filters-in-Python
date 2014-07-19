@@ -1,10 +1,11 @@
 Introductory textbook for Kalman filters and Bayesian filters. All code is written in Python, and the book itself is written in Ipython Notebook so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
 
 
-You may read the most recent version online by using nbviewer.[HERE](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb) nbviewer renders Ipython notebooks as static content. You will not be able to modify the code, but it is the easiest way to access the content of this book. Any check in I make will be reflected in the viewer within minutes.
+You may read the most recent version online by using nbviewer[here](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/toc.ipynb). nbviewer renders Ipython notebooks as static content. You will not be able to modify the code, but it is the easiest way to access the content of this book. Any check in I make will be reflected in the viewer within minutes.
 
-If you prefer a PDF, it is available [HERE](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf). I have to generate this PDF manually from the IPython Notebook, and I do not due that for every check in. During the book's development this PDF will often be quite out of date. I recommend the nbviewer version above.
+If you prefer a PDF, it is available [here](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf). I have to generate this PDF manually from the IPython Notebook, and I do not due that for every check in. During the book's development this PDF will often be quite out of date. I recommend the nbviewer version above.
 
+Finally, the github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
 
 #[Kalman Filters and Random Signals in Python](http://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python)
 
