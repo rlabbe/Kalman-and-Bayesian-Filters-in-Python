@@ -156,6 +156,7 @@ class BaseballPath(object):
 
         # force due to air drag
         v_x_wind = self.v_x - vel_wind
+       
         v = sqrt (v_x_wind**2 + self.v_y**2)
         F = self.drag_force(v)
 

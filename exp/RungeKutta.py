@@ -50,6 +50,9 @@ def rk4(y, x, dx, f):
     
     return y + (k1 + 2*k2 + 2*k3 + k4) / 6
 
+def rk2 (y,x,dx,f):
+    """computes the 2nd order Runge-kutta for dy/dx"""
+    
     
     
     
