@@ -59,19 +59,19 @@ Contents
 * [**Chapter 6: Kalman Filter Math**](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_Filter_Math.ipynb)
     We have gotten about as far as we can without forming a strong mathematical foundation. This chapter is optional, especially the first time, but if you intend to write robust, numerically stable filters, or to read the literature, you will need to know this.
     
-* [Chapter 7: Designing Kalman Filters**] (http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Designing_Kalman_Filters.ipynb) 
+* [**Chapter 7: Designing Kalman Filters**] (http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Designing_Kalman_Filters.ipynb) 
 
     Building on material in Chapter 5, walks you through the design of several Kalman filters. Discusses, but does not solve issues like numerical stability.
     
     
-* [Chapter 8: The Extended Kalman Filter**] (http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Extended_Kalman_Filters.ipynb)
+* [**Chapter 8: The Extended Kalman Filter**] (http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Extended_Kalman_Filters.ipynb)
     Kalman filter as covered only work for linear problems. Extended Kalman filters (EKF) are the most common approach to linearizing non-linear problems.
 
 
 * [**Chapter 9: Unscented Kalman Filters**](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Unscented_Kalman_Filter.ipynb)
     Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.
 
-* [Chapter N: Designing Nonlinear Kalman Filters](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Designing_Nonlinear_Kalman_Filters.ipynb)
+* [**Chapter N: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Designing_Nonlinear_Kalman_Filters.ipynb)
     Building on the material in chapters 8 and 9 we walk through the design of several nonlinear filters. 
 
 
