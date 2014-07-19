@@ -114,6 +114,10 @@ Personally, I use the Anaconda Python distribution in all of my work, [available
 Provided Libraries
 -----
 
+update: I have created the filterpy project, into which I am slowly moving a lot of this code. Some of the chapters use this project, some do not (yet). It is at https://github.com/rlabbe/filterpy For the time being this book is it's documentation; I cannot spend a lot of time working on the documentation for that library when I am writing this book. 
+
+
+
 I've not structured anything nicely yet. For now just look for any .py files in the base directory. As I pull everything together I will turn this into a python library, and probably create a separate git project just for the python code.
 
 There are python files with a name like *xxx*_internal.py. I use these to store functions that are useful for the book, but not of general interest. Often the Python is the point and focus of what I am talking about, but sometimes I just want to display a chart. IPython Notebook does not allow you to collapse the python code, and so it sometimes gets in the way. Some IPython books just incorporate .png files for the image, but I want to ensure that everything is open - if you want to look at the code you can. 
