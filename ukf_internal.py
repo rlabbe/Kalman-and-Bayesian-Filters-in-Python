@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse,Arrow
 import stats
 import numpy as np
+import math
 
 
 def arrow(x1,y1,x2,y2):
@@ -65,7 +66,37 @@ def show_sigma_selections():
 
 
 
-
+def show_sigmas_for_2_kappas():
+    # generate the Gaussian data
+    
+    xs = np.arange(-4, 4, 0.1)
+    mean = 0
+    sigma = 1.5
+    ys = [stats.gaussian(x, mean, sigma*sigma) for x in xs]
+    
+    def sigma_points(mean, sigma, kappa):
+        sigma1 = mean + math.sqrt((1+kappa)*sigma) 
+        sigma2 = mean - math.sqrt((1+kappa)*sigma) 
+        return mean, sigma1, sigma2
+        
+    #generate our samples
+    kappa = 2
+    x0,x1,x2 = sigma_points(mean, sigma, kappa)
+    
+    samples = [x0,x1,x2]
+    for x in samples:
+        p1 = plt.scatter([x], [stats.gaussian(x, mean, sigma*sigma)], s=80, color='k')
+    
+    kappa = -.5
+    x0,x1,x2 = sigma_points(mean, sigma, kappa)
+    
+    samples = [x0,x1,x2]
+    for x in samples:
+        p2 = plt.scatter([x], [stats.gaussian(x, mean, sigma*sigma)], s=80, color='b')
+    
+    plt.legend([p1,p2], ['$kappa$=2', '$kappa$=-0.5'])
+    plt.plot(xs, ys)
+    plt.show()
 
 
 
