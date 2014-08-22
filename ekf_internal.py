@@ -126,3 +126,39 @@ def plot_ball():
     p3, = plt.plot (xs2, ys2,lw=4, c='r')
     plt.legend([p1,p2, p3], ['Measurements', 'Kalman filter(R=0.5)', 'Kalman filter(R=10)'])
     plt.show()
+    
+    
+def show_radar_chart():
+    plt.xlim([0.9,2.5])
+    plt.ylim([0.5,2.5])
+
+    plt.scatter ([1,2],[1,2])
+    #plt.scatter ([2],[1],marker='o')
+    ax = plt.axes()
+
+    ax.annotate('', xy=(2,2), xytext=(1,1),
+                arrowprops=dict(arrowstyle='->', ec='r',shrinkA=3, shrinkB=4))
+
+    ax.annotate('', xy=(2,1), xytext=(1,1),
+                arrowprops=dict(arrowstyle='->', ec='b',shrinkA=0, shrinkB=0))
+
+    ax.annotate('', xy=(2,2), xytext=(2,1),
+                arrowprops=dict(arrowstyle='->', ec='b',shrinkA=0, shrinkB=4))
+
+
+    ax.annotate('Aircraft', xy=(2.04,2.), color='b')
+    ax.annotate('altitude', xy=(2.04,1.5), color='k')
+    ax.annotate('X', xy=(1.5, .9))
+    ax.annotate('Radar', xy=(.95, 0.9))
+    ax.annotate('Slant\n  (r)', xy=(1.5,1.62), color='r')
+
+    plt.title("Radar Tracking")
+    ax.xaxis.set_ticklabels([])
+    ax.yaxis.set_ticklabels([])
+    ax.xaxis.set_ticks([])
+    ax.yaxis.set_ticks([])
+
+
+    plt.show()
+    
+show_radar_chart()

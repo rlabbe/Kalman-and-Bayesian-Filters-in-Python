@@ -12,7 +12,8 @@ faster, at least on my machine. For example, gaussian average 794 ns, whereas
 stats.norm(), using the frozen form, averages 116 microseconds per call.
 """
 
-from __future__ import division
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import math
 import numpy as np
@@ -252,4 +253,4 @@ if __name__ == '__main__':
     plot_covariance_ellipse((2,7), cov=cov, variance=[1,2], title='my title')
     plt.show()
 
-    print "all tests passed"
+    print("all tests passed")
