@@ -86,7 +86,8 @@ Contents
 * [**Chapter N: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Designing_Nonlinear_Kalman_Filters.ipynb)
     Building on the material in chapters 8 and 9 we walk through the design of several nonlinear filters. 
 
-
+*[**Appendix: Symbols and Notations**](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Appendix_Symbols_and_Notations.ipynb)
+    Math symbology used by this book and by the notable books in the literature. 
 
 
 Reading the book
