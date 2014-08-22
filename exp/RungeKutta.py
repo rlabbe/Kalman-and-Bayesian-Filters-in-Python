@@ -5,18 +5,44 @@ Created on Sat Jul 05 09:54:39 2014
 @author: rlabbe
 """
 
-from __future__ import division
+from __future__ import division, print_function
 import matplotlib.pyplot as plt
 from scipy.integrate import ode
 import math
+import numpy as np
+from numpy import random, radians, cos, sin
 
+
+class BallTrajectory2D(object):
+    def __init__(self, x0, y0, velocity, theta_deg=0., g=9.8, noise=[0.0,0.0]):
+        theta = radians(theta_deg)
+        self.vx0 = velocity * cos(theta)
+        self.vy0 = velocity * sin(theta)
+        
+        self.x0 = x0
+        self.y0 = y0
+        self.x = x
+        
+        self.g = g
+        self.noise = noise
+        
+    def position(self, t):
+        """ returns (x,y) tuple of ball position at time t"""
+        
+        self.x = self.vx0*t + self.x0
+        self.y = -0.5*self.g*t**2 + self.vy0*t + self.y0
+        
+        return (self.x +random.randn()*self.noise[0], self.y +random.randn()*self.noise[1])
+        
+        
 
 class BallEuler(object):
-    def __init__(self, y=100., vel=10.):
+    def __init__(self, y=100., vel=10., omega=0):
         self.x = 0.
         self.y = y
-        self.vel = vel
-        self.y_vel = 0.0
+        omega = radians(omega)
+        self.vel = vel*np.cos(omega)
+        self.y_vel = vel*np.sin(omega)
 
 
 
@@ -48,7 +74,7 @@ def rk4(y, x, dx, f):
     k3 = dx * f(y + 0.5*k2, x + 0.5*dx)
     k4 = dx * f(y + k3, x + dx)
     
-    return y + (k1 + 2*k2 + 2*k3 + k4) / 6
+    return y + (k1 + 2*k2 + 2*k3 + k4) / 6.
 
 def rk2 (y,x,dx,f):
     """computes the 2nd order Runge-kutta for dy/dx"""
@@ -78,8 +104,9 @@ class BallRungeKutta(object):
         self.x = rk4 (self.x, self.t, dt, fx)
         self.y = rk4 (self.y, self.t, dt, fy)
         self.t += dt 
+        print(fx.vel)
         return (self.x, self.y)
-
+        
 
 def ball_scipy(y0, vel, omega, dt):
     
@@ -104,22 +131,25 @@ if __name__ == "__main__":
     dt = 1./30
     y0 = 15.
     vel = 100.
-    omega = 0.
+    omega = 30.
     vel_y = math.sin(math.radians(omega)) * vel
     
     def f(t,y):
         return vel_y-9.8*t
         
-    be = BallEuler (y=y0, vel=vel)
+    be = BallEuler (y=y0, vel=vel,omega=omega)
+    #be = BallTrajectory2D (x0=0, y0=y0, velocity=vel, theta_deg = omega)
     ball_rk = BallRungeKutta (y=y0, vel=vel, omega=omega)
 
-    
     while be.y >= 0:
         be.step (dt)
         ball_rk.step(dt)
+            
+    print (ball_rk.y - be.y)
         
-        plt.scatter (be.x, be.y, color='red')
-
-        plt.scatter (ball_rk.x, ball_rk.y, color='blue', marker='v')
-        #plt.scatter (brk.x, y[0], color='green', marker='+')
-        #plt.axis('equal')
+'''
+        p1 = plt.scatter (be.x, be.y, color='red')
+        p2 = plt.scatter (ball_rk.x, ball_rk.y, color='blue', marker='v')
+    
+        plt.legend([p1,p2], ['euler', 'runge kutta'])
+'''
