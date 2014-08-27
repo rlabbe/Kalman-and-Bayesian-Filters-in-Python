@@ -241,19 +241,6 @@ def _to_cov(x,n):
         return np.eye(n) * x
 
 
-def test_gaussian():
-    import scipy.stats
-
-    mean = 3.
-    var = 1.5
-    std = var*0.5
-
-    for i in np.arange(-5,5,0.1):
-        p0 = scipy.stats.norm(mean, std).pdf(i)
-        p1 = gaussian(i, mean, var)
-
-        assert abs(p0-p1) < 1.e15
-
 
 def do_plot_test():
 
@@ -283,6 +270,7 @@ def do_plot_test():
                             variance=sd*sd)
 
     print (count / len(x))
+
 
 
 if __name__ == '__main__':
