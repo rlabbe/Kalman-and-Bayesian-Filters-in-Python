@@ -6,13 +6,13 @@ Created on Sun May 11 20:47:52 2014
 """
 
 from DogSensor import DogSensor
-from KalmanFilter import KalmanFilter
+from filterpy.kalman import KalmanFilter
 import numpy as np
 import matplotlib.pyplot as plt
 import stats
 
 def dog_tracking_filter(R,Q=0,cov=1.):
-    f = KalmanFilter (dim=2)
+    f = KalmanFilter (dim_x=2, dim_z=1)
     f.x = np.matrix([[0], [0]])    # initial state (location and velocity)
     f.F = np.matrix([[1,1],[0,1]]) # state transition matrix
     f.H = np.matrix([[1,0]])       # Measurement function
@@ -31,7 +31,7 @@ def plot_track(noise, count, R, Q=0, plot_P=True, title='Kalman Filter'):
     cov = []
     for t in range (count):
         z = dog.sense()
-        f.measure (z)
+        f.update (z)
         #print (t,z)
         ps.append (f.x[0,0])
         cov.append(f.P)
@@ -53,4 +53,5 @@ def plot_track(noise, count, R, Q=0, plot_P=True, title='Kalman Filter'):
     plt.show()
 
 
-plot_track (noise=30, R=5, Q=2, count=20)
+if __name__ == "__main__":
+    plot_track (noise=30, R=5, Q=2, count=20)
