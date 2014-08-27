@@ -133,17 +133,44 @@ def plot_gaussian(mean, variance,
        plt.ylabel(ylabel)
 
 
-def covariance_ellipse(P):
+def covariance_ellipse(P, deviations=1):
     """ returns a tuple defining the ellipse representing the 2 dimensional
     covariance matrix P.
+
+    Parameters
+    ----------
+    P : nd.array shape (2,2)
+       covariance matrix
+
+    deviations : int (optional, default = 1)
+       # of standard deviations. Default is 1.
 
     Returns (angle_radians, width_radius, height_radius)
     """
     U,s,v = linalg.svd(P)
     orientation = math.atan2(U[1,0],U[0,0])
-    width  = math.sqrt(s[0])
-    height = math.sqrt(s[1])
+    width  = deviations*math.sqrt(s[0])
+    height = deviations*math.sqrt(s[1])
+
+    assert width >= height
+
     return (orientation, width, height)
+
+
+def is_inside_ellipse(x,y, ex, ey, orientation, width, height):
+
+    co = np.cos(orientation)
+    so = np.sin(orientation)
+
+    xx = x*co + y*so
+    yy = y*co - x*so
+
+    return (xx / width)**2 + (yy / height)**2 <= 1.
+
+
+    return ((x-ex)*co - (y-ey)*so)**2/width**2 + \
+           ((x-ex)*so + (y-ey)*co)**2/height**2 <= 1
+
 
 
 def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
@@ -191,7 +218,8 @@ def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
     height = ellipse[2] * 2.
 
     for var in variance:
-        e = Ellipse(xy=mean, width=var*width, height=var*height, angle=angle,
+        sd = np.sqrt(var)
+        e = Ellipse(xy=mean, width=sd*width, height=sd*height, angle=angle,
                     facecolor=facecolor,
                     edgecolor=edgecolor,
                     lw=1)
@@ -214,22 +242,54 @@ def _to_cov(x,n):
 
 
 def test_gaussian():
-   import scipy.stats
+    import scipy.stats
 
-   mean = 3.
-   var = 1.5
-   std = var*0.5
+    mean = 3.
+    var = 1.5
+    std = var*0.5
 
-   for i in np.arange(-5,5,0.1):
-       p0 = scipy.stats.norm(mean, std).pdf(i)
-       p1 = gaussian(i, mean, var)
+    for i in np.arange(-5,5,0.1):
+        p0 = scipy.stats.norm(mean, std).pdf(i)
+        p1 = gaussian(i, mean, var)
 
-       assert abs(p0-p1) < 1.e15
+        assert abs(p0-p1) < 1.e15
+
+
+def do_plot_test():
+
+    from numpy.random import multivariate_normal
+    p = np.array([[32, 15],[15., 40.]])
+
+    x,y = multivariate_normal(mean=(0,0), cov=p, size=5000).T
+    sd = 2
+    a,w,h = covariance_ellipse(p,sd)
+    print (np.degrees(a), w, h)
+
+    count = 0
+    color=[]
+    for i in range(len(x)):
+        if is_inside_ellipse(x[i], y[i], 0, 0, a, w, h):
+            color.append('b')
+            count += 1
+        else:
+            color.append('r')
+    plt.scatter(x,y,alpha=0.2, c=color)
+
+
+    plt.axis('equal')
+
+    plot_covariance_ellipse(mean=(0., 0.),
+                            cov = p,
+                            variance=sd*sd)
+
+    print (count / len(x))
 
 
 if __name__ == '__main__':
 
     from scipy.stats import norm
+
+    do_plot_test()
 
     test_gaussian()
 
@@ -249,6 +309,7 @@ if __name__ == '__main__':
     cov = np.array([[1.0, 1.0],
                     [1.0, 1.1]])
 
+    plt.figure()
     P = np.array([[2,0],[0,2]])
     plot_covariance_ellipse((2,7), cov=cov, variance=[1,2], title='my title')
     plt.show()
