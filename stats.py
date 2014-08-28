@@ -28,14 +28,33 @@ _two_pi = 2*math.pi
 
 
 def gaussian(x, mean, var):
-    """returns normal distribution for x given a gaussian with the specified
-    mean and variance. All must be scalars.
+    """returns normal distribution (pdf) for x given a Gaussian with the
+    specified mean and variance. All must be scalars.
 
     gaussian (1,2,3) is equivalent to scipy.stats.norm(2,math.sqrt(3)).pdf(1)
     It is quite a bit faster albeit much less flexible than the latter.
+
+    @param x test
+
+    Parameters
+    ----------
+    x : scalar
+        The value for which we compute the probability
+
+    mean : scalar
+        Mean of the Gaussian
+
+    var : scalar
+        Variance of the Gaussian
+
+    Returns
+    -------
+    probability : float
+        probability of x for the Gaussian (mean, var). E.g. 0.101 denotes
+        10.1%.
+
     """
     return math.exp((-0.5*(x-mean)**2)/var) / math.sqrt(_two_pi*var)
-    # return scipy.stats.norm(mean, math.sqrt(var)).pdf(x)
 
 
 def mul (mean1, var1, mean2, var2):
@@ -64,8 +83,10 @@ def multivariate_gaussian(x, mu, cov):
     """ This is designed to replace scipy.stats.multivariate_normal
     which is not available before version 0.14. You may either pass in a
     multivariate set of data:
+
        multivariate_gaussian (array([1,1]), array([3,4]), eye(2)*1.4)
        multivariate_gaussian (array([1,1,1]), array([3,4,5]), 1.4)
+
     or unidimensional data:
        multivariate_gaussian(1, 3, 1.4)
 
@@ -77,8 +98,38 @@ def multivariate_gaussian(x, mu, cov):
     equivalent calls:
        multivariate_gaussian(1, 2, 3)
        scipy.stats.multivariate_normal(2,3).pdf(1)
-    """
 
+
+
+    Parameters
+    ----------
+    x : scalar, or np.array-like
+       Value to compute the probability for. May be a scalar if univariate,
+       or any type that can be converted to an np.array (list, tuple, etc).
+       np.array is best for speed.
+
+    mu :  scalar, or np.array-like
+       mean for the Gaussian . May be a scalar if univariate,  or any type
+       that can be converted to an np.array (list, tuple, etc).np.array is
+       best for speed.
+
+    cov :  scalar, or np.array-like
+       Covariance for the Gaussian . May be a scalar if univariate,  or any
+       type that can be converted to an np.array (list, tuple, etc).np.array is
+       best for speed.
+
+
+
+    Returns
+    -------
+    probability : float
+        probability for x for the Gaussian (mu,cov)
+
+
+
+
+    """
+    scipy.stats.multivariate_normal
     # force all to numpy.array type
     x   = np.array(x, copy=False, ndmin=1)
     mu  = np.array(mu,copy=False, ndmin=1)
