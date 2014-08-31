@@ -5,7 +5,13 @@ Reading the book
 -----
 There are multiple ways to read this book. However, it is intended to be interactive and I recommend using it in that form. If you install IPython on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
-The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/ You can clone it to your hard drive with the command *git clone http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/ *. Navigate to the directory, and run IPython notebook with the command *ipython notebook*
+The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/ You can clone it to your hard drive with the command 
+
+    git clone http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
+    
+Navigate to the directory, and run IPython notebook with the command 
+
+    ipython notebook
 
 If you do not want to do that you can read this book online. the website [nbviewer]http://nbviewer.org provides an IPython Notebook server that renders a notebook stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
 _note: nbviewer is not currently rendering Latex on my or anyone's notebooks, so this is currently a poor option._
