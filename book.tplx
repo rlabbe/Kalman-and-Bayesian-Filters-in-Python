@@ -10,7 +10,6 @@
     ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
 ((* endblock predoc *))
 
-
 ((* block title *))
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
