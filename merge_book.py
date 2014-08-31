@@ -30,6 +30,6 @@ def merge_notebooks(filenames):
 
 if __name__ == '__main__':
     #merge_notebooks(sys.argv[1:])   
-    merge_notebooks(['Preface.ipynb', 'Signals_and_Noise.ipynb','g-h_filter.ipynb', 'discrete_bayes.ipynb', 'Gaussians.ipynb', 'Kalman_Filters.ipynb', 'Multidimensional_Kalman_Filters.ipynb', 'Kalman_Filter_Math.ipynb', 'Extended_Kalman_Filters.ipynb', 'Unscented_Kalman_Filter.ipynb', 'Designing_Nonlinear_Kalman_Filters.ipynb'])
+    merge_notebooks(['Preface.ipynb', 'Signals_and_Noise.ipynb','g-h_filter.ipynb', 'discrete_bayes.ipynb', 'Least_Squares_Filters.ipynb', 'Gaussians.ipynb', 'Kalman_Filters.ipynb', 'Multidimensional_Kalman_Filters.ipynb', 'Kalman_Filter_Math.ipynb', 'Extended_Kalman_Filters.ipynb', 'Unscented_Kalman_Filter.ipynb', 'Designing_Nonlinear_Kalman_Filters.ipynb', 'Appendix_Symbols_and_Notations.ipynb'])
 #    merge_notebooks(['Preface.ipynb', 'Signals_and_Noise.ipynb' g-h_filter.ipynb discrete_bayes.ipynb Gaussians.ipynb Kalman_Filters.ipynb Multidimensional_Kalman_Filters.ipynb Kalman_Filter_Math.ipynb Designing_Kalman_Filters.ipynb Extended_Kalman_Filters.ipynb Unscented_Kalman_Filter.ipynb'])
     
