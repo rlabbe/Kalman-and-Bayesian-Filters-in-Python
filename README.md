@@ -8,18 +8,12 @@ There are multiple ways to read this book. However, it is intended to be interac
 The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
 
 If you do not want to do that you can read this book online. the website [nbviewer]http://nbviewer.org provides an IPython Notebook server that renders a notebook stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
-*note: nbviewer is not currently rendering Latex on my or anyone's notebooks, so this is currently a poor option.*
+_note: nbviewer is not currently rendering Latex on my or anyone's notebooks, so this is currently a poor option._
 
 You may access this book via nbviewer at any by using this address:
 http://nbviewer.ipython.org/github/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/blob/master/Introduction.ipynb
 
 Finally, you may generate output in a variety of formats. I will not cover how to do that, other than to point you to [IPython nbconvert](http://ipython.org/ipython-doc/rel-1.0.0/interactive/nbconvert.html). You can convert this book into static HTML pages, latex, or PDF. While I don't recommend it particularly, it is useful for those that don't want to program and/or are working offline.
-
-
-The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
-
-#[Kalman Filters and Random Signals in Python](http://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python)
-
 
 
 ### Version 0.0 - not ready for public consumption. In development.
