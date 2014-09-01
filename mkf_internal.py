@@ -20,16 +20,19 @@ def show_residual_chart():
     plt.scatter ([2],[2.8],marker='o')
     ax = plt.axes()
     ax.annotate('', xy=(2,3), xytext=(1,2),
-                arrowprops=dict(arrowstyle='->', ec='b',shrinkA=3, shrinkB=4))
-    ax.annotate('prediction', xy=(2.04,3.), color='b')
+                arrowprops=dict(arrowstyle='->', ec='#004080',
+                                lw=2,
+                                shrinkA=3, shrinkB=4))
+    ax.annotate('prediction', xy=(2.04,3.), color='#004080')
     ax.annotate('measurement', xy=(2.05, 2.28))
     ax.annotate('prior estimate', xy=(1, 1.9))
-    ax.annotate('residual', xy=(2.04,2.6), color='r')
+    ax.annotate('residual', xy=(2.04,2.6), color='#e24a33')
     ax.annotate('new estimate', xy=(2,2.8),xytext=(2.1,2.8),
                 arrowprops=dict(arrowstyle='->', ec="k", shrinkA=3, shrinkB=4))
     ax.annotate('', xy=(2,3), xytext=(2,2.3),
                 arrowprops=dict(arrowstyle="-",
-                                ec="r",
+                                ec="#e24a33",
+                                lw=2,
                                 shrinkA=5, shrinkB=5))
     plt.title("Kalman Filter Prediction Update Step")
     plt.axis('equal')
@@ -39,7 +42,7 @@ def show_residual_chart():
 def show_position_chart():
     """ Displays 3 measurements at t=1,2,3, with x=1,2,3"""
 
-    plt.scatter ([1,2,3], [1,2,3], s=128)
+    plt.scatter ([1,2,3], [1,2,3], s=128, color='#004080')
     plt.xlim([0,4]);
     plt.ylim([0,4])
 
@@ -54,7 +57,7 @@ def show_position_chart():
 def show_position_prediction_chart():
     """ displays 3 measurements, with the next position predicted"""
 
-    plt.scatter ([1,2,3], [1,2,3], s=128)
+    plt.scatter ([1,2,3], [1,2,3], s=128, color='#004080')
 
     plt.xlim([0,5])
     plt.ylim([0,5])
@@ -65,7 +68,7 @@ def show_position_prediction_chart():
     plt.xticks(np.arange(1,5,1))
     plt.yticks(np.arange(1,5,1))
 
-    plt.scatter ([4], [4], c='g',s=128)
+    plt.scatter ([4], [4], c='g',s=128, color='#8EBA42')
     ax = plt.axes()
     ax.annotate('', xy=(4,4), xytext=(3,3),
                 arrowprops=dict(arrowstyle='->',
@@ -181,6 +184,6 @@ def plot_3d_covariance(mean, cov):
 
 
 if __name__ == "__main__":
-
-    plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
-    #show_residual_chart()
+    #show_position_chart()
+    #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
+    show_residual_chart()
