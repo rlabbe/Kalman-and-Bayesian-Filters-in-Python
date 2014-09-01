@@ -126,8 +126,6 @@ def multivariate_gaussian(x, mu, cov):
         probability for x for the Gaussian (mu,cov)
 
 
-
-
     """
     scipy.stats.multivariate_normal
     # force all to numpy.array type
@@ -226,7 +224,8 @@ def is_inside_ellipse(x,y, ex, ey, orientation, width, height):
 
 def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
              ellipse=None, title=None, axis_equal=True,
-             facecolor='none', edgecolor='#004080'):
+             facecolor='none', edgecolor='#004080',
+             alpha=1.0):
     """ plots the covariance ellipse where
 
     mean is a (x,y) tuple for the mean of the covariance (center of ellipse)
@@ -273,6 +272,7 @@ def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
         e = Ellipse(xy=mean, width=sd*width, height=sd*height, angle=angle,
                     facecolor=facecolor,
                     edgecolor=edgecolor,
+                    alpha=alpha,
                     lw=2)
         ax.add_patch(e)
     plt.scatter(mean[0], mean[1], marker='+') # mark the center
@@ -318,7 +318,8 @@ def do_plot_test():
 
     plot_covariance_ellipse(mean=(0., 0.),
                             cov = p,
-                            variance=sd*sd)
+                            variance=sd*sd,
+                            facecolor='none')
 
     print (count / len(x))
 
@@ -350,7 +351,7 @@ if __name__ == '__main__':
 
     plt.figure()
     P = np.array([[2,0],[0,2]])
-    plot_covariance_ellipse((2,7), cov=cov, variance=[1,2], title='my title')
+    plot_covariance_ellipse((2,7), cov=cov, variance=[1,2], facecolor='g', title='my title', alpha=.2)
     plt.show()
 
     print("all tests passed")
