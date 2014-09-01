@@ -14,7 +14,7 @@ Navigate to the directory, and run IPython notebook with the command
     ipython notebook
 
 If you do not want to do that you can read this book online. the website [nbviewer]http://nbviewer.org provides an IPython Notebook server that renders a notebook stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
-_note: nbviewer is not currently rendering Latex on my or anyone's notebooks, so this is currently a poor option._
+
 
 You may access this book via nbviewer at any by using this address:
 http://nbviewer.ipython.org/github/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/blob/master/Introduction.ipynb
