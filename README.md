@@ -1,9 +1,22 @@
 Introductory textbook for Kalman filters and Bayesian filters. All code is written in Python, and the book itself is written in Ipython Notebook so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
 
 
-Reading the book
+
+Reading Online
+--
+The quickest way to read the book is to read it online. The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your brower. The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
+
+You may access this book via nbviewer at any by using this address:
+[*Static Version of Book*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Introduction.ipynb)
+
+I periodically generate a PDF of the book from the Notebooks. I do not do this for every check in, so the PDF will usually lag the content in github and on nbviewer.org. However, I do generate it whenever I make a substantial change. 
+
+[*PDF Version of the book*](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf)
+
+
+Downloading the book
 -----
-There are multiple ways to read this book. However, it is intended to be interactive and I recommend using it in that form. If you install IPython on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
+However, this book is intended to be interactive and I recommend using it in that form. If you install IPython on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
 The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/ You can clone it to your hard drive with the command 
 
@@ -13,13 +26,8 @@ Navigate to the directory, and run IPython notebook with the command
 
     ipython notebook
 
-If you do not want to do that you can read this book online. the website [nbviewer]http://nbviewer.org provides an IPython Notebook server that renders a notebook stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
+If you need more instructions they are available in the static version of the book. Follow the link above, and read the installation appendix.
 
-
-You may access this book via nbviewer at any by using this address:
-http://nbviewer.ipython.org/github/rlabbe/Kalman-Filters-and-Random-Signals-in-Python/blob/master/Introduction.ipynb
-
-Finally, you may generate output in a variety of formats. I will not cover how to do that, other than to point you to [IPython nbconvert](http://ipython.org/ipython-doc/rel-1.0.0/interactive/nbconvert.html). You can convert this book into static HTML pages, latex, or PDF. While I don't recommend it particularly, it is useful for those that don't want to program and/or are working offline.
 
 
 ### Version 0.0 - not ready for public consumption. In development.
