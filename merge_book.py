@@ -19,7 +19,7 @@ def remove_links(nb):
     c = node['cells']
     for i in range (len(c)):
         if 'source' in c[i].keys():
-            if c[i]['source'][0:15] == 'http://nbviewer':
+            if c[i]['source'][0:19] == '[Table of Contents]':
                 del c[i]
                 return
 
