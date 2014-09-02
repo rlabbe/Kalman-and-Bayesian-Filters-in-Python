@@ -3,7 +3,7 @@ from IPython.core.display import HTML
 import matplotlib.pylab as pylab
 
 def load_style():
-    styles = open("./styles/custom2.css", "r").read()
+    styles = open("../styles/custom2.css", "r").read()
     return HTML(styles)
 
 pylab.rcParams['lines.linewidth'] = 2
