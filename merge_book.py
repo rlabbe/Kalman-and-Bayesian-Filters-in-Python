@@ -13,6 +13,15 @@ def remove_formatting(nb):
                 del c[i]
                 return
 
+def remove_links(nb):
+    w = nb['worksheets']
+    node = w[0]
+    c = node['cells']
+    for i in range (len(c)):
+        if 'source' in c[i].keys():
+            if c[i]['source'][0:15] == 'http://nbviewer':
+                del c[i]
+                return
 
 def merge_notebooks(filenames):
     merged = None
@@ -20,6 +29,7 @@ def merge_notebooks(filenames):
         with io.open(fname, 'r', encoding='utf-8') as f:
             nb = current.read(f, u'json')
             remove_formatting(nb)
+            remove_links(nb)
         if merged is None:
             merged = nb
         else:
