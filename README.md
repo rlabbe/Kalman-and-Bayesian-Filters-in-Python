@@ -79,7 +79,7 @@ Introduction to the Kalman filter. Explanation of the idea behind this book.
 Yes, it is more or less the preface restated. will edit and delete one or the other.
 
 
-* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/g-h_filter.ipynb)
+* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter01_gh_filter/g-h_filter.ipynb)
 
 Intuitive introduction to the g-h filter, which is a family of filters that includes the Kalman filter. Not filler - once you understand this chapter you will understand the concepts behind the Kalman filter. 
 
