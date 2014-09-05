@@ -104,12 +104,12 @@ Introduces using Gaussians to represent beliefs. Gaussians allow us to implement
 Implements a Kalman filter by modifying the Discrete Bayesian Filter to use Gaussians. This is a full featured Kalman filter, albeit only useful for 1D problems. 
 
 
-* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter06_Multivariate_Kalman_Filters/Multivariate_Kalman_Filters.ipynb)
+* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter06_Multivariate_Kalman_Filter/Multivariate_Kalman_Filters.ipynb)
 
 We extend the Kalman filter developed in the previous chapter to the full, generalized filter. 
 
 
-* [**Chapter 7: Kalman Filter Math**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Chapter07_Kalman_Filter_Math/Kalman-and-Bayesian-Filters-in-Python/master/Kalman_Filter_Math.ipynb)
+* [**Chapter 7: Kalman Filter Math**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter07_Kalman_Filter_Math/Kalman_Filter_Math.ipynb)
 
 We gotten about as far as we can without forming a strong mathematical foundation. This chapter is optional, especially the first time, but if you intend to write robust, numerically stable filters, or to read the literature, you will need to know this.
 
