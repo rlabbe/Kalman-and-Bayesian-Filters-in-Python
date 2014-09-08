@@ -135,7 +135,7 @@ Unscented Kalman filters (UKF) are a recent development in Kalman filter theory.
 EKF and UKF are linear approximations of nonlinear problems. Unless programmed carefully, they are not numerically stable. We discuss some common approaches to this problem.
 
 
-* [**Chapter 12: H-Infinity Filters**](not implemented)
+* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter12_HInfinity_Filters/HInfinity_Filter.ipynb)
     
 
 * [**Chapter 13: Numerical Stability**](not implemented)
