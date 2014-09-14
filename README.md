@@ -176,10 +176,10 @@ If you want to run the notebook on your computer, which is what I recommend, the
 
 To use all features you will have to have Ipython 2.0 installed, which is released and stable as of April 2014. Most of the book does not require that, but I do make use of the interactive plotting widgets introduced in this release. A few cells will not run if you have an older version installed.
 
-You will need Python 2.7 or later installed. Almost all of my work is done in Python 2.7, but I periodically test on 3.3. I do not promise any specific check in will work in 3.X, however. I do use Python's "from __future__ import ..." statement to help with compatibility. For example, all prints need to use parenthesis. If you try to add, say, "print 3.14" into the book your script will fail; you must write "print (3.4)" as in Python 3.X.
+You will need Python 2.7 or later installed. Almost all of my work is done in Python 3.4, but I periodically test on 2.7. I do not promise any specific check in will work in 2.7 however. I do use Python's "from __future__ import ..." statement to help with compatibility. For example, all prints need to use parenthesis. If you try to add, say, "print 3.14" into the book your script will fail; you must write "print (3.4)" as in Python 3.X.
 
-You will need a recent version of NumPy, SciPy, and Matplotlib installed. I don't really know what the minimal might be. 
-I have numpy 1.71, SciPy 0.13.0, and Matplotlib 1.3.1 installed on my machines.
+You will need a recent version of NumPy, SciPy, and Matplotlib installed. I don't really know what the minimal version might be. 
+I have numpy 1.71, SciPy 0.13.0, and Matplotlib 1.4.0 installed on my machines.
 
 Personally, I use the Anaconda Python distribution in all of my work, [available here](https://store.continuum.io/cshop/anaconda/). I am not selecting them out of favoritism, I am merely documenting my environment. Should you have trouble running any of the code, perhaps knowing this will help you.
 
