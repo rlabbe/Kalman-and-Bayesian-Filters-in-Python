@@ -72,13 +72,6 @@ Contents
 
 Motivation for the book. Where to download, how to use.
 
-** add something about teaching methodology. exploration vs regurgitation.
-
-* [**Introduction**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Introduction.ipynb)
- 
-Introduction to the Kalman filter. Explanation of the idea behind this book.
-Yes, it is more or less the preface restated. will edit and delete one or the other.
-
 
 * [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter01_gh_filter/g-h_filter.ipynb)
 
