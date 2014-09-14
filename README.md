@@ -20,9 +20,9 @@ Downloading the book
 -----
 However, this book is intended to be interactive and I recommend using it in that form. If you install IPython on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
-The github pages for this project are at http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/ You can clone it to your hard drive with the command 
+The github pages for this project are at https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python You can clone it to your hard drive with the command 
 
-    git clone http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
+    git clone https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python.git
     
 Navigate to the directory, and run IPython notebook with the command 
 
