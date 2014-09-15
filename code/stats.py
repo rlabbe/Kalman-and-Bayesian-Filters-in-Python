@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import scipy.sparse as sp
 import scipy.sparse.linalg as spln
 import scipy.stats
+from scipy.stats import norm
 from matplotlib.patches import Ellipse
 
 _two_pi = 2*math.pi
@@ -325,9 +326,72 @@ def do_plot_test():
 
 
 
+def norm_cdf (x_range, mu, var=1, std=None):
+    """ computes the probability that a Gaussian distribution lies
+    within a range of values.
+
+    Paramateters
+    ------------
+
+    x_range : (float, float)
+        tuple of range to compute probability for
+
+    mu : float
+        mean of the Gaussian
+
+    var : float, optional
+        variance of the Gaussian. Ignored if std is provided
+
+    std : float, optional
+       standard deviation of the Gaussian. This overrides the var parameter
+
+
+    Returns
+    -------
+    probability : float
+        probability that Gaussian is within x_range. E.g. .1 means 10%.
+
+    """
+
+    if std is None:
+        std = math.sqrt(var)
+    return abs(norm.cdf(x_range[0], loc=mu, scale=std) -
+               norm.cdf(x_range[1], loc=mu, scale=std))
+
+
+
+def test_norm_cdf():
+
+    # test using the 68-95-99.7 rule
+
+    mu = 5
+    std = 3
+    var = std*std
+
+    std_1 = (norm_cdf((mu-std, mu+std), mu, var))
+    assert abs(std_1 - .6827) < .0001
+
+    std_1 = (norm_cdf((mu+std, mu-std), mu, std=std))
+    assert abs(std_1 - .6827) < .0001
+
+    std_1half = (norm_cdf((mu+std, mu), mu, var))
+    assert abs(std_1half - .6827/2) < .0001
+
+    std_2 = (norm_cdf((mu-2*std, mu+2*std), mu, var))
+    assert abs(std_2 - .9545) < .0001
+
+    std_3 = (norm_cdf((mu-3*std, mu+3*std), mu, var))
+    assert abs(std_3 - .9973) < .0001
+
+
+
+test_norm_cdf()
+
 if __name__ == '__main__':
 
-    from scipy.stats import norm
+
+
+    test_norm_cdf ()
 
     do_plot_test()
 
