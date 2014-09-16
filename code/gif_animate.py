@@ -8,7 +8,7 @@ Created on Sun Sep 14 12:41:24 2014
 from matplotlib import animation
 import matplotlib.pyplot as plt
 
-def animate(filename, func, frames, interval, figsize=(6.5, 6.5)):
+def animate(filename, func, frames, interval, fig=None, figsize=(6.5, 6.5)):
     """ Creates an animated GIF of a matplotlib.
 
     Parameters
@@ -43,7 +43,8 @@ def animate(filename, func, frames, interval, figsize=(6.5, 6.5)):
             return
         func(frame)
 
-    fig = plt.figure(figsize=figsize)
+    if fig is None:
+        fig = plt.figure(figsize=figsize)
     forward.first = True
     anim = animation.FuncAnimation(fig, forward, frames=frames, interval=interval)
     anim.save(filename, writer='imagemagick')
