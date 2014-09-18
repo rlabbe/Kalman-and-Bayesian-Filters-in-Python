@@ -1,6 +1,6 @@
 Introductory textbook for Kalman filters and Bayesian filters. All code is written in Python, and the book itself is written in Ipython Notebook so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
 
-![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter06_Multivariate_Kalman_Filter/track1.gif)
+![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter05_Kalman_Filters/dog_track.gif)
 
 
 Reading Online
@@ -25,8 +25,7 @@ However, this book is intended to be interactive and I recommend using it in tha
 The github pages for this project are at https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python You can clone it to your hard drive with the command 
 
     git clone https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python.git
-    
-    git clone http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/
+   
    
 This will create a directory named Kalman-and-Bayesian-Filters-in-Python. Navigate to the directory, and run IPython notebook with the command 
 
