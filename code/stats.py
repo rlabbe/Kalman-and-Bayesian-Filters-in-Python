@@ -226,7 +226,7 @@ def is_inside_ellipse(x,y, ex, ey, orientation, width, height):
 def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
              ellipse=None, title=None, axis_equal=True,
              facecolor='none', edgecolor='#004080',
-             alpha=1.0):
+             alpha=1.0, xlim=None, ylim=None):
     """ plots the covariance ellipse where
 
     mean is a (x,y) tuple for the mean of the covariance (center of ellipse)
@@ -277,6 +277,11 @@ def plot_covariance_ellipse(mean, cov=None, variance = 1.0,
                     lw=2)
         ax.add_patch(e)
     plt.scatter(mean[0], mean[1], marker='+') # mark the center
+    if xlim is not None:
+        ax.set_xlim(xlim)
+
+    if ylim is not None:
+        ax.set_ylim(ylim)
 
 
 def _to_cov(x,n):
