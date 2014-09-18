@@ -98,12 +98,12 @@
     div.output_subarea.output_text.output_pyout {
         overflow-x: auto;
         overflow-y: scroll;
-        max-height: 300px;
+        max-height: 50000px;
     }
     div.output_subarea.output_stream.output_stdout.output_text {
         overflow-x: auto;
         overflow-y: scroll;
-        max-height: 300px;
+        max-height: 50000px;
     }
     code{
       font-size: 70%;
