@@ -79,63 +79,63 @@ Contents
 Motivation for the book. Where to download, how to use.
 
 
-* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter01_gh_filter/g-h_filter.ipynb)
+* [**Chapter 1: The g-h Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/01_gh_filter/g-h_filter.ipynb)
 
 Intuitive introduction to the g-h filter, which is a family of filters that includes the Kalman filter. Not filler - once you understand this chapter you will understand the concepts behind the Kalman filter. 
 
 
-* [**Chapter 2: The Discrete Bayes Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter02_Discrete_Bayes/discrete_bayes.ipynb)
+* [**Chapter 2: The Discrete Bayes Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/02_Discrete_Bayes/discrete_bayes.ipynb)
 
 Introduces the Discrete Bayes Filter. From this you will learn the probabilistic reasoning that underpins the Kalman filter in an easy to digest form.
 
 
-* [**Chapter 3: Least Squares Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter03_Least_Squares/Least_Squares_Filters.ipynb)
+* [**Chapter 3: Least Squares Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/03_Least_Squares/Least_Squares_Filters.ipynb)
 
 Introduces the least squares filter in batch and recursive forms.
 
 
-* [**Chapter 4: Gaussian Probabilities**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter04_Gaussians/Gaussians.ipynb)
+* [**Chapter 4: Gaussian Probabilities**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/04_Gaussians/Gaussians.ipynb)
 
 Introduces using Gaussians to represent beliefs. Gaussians allow us to implement the algorithms used in the Discrete Bayes Filter to work in continuous domains.
 
 
-* [**Chapter 5: One Dimensional Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter05_Kalman_Filters/Kalman_Filters.ipynb)
+* [**Chapter 5: One Dimensional Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/05_Kalman_Filters/Kalman_Filters.ipynb)
 
 Implements a Kalman filter by modifying the Discrete Bayesian Filter to use Gaussians. This is a full featured Kalman filter, albeit only useful for 1D problems. 
 
 
-* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter06_Multivariate_Kalman_Filter/Multivariate_Kalman_Filters.ipynb)
+* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/06_Multivariate_Kalman_Filter/Multivariate_Kalman_Filters.ipynb)
 
 We extend the Kalman filter developed in the previous chapter to the full, generalized filter. 
 
 
-* [**Chapter 7: Kalman Filter Math**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter07_Kalman_Filter_Math/Kalman_Filter_Math.ipynb)
+* [**Chapter 7: Kalman Filter Math**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/07_Kalman_Filter_Math/Kalman_Filter_Math.ipynb)
 
 We gotten about as far as we can without forming a strong mathematical foundation. This chapter is optional, especially the first time, but if you intend to write robust, numerically stable filters, or to read the literature, you will need to know this.
 
 
-* [**Chapter 8: Designing Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter08_Designing_Kalman_Filters/Designing_Kalman_Filters.ipynb)
+* [**Chapter 8: Designing Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/08_Designing_Kalman_Filters/Designing_Kalman_Filters.ipynb)
 
 Building on material in Chapter 6, walks you through the design of several Kalman filters. Discusses, but does not solve issues like numerical stability.
 
 
-* [**Chapter 9: Extended Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter09_Extended_Kalman_Filters/Extended_Kalman_Filters.ipynb)
+* [**Chapter 9: Extended Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/09_Extended_Kalman_Filters/Extended_Kalman_Filters.ipynb)
 
 Kalman filter as covered only work for linear problems. Extended Kalman filters (EKF) are the most common approach to linearizing non-linear problems.
 
 
-* [**Chapter 10: Unscented Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb)
+* [**Chapter 10: Unscented Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb)
 
 
 Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.
 
 
-* [**Chapter 11: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter11_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb)
+* [**Chapter 11: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb)
 
 EKF and UKF are linear approximations of nonlinear problems. Unless programmed carefully, they are not numerically stable. We discuss some common approaches to this problem.
 
 
-* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Chapter12_HInfinity_Filters/HInfinity_Filter.ipynb)
+* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_HInfinity_Filters/HInfinity_Filter.ipynb)
     
 
 * [**Chapter 13: Numerical Stability**](not implemented)
