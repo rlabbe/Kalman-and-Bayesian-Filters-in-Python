@@ -1,5 +1,7 @@
 <style>
 @import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
+@import url('http://fonts.googleapis.com/css?family=Vollkorn');
+@import url('http://fonts.googleapis.com/css?family=Arimo');
 
     div.cell{
         width: 850px;
@@ -86,9 +88,9 @@
         white-space: nowrap;
     }
     div.text_cell_render{
-        font-family: 'Open sans',verdana,arial,sans-serif;
+        font-family: 'Arimo',verdana,arial,sans-serif;
         line-height: 135%;
-        font-size: 110%;
+        font-size: 125%;
         width:750px;
         margin-left:auto;
         margin-right:auto;
