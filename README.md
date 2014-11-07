@@ -17,6 +17,11 @@ I periodically generate a PDF of the book from the Notebooks. I do not do this f
 
 [*PDF Version of the book*](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf)
 
+Companion Software
+-----
+
+All of the filters used in this book as well as others not in this book are implemented in my Python library filterpy, available [here](https://github/com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
+
 
 Downloading the book
 -----
@@ -104,7 +109,7 @@ Introduces using Gaussians to represent beliefs. Gaussians allow us to implement
 Implements a Kalman filter by modifying the Discrete Bayesian Filter to use Gaussians. This is a full featured Kalman filter, albeit only useful for 1D problems. 
 
 
-* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/06_Multivariate_Kalman_Filter/Multivariate_Kalman_Filters.ipynb)
+* [**Chapter 6: Multivariate Kalman Filter**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/06_Multivariate_Kalman_filter/Multivariate_Kalman_Filters.ipynb)
 
 We extend the Kalman filter developed in the previous chapter to the full, generalized filter. 
 
