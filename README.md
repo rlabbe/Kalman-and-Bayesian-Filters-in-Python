@@ -20,7 +20,7 @@ I periodically generate a PDF of the book from the Notebooks. I do not do this f
 Companion Software
 -----
 
-All of the filters used in this book as well as others not in this book are implemented in my Python library filterpy, available [here](https://github/com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
+All of the filters used in this book as well as others not in this book are implemented in my Python library FilterPy, available [here](https://github/com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
 
 
 Downloading the book
@@ -161,17 +161,16 @@ Particle filters uses a Monte Carlo technique to
 description
 
 
-* [**Appendix: Installation, Python, NumPy, and filterpy**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation/Appendix_Installation.ipynb)
+* [**Appendix: Installation, Python, NumPy, and FilterPy**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation/Appendix_Installation.ipynb)
 
 
 Brief introduction of Python and how it is used in this book. Description of the companion
-library filterpy. 
+library FilterPy. 
     
 
 * [**Appendix: Symbols and Notations**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_B_Symbols_and_Notations/Appendix_Symbols_and_Notations.ipynb)
 
 Symbols and notations used in this book. Comparison with notations used in the literature.
-
 
 
 Installation and Software Requirements
@@ -193,7 +192,7 @@ Personally, I use the Anaconda Python distribution in all of my work, [available
 Provided Libraries and Modules
 -----
 
-I am writing an open source bayesian filtering Python library called **filterpy**. It is available on github at (https://github.com/rlabbe/filterpy). To ensure that you have the latest release you will want to grab a copy from github, and follow your Python installation's instructions for adding it to the Python search path.
+I am writing an open source bayesian filtering Python library called **FilterPy**. It is available on github at (https://github.com/rlabbe/filterpy). To ensure that you have the latest release you will want to grab a copy from github, and follow your Python installation's instructions for adding it to the Python search path.
 
 I have also made the project available on PyPi, the Python Package Index. I will be honest, I am not updating this as fast as I am changing the code in the library. That will change as the library and this book mature. To install from PyPi, at the command line issue the command
 
