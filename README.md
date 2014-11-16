@@ -146,7 +146,7 @@ EKF and UKF are linear approximations of nonlinear problems. Unless programmed c
 * [**Chapter 13: Numerical Stability**](not implemented)
 
 
-* [**Chapter 14: Smoothing**](not implemented)
+* [**Chapter 14: Smoothing**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/14_Smoothing/14_Smoothing.ipynb)
     
 Kalman filters are recursive, and thus very suitable for real time filtering. However, they work well for post-processing data. We discuss some common approaches.
     
