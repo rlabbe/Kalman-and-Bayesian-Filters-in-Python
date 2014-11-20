@@ -12,14 +12,14 @@ import math
 
 class DogSensor(object):
 
-    def __init__(self, x0=0, velocity=1, noise=0.0):
+    def __init__(self, x0=0, velocity=1, noise_var=0.0):
         """ x0 - initial position
             velocity - (+=right, -=left)
-            noise - scaling factor for noise, 0== no noise
+            noise_var - noise variance, 0== no noise
         """
         self.x = x0
         self.velocity = velocity
-        self.noise = math.sqrt(noise)
+        self.noise = math.sqrt(noise_var)
 
     def sense(self):
         self.x = self.x + self.velocity
