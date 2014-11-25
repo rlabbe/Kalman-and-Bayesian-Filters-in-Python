@@ -389,13 +389,7 @@ def test_norm_cdf():
     assert abs(std_3 - .9973) < .0001
 
 
-
-test_norm_cdf()
-
 if __name__ == '__main__':
-
-
-
     test_norm_cdf ()
 
     do_plot_test()
