@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from IPython.core.display import HTML
 import matplotlib.pylab as pylab
+import matplotlib.pyplot as plt
 
 def load_style(name='../styles/custom2.css'):
     styles = open(name, 'r').read()
@@ -30,7 +31,7 @@ pylab.rcParams['xtick.minor.pad'] = 6
 pylab.rcParams['xtick.color'] = '555555'
 pylab.rcParams['ytick.direction'] = 'in'
 pylab.rcParams['legend.fancybox'] = True
-pylab.rcParams['figure.facecolor'] = '0.85'
+pylab.rcParams['figure.facecolor'] = '1.0'
 pylab.rcParams['figure.edgecolor'] = '0.50'
 pylab.rcParams['figure.subplot.hspace'] = 0.5
 pylab.rcParams['figure.figsize'] = 12,6
@@ -38,4 +39,11 @@ pylab.rcParams['grid.color'] = 'ffffff'
 pylab.rcParams['grid.linestyle'] = 'solid'
 pylab.rcParams['grid.linewidth'] = 1.5
 
+
+def equal_axis():
+    pylab.rcParams['figure.figsize'] = 10,10
+    plt.axis('equal')
+
+def reset_axis():
+    pylab.rcParams['figure.figsize'] = 12, 6
 
