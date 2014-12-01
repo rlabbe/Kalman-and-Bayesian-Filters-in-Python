@@ -140,10 +140,12 @@ Unscented Kalman filters (UKF) are a recent development in Kalman filter theory.
 EKF and UKF are linear approximations of nonlinear problems. Unless programmed carefully, they are not numerically stable. We discuss some common approaches to this problem.
 
 
-* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_HInfinity_Filters/HInfinity_Filter.ipynb)
+* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_HInfinity_Filters/HInfinity_Filters.ipynb)
     
 
 * [**Chapter 13: Numerical Stability**](not implemented)
+
+Not written yet.
 
 
 * [**Chapter 14: Smoothing**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/14_Smoothing/Smoothing.ipynb)
@@ -153,12 +155,12 @@ Kalman filters are recursive, and thus very suitable for real time filtering. Ho
  
 * [**Chapter 15: Particle Filters**](not implemented)
     
-Particle filters uses a Monte Carlo technique to 
+Not written yet
   
 
 * [**Chapter 16: Multihypothesis Tracking**](not implemented)
     
-description
+Not written yet.
 
 
 * [**Appendix: Installation, Python, NumPy, and FilterPy**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation/Appendix_Installation.ipynb)
