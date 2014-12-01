@@ -141,7 +141,9 @@ EKF and UKF are linear approximations of nonlinear problems. Unless programmed c
 
 
 * [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_HInfinity_Filters/HInfinity_Filters.ipynb)
-    
+
+H-inifinity filters are a form of filter that is very robust in the presence of non-Gaussian noise. They do not perform as well as Kalman filters, but are less likely to diverge.
+
 
 * [**Chapter 13: Numerical Stability**](not implemented)
 
