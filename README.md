@@ -136,36 +136,41 @@ Kalman filter as covered only work for linear problems. Extended Kalman filters 
 
 * [**Chapter 10: Unscented Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb)
 
-
 Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.
 
 
-* [**Chapter 11: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb)
+[**Chapter 11: Ensemble Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filter_Kalman_Filters.ipynb)
+
+Discusses the ensemble Kalman Filter, which uses a Monte Carlo approach to deal with very large Kalman filter states in nonlinear systems.
+
+
+* [**Chapter 12: Designing Nonlinear Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb)
 
 EKF and UKF are linear approximations of nonlinear problems. Unless programmed carefully, they are not numerically stable. We discuss some common approaches to this problem.
 
 
-* [**Chapter 12: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_HInfinity_Filters/HInfinity_Filters.ipynb)
+* [**Chapter 13: H-Infinity Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/13_HInfinity_Filters/HInfinity_Filters.ipynb)
 
 H-inifinity filters are a form of filter that is very robust in the presence of non-Gaussian noise. They do not perform as well as Kalman filters, but are less likely to diverge.
-
-
-* [**Chapter 13: Numerical Stability**](not implemented)
-
-Not written yet.
 
 
 * [**Chapter 14: Smoothing**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/14_Smoothing/Smoothing.ipynb)
     
 Kalman filters are recursive, and thus very suitable for real time filtering. However, they work well for post-processing data. We discuss some common approaches.
     
+
+
+* [**Chapter XX: Numerical Stability**](not implemented)
+
+Not written yet.
+
  
-* [**Chapter 15: Particle Filters**](not implemented)
+* [**Chapter XX: Particle Filters**](not implemented)
     
 Not written yet
   
 
-* [**Chapter 16: Multihypothesis Tracking**](not implemented)
+* [**Chapter XX: Multihypothesis Tracking**](not implemented)
     
 Not written yet.
 
