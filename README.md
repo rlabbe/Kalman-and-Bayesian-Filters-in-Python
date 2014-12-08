@@ -139,7 +139,7 @@ Kalman filter as covered only work for linear problems. Extended Kalman filters 
 Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.
 
 
-[**Chapter 11: Ensemble Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filter_Kalman_Filters.ipynb)
+[**Chapter 11: Ensemble Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filters.ipynb)
 
 Discusses the ensemble Kalman Filter, which uses a Monte Carlo approach to deal with very large Kalman filter states in nonlinear systems.
 
