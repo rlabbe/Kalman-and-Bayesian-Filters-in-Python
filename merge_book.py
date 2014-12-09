@@ -53,11 +53,9 @@ if __name__ == '__main__':
          '08_Designing_Kalman_Filters/Designing_Kalman_Filters.ipynb',
          '09_Extended_Kalman_Filters/Extended_Kalman_Filters.ipynb',
          '10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb',
-         '11_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb',
-         '12_HInfinity_Filters/HInfinity_Filters.ipynb',
+         '11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filters.ipynb',
+         '12_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb',
+         '13_HInfinity_Filters/HInfinity_Filters.ipynb',
          '14_Smoothing/Smoothing.ipynb',
          'Appendix_A_Installation/Appendix_Installation.ipynb',
          'Appendix_B_Symbols_and_Notations/Appendix_Symbols_and_Notations.ipynb'])
-
-
-#    merge_notebooks(['Preface.ipynb', g-h_filter.ipynb discrete_bayes.ipynb Gaussians.ipynb Kalman_Filters.ipynb Multivariate_Kalman_Filters.ipynb Kalman_Filter_Math.ipynb Designing_Kalman_Filters.ipynb Extended_Kalman_Filters.ipynb Unscented_Kalman_Filter.ipynb'])
