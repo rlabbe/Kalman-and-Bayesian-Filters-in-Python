@@ -160,5 +160,3 @@ def show_radar_chart():
 
 
     plt.show()
-    
-show_radar_chart()
