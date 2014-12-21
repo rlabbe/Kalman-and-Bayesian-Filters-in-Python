@@ -9,7 +9,7 @@ from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
-
+from numpy.random import multivariate_normal
 import stats
 
 def show_residual_chart():
@@ -34,7 +34,7 @@ def show_residual_chart():
                                 ec="#e24a33",
                                 lw=2,
                                 shrinkA=5, shrinkB=5))
-    plt.title("Kalman Filter Prediction Update Step")
+    plt.title("Kalman Filter Predict and Update")
     plt.axis('equal')
     plt.show()
 
@@ -183,7 +183,63 @@ def plot_3d_covariance(mean, cov):
     ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
 
 
+def plot_3d_sampled_covariance(mean, cov):
+    """ plots a 2x2 covariance matrix positioned at mean. mean will be plotted
+    in x and y, and the probability in the z axis.
+
+    Parameters
+    ----------
+    mean :  2x1 tuple-like object
+        mean for x and y coordinates. For example (2.3, 7.5)
+
+    cov : 2x2 nd.array
+       the covariance matrix
+
+    """
+
+    # compute width and height of covariance ellipse so we can choose
+    # appropriate ranges for x and y
+    o,w,h = stats.covariance_ellipse(cov,3)
+    # rotate width and height to x,y axis
+    wx = abs(w*np.cos(o) + h*np.sin(o))*1.2
+    wy = abs(h*np.cos(o) - w*np.sin(o))*1.2
+
+
+    # ensure axis are of the same size so everything is plotted with the same
+    # scale
+    if wx > wy:
+        w = wx
+    else:
+        w = wy
+
+    minx = mean[0] - w
+    maxx = mean[0] + w
+    miny = mean[1] - w
+    maxy = mean[1] + w
+
+    count = 1000
+    x,y = multivariate_normal(mean=mean, cov=cov, size=count).T
+
+    xs = np.arange(minx, maxx, (maxx-minx)/40.)
+    ys = np.arange(miny, maxy, (maxy-miny)/40.)
+    xv, yv = np.meshgrid (xs, ys)
+
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x,y]),mean,cov) \
+                   for x,y in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+
+    ax = plt.figure().add_subplot(111, projection='3d')
+    ax.scatter(x,y, [0]*count, marker='.')
+
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+
+    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.autumn)
+    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
+
+
 if __name__ == "__main__":
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
-    show_residual_chart()
+    plot_3d_sampled_covariance((2,7), np.array([[8.,0],[0,4.]]))
+    #show_residual_chart()
