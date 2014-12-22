@@ -30,9 +30,6 @@ def load_style(name='../styles/custom2.css'):
 # chapter so the reader can see that they need to update FilterPy.
 test_filterpy_version()
 
-'''
-
-'''
 
 def equal_axis():
     pylab.rcParams['figure.figsize'] = 10,10
@@ -42,7 +39,7 @@ def reset_axis():
     pylab.rcParams['figure.figsize'] = 12, 6
 
 try:
-    plt.style.use('ggplot')
+    plt.style.use('fivethirtyeight')
     reset_axis ()
     pylab.rcParams['lines.linewidth'] = 2
     pylab.rcParams['figure.subplot.hspace'] = 0.5
