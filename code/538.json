@@ -10,7 +10,7 @@
     "#6d904f",
     "#8b8b8b"
   ],
-  "axes.facecolor": "#f0f0f0",
+  "axes.facecolor": "#ffffff",
   "axes.labelsize": "large",
   "axes.axisbelow": true,
   "axes.grid": true,
@@ -18,7 +18,7 @@
   "axes.titlesize": "x-large",
   "svg.embed_char_paths": "path",
   "examples.directory": "",
-  "figure.facecolor": "#f0f0f0",
+  "figure.facecolor": "#ffffff",
   "grid.linestyle": "-",
   "grid.linewidth": 1.0,
   "grid.color": "#cbcbcb",
