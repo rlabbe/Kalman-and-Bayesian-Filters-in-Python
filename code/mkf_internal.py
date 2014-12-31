@@ -224,8 +224,8 @@ def plot_3d_sampled_covariance(mean, cov):
     ys = np.arange(miny, maxy, (maxy-miny)/40.)
     xv, yv = np.meshgrid (xs, ys)
 
-    zs = np.array([100.* stats.multivariate_gaussian(np.array([x,y]),mean,cov) \
-                   for x,y in zip(np.ravel(xv), np.ravel(yv))])
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([xx,yy]),mean,cov) \
+                   for xx,yy in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
 
     ax = plt.figure().add_subplot(111, projection='3d')
@@ -241,5 +241,7 @@ def plot_3d_sampled_covariance(mean, cov):
 if __name__ == "__main__":
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
-    plot_3d_sampled_covariance((2,7), np.array([[8.,0],[0,4.]]))
+    plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
     #show_residual_chart()
+
+
