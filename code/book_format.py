@@ -39,6 +39,36 @@ def reset_axis():
     pylab.rcParams['figure.figsize'] = 12, 6
 
 
-s = json.load( open("../code/538.json") )
+def _decode_list(data):
+    rv = []
+    for item in data:
+        if isinstance(item, unicode):
+            item = item.encode('utf-8')
+        elif isinstance(item, list):
+            item = _decode_list(item)
+        elif isinstance(item, dict):
+            item = _decode_dict(item)
+        rv.append(item)
+    return rv
+
+def _decode_dict(data):
+    rv = {}
+    for key, value in data.iteritems():
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        elif isinstance(value, list):
+            value = _decode_list(value)
+        elif isinstance(value, dict):
+            value = _decode_dict(value)
+        rv[key] = value
+    return rv
+
+import sys
+if sys.version_info[0] >= 3:
+    s = json.load( open("../code/538.json"))
+else:
+    s = json.load( open("../code/538.json"), object_hook=_decode_dict)
 plt.rcParams.update(s)
 reset_axis ()
