@@ -198,10 +198,12 @@ To use all features you will have to have IPython 2.0 installed, which is releas
 
 You will need Python 2.7 or later installed. Almost all of my work is done in Python 3.4, but I periodically test on 2.7. I do not promise any specific check in will work in 2.7 however. I do use Python's "from __future__ import ..." statement to help with compatibility. For example, all prints need to use parenthesis. If you try to add, say, "print 3.14" into the book your script will fail; you must write "print (3.4)" as in Python 3.X.
 
-You will need a recent version of NumPy, SciPy, and Matplotlib installed. I don't really know what the minimal version might be. 
-I have numpy 1.71, SciPy 0.13.0, and Matplotlib 1.4.0 installed on my machines.
+You will need a recent version of NumPy, SciPy, SymPy, and Matplotlib installed. I don't really know what the minimal version might be. I have numpy 1.71, SciPy 0.13.0, and Matplotlib 1.4.0 installed on my machines.
 
 Personally, I use the Anaconda Python distribution in all of my work, [available here](https://store.continuum.io/cshop/anaconda/). I am not selecting them out of favoritism, I am merely documenting my environment. Should you have trouble running any of the code, perhaps knowing this will help you.
+
+Finally, you will need to install FilterPy, described in the next section.
+
 
 Provided Libraries and Modules
 -----
