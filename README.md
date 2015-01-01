@@ -205,6 +205,9 @@ Personally, I use the Anaconda Python distribution in all of my work, [available
 Finally, you will need to install FilterPy, described in the next section.
 
 
+Installation of all of these packages is described in the Installation appendix, which you can read online [here](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Appendix_A_Installation/Appendix_Installation.ipynb).
+
+
 Provided Libraries and Modules
 -----
 
