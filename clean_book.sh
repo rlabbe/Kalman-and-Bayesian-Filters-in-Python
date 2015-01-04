@@ -1,6 +1,9 @@
 #! /bin/bash
 rm --f *.tex
 rm --f *.toc
+rm --f *.aux
+rm --f *.log
+rm --f *.out
 rm --f ./*_files/*.png
 rm --f Kalman_and_Bayesian_Filters_in_Python.ipynb
 rm --f Kalman_and_Bayesian_Filters_in_Python.toc
