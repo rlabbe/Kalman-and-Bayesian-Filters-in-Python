@@ -12,11 +12,11 @@
 % Latex Book
 %===============================================================================
 
-((* block predoc *))
-    ((( super() )))
-    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
-((* endblock predoc *))
+%((* block predoc *))
+%    ((( super() )))
+%    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+%((* endblock predoc *))
 
 ((* block docclass *))
-\documentclass[11pt]{report}
+\documentclass[8pt]{report}
 ((* endblock docclass *))
