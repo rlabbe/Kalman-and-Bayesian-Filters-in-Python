@@ -18,5 +18,5 @@
 %((* endblock predoc *))
 
 ((* block docclass *))
-\documentclass[8pt]{report}
+\documentclass[20pt]{book}
 ((* endblock docclass *))
