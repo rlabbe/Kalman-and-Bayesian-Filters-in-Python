@@ -1,20 +1,17 @@
-%((* extends 'report.tplx' *))
+((* extends 'report.tplx' *))
 
 %===============================================================================
 % Latex Book
 %===============================================================================
 
 
-((* block predoc *))
-    ((( super() )))
-    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
-((* endblock predoc *))
-
 ((* block title *))
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
 \date{}
 ((* endblock title *))
+
+((* block abstract *))\tableofcontents((* endblock abstract *))
 
 % Define block headings
 % Note: latex will only number headings that aren't starred 
