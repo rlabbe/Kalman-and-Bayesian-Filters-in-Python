@@ -3,6 +3,8 @@ from IPython.core.display import HTML
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import json
+import numpy as np
+
 
 def test_filterpy_version():
     import filterpy
@@ -72,3 +74,4 @@ else:
     s = json.load( open("../code/538.json"), object_hook=_decode_dict)
 plt.rcParams.update(s)
 reset_axis ()
+np.set_printoptions(suppress=True)
