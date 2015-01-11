@@ -160,6 +160,10 @@ Kalman filters are recursive, and thus very suitable for real time filtering. Ho
     
 
 
+* [**Chapter 15: Adaptive Filtering**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/15_Adaptive_Filtering/Adaptive_Filtering.ipynb)
+    
+Kalman filters assume a single process model, but manuevering targets typically need to be described by several different process models. Adaptive filtering uses several techniques to allow the Kalman filter to adapt to the changing behavior of the target.
+
 * [**Chapter XX: Numerical Stability**](not implemented)
 
 Not written yet.
