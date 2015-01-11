@@ -57,5 +57,6 @@ if __name__ == '__main__':
          '12_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb',
          '13_HInfinity_Filters/HInfinity_Filters.ipynb',
          '14_Smoothing/Smoothing.ipynb',
+         '15_Adaptive_Filtering/Adaptive_Filtering.ipynb',
          'Appendix_A_Installation/Appendix_Installation.ipynb',
          'Appendix_B_Symbols_and_Notations/Appendix_Symbols_and_Notations.ipynb'])
