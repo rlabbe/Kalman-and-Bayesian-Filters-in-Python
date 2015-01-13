@@ -4,7 +4,7 @@ import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import json
 import numpy as np
-
+import sys
 
 def test_filterpy_version():
     import filterpy
@@ -21,10 +21,6 @@ def test_filterpy_version():
                        "Please install a more recent version." .format(
              *min_version))
     v = int(tokens[0]*1000)
-
-def load_style(name='../styles/custom2.css'):
-    styles = open(name, 'r').read()
-    return HTML(styles)
 
 
 # ensure that we have the correct filterpy loaded. This is
@@ -67,11 +63,15 @@ def _decode_dict(data):
         rv[key] = value
     return rv
 
-import sys
-if sys.version_info[0] >= 3:
-    s = json.load( open("../code/538.json"))
-else:
-    s = json.load( open("../code/538.json"), object_hook=_decode_dict)
-plt.rcParams.update(s)
-reset_axis ()
-np.set_printoptions(suppress=True)
+
+def load_style(name='../styles/custom2.css'):
+    if sys.version_info[0] >= 3:
+        s = json.load( open("../code/538.json"))
+    else:
+        s = json.load( open("../code/538.json"), object_hook=_decode_dict)
+    plt.rcParams.update(s)
+    reset_axis ()
+    np.set_printoptions(suppress=True)
+
+    styles = open(name, 'r').read()
+    return HTML(styles)
