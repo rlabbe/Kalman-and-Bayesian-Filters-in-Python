@@ -6,9 +6,10 @@
   "axes.color_cycle": [
     "#30a2da",
     "#fc4f30",
-    "#e5ae38",
     "#6d904f",
-    "#8b8b8b"
+    "#8b8b8b",
+    "#e5ae38"
+
   ],
   "axes.facecolor": "#ffffff",
   "axes.labelsize": "large",
