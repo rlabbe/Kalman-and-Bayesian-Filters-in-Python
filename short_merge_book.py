@@ -3,7 +3,6 @@ import io
 from IPython.nbformat import current
 import sys
 
-
 def remove_formatting(nb):
     w = nb['worksheets']
     node = w[0]
@@ -14,7 +13,6 @@ def remove_formatting(nb):
                 del c[i]
                 return
 
-
 def remove_links(nb):
     w = nb['worksheets']
     node = w[0]
@@ -24,7 +22,6 @@ def remove_links(nb):
             if c[i]['source'][0:19] == '[Table of Contents]':
                 del c[i]
                 return
-
 
 def remove_links_add_appendix(nb):
     w = nb['worksheets']
@@ -64,18 +61,5 @@ if __name__ == '__main__':
         ['Preface.ipynb',
          '01_gh_filter/g-h_filter.ipynb',
          '02_Discrete_Bayes/discrete_bayes.ipynb',
-         '03_Least_Squares/Least_Squares_Filters.ipynb',
-         '04_Gaussians/Gaussians.ipynb',
-         '05_Kalman_Filters/Kalman_Filters.ipynb',
-         '06_Multivariate_Kalman_filter/Multivariate_Kalman_Filters.ipynb',
-         '07_Kalman_Filter_Math/Kalman_Filter_Math.ipynb',
-         '08_Designing_Kalman_Filters/Designing_Kalman_Filters.ipynb',
-         '09_Extended_Kalman_Filters/Extended_Kalman_Filters.ipynb',
-         '10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb',
-         '11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filters.ipynb',
-         '12_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb',
-         '13_HInfinity_Filters/HInfinity_Filters.ipynb',
-         '14_Smoothing/Smoothing.ipynb',
-         '15_Adaptive_Filtering/Adaptive_Filtering.ipynb',
          'Appendix_A_Installation/Appendix_Installation.ipynb',
          'Appendix_B_Symbols_and_Notations/Appendix_Symbols_and_Notations.ipynb'])

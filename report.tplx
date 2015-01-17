@@ -19,4 +19,5 @@
 
 ((* block docclass *))
 \documentclass[4pt]{book}
+\setcounter{chapter}{-1}
 ((* endblock docclass *))
