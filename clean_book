@@ -8,6 +8,8 @@ rm --f ./*_files/*.png
 rm --f Kalman_and_Bayesian_Filters_in_Python.ipynb
 rm --f Kalman_and_Bayesian_Filters_in_Python.toc
 rm --f Kalman_and_Bayesian_Filters_in_Python.tex
+rm --f short.ipynb
+
 rmdir  ./*_files/ 2> /dev/null
 
 if (( $# == 1)); then
