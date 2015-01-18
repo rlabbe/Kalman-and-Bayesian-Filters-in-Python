@@ -21,3 +21,8 @@
 \documentclass[4pt]{book}
 \setcounter{chapter}{-1}
 ((* endblock docclass *))
+
+((* block preamble *))
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+((* endblock preamble *))
