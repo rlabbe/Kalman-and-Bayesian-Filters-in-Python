@@ -9,6 +9,8 @@
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
 \date{}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 ((* endblock title *))
 
 ((* block abstract *))\tableofcontents((* endblock abstract *))
@@ -21,5 +23,5 @@
 ((* block h2 -*))\section((* endblock h2 -*))
 ((* block h3 -*))\subsection((* endblock h3 -*))
 ((* block h4 -*))\subsubsection((* endblock h4 -*))
-((* block h5 -*))\paragraph*((* endblock h5 -*))
-((* block h6 -*))\subparagraph*((* endblock h6 -*))
+((* block h5 -*))\paragraph((* endblock h5 -*))
+((* block h6 -*))\subparagraph((* endblock h6 -*))
