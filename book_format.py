@@ -6,6 +6,8 @@ import json
 import numpy as np
 import sys
 
+sys.path.insert(0,'./code') # allow us to import book_format
+
 def test_filterpy_version():
     import filterpy
     min_version = [0,0,10]
