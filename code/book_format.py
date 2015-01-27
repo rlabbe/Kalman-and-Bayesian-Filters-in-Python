@@ -64,14 +64,14 @@ def _decode_dict(data):
     return rv
 
 
-def load_style(name='./styles/custom2.css'):
+def load_style(directory = '.', name='/styles/custom2.css'):
     if sys.version_info[0] >= 3:
-        s = json.load( open("./code/538.json"))
+        s = json.load(open(directory + "/code/538.json"))
     else:
-        s = json.load( open("./code/538.json"), object_hook=_decode_dict)
+        s = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
     plt.rcParams.update(s)
     reset_axis ()
     np.set_printoptions(suppress=True)
 
-    styles = open(name, 'r').read()
+    styles = open(directory + name, 'r').read()
     return HTML(styles)
