@@ -139,7 +139,7 @@ Kalman filter as covered only work for linear problems. Extended Kalman filters 
 Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.
 
 
-[**Chapter 11: Ensemble Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filters.ipynb)
+* [**Chapter 11: Ensemble Kalman Filters**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filters.ipynb)
 
 Discusses the ensemble Kalman Filter, which uses a Monte Carlo approach to deal with very large Kalman filter states in nonlinear systems.
 
@@ -179,14 +179,14 @@ Not written yet
 Not written yet.
 
 
-* [**Appendix: Installation, Python, NumPy, and FilterPy**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation.ipynb)
+* [**Appendix A: Installation, Python, NumPy, and FilterPy**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation.ipynb)
 
 
 Brief introduction of Python and how it is used in this book. Description of the companion
 library FilterPy. 
     
 
-* [**Appendix: Symbols and Notations**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_B_Symbols_and_Notations.ipynb)
+* [**Appendix B: Symbols and Notations**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_B_Symbols_and_Notations.ipynb)
 
 Symbols and notations used in this book. Comparison with notations used in the literature.
 
