@@ -76,11 +76,8 @@ def rk4(y, x, dx, f):
     
     return y + (k1 + 2*k2 + 2*k3 + k4) / 6.
 
-def rk2 (y,x,dx,f):
-    """computes the 2nd order Runge-kutta for dy/dx"""
     
-    
-    
+        
     
 def fx(x,t):
     return fx.vel
@@ -126,7 +123,44 @@ def ball_scipy(y0, vel, omega, dt):
         ys.append(solver.integrate(t))
         
         
+def RK4(f):
+    return lambda t, y, dt: (
+            lambda dy1: (
+            lambda dy2: (
+            lambda dy3: (
+            lambda dy4: (dy1 + 2*dy2 + 2*dy3 + dy4)/6
+            )( dt * f( t + dt  , y + dy3   ) )
+	    )( dt * f( t + dt/2, y + dy2/2 ) )
+	    )( dt * f( t + dt/2, y + dy1/2 ) )
+	    )( dt * f( t       , y         ) )
+ 
+def theory(t): return (t**2 + 4)**2 /16
+ 
+from math import sqrt
+dy = RK4(lambda t, y: t*sqrt(y))
+ 
+t, y, dt = 0., 1., .1
+while t <= 10:
+    if abs(round(t) - t) < 1e-5:
+        print("y(%2.1f)\t= %4.6f \t error: %4.6g" % (t, y, abs(y - theory(t))))
+ 
+    t, y = t + dt, y + dy(t, y, dt)        
+        
+t = 0.
+y=1.
+
+def test(y, t):
+    return t*sqrt(y)
+    
+while t <= 10:
+    if abs(round(t) - t) < 1e-5:
+        print("y(%2.1f)\t= %4.6f \t error: %4.6g" % (t, y, abs(y - theory(t))))
+ 
+    y = rk4(y, t, dt, test)
+    t += dt     
+    
 if __name__ == "__main__":
+    1/0
 
     dt = 1./30
     y0 = 15.
