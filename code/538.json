@@ -4,12 +4,18 @@
   "patch.linewidth": 0.5,
   "legend.fancybox": true,
   "axes.color_cycle": [
-    "#30a2da",
-    "#fc4f30",
     "#6d904f",
-    "#8b8b8b",
-    "#e5ae38"
-
+    "#013afe", 
+    "#202020",
+    "#fc4f30",
+    "#e5ae38",
+    "#A60628",
+    "#30a2da",
+    "#008080",
+    "#7A68A6",
+    "#CF4457",
+    "#188487",
+    "#E24A33"
   ],
   "axes.facecolor": "#ffffff",
   "axes.labelsize": "large",
@@ -21,7 +27,7 @@
   "examples.directory": "",
   "figure.facecolor": "#ffffff",
   "grid.linestyle": "-",
-  "grid.linewidth": 1.0,
+  "grid.linewidth": 2.0,
   "grid.color": "#cbcbcb",
   "axes.edgecolor":"#f0f0f0",
   "xtick.major.size": 0,
@@ -30,12 +36,14 @@
   "ytick.minor.size": 0,
   "axes.linewidth": 3.0,
   "font.size":14.0,
-  "lines.linewidth": 2,
+  "lines.linewidth": 4,
   "lines.solid_capstyle": "butt",
   "savefig.edgecolor": "#f0f0f0",
   "savefig.facecolor": "#f0f0f0",
   "figure.subplot.left"    : 0.08,
   "figure.subplot.right"   : 0.95, 
   "figure.subplot.bottom"  : 0.07,
-  "figure.subplot.hspace"  : 0.5
+  "figure.subplot.hspace"  : 0.5,
+  "legend.scatterpoints" : 1
 }
+
