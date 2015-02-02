@@ -46,8 +46,17 @@ def show_position_chart():
     plt.xlim([0,4]);
     plt.ylim([0,4])
 
-    plt.xlabel("Position")
-    plt.ylabel("Time")
+    plt.annotate('t=1', xy=(1,1), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
+
+    plt.annotate('t=2', xy=(2,2), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
+
+    plt.annotate('t=3', xy=(3,3), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
+
+    plt.xlabel("X")
+    plt.ylabel("Y")
 
     plt.xticks(np.arange(1,4,1))
     plt.yticks(np.arange(1,4,1))
@@ -58,6 +67,15 @@ def show_position_prediction_chart():
     """ displays 3 measurements, with the next position predicted"""
 
     plt.scatter ([1,2,3], [1,2,3], s=128, color='#004080')
+
+    plt.annotate('t=1', xy=(1,1), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
+
+    plt.annotate('t=2', xy=(2,2), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
+
+    plt.annotate('t=3', xy=(3,3), xytext=(0,-10),
+                  textcoords='offset points', ha='center', va='top')
 
     plt.xlim([0,5])
     plt.ylim([0,5])
@@ -78,23 +96,53 @@ def show_position_prediction_chart():
     plt.show()
 
 
-def show_x_error_chart():
+def show_x_error_chart(count):
     """ displays x=123 with covariances showing error"""
 
-    cov = np.array([[0.003,0], [0,12]])
-    sigma=[0.5,1.,1.5,2]
+    plt.cla()
+    plt.gca().autoscale(tight=True)
+
+    cov = np.array([[0.03,0], [0,8]])
     e = stats.covariance_ellipse (cov)
 
-    stats.plot_covariance_ellipse ((1,1), ellipse=e, variance=sigma, axis_equal=False)
-    stats.plot_covariance_ellipse ((2,1), ellipse=e, variance=sigma, axis_equal=False)
-    stats.plot_covariance_ellipse ((3,1), ellipse=e, variance=sigma, axis_equal=False)
+    cov2 = np.array([[0.03,0], [0,4]])
+    e2 = stats.covariance_ellipse (cov2)
+
+    cov3 = np.array([[12,11.95], [11.95,12]])
+    e3 = stats.covariance_ellipse (cov3)
 
 
-    plt.ylim([0,11])
-    plt.xticks(np.arange(1,4,1))
+    sigma=[1, 4, 9]
+
+    if count >= 1:
+        stats.plot_covariance_ellipse ((0,0), ellipse=e, variance=sigma)
+
+    if count == 2 or count == 3:
+
+        stats.plot_covariance_ellipse ((5,5), ellipse=e, variance=sigma)
+
+    if count == 3:
+
+        stats.plot_covariance_ellipse ((5,5), ellipse=e3, variance=sigma,
+                                       edgecolor='r')
+
+    if count == 4:
+        M1 = np.array([[5, 5]]).T
+        m4, cov4 = stats.multivariate_multiply(M1, cov2, M1, cov3)
+        e4 = stats.covariance_ellipse (cov4)
+
+        stats.plot_covariance_ellipse ((5,5), ellipse=e, variance=sigma,
+                                       alpha=0.25)
+
+        stats.plot_covariance_ellipse ((5,5), ellipse=e3, variance=sigma,
+                                       edgecolor='r', alpha=0.25)
+        stats.plot_covariance_ellipse (m4[:,0], ellipse=e4, variance=sigma)
+
+    #plt.ylim([0,11])
+    #plt.xticks(np.arange(1,4,1))
 
     plt.xlabel("Position")
-    plt.ylabel("Time")
+    plt.ylabel("Velocity")
 
     plt.show()
 
@@ -241,7 +289,9 @@ def plot_3d_sampled_covariance(mean, cov):
 if __name__ == "__main__":
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
-    plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
+    #plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
     #show_residual_chart()
 
+    #show_position_chart()
+    show_x_error_chart(4)
 

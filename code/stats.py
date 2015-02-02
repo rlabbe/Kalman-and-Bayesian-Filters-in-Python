@@ -330,6 +330,24 @@ def do_plot_test():
     print (count / len(x))
 
 
+from numpy.linalg import inv
+from numpy import asarray, dot
+
+
+def multivariate_multiply(m1, c1, m2, c2):
+
+    C1 = asarray(c1)
+    C2 = asarray(c2)
+    M1 = asarray(m1)
+    M2 = asarray(m2)
+
+    sum_inv = inv(C1+C2)
+    C3 = dot(C1, sum_inv).dot(C2)
+
+    M3 = (dot(C2, sum_inv).dot(M1) +
+          dot(C1, sum_inv).dot(M2))
+
+    return M3, C3
 
 def norm_cdf (x_range, mu, var=1, std=None):
     """ computes the probability that a Gaussian distribution lies
