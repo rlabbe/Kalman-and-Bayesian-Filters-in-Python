@@ -2,7 +2,7 @@
 
 echo "merging book..."
 
-python short_merge_book.py > short.ipynb
+ipython short_merge_book.py > short.ipynb
 
 echo "creating pdf..."
 ipython nbconvert --to latex --template book --post PDF short.ipynb
