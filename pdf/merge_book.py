@@ -61,7 +61,7 @@ def merge_notebooks(filenames):
 if __name__ == '__main__':
     #merge_notebooks(sys.argv[1:])
     merge_notebooks(
-        ['../Preface.ipynb',
+        ['../00_Preface.ipynb',
          '../01_g-h_filter.ipynb',
          '../02_Discrete_Bayes.ipynb',
          '../03_Least_Squares_Filters.ipynb',
