@@ -84,7 +84,7 @@ Finally, this book is free. The cost for the books required to learn Kalman filt
 Contents
 -----
 
-[**Preface**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Preface.ipynb)
+[**Preface**](http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/00_Preface.ipynb)
 
 Motivation for the book. Where to download, how to use.
 
