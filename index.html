@@ -37,7 +37,7 @@
 
 <p>Introductory textbook for Kalman filters and Bayesian filters. All code is written in Python, and the book itself is written in IPython Notebook so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?</p>
 
-<p><img src="https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/05_Kalman_Filters/dog_track.gif" alt="alt tag"></p>
+<p><img src="https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif" alt="alt tag"></p>
 
 <h2>
 <a id="reading-online" class="anchor" href="#reading-online" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reading Online</h2>
@@ -51,7 +51,7 @@
 
 <p>I periodically generate a PDF of the book from the Notebooks. I do not do this for every check in, so the PDF will usually lag the content in github and on nbviewer.org. However, I do generate it whenever I make a substantial change. Of course, you will not be able to run and modify the code in the notebooks, nor will you be able to see the animations.</p>
 
-<p><a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Kalman_and_Bayesian_Filters_in_Python.pdf"><em>PDF Version of the book</em></a></p>
+<p><a href="http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/Kalman_and_Bayesian_Filters_in_Python.pdf"><em>PDF Version of the book</em></a></p>
 
 <h2>
 <a id="companion-software" class="anchor" href="#companion-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Companion Software</h2>
@@ -108,132 +108,6 @@
 <p>Finally, this book is free. The cost for the books required to learn Kalman filtering is somewhat prohibitive even for a Silicon Valley engineer like myself; I cannot believe the are within the reach of someone in a depressed economy, or a financially struggling student. I have gained so much from free software like Python, and free books like those from Allen B. Downey <a href="http://www.greenteapress.com/">here</a>. It's time to repay that. So, the book is free, it is hosted on free servers, and it uses only free and open software such as IPython and mathjax to create the book. </p>
 
 <h2>
-<a id="contents" class="anchor" href="#contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contents</h2>
-
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Preface.ipynb"><strong>Preface</strong></a></p>
-
-<p>Motivation for the book. Where to download, how to use.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/01_gh_filter/g-h_filter.ipynb"><strong>Chapter 1: The g-h Filter</strong></a></li>
-</ul>
-
-<p>Intuitive introduction to the g-h filter, which is a family of filters that includes the Kalman filter. Not filler - once you understand this chapter you will understand the concepts behind the Kalman filter. </p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/02_Discrete_Bayes/discrete_bayes.ipynb"><strong>Chapter 2: The Discrete Bayes Filter</strong></a></li>
-</ul>
-
-<p>Introduces the Discrete Bayes Filter. From this you will learn the probabilistic reasoning that underpins the Kalman filter in an easy to digest form.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/03_Least_Squares/Least_Squares_Filters.ipynb"><strong>Chapter 3: Least Squares Filter</strong></a></li>
-</ul>
-
-<p>Introduces the least squares filter in batch and recursive forms.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/04_Gaussians/Gaussians.ipynb"><strong>Chapter 4: Gaussian Probabilities</strong></a></li>
-</ul>
-
-<p>Introduces using Gaussians to represent beliefs. Gaussians allow us to implement the algorithms used in the Discrete Bayes Filter to work in continuous domains.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/05_Kalman_Filters/Kalman_Filters.ipynb"><strong>Chapter 5: One Dimensional Kalman Filters</strong></a></li>
-</ul>
-
-<p>Implements a Kalman filter by modifying the Discrete Bayesian Filter to use Gaussians. This is a full featured Kalman filter, albeit only useful for 1D problems. </p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/06_Multivariate_Kalman_filter/Multivariate_Kalman_Filters.ipynb"><strong>Chapter 6: Multivariate Kalman Filter</strong></a></li>
-</ul>
-
-<p>We extend the Kalman filter developed in the previous chapter to the full, generalized filter. </p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/07_Kalman_Filter_Math/Kalman_Filter_Math.ipynb"><strong>Chapter 7: Kalman Filter Math</strong></a></li>
-</ul>
-
-<p>We gotten about as far as we can without forming a strong mathematical foundation. This chapter is optional, especially the first time, but if you intend to write robust, numerically stable filters, or to read the literature, you will need to know this.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/08_Designing_Kalman_Filters/Designing_Kalman_Filters.ipynb"><strong>Chapter 8: Designing Kalman Filters</strong></a></li>
-</ul>
-
-<p>Building on material in Chapter 6, walks you through the design of several Kalman filters. Discusses, but does not solve issues like numerical stability.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/09_Extended_Kalman_Filters/Extended_Kalman_Filters.ipynb"><strong>Chapter 9: Extended Kalman Filters</strong></a></li>
-</ul>
-
-<p>Kalman filter as covered only work for linear problems. Extended Kalman filters (EKF) are the most common approach to linearizing non-linear problems.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/10_Unscented_Kalman_Filters/Unscented_Kalman_Filter.ipynb"><strong>Chapter 10: Unscented Kalman Filters</strong></a></li>
-</ul>
-
-<p>Unscented Kalman filters (UKF) are a recent development in Kalman filter theory. They allow you to filter nonlinear problems without requiring a closed form solution like the Extended Kalman filter requires.</p>
-
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/11_Ensemble_Kalman_Filter/Ensemble_Kalman_Filters.ipynb"><strong>Chapter 11: Ensemble Kalman Filters</strong></a></p>
-
-<p>Discusses the ensemble Kalman Filter, which uses a Monte Carlo approach to deal with very large Kalman filter states in nonlinear systems.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/12_Designing_Nonlinear_Kalman_Filters/Designing_Nonlinear_Kalman_Filters.ipynb"><strong>Chapter 12: Designing Nonlinear Kalman Filters</strong></a></li>
-</ul>
-
-<p>EKF and UKF are linear approximations of nonlinear problems. Unless programmed carefully, they are not numerically stable. We discuss some common approaches to this problem.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/13_HInfinity_Filters/HInfinity_Filters.ipynb"><strong>Chapter 13: H-Infinity Filters</strong></a></li>
-</ul>
-
-<p>H-inifinity filters are a form of filter that is very robust in the presence of non-Gaussian noise. They do not perform as well as Kalman filters, but are less likely to diverge.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/14_Smoothing/Smoothing.ipynb"><strong>Chapter 14: Smoothing</strong></a></li>
-</ul>
-
-<p>Kalman filters are recursive, and thus very suitable for real time filtering. However, they work well for post-processing data. We discuss some common approaches.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/15_Adaptive_Filtering/Adaptive_Filtering.ipynb"><strong>Chapter 15: Adaptive Filtering</strong></a></li>
-</ul>
-
-<p>Kalman filters assume a single process model, but manuevering targets typically need to be described by several different process models. Adaptive filtering uses several techniques to allow the Kalman filter to adapt to the changing behavior of the target.</p>
-
-<ul>
-<li><a href="not%20implemented"><strong>Chapter XX: Numerical Stability</strong></a></li>
-</ul>
-
-<p>Not written yet.</p>
-
-<ul>
-<li><a href="not%20implemented"><strong>Chapter XX: Particle Filters</strong></a></li>
-</ul>
-
-<p>Not written yet</p>
-
-<ul>
-<li><a href="not%20implemented"><strong>Chapter XX: Multihypothesis Tracking</strong></a></li>
-</ul>
-
-<p>Not written yet.</p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_A_Installation/Appendix_Installation.ipynb"><strong>Appendix: Installation, Python, NumPy, and FilterPy</strong></a></li>
-</ul>
-
-<p>Brief introduction of Python and how it is used in this book. Description of the companion
-library FilterPy. </p>
-
-<ul>
-<li><a href="http://nbviewer.ipython.org/urls/raw.github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/Appendix_B_Symbols_and_Notations/Appendix_Symbols_and_Notations.ipynb"><strong>Appendix: Symbols and Notations</strong></a></li>
-</ul>
-
-<p>Symbols and notations used in this book. Comparison with notations used in the literature.</p>
-
-<h2>
 <a id="installation-and-software-requirements" class="anchor" href="#installation-and-software-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation and Software Requirements</h2>
 
 <p>** author's note*<em>. *The book is still being written, and so I am not focusing on issues like supporting multipe versions of Python. I am staying more or less on the bleeding edge of Python 3 for the time being. If you follow my suggestion of installing Anaconda all off the versioning problems will be taken care of for you, and you will not alter or affect any existing installation of Python on your machine. I am aware that telling somebody to install a specific packaging system is not a long term solution, but I can either focus on endless regression testing for every minor code change, or work on delivering the book, and then doing one sweep through it to maximize compatibility. I opt for the latter. In the meantime I welcome bug reports if the book does not work on your platform.</em></p>
@@ -277,7 +151,7 @@ library FilterPy. </p>
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a><br>Kalman Filters and Random Signals in Python by <a href="https://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python">Roger Labbe</a> is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>Based on a work at <a href="https://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python"></a><a href="https://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python">https://github.com/rlabbe/Kalman-Filters-and-Random-Signals-in-Python</a>.</p>
+<p><a href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png"></a><br>Kalman and Bayesian Filters in Python by <a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">Roger R. Labbe</a> is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
 <h2>
 <a id="contact" class="anchor" href="#contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact</h2>
