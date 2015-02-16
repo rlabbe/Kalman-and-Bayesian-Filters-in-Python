@@ -10,12 +10,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def plot_transfer_func(data, f, lims,num_bins=1000):
+def plot_transfer_func(data, f, lims, num_bins=1000):
     ys = f(data)
-
+    
+    
+    h = np.histogram(ys, num_bins, density=False)
+   
     #plot output
     plt.subplot(2,2,1)
-    plt.hist(ys, num_bins, orientation='horizontal', histtype='step', lw=3)
+    plt.plot(h[0], h[1][1:], lw=4)
     plt.ylim(lims)
     plt.gca().xaxis.set_ticklabels([])
     plt.title('output')
@@ -34,8 +37,10 @@ def plot_transfer_func(data, f, lims,num_bins=1000):
     plt.title('transfer function')
 
     # plot input
+    h = np.histogram(data, num_bins, density=True)
+
     plt.subplot(2,2,4)
-    plt.hist(data, num_bins, histtype='step', lw=3)
+    plt.plot(h[1][1:], h[0], lw=4)
     plt.xlim(lims)
     plt.gca().yaxis.set_ticklabels([])
     plt.title('input')
@@ -54,4 +59,4 @@ if __name__ == "__main__":
         return (np.cos(4*(x/2+0.7)))*np.sin(0.3*x)-1.6*x
 
 
-    plot_transfer_func (data, g, lims=(-3,3), num_bins=300)
+    plot_transfer_func (data, g, lims=(-3,3), num_bins=100)

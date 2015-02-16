@@ -5,6 +5,9 @@ Created on Sun Feb  8 09:34:36 2015
 @author: rlabbe
 """
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 from numpy import array, asarray
 from numpy.random import randn
 import math
