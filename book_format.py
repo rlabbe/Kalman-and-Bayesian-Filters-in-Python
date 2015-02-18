@@ -38,7 +38,9 @@ def equal_axis():
 def reset_axis():
     pylab.rcParams['figure.figsize'] = 12, 6
 
-
+def set_figsize(x, y):
+    pylab.rcParams['figure.figsize'] = x, y
+    
 def _decode_list(data):
     rv = []
     for item in data:
