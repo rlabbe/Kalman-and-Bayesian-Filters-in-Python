@@ -19,13 +19,13 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
     f1.F = np.array ([[1, dt,  0,  0,  0],   # x   = x0+dx*dt
                       [0,  1,  0,  0,  0],   # dx  = dx
                       [0,  0,  1, dt, ay],   # y   = y0 +dy*dt+1/2*g*dt^2
-                      [0,  0,  0,  1, dt],   # dy  = dy0 + ddy*dt 
+                      [0,  0,  0,  1, dt],   # dy  = dy0 + ddy*dt
                       [0,  0,  0,  0, 1]])   # ddy = -g.
 
     f1.H = np.array([
                 [1, 0, 0, 0, 0],
                 [0, 0, 1, 0, 0]])
-    
+
     f1.R *= r
     f1.Q *= q
 
@@ -34,20 +34,20 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
     vy = sin(omega) * v0
 
     f1.x = np.array([[x,vx,y,vy,-9.8]]).T
-    
+
     return f1
-    
-    
+
+
 class BaseballPath(object):
-    def __init__(self, x0, y0, launch_angle_deg, velocity_ms, noise=(1.0,1.0)): 
+    def __init__(self, x0, y0, launch_angle_deg, velocity_ms, noise=(1.0,1.0)):
         """ Create baseball path object in 2D (y=height above ground)
-        
+
         x0,y0 initial position
         launch_angle_deg angle ball is travelling respective to ground plane
         velocity_ms speeed of ball in meters/second
         noise amount of noise to add to each reported position in (x,y)
         """
-        
+
         omega = radians(launch_angle_deg)
         self.v_x = velocity_ms * cos(omega)
         self.v_y = velocity_ms * sin(omega)
@@ -77,7 +77,7 @@ class BaseballPath(object):
 
         # force due to air drag
         v_x_wind = self.v_x - vel_wind
-       
+
         v = sqrt (v_x_wind**2 + self.v_y**2)
         F = self.drag_force(v)
 
@@ -85,7 +85,7 @@ class BaseballPath(object):
         self.v_x = self.v_x - F*v_x_wind*dt
         self.v_y = self.v_y - 9.81*dt - F*self.v_y*dt
 
-        return (self.x + random.randn()*self.noise[0], 
+        return (self.x + random.randn()*self.noise[0],
                 self.y + random.randn()*self.noise[1])
 
 
@@ -96,7 +96,7 @@ def plot_ball():
     theta = 35. # launch angle
     v0 = 50.
     dt = 1/10.   # time step
-    
+
     ball = BaseballPath(x0=x, y0=y, launch_angle_deg=theta, velocity_ms=v0, noise=[.3,.3])
     f1 = ball_kf(x,y,theta,v0,dt,r=1.)
     f2 = ball_kf(x,y,theta,v0,dt,r=10.)
@@ -105,29 +105,29 @@ def plot_ball():
     ys = []
     xs2 = []
     ys2 = []
-    
+
     while f1.x[2,0] > 0:
         t += dt
         x,y = ball.update(dt)
         z = np.mat([[x,y]]).T
-    
+
         f1.update(z)
         f2.update(z)
         xs.append(f1.x[0,0])
         ys.append(f1.x[2,0])
         xs2.append(f2.x[0,0])
-        ys2.append(f2.x[2,0])    
-        f1.predict() 
+        ys2.append(f2.x[2,0])
+        f1.predict()
         f2.predict()
-        
+
         p1 = plt.scatter(x, y, color='green', marker='o', s=75, alpha=0.5)
-    
+
     p2, = plt.plot (xs, ys,lw=2)
     p3, = plt.plot (xs2, ys2,lw=4, c='r')
     plt.legend([p1,p2, p3], ['Measurements', 'Kalman filter(R=0.5)', 'Kalman filter(R=10)'])
     plt.show()
-    
-    
+
+
 def show_radar_chart():
     plt.xlim([0.9,2.5])
     plt.ylim([0.5,2.5])
@@ -146,6 +146,8 @@ def show_radar_chart():
                 arrowprops=dict(arrowstyle='->', ec='b',shrinkA=0, shrinkB=4))
 
 
+
+    ax.annotate('$\Theta$ (', xy=(1.2, 1.1), color='b')
     ax.annotate('Aircraft', xy=(2.04,2.), color='b')
     ax.annotate('altitude', xy=(2.04,1.5), color='k')
     ax.annotate('X', xy=(1.5, .9))

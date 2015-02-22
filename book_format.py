@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import json
 import numpy as np
 import sys
+from contextlib import contextmanager
+
 
 sys.path.insert(0,'./code') # allow us to import book_format
 
@@ -40,7 +42,17 @@ def reset_axis():
 
 def set_figsize(x, y):
     pylab.rcParams['figure.figsize'] = x, y
-    
+
+
+@contextmanager
+def figsize(x,y):
+    """Temporarily set the figure size using 'with figsize(a,b):'"""
+
+    set_figsize(x,y)
+    yield
+    reset_axis()
+
+
 def _decode_list(data):
     rv = []
     for item in data:
