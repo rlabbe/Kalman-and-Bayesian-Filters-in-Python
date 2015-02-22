@@ -1,5 +1,7 @@
 # test document not for distribution
 short.pdf
+10_Unscented_Kalman_Filter_.ipynb
+tmp.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
