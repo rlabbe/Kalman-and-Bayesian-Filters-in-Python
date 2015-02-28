@@ -42,6 +42,33 @@ def show_two_sensor_bearing():
     ax.add_artist(circle2)
     plt.show()
 
+
+def show_three_gps():
+    circle1=plt.Circle((-4,0),5,color='#004080',fill=False,linewidth=20, alpha=.7)
+    circle2=plt.Circle((4,0),5,color='#E24A33', fill=False, linewidth=8, alpha=.7)
+    circle3=plt.Circle((0,-3),6,color='#534543',fill=False, linewidth=13, alpha=.7)
+
+    fig = plt.gcf()
+    ax = fig.gca()
+
+#    plt.ylim((-10,10))
+
+    #plt.plot ([-4,0], [0,3], c='#004080')
+    #plt.plot ([4,0], [0,3], c='#E24A33')
+    #plt.text(-4, -.5, "A", fontsize=16, horizontalalignment='center')
+    #plt.text(4, -.5, "B", fontsize=16, horizontalalignment='center')
+
+    ax.add_patch(circle1)
+    ax.add_patch(circle2)
+    ax.add_patch(circle3)
+
+    plt.axis('equal')
+    #ax.set_xlim(-15,15)
+    #ax.set_ylim(-15,15)
+
+    plt.show()
+
+
 def show_sigma_transform():
     fig = plt.figure()
     ax=fig.gca()
@@ -157,6 +184,7 @@ def show_sigmas_for_2_kappas():
 
 
 if __name__ == '__main__':
-    show_sigma_transform()
+    show_three_gps()
+    #show_sigma_transform()
     #show_sigma_selections()
 
