@@ -30,16 +30,16 @@ def show_two_sensor_bearing():
     ax = fig.gca()
 
     plt.axis('equal')
-    plt.xlim((-10,10))
-    plt.ylim((-10,10))
+    #plt.xlim((-10,10))
+    plt.ylim((-6,6))
 
     plt.plot ([-4,0], [0,3], c='#004080')
     plt.plot ([4,0], [0,3], c='#E24A33')
     plt.text(-4, -.5, "A", fontsize=16, horizontalalignment='center')
     plt.text(4, -.5, "B", fontsize=16, horizontalalignment='center')
 
-    ax.add_artist(circle1)
-    ax.add_artist(circle2)
+    ax.add_patch(circle1)
+    ax.add_patch(circle2)
     plt.show()
 
 
@@ -51,21 +51,11 @@ def show_three_gps():
     fig = plt.gcf()
     ax = fig.gca()
 
-#    plt.ylim((-10,10))
-
-    #plt.plot ([-4,0], [0,3], c='#004080')
-    #plt.plot ([4,0], [0,3], c='#E24A33')
-    #plt.text(-4, -.5, "A", fontsize=16, horizontalalignment='center')
-    #plt.text(4, -.5, "B", fontsize=16, horizontalalignment='center')
-
     ax.add_patch(circle1)
     ax.add_patch(circle2)
     ax.add_patch(circle3)
 
     plt.axis('equal')
-    #ax.set_xlim(-15,15)
-    #ax.set_ylim(-15,15)
-
     plt.show()
 
 

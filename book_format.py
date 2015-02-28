@@ -52,7 +52,14 @@ def figsize(x,y):
     yield
     reset_axis()
 
-
+@contextmanager
+def numpy_precision(precision):
+	old = np.get_printoptions()['precision']
+	np.set_printoptions(precision=precision)
+	yield
+	np.set_printoptions(old)
+	
+	
 def _decode_list(data):
     rv = []
     for item in data:
