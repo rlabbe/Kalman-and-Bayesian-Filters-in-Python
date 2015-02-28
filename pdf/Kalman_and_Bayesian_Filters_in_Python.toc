@@ -1,0 +1,288 @@
+\contentsline {chapter}{\numberline {0}Preface}{9}{chapter.0}
+\contentsline {subsection}{\numberline {0.0.1}Reading Online}{9}{subsection.0.0.1}
+\contentsline {subsection}{\numberline {0.0.2}PDF Version}{9}{subsection.0.0.2}
+\contentsline {subsection}{\numberline {0.0.3}Downloading the book}{9}{subsection.0.0.3}
+\contentsline {subsection}{\numberline {0.0.4}Version 0.0}{10}{subsection.0.0.4}
+\contentsline {subsection}{\numberline {0.0.5}Motivation}{10}{subsection.0.0.5}
+\contentsline {subsection}{\numberline {0.0.6}Installation and Software Requirements}{12}{subsection.0.0.6}
+\contentsline {subsection}{\numberline {0.0.7}Provided Libraries}{12}{subsection.0.0.7}
+\contentsline {subsection}{\numberline {0.0.8}Thoughts on Python and Coding Math}{13}{subsection.0.0.8}
+\contentsline {subsection}{\numberline {0.0.9}License}{15}{subsection.0.0.9}
+\contentsline {subsection}{\numberline {0.0.10}Contact}{15}{subsection.0.0.10}
+\contentsline {subsection}{\numberline {0.0.11}Resources}{15}{subsection.0.0.11}
+\contentsline {chapter}{\numberline {1}The g-h Filter}{17}{chapter.1}
+\contentsline {section}{\numberline {1.1}Building Intuition via Thought Experiments}{17}{section.1.1}
+\contentsline {paragraph}{Try Another Scale}{17}{section*.2}
+\contentsline {section}{\numberline {1.2}The g-h Filter}{31}{section.1.2}
+\contentsline {section}{\numberline {1.3}Notation and Nomenclature}{33}{section.1.3}
+\contentsline {section}{\numberline {1.4}Exercise: Write Generic Algorithm}{33}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Solution and Discussion}{33}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.5}Choice of g and h}{35}{section.1.5}
+\contentsline {section}{\numberline {1.6}Exercise: create measurement function}{35}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}Solution}{36}{subsection.1.6.1}
+\contentsline {section}{\numberline {1.7}Exercise: Bad Initial Conditions}{36}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Solution and Discussion}{36}{subsection.1.7.1}
+\contentsline {section}{\numberline {1.8}Exercise: Extreme Noise}{37}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}Solution and Discussion}{37}{subsection.1.8.1}
+\contentsline {section}{\numberline {1.9}Exercise: The Effect of Acceleration}{38}{section.1.9}
+\contentsline {subsection}{\numberline {1.9.1}Solution and Discussion}{38}{subsection.1.9.1}
+\contentsline {section}{\numberline {1.10}Exercise: Varying g}{39}{section.1.10}
+\contentsline {subsection}{\numberline {1.10.1}Solution and Discussion}{39}{subsection.1.10.1}
+\contentsline {section}{\numberline {1.11}Varying h}{44}{section.1.11}
+\contentsline {section}{\numberline {1.12}Tracking a Train}{46}{section.1.12}
+\contentsline {section}{\numberline {1.13}g-h Filters with FilterPy}{51}{section.1.13}
+\contentsline {section}{\numberline {1.14}Final Thoughts}{51}{section.1.14}
+\contentsline {section}{\numberline {1.15}Summary}{52}{section.1.15}
+\contentsline {section}{\numberline {1.16}References}{52}{section.1.16}
+\contentsline {chapter}{\numberline {2}Discrete Bayes Filter}{53}{chapter.2}
+\contentsline {section}{\numberline {2.1}Tracking a Dog}{53}{section.2.1}
+\contentsline {section}{\numberline {2.2}Extracting Information from Multiple Sensor Readings}{55}{section.2.2}
+\contentsline {section}{\numberline {2.3}Noisy Sensors}{55}{section.2.3}
+\contentsline {section}{\numberline {2.4}Incorporating Movement Data}{57}{section.2.4}
+\contentsline {section}{\numberline {2.5}Adding Noise to the Prediction}{58}{section.2.5}
+\contentsline {section}{\numberline {2.6}Integrating Measurements and Movement Updates}{62}{section.2.6}
+\contentsline {section}{\numberline {2.7}The Effect of Bad Sensor Data}{65}{section.2.7}
+\contentsline {section}{\numberline {2.8}Drawbacks and Limitations}{67}{section.2.8}
+\contentsline {section}{\numberline {2.9}Generalizing to Multiple Dimensions}{68}{section.2.9}
+\contentsline {section}{\numberline {2.10}Summary}{68}{section.2.10}
+\contentsline {section}{\numberline {2.11}References}{69}{section.2.11}
+\contentsline {chapter}{\numberline {3}Least Squares Filters}{71}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introduction}{71}{section.3.1}
+\contentsline {chapter}{\numberline {4}Gaussian Probabilities}{73}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{73}{section.4.1}
+\contentsline {section}{\numberline {4.2}Nomenclature}{74}{section.4.2}
+\contentsline {section}{\numberline {4.3}Gaussian Distributions}{75}{section.4.3}
+\contentsline {section}{\numberline {4.4}The Variance}{77}{section.4.4}
+\contentsline {section}{\numberline {4.5}Interactive Gaussians}{79}{section.4.5}
+\contentsline {section}{\numberline {4.6}Computational Properties of the Gaussian}{79}{section.4.6}
+\contentsline {section}{\numberline {4.7}Computing Probabilities with scipy.stats}{80}{section.4.7}
+\contentsline {section}{\numberline {4.8}Fat Tails}{81}{section.4.8}
+\contentsline {section}{\numberline {4.9}Summary and Key Points}{84}{section.4.9}
+\contentsline {section}{\numberline {4.10}References}{84}{section.4.10}
+\contentsline {chapter}{\numberline {5}One Dimensional Kalman Filters}{85}{chapter.5}
+\contentsline {section}{\numberline {5.1}One Dimensional Kalman Filters}{85}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tracking A Dog}{85}{section.5.2}
+\contentsline {section}{\numberline {5.3}Math with Gaussians}{91}{section.5.3}
+\contentsline {section}{\numberline {5.4}Implementing the Update Step}{97}{section.5.4}
+\contentsline {section}{\numberline {5.5}Implementing Predictions}{98}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Animating the Tracking}{104}{subsection.5.5.1}
+\contentsline {section}{\numberline {5.6}Implementation in a Class}{104}{section.5.6}
+\contentsline {section}{\numberline {5.7}Relationship to the g-h Filter}{105}{section.5.7}
+\contentsline {subparagraph}{Exercise:}{107}{section*.3}
+\contentsline {section}{\numberline {5.8}Introduction to Designing a Filter}{107}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Animation}{110}{subsection.5.8.1}
+\contentsline {section}{\numberline {5.9}Exercise(optional):}{110}{section.5.9}
+\contentsline {subsection}{\numberline {5.9.1}Solution}{110}{subsection.5.9.1}
+\contentsline {subsection}{\numberline {5.9.2}Discussion}{111}{subsection.5.9.2}
+\contentsline {section}{\numberline {5.10}Explaining the Results - Multi-Sensor Fusion}{111}{section.5.10}
+\contentsline {section}{\numberline {5.11}More examples}{113}{section.5.11}
+\contentsline {subsection}{\numberline {5.11.1}Example: Extreme Amounts of Noise}{113}{subsection.5.11.1}
+\contentsline {subsection}{\numberline {5.11.2}Example: Bad Initial Estimate}{114}{subsection.5.11.2}
+\contentsline {subsection}{\numberline {5.11.3}Example: Large Noise and Bad Initial Estimate}{115}{subsection.5.11.3}
+\contentsline {section}{\numberline {5.12}Exercise: Interactive Plots}{117}{section.5.12}
+\contentsline {subsection}{\numberline {5.12.1}Solution}{118}{subsection.5.12.1}
+\contentsline {section}{\numberline {5.13}Exercise - Nonlinear Systems}{119}{section.5.13}
+\contentsline {subsection}{\numberline {5.13.1}Solution}{120}{subsection.5.13.1}
+\contentsline {section}{\numberline {5.14}Exercise - Noisy Nonlinear Systems}{121}{section.5.14}
+\contentsline {subsection}{\numberline {5.14.1}Solution}{121}{subsection.5.14.1}
+\contentsline {subsection}{\numberline {5.14.2}Discussion}{121}{subsection.5.14.2}
+\contentsline {section}{\numberline {5.15}Summary}{122}{section.5.15}
+\contentsline {chapter}{\numberline {6}Multivariate Kalman Filters}{123}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introduction}{123}{section.6.1}
+\contentsline {section}{\numberline {6.2}Multivariate Normal Distributions}{124}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Multiplying Multidimensional Gaussians}{132}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Unobserved Variables}{139}{section.6.3}
+\contentsline {section}{\numberline {6.4}Kalman Filter Algorithm}{143}{section.6.4}
+\contentsline {section}{\numberline {6.5}The Equations}{144}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Kalman Equations Expressed as an Algorithm}{145}{subsection.6.5.1}
+\contentsline {section}{\numberline {6.6}Implementation in Python}{145}{section.6.6}
+\contentsline {section}{\numberline {6.7}Tracking a Dog}{150}{section.6.7}
+\contentsline {subparagraph}{\textbf {Step 1:} Choose the State Variables and Set Initial Conditions}{150}{section*.4}
+\contentsline {subparagraph}{\textbf {Step 2:} Design the State Transition Function}{152}{section*.5}
+\contentsline {subparagraph}{\textbf {Step 3}: Design the Motion Function}{153}{section*.6}
+\contentsline {subparagraph}{\textbf {Step 4}: Design the Measurement Function}{153}{section*.7}
+\contentsline {subparagraph}{\textbf {Step 5}: Design the Measurement Noise Matrix}{154}{section*.8}
+\contentsline {subparagraph}{\textbf {Step 6}: Design the Process Noise Matrix}{155}{section*.9}
+\contentsline {section}{\numberline {6.8}Implementing the Kalman Filter}{157}{section.6.8}
+\contentsline {section}{\numberline {6.9}Compare to Univariate Kalman Filter}{162}{section.6.9}
+\contentsline {subparagraph}{Discussion}{164}{section*.10}
+\contentsline {section}{\numberline {6.10}Converting the Multivariate Equations to the Univariate Case}{164}{section.6.10}
+\contentsline {subparagraph}{Exercise: Compare to a Filter That Incorporates Velocity}{167}{section*.11}
+\contentsline {subparagraph}{Solution}{167}{section*.12}
+\contentsline {subparagraph}{Discussion}{168}{section*.13}
+\contentsline {section}{\numberline {6.11}Adjusting the Filter}{169}{section.6.11}
+\contentsline {section}{\numberline {6.12}A Detailed Examination of the Covariance Matrix}{173}{section.6.12}
+\contentsline {section}{\numberline {6.13}Question: Explain Ellipse Differences}{180}{section.6.13}
+\contentsline {subsection}{\numberline {6.13.1}Solution}{180}{subsection.6.13.1}
+\contentsline {section}{\numberline {6.14}Batch Processing}{181}{section.6.14}
+\contentsline {section}{\numberline {6.15}Smoothing the Results}{182}{section.6.15}
+\contentsline {section}{\numberline {6.16}Walking Through the KalmanFilter Code (Optional)}{185}{section.6.16}
+\contentsline {section}{\numberline {6.17}References}{188}{section.6.17}
+\contentsline {chapter}{\numberline {7}Kalman Filter Math}{189}{chapter.7}
+\contentsline {section}{\numberline {7.1}Bayesian Probability}{189}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Bayes' theorem}{190}{subsection.7.1.1}
+\contentsline {section}{\numberline {7.2}Modeling a Dynamic System that Has Noise}{191}{section.7.2}
+\contentsline {section}{\numberline {7.3}Modeling Dynamic Systems}{192}{section.7.3}
+\contentsline {subsubsection}{\numberline {7.3.0.1}Why This is Hard}{193}{subsubsection.7.3.0.1}
+\contentsline {subsection}{\numberline {7.3.1}Finding the Fundamental Matrix for Time Invariant Systems}{194}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Forming First Order Equations from Higher Order Equations}{196}{subsection.7.3.2}
+\contentsline {section}{\numberline {7.4}Walking Through the Kalman Filter Equations}{196}{section.7.4}
+\contentsline {section}{\numberline {7.5}Design of the Process Noise Matrix}{199}{section.7.5}
+\contentsline {subsubsection}{\numberline {7.5.0.1}Continuous White Noise Model}{199}{subsubsection.7.5.0.1}
+\contentsline {subsubsection}{\numberline {7.5.0.2}Piecewise White Noise Model}{201}{subsubsection.7.5.0.2}
+\contentsline {subsubsection}{\numberline {7.5.0.3}Using FilterPy to Compute Q}{202}{subsubsection.7.5.0.3}
+\contentsline {subsubsection}{\numberline {7.5.0.4}Simplification of Q}{203}{subsubsection.7.5.0.4}
+\contentsline {section}{\numberline {7.6}Numeric Integration of Differential Equations}{204}{section.7.6}
+\contentsline {subsection}{\numberline {7.6.1}Runge Kutta Methods}{204}{subsection.7.6.1}
+\contentsline {section}{\numberline {7.7}References}{206}{section.7.7}
+\contentsline {chapter}{\numberline {8}Designing Kalman Filters}{207}{chapter.8}
+\contentsline {section}{\numberline {8.1}Introduction}{207}{section.8.1}
+\contentsline {section}{\numberline {8.2}Tracking a Robot}{207}{section.8.2}
+\contentsline {subparagraph}{Step 1: Choose the State Variables}{208}{section*.19}
+\contentsline {subparagraph}{\textbf {Step 2:} Design State Transition Function}{209}{section*.20}
+\contentsline {subparagraph}{\textbf {Step 3}: Design the Motion Function}{209}{section*.21}
+\contentsline {subparagraph}{\textbf {Step 4}: Design the Measurement Function}{210}{section*.22}
+\contentsline {subparagraph}{\textbf {Step 5}: Design the Measurement Noise Matrix}{210}{section*.23}
+\contentsline {subparagraph}{Step 6: Design the Process Noise Matrix}{211}{section*.24}
+\contentsline {subparagraph}{\textbf {Step 7}: Design Initial Conditions}{211}{section*.25}
+\contentsline {section}{\numberline {8.3}Implement the Filter Code}{211}{section.8.3}
+\contentsline {section}{\numberline {8.4}The Effect of Order}{216}{section.8.4}
+\contentsline {subsection}{\numberline {8.4.1}Zero Order Kalman Filter}{218}{subsection.8.4.1}
+\contentsline {subsection}{\numberline {8.4.2}First Order Kalman Filter}{218}{subsection.8.4.2}
+\contentsline {subsection}{\numberline {8.4.3}Second Order Kalman Filter}{219}{subsection.8.4.3}
+\contentsline {subsection}{\numberline {8.4.4}Evaluating the Performance}{220}{subsection.8.4.4}
+\contentsline {section}{\numberline {8.5}Sensor Fusion}{235}{section.8.5}
+\contentsline {subsection}{\numberline {8.5.1}Exercise: Can you Kalman Filter GPS outputs?}{241}{subsection.8.5.1}
+\contentsline {subsubsection}{\numberline {8.5.1.1}Solution}{241}{subsubsection.8.5.1.1}
+\contentsline {subsection}{\numberline {8.5.2}Excercise: Prove that the PS improves the filter}{246}{subsection.8.5.2}
+\contentsline {subparagraph}{Solution 1}{246}{section*.26}
+\contentsline {subparagraph}{Solution 2}{246}{section*.27}
+\contentsline {subsection}{\numberline {8.5.3}Exercise: Different Data Rates}{248}{subsection.8.5.3}
+\contentsline {subsubsection}{\numberline {8.5.3.1}Solution}{248}{subsubsection.8.5.3.1}
+\contentsline {section}{\numberline {8.6}Tracking a Ball}{251}{section.8.6}
+\contentsline {paragraph}{Step 1: Choose the State Variables}{253}{section*.28}
+\contentsline {paragraph}{\textbf {Step 2:} Design State Transition Function}{254}{section*.29}
+\contentsline {paragraph}{Interlude: Test State Transition}{254}{section*.30}
+\contentsline {paragraph}{\textbf {Step 3}: Design the Motion Function}{256}{section*.31}
+\contentsline {paragraph}{\textbf {Step 4}: Design the Measurement Function}{256}{section*.32}
+\contentsline {paragraph}{\textbf {Step 5}: Design the Measurement Noise Matrix}{256}{section*.33}
+\contentsline {subparagraph}{Step 6: Design the Process Noise Matrix}{257}{section*.34}
+\contentsline {subparagraph}{Step 7: Design the Initial Conditions}{257}{section*.35}
+\contentsline {section}{\numberline {8.7}Tracking a Ball in Air}{259}{section.8.7}
+\contentsline {subsection}{\numberline {8.7.1}Implementing Air Drag}{259}{subsection.8.7.1}
+\contentsline {section}{\numberline {8.8}Tracking Noisy Data}{267}{section.8.8}
+\contentsline {chapter}{\numberline {9}Nonlinear Filtering}{269}{chapter.9}
+\contentsline {section}{\numberline {9.1}Introduction}{269}{section.9.1}
+\contentsline {section}{\numberline {9.2}The Problem with Nonlinearity}{270}{section.9.2}
+\contentsline {section}{\numberline {9.3}An Intuitive Look at the Problem}{271}{section.9.3}
+\contentsline {section}{\numberline {9.4}The Effect of Nonlinear Functions on Gaussians}{272}{section.9.4}
+\contentsline {section}{\numberline {9.5}A 2D Example}{276}{section.9.5}
+\contentsline {section}{\numberline {9.6}The Algorithms}{279}{section.9.6}
+\contentsline {section}{\numberline {9.7}Summary}{280}{section.9.7}
+\contentsline {section}{\numberline {9.8}Unscented Kalman Filters}{281}{section.9.8}
+\contentsline {subsection}{\numberline {9.8.1}Choosing Sigma Points}{282}{subsection.9.8.1}
+\contentsline {subsection}{\numberline {9.8.2}Handling the Nonlinearities}{287}{subsection.9.8.2}
+\contentsline {subsection}{\numberline {9.8.3}Sigma Point Algorithm}{288}{subsection.9.8.3}
+\contentsline {subsection}{\numberline {9.8.4}The Unscented Transform}{289}{subsection.9.8.4}
+\contentsline {subsection}{\numberline {9.8.5}The Unscented Filter}{289}{subsection.9.8.5}
+\contentsline {subsubsection}{\numberline {9.8.5.1}Predict Step}{289}{subsubsection.9.8.5.1}
+\contentsline {subsubsection}{\numberline {9.8.5.2}Update Step}{290}{subsubsection.9.8.5.2}
+\contentsline {subsection}{\numberline {9.8.6}Using the UKF}{291}{subsection.9.8.6}
+\contentsline {subsection}{\numberline {9.8.7}Tracking a Flying Airplane}{294}{subsection.9.8.7}
+\contentsline {subsubsection}{\numberline {9.8.7.1}First Attempt}{294}{subsubsection.9.8.7.1}
+\contentsline {subsubsection}{\numberline {9.8.7.2}Tracking Manuevering Aircraft}{299}{subsubsection.9.8.7.2}
+\contentsline {subsubsection}{\numberline {9.8.7.3}Sensor Fusion}{302}{subsubsection.9.8.7.3}
+\contentsline {subsubsection}{\numberline {9.8.7.4}Multiple Position Sensors}{305}{subsubsection.9.8.7.4}
+\contentsline {subsection}{\numberline {9.8.8}Iterative Least Squares for Sensor Fusion}{308}{subsection.9.8.8}
+\contentsline {subsection}{\numberline {9.8.9}Derivation of ILS Equations (Optional)}{310}{subsection.9.8.9}
+\contentsline {subsection}{\numberline {9.8.10}Implmenting ILS}{311}{subsection.9.8.10}
+\contentsline {section}{\numberline {9.9}Exercise: Track a target moving in a circle}{311}{section.9.9}
+\contentsline {subsection}{\numberline {9.9.1}Solution}{311}{subsection.9.9.1}
+\contentsline {subsection}{\numberline {9.9.2}Discussion}{312}{subsection.9.9.2}
+\contentsline {section}{\numberline {9.10}Exercise: Sensor Position Effects}{313}{section.9.10}
+\contentsline {subsection}{\numberline {9.10.1}Solution}{313}{subsection.9.10.1}
+\contentsline {section}{\numberline {9.11}Exercise: Compute Position Errors}{314}{section.9.11}
+\contentsline {subsection}{\numberline {9.11.1}Solution}{314}{subsection.9.11.1}
+\contentsline {subsection}{\numberline {9.11.2}Discussion}{314}{subsection.9.11.2}
+\contentsline {section}{\numberline {9.12}Exercise: Explain Filter Performance}{315}{section.9.12}
+\contentsline {subsection}{\numberline {9.12.1}Solution}{315}{subsection.9.12.1}
+\contentsline {section}{\numberline {9.13}Exercise: Visualize Sigma Points}{319}{section.9.13}
+\contentsline {section}{\numberline {9.14}Solution}{319}{section.9.14}
+\contentsline {subsection}{\numberline {9.14.1}Discussion}{321}{subsection.9.14.1}
+\contentsline {subsection}{\numberline {9.14.2}Implementation of the UKF}{321}{subsection.9.14.2}
+\contentsline {subsection}{\numberline {9.14.3}Weights}{322}{subsection.9.14.3}
+\contentsline {subsection}{\numberline {9.14.4}Sigma Points}{322}{subsection.9.14.4}
+\contentsline {subsection}{\numberline {9.14.5}Predict Step}{325}{subsection.9.14.5}
+\contentsline {subsection}{\numberline {9.14.6}Update Step}{325}{subsection.9.14.6}
+\contentsline {section}{\numberline {9.15}Full Source from FilterPy}{326}{section.9.15}
+\contentsline {section}{\numberline {9.16}Batch Processing}{336}{section.9.16}
+\contentsline {section}{\numberline {9.17}Smoothing the Results}{339}{section.9.17}
+\contentsline {subsection}{\numberline {9.17.1}Choosing Values for kappa}{342}{subsection.9.17.1}
+\contentsline {subsection}{\numberline {9.17.2}The Skewed Unscented Transform}{343}{subsection.9.17.2}
+\contentsline {section}{\numberline {9.18}The Scaled Unscented Transform}{343}{section.9.18}
+\contentsline {section}{\numberline {9.19}Nonlinear State Variables}{343}{section.9.19}
+\contentsline {section}{\numberline {9.20}References}{343}{section.9.20}
+\contentsline {section}{\numberline {9.21}The Extended Kalman Filter}{344}{section.9.21}
+\contentsline {subsection}{\numberline {9.21.1}The Problem with Nonlinearity}{344}{subsection.9.21.1}
+\contentsline {subsection}{\numberline {9.21.2}The Effect of Nonlinear Transfer Functions on Gaussians}{345}{subsection.9.21.2}
+\contentsline {subsection}{\numberline {9.21.3}The Extended Kalman Filter}{349}{subsection.9.21.3}
+\contentsline {subsection}{\numberline {9.21.4}Example: Tracking a Flying Airplane}{353}{subsection.9.21.4}
+\contentsline {subsubsection}{\numberline {9.21.4.1}Design the State Variables}{354}{subsubsection.9.21.4.1}
+\contentsline {subsubsection}{\numberline {9.21.4.2}Design the System Model}{354}{subsubsection.9.21.4.2}
+\contentsline {subsubsection}{\numberline {9.21.4.3}Design the Measurement Model}{355}{subsubsection.9.21.4.3}
+\contentsline {subsection}{\numberline {9.21.5}Using SymPy to compute Jacobians}{360}{subsection.9.21.5}
+\contentsline {subsection}{\numberline {9.21.6}Designing Q}{360}{subsection.9.21.6}
+\contentsline {subsection}{\numberline {9.21.7}Example: A falling Ball}{361}{subsection.9.21.7}
+\contentsline {chapter}{\numberline {10}Designing Nonlinear Kalman Filters}{363}{chapter.10}
+\contentsline {section}{\numberline {10.1}Introduction}{363}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}Kalman Filter with Air Drag}{363}{subsection.10.1.1}
+\contentsline {section}{\numberline {10.2}Realistic 2D Position Sensors}{364}{section.10.2}
+\contentsline {section}{\numberline {10.3}Linearizing the Kalman Filter}{370}{section.10.3}
+\contentsline {section}{\numberline {10.4}References}{371}{section.10.4}
+\contentsline {chapter}{\numberline {11}Smoothing}{373}{chapter.11}
+\contentsline {section}{\numberline {11.1}Introduction}{373}{section.11.1}
+\contentsline {section}{\numberline {11.2}Types of Smoothers}{375}{section.11.2}
+\contentsline {section}{\numberline {11.3}Fixed Point Smoothing}{376}{section.11.3}
+\contentsline {section}{\numberline {11.4}Fixed Lag Smoothing}{376}{section.11.4}
+\contentsline {section}{\numberline {11.5}Fixed Interval Smoothing}{376}{section.11.5}
+\contentsline {section}{\numberline {11.6}References}{379}{section.11.6}
+\contentsline {chapter}{\numberline {12}Adaptive Filtering}{381}{chapter.12}
+\contentsline {section}{\numberline {12.1}Introduction}{381}{section.12.1}
+\contentsline {section}{\numberline {12.2}Maneuvering Targets}{381}{section.12.2}
+\contentsline {section}{\numberline {12.3}Detecting a Maneuver}{390}{section.12.3}
+\contentsline {section}{\numberline {12.4}Adjustable Process Noise}{392}{section.12.4}
+\contentsline {subsection}{\numberline {12.4.1}Continuous Adjustment}{393}{subsection.12.4.1}
+\contentsline {subsection}{\numberline {12.4.2}Continuous Adjustment - Standard Deviation Version}{395}{subsection.12.4.2}
+\contentsline {section}{\numberline {12.5}Fading Memory Filter}{402}{section.12.5}
+\contentsline {section}{\numberline {12.6}Noise Level Switching}{405}{section.12.6}
+\contentsline {section}{\numberline {12.7}Variable State Dimension}{405}{section.12.7}
+\contentsline {section}{\numberline {12.8}Multiple Model Estimation}{405}{section.12.8}
+\contentsline {section}{\numberline {12.9}References}{406}{section.12.9}
+\contentsline {section}{\numberline {12.10}Ensemble Kalman Filters}{408}{section.12.10}
+\contentsline {subsection}{\numberline {12.10.1}The Algorithm}{409}{subsection.12.10.1}
+\contentsline {subsubsection}{\numberline {12.10.1.1}Initialize Step}{409}{subsubsection.12.10.1.1}
+\contentsline {subsubsection}{\numberline {12.10.1.2}Predict Step}{409}{subsubsection.12.10.1.2}
+\contentsline {subsubsection}{\numberline {12.10.1.3}Update Step}{410}{subsubsection.12.10.1.3}
+\contentsline {subsection}{\numberline {12.10.2}Implementation and Example}{412}{subsection.12.10.2}
+\contentsline {subsection}{\numberline {12.10.3}Outstanding Questions}{414}{subsection.12.10.3}
+\contentsline {subsection}{\numberline {12.10.4}References}{415}{subsection.12.10.4}
+\contentsline {section}{\numberline {12.11}Installation, Python, Numpy, and filterpy}{415}{section.12.11}
+\contentsline {subsection}{\numberline {12.11.1}Installing the SciPy Stack}{416}{subsection.12.11.1}
+\contentsline {subsubsection}{\numberline {12.11.1.1}Manual Install of the SciPy stack}{416}{subsubsection.12.11.1.1}
+\contentsline {subsection}{\numberline {12.11.2}Installing/downloading and running the book}{417}{subsection.12.11.2}
+\contentsline {subsection}{\numberline {12.11.3}Using IPython Notebook}{418}{subsection.12.11.3}
+\contentsline {subsection}{\numberline {12.11.4}SymPy}{418}{subsection.12.11.4}
+\contentsline {chapter}{\numberline {13}Symbology}{421}{chapter.13}
+\contentsline {subsubsection}{\numberline {13.0.4.1}State}{421}{subsubsection.13.0.4.1}
+\contentsline {subsubsection}{\numberline {13.0.4.2}State at step n}{421}{subsubsection.13.0.4.2}
+\contentsline {subsubsection}{\numberline {13.0.4.3}Prediction}{421}{subsubsection.13.0.4.3}
+\contentsline {subsection}{\numberline {13.0.5}measurement}{421}{subsection.13.0.5}
+\contentsline {subsection}{\numberline {13.0.6}control transition Matrix}{421}{subsection.13.0.6}
+\contentsline {section}{\numberline {13.1}Nomenclature}{421}{section.13.1}
+\contentsline {subsection}{\numberline {13.1.1}Equations}{421}{subsection.13.1.1}
+\contentsline {subsubsection}{\numberline {13.1.1.1}Brookner}{421}{subsubsection.13.1.1.1}
+\contentsline {subsubsection}{\numberline {13.1.1.2}Gelb}{422}{subsubsection.13.1.1.2}
+\contentsline {subsubsection}{\numberline {13.1.1.3}Brown}{422}{subsubsection.13.1.1.3}
+\contentsline {subsubsection}{\numberline {13.1.1.4}Zarchan}{422}{subsubsection.13.1.1.4}
+\contentsline {subsubsection}{\numberline {13.1.1.5}Wikipedia}{422}{subsubsection.13.1.1.5}
+\contentsline {subsubsection}{\numberline {13.1.1.6}Labbe}{422}{subsubsection.13.1.1.6}
