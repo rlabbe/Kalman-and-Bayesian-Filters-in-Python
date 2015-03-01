@@ -59,6 +59,24 @@ def show_three_gps():
     plt.show()
 
 
+
+
+def show_four_gps():
+    circle1=plt.Circle((-4,2),5,color='#004080',fill=False,linewidth=20, alpha=.7)
+    circle2=plt.Circle((5.5,1),5,color='#E24A33', fill=False, linewidth=8, alpha=.7)
+    circle3=plt.Circle((0,-3),6,color='#534543',fill=False, linewidth=13, alpha=.7)
+    circle4=plt.Circle((0,8),5,color='#214513',fill=False, linewidth=13, alpha=.7)
+
+    fig = plt.gcf()
+    ax = fig.gca()
+
+    ax.add_patch(circle1)
+    ax.add_patch(circle2)
+    ax.add_patch(circle3)
+    ax.add_patch(circle4)
+
+    plt.axis('equal')
+    plt.show()
 def show_sigma_transform():
     fig = plt.figure()
     ax=fig.gca()
@@ -174,7 +192,7 @@ def show_sigmas_for_2_kappas():
 
 
 if __name__ == '__main__':
-    show_three_gps()
+    show_four_gps()
     #show_sigma_transform()
     #show_sigma_selections()
 
