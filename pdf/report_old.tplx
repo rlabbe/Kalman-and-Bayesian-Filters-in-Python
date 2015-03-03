@@ -1,0 +1,28 @@
+
+% Default to the notebook output style
+((* if not cell_style is defined *))
+    ((* set cell_style = 'style_ipython.tplx' *))
+((* endif *))
+
+% Inherit from the specified cell style.
+((* extends cell_style *))
+
+
+%===============================================================================
+% Latex Book
+%===============================================================================
+
+%((* block predoc *))
+%    ((( super() )))
+%    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+%((* endblock predoc *))
+
+((* block docclass *))
+\documentclass[4pt]{book}
+\setcounter{chapter}{-1}
+((* endblock docclass *))
+
+((* block preamble *))
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+((* endblock preamble *))
