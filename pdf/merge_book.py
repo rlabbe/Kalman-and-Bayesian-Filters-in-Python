@@ -1,13 +1,11 @@
 from __future__ import print_function
 import io
-from IPython.nbformat import current
+import IPython.nbformat as nbformat
 import sys
 
 
 def remove_formatting(nb):
-    w = nb['worksheets']
-    node = w[0]
-    c = node['cells']
+    c = nb['cells']
     for i in range (len(c)):
         if 'input' in c[i].keys():
             if c[i]['input'][0:16] == '#format the book':
@@ -16,9 +14,7 @@ def remove_formatting(nb):
 
 
 def remove_links(nb):
-    w = nb['worksheets']
-    node = w[0]
-    c = node['cells']
+    c = nb['cells']
     for i in range (len(c)):
         if 'source' in c[i].keys():
             if c[i]['source'][0:19] == '[Table of Contents]':
@@ -27,9 +23,7 @@ def remove_links(nb):
 
 
 def remove_links_add_appendix(nb):
-    w = nb['worksheets']
-    node = w[0]
-    c = node['cells']
+    c = nb['cells']
     for i in range (len(c)):
         if 'source' in c[i].keys():
             if c[i]['source'][0:19] == '[Table of Contents]':
@@ -42,7 +36,7 @@ def merge_notebooks(filenames):
     added_appendix = False
     for fname in filenames:
         with io.open(fname, 'r', encoding='utf-8') as f:
-            nb = current.read(f, u'json')
+            nb = nbformat.read(f, nbformat.NO_CONVERT)
             remove_formatting(nb)
             if not added_appendix and fname[0:8] == 'Appendix':
                 remove_links_add_appendix(nb)
@@ -52,14 +46,13 @@ def merge_notebooks(filenames):
         if merged is None:
             merged = nb
         else:
-            merged.worksheets[0].cells.extend(nb.worksheets[0].cells)
-    merged.metadata.name += "_merged"
+            merged.cells.extend(nb.cells)
+    #merged.metadata.name += "_merged"
 
-    print(current.writes(merged, u'json'))
+    print(nbformat.writes(merged, nbformat.NO_CONVERT))
 
 
 if __name__ == '__main__':
-    #merge_notebooks(sys.argv[1:])
     merge_notebooks(
         ['../00_Preface.ipynb',
          '../01_g-h_filter.ipynb',
