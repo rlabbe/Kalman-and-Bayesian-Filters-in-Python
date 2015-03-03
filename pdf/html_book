@@ -3,8 +3,8 @@
 echo "merging book..."
 
 python merge_book.py > Kalman_and_Bayesian_Filters_in_Python.ipynb
-mv -f Kalman_and_Bayesian_Filters_in_Python.ipynb ..
 
 echo "creating HTML..."
-#ipython nbconvert Kalman_and_Bayesian_Filters_in_Python.ipynb
+ipython nbconvert Kalman_and_Bayesian_Filters_in_Python.ipynb
+mv -f Kalman_and_Bayesian_Filters_in_Python.html ..
 
