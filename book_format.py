@@ -38,7 +38,7 @@ def equal_axis():
     plt.axis('equal')
 
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 12, 6
+    pylab.rcParams['figure.figsize'] = 11, 5.5
 
 def set_figsize(x, y):
     pylab.rcParams['figure.figsize'] = x, y
