@@ -5,7 +5,8 @@ echo "merging book..."
 python merge_book.py > Kalman_and_Bayesian_Filters_in_Python.ipynb
 
 echo "creating pdf..."
-ipython nbconvert --to PDF --template book Kalman_and_Bayesian_Filters_in_Python.ipynb
+ipython nbconvert --to latex --template book Kalman_and_Bayesian_Filters_in_Python.ipynb
+ipython to_pdf.py
 
 mv Kalman_and_Bayesian_Filters_in_Python.pdf ..
 echo "done."
