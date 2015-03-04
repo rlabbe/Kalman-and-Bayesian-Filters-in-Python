@@ -4,7 +4,7 @@
  
 ((* block docclass *))
 \documentclass{book}
-\setcounter{chapter}{-1}
+\setcounter{chapter}{0}
 ((* endblock docclass *))
  
 ((* block preamble *))
@@ -13,7 +13,6 @@
 ((* block title *))
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
-\date{}
 ((* endblock title *))
  
 ((* block markdowncell scoped *))

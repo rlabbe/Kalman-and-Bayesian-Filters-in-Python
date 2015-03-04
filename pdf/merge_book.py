@@ -5,11 +5,11 @@ import sys
 
 
 def remove_formatting(nb):
-    c = nb['cells']
-    for i in range (len(c)):
-        if 'input' in c[i].keys():
-            if c[i]['input'][0:16] == '#format the book':
-                del c[i]
+    cells = nb['cells']
+    for i in range (len(cells)):
+        if 'source' in cells[i].keys():
+            if cells[i]['source'][0:16] == '#format the book':
+                del cells[i]
                 return
 
 
@@ -53,6 +53,11 @@ def merge_notebooks(filenames):
 
 
 if __name__ == '__main__':
+    '''merge_notebooks(
+        ['../00_Preface.ipynb',
+         '../01_g-h_filter.ipynb',
+         '../Appendix_A_Installation.ipynb'])'''
+
     merge_notebooks(
         ['../00_Preface.ipynb',
          '../01_g-h_filter.ipynb',
