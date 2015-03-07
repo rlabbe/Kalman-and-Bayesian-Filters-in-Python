@@ -30,7 +30,8 @@ _two_pi = 2*math.pi
 
 def gaussian(x, mean, var):
     """returns normal distribution (pdf) for x given a Gaussian with the
-    specified mean and variance. All must be scalars.
+    specified mean and variance. x can either be a scalar or an 
+    array-like. 
 
     gaussian (1,2,3) is equivalent to scipy.stats.norm(2,math.sqrt(3)).pdf(1)
     It is quite a bit faster albeit much less flexible than the latter.
@@ -39,7 +40,7 @@ def gaussian(x, mean, var):
 
     Parameters
     ----------
-    x : scalar
+    x : scalar or array-like
         The value for which we compute the probability
 
     mean : scalar
@@ -50,12 +51,18 @@ def gaussian(x, mean, var):
 
     Returns
     -------
-    probability : float
+    probability : float, or array-like
         probability of x for the Gaussian (mean, var). E.g. 0.101 denotes
         10.1%.
-
+        
+    Examples
+    --------
+    gaussian(3, 1, 2)
+    gaussian([3,4,3,2,1], 1, 2)
     """
-    return math.exp((-0.5*(x-mean)**2)/var) / math.sqrt(_two_pi*var)
+    
+    return (np.exp((-0.5*(np.asarray(x)-mean)**2)/var) / 
+            np.sqrt(_two_pi*var))
 
 
 def mul (mean1, var1, mean2, var2):
