@@ -1,0 +1,22 @@
+ipython build_html_ipynb.py
+
+ipython nbconvert index.ipynb
+ipython nbconvert ../00_Preface.ipynb
+ipython nbconvert ../01_g-h_filter.ipynb
+ipython nbconvert ../02_Discrete_Bayes.ipynb
+ipython nbconvert ../03_Least_Squares_Filters.ipynb
+ipython nbconvert ../04_Gaussians.ipynb
+ipython nbconvert ../05_Kalman_Filters.ipynb
+ipython nbconvert ../06_Multivariate_Kalman_Filters.ipynb
+ipython nbconvert ../07_Kalman_Filter_Math.ipynb
+ipython nbconvert ../08_Designing_Kalman_Filters.ipynb
+ipython nbconvert ../09_Nonlinear_Filtering.ipynb
+ipython nbconvert ../10_Unscented_Kalman_Filter.ipynb
+ipython nbconvert ../11_Extended_Kalman_Filters.ipynb
+ipython nbconvert ../12_Designing_Nonlinear_Kalman_Filters.ipynb
+ipython nbconvert ../13_Smoothing.ipynb
+ipython nbconvert ../14_Adaptive_Filtering.ipynb
+ipython nbconvert ../15_HInfinity_Filters.ipynb
+ipython nbconvert ../16_Ensemble_Kalman_Filters.ipynb
+ipython nbconvert ../Appendix_A_Installation.ipynb
+ipython nbconvert ../Appendix_B_Symbols_and_Notations.ipynb
