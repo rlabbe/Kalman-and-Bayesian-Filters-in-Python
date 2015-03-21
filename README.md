@@ -1,3 +1,5 @@
+**Note: You need to be running IPython 3.0 or later to run and edit these notebooks. If you are running an older version you will likely get the unhelpful error message "Bad request" when you try to open the notebook. Note that this is the version number for _IPython_, which provides the IPython Notebook software, and not the Python version. I.e. you can run these notebooks with Python 2.7, so long as you have IPython 3.0 installed. IPython 3.0 was released on Febuary 27, 2015, so if your install is later than that you will have to update IPython.**
+
 [*Read Online Now*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb)
 
 [Online PDF Version](http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/Kalman_and_Bayesian_Filters_in_Python.pdf)
