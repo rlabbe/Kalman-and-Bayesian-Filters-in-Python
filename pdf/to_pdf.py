@@ -4,10 +4,11 @@ import io
 import IPython.nbconvert.exporters.pdf as pdf
 import fileinput
 
-for line in fileinput.input('Kalman_and_Bayesian_Filters_in_Python.tex', inplace=True):
-    print(line.replace('\chapter{Preface}', '\chapter*{Preface}'), end='')
+for line in fileinput.input('book.tex', openhook=fileinput.hook_encoded("iso-8859-1")):
+#    print(line.replace('\chapter{Preface}', '\chapter*{Preface}'), end='')
+    line.replace('\chapter{Preface}', '\chapter*{Preface}')
 
 
 p = pdf.PDFExporter()
-p.run_latex('Kalman_and_Bayesian_Filters_in_Python.tex')
+p.run_latex('book.tex')
 

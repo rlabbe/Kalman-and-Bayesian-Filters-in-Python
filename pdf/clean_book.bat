@@ -1,14 +1,12 @@
-#! /bin/bash
+REM WINDOWS script to delete all files
+
 rm --f *.tex
 rm --f *.toc
-rm --f ./*_files/*.png
-rm --f Kalman_and_Bayesian_Filters_in_Python.ipynb
-rm --f Kalman_and_Bayesian_Filters_in_Python.toc
-rm --f Kalman_and_Bayesian_Filters_in_Python.tex
-rmdir  ./*_files/ 2> /dev/null
+rm --f *.aux
+rm --f *.log
+rm --f *.out
 
-if (( $# == 1)); then
-  if [ "@1" == all ]; then
-    rm Kalman_and_Bayesian_Filters_in_Python.pdf;
-  fi 
-fi
+rm --f book.ipynb
+rm --f book.toc
+rm --f book.tex
+rmdir  /S /Q book_files

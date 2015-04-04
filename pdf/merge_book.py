@@ -5,7 +5,7 @@ import sys
 from formatting import *
 
 
-def merge_notebooks(filenames):
+def merge_notebooks(outfile, filenames):
     merged = None
     added_appendix = False
     for fname in filenames:
@@ -23,16 +23,17 @@ def merge_notebooks(filenames):
             merged.cells.extend(nb.cells)
     #merged.metadata.name += "_merged"
 
-    print(nbformat.writes(merged, nbformat.NO_CONVERT))
+    outfile.write(nbformat.writes(merged, nbformat.NO_CONVERT))
 
 
 if __name__ == '__main__':
+    f = open('book.ipynb', 'w', encoding='utf-8')
     '''merge_notebooks(
         ['../00_Preface.ipynb',
          '../01_g-h_filter.ipynb',
          '../Appendix_A_Installation.ipynb'])'''
 
-    merge_notebooks(
+    merge_notebooks(f,
         ['../00_Preface.ipynb',
          '../01_g-h_filter.ipynb',
          '../02_Discrete_Bayes.ipynb',
