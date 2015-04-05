@@ -37,20 +37,22 @@ def equal_axis():
     pylab.rcParams['figure.figsize'] = 10,10
     plt.axis('equal')
 
+	
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 11, 5.5
+    pylab.rcParams['figure.figsize'] = 11, 4 
 
-def set_figsize(x, y):
+def set_figsize(x=11, y=4):
     pylab.rcParams['figure.figsize'] = x, y
 
 
 @contextmanager
-def figsize(x,y):
+def figsize(x=11, y=4):
     """Temporarily set the figure size using 'with figsize(a,b):'"""
 
-    set_figsize(x,y)
+    size = pylab.rcParams['figure.figsize']
+    set_figsize(x, y)
     yield
-    reset_axis()
+    pylab.rcParams['figure.figsize'] = size
 
 @contextmanager
 def numpy_precision(precision):
