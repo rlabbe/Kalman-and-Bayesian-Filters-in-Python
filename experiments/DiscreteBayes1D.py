@@ -9,7 +9,6 @@ from __future__ import print_function
 
 import copy
 import numpy as np
-import bar_plot
 import numpy.random as random
 import matplotlib.pyplot as plt
 
@@ -17,6 +16,19 @@ import matplotlib.pyplot as plt
 problem specific
 '''
 
+
+def bar_plot(pos, ylim=(0,1), title=None):
+    plt.cla()
+    ax = plt.gca()
+    x = np.arange(len(pos))
+    ax.bar(x, pos, color='#30a2da')
+    if ylim:
+        plt.ylim(ylim)
+    plt.xticks(x+0.4, x)
+    if title is not None:
+        plt.title(title)
+        
+        
 class DiscreteBayes1D(object):
 
     def __init__(self, world_map, belief=None):
@@ -89,7 +101,7 @@ def animate_three_doors (loops=5):
         f.sense (m, .8, .2)
         f.update(1, (.05, .9, .05))
 
-        bar_plot.plot(f.belief)
+        bar_plot(f.belief)
         plt.pause(0.01)
 
 
@@ -142,7 +154,7 @@ if __name__ == "__main__":
 
 
 
-    #animate_three_doors(loops=1)
+    animate_three_doors(loops=1)
 
 
 
