@@ -38,18 +38,17 @@ def update(map_, belief, z, p_hit, p_miss):
     belief = normalize(belief)
 
 
-def predict(belief, U, kernel):
-    N = len(belief)
+def predict(prob_dist, offset, kernel):
+    N = len(prob_dist)
     kN = len(kernel)
     width = int((kN - 1) / 2)
 
-    belief_k = np.zeros(N)
-
+    result = np.zeros(N)
     for i in range(N):
         for k in range (kN):
-            index = (i + (width-k)-U) % N
-            belief_k[i] += belief[index] * kernel[k]
-    belief[:] = belief_k[:]
+            index = (i + (width-k) - offset) % N
+            result[i] += prob_dist[index] * kernel[k]
+    prob_dist[:] = result[:] # update belief
 
 
 def add_noise (Z, count):
@@ -102,10 +101,10 @@ import random
 
 class Train(object):
 
-    def __init__(self, track, move_error=.1, sense_error=.1, no_sense_error=.05):
+    def __init__(self, track, kernel=[1.], sense_error=.1, no_sense_error=.05):
         self.track = track
         self.pos = 0
-        self.move_error = move_error
+        self.kernel = kernel
         self.sense_error = sense_error
         self.no_sense_error = no_sense_error
 
@@ -115,14 +114,17 @@ class Train(object):
 
         self.pos += distance
 
-        # insert random movement error
+        # insert random movement error according to kernel
         r = random.random()
-        if r < self.move_error:
-            self.pos -= 1
-        elif r > 1 - self.move_error:
-            self.pos += 1
+        s = 0
+        offset = -(len(self.kernel) - 1) / 2
+        for k in self.kernel:
+            s += k
+            if r <= s:
+                break
+            offset += 1
 
-        self.pos = self.pos % len(self.track)
+        self.pos = (self.pos + offset) % len(self.track)
         return self.pos
 
     def sense(self):
@@ -141,14 +143,12 @@ class Train(object):
 
 def animate_train(loops=5):
     world = np.array([1,2,3,4,5,6,7,8,9,10])
-    #world = np.array([1,1,1,1,1])
-    #world = np.array([1,0,1,0,1,0])
 
     N = len(world)
     belief = np.zeros(N)
     belief[0] = 1.0
 
-    robot = Train(world, .0, 0, 0)
+    robot = Train(world, [.1, .8, .1], .1, .1)
 
     for i in range(N*loops):
         robot.move(1)
@@ -157,43 +157,13 @@ def animate_train(loops=5):
         predict(belief, 1, (.05, .9, .05))
 
         bar_plot(belief)
-        plt.pause(0.5)
+        plt.pause(0.1)
     print(belief)
 
-#animate_train(1)
+animate_train(3)
 
 world = np.array([1,2,3,4,5,6,7,8,9,10])
 #world = np.array([1,1,1,1,1])
 #world = np.array([1,0,1,0,1,0])
 
 
-def predict_old(pos_belief, move, p_correct, p_under, p_over):
-    n = len(pos_belief)
-    result = np.zeros(n)
-    for i in range(n):
-                result[i] = (
-            pos_belief[(i-move) % n]   * p_correct +
-            pos_belief[(i-move-1) % n] * p_over +
-            pos_belief[(i-move+1) % n] * p_under)
-    pos_belief[:] = result
-
-
-N = len(world)
-
-belief = np.ones(N)
-belief[0] = 10.0
-normalize(belief)
-
-belief2 = belief.copy()
-
-predict(belief, 3, (.05, .9, .05))
-predict_old(belief2, 3, .9, .05, .05)
-
-'''
-print(belief)
-update(world, belief, 1, .8, .2)
-print(belief)
-
-predict(belief, 3, (.05, .9, .05))
-print(belief)
-'''
