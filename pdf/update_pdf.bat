@@ -1,4 +1,3 @@
-#! /bin/bash
 cd ..
 git checkout gh-pages
 git pull
