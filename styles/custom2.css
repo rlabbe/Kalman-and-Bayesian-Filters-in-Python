@@ -89,9 +89,9 @@
     }
     div.text_cell_render{
         font-family: 'Arimo',verdana,arial,sans-serif;
-        line-height: 135%;
-        font-size: 125%;
-        width:750px;
+        line-height: 125%;
+        font-size: 120%;
+        width:740px;
         margin-left:auto;
         margin-right:auto;
         text-align:justify;
