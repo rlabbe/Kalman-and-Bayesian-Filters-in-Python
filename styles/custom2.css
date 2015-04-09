@@ -40,21 +40,21 @@
     }
     .text_cell_render h2 {
         font-weight: 200;
-        font-size: 20pt;
+        font-size: 16pt;
         font-style: italic;
         line-height: 100%;
         color:#c76c0c;
         margin-bottom: 0.5em;
         margin-top: 1.5em;
-        display: block;
-        white-space: nowrap;
+        display: inline;
+        white-space: wrap;
     } 
     h3 {
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
     .text_cell_render h3 {
-        font-weight: 300;
-        font-size: 18pt;
+        font-weight: 200;
+        font-size: 14pt;
         line-height: 100%;
         color:#d77c0c;
         margin-bottom: 0.5em;
@@ -66,8 +66,8 @@
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
     .text_cell_render h4 {
-        font-weight: 300;
-        font-size: 16pt;
+        font-weight: 100;
+        font-size: 14pt;
         color:#d77c0c;
         margin-bottom: 0.5em;
         margin-top: 0.5em;
@@ -78,7 +78,7 @@
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
     .text_cell_render h5 {
-        font-weight: 300;
+        font-weight: 200;
         font-style: normal;
         color: #1d3b84;
         font-size: 16pt;
@@ -209,6 +209,9 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
+                    availableFonts: ["TeX"],
+                    preferredFont: "TeX",
+                    scale:85,
                     styles: {'.MathJax_Display': {"margin": 4}}
                 }
         });
