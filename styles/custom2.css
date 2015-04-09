@@ -209,8 +209,6 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    availableFonts: ["TeX"],
-                    preferredFont: "TeX",
                     scale:85,
                     styles: {'.MathJax_Display': {"margin": 4}}
                 }
