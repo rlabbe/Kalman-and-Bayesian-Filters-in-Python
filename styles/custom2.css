@@ -83,7 +83,7 @@
         color: #1d3b84;
         font-size: 16pt;
         margin-bottom: 0em;
-        margin-top: 1.5em;
+        margin-top: 0.5em;
         display: block;
         white-space: nowrap;
     }
@@ -107,6 +107,11 @@
         overflow-y: scroll;
         max-height: 50000px;
     }
+    div.output_wrapper{
+        margin-top:0.2em;
+        margin-bottom:0.2em;
+}
+
     code{
       font-size: 70%;
     }
