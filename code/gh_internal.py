@@ -1,6 +1,7 @@
 import numpy as np
 import pylab as plt
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
+import book_plots
 
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
@@ -119,6 +120,80 @@ def plot_estimate_chart_3():
     plt.ylabel('weight (lbs)')
     plt.show()
 
+def plot_hypothesis():
+    plt.errorbar([1, 2, 3], [170, 161, 169], 
+                 xerr=0, yerr=10, fmt='bo', capthick=2, capsize=10)
 
+    plt.plot([1, 3], [180, 160], color='g', ls='--')
+    plt.plot([1, 3], [170, 170], color='g', ls='--')
+    plt.plot([1, 3], [160, 175], color='g', ls='--')
+    plt.plot([1, 2, 3], [180, 152, 179], color='g', ls='--')
+    plt.xlim(0,4); plt.ylim(150, 185)
+    plt.xlabel('day')
+    plt.ylabel('lbs')
+    plt.tight_layout()
+    plt.show()
+    
+def plot_hypothesis2():
+    plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170], 
+                 xerr=0, yerr=6, fmt='bo', capthick=2, capsize=10)
+    plt.plot([1, 10], [169, 170.5], color='g', ls='--')
+    plt.xlim(0, 11); plt.ylim(150, 185)
+    plt.xlabel('day')
+    plt.ylabel('lbs')
+    plt.show()
+    
+    
+def plot_hypothesis3():   
+    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
+           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
+    plt.errorbar(range(1, 13), weights,
+                 xerr=0, yerr=6, fmt='o', capthick=2, capsize=10)
+
+    plt.xlim(0, 13); plt.ylim(145, 185)
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')
+    plt.show()
+
+    
+def plot_hypothesis4():
+    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
+           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
+
+    ave = np.sum(weights) / len(weights)
+    plt.errorbar(range(1,13), weights, label='weights',
+                 yerr=6, fmt='o', capthick=2, capsize=10)
+    plt.plot([1, 12], [ave,ave], c='r', label='hypothesis')
+    plt.xlim(0, 13); plt.ylim(145, 185)
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')
+    book_plots.show_legend()
+    plt.show()
+
+    
+def plot_hypothesis5():   
+    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
+           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
+
+    xs = range(1, len(weights)+1)
+    line = np.poly1d(np.polyfit(xs, weights, 1))
+    plt.errorbar(range(1, 13), weights, label='weights',
+                 yerr=5, fmt='o', capthick=2, capsize=10)
+    plt.plot (xs, line(xs), c='r', label='hypothesis')
+    plt.xlim(0, 13); plt.ylim(145, 185)
+    plt.xlabel('day')
+    plt.ylabel('weight (lbs)')
+    book_plots.show_legend()
+    plt.show()
+
+def plot_g_h_results(measurements, filtered_data, 
+                     title='', z_label='Scale', ):    
+    book_plots.plot_measurements(measurements, label=z_label)
+    book_plots.plot_filter(filtered_data)
+    book_plots.show_legend()
+    plt.title(title)
+    plt.gca().set_xlim(left=0,right=len(measurements))
+    plt.show()
+    
 if __name__ == '__main__':
     create_predict_update_chart()
