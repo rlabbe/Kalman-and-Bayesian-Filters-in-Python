@@ -157,6 +157,7 @@ def multivariate_gaussian(x, mu, cov):
 def plot_gaussian(mean, variance,
                   mean_line=False,
                   xlim=None,
+                  ylim=None,
                   xlabel=None,
                   ylabel=None):
     """ plots the normal distribution with the given mean and variance. x-axis
@@ -181,6 +182,9 @@ def plot_gaussian(mean, variance,
     xs = np.arange(min_x, max_x, (max_x - min_x) / 1000)
     plt.plot(xs,n.pdf(xs))
     plt.xlim((min_x, max_x))
+
+    if ylim is not None:
+        plt.ylim(ylim)
 
     if mean_line:
         plt.axvline(mean)

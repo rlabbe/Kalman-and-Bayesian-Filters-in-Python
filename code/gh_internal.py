@@ -6,7 +6,7 @@ import book_plots
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(6,6), facecolor='w')
+    plt.figure(figsize=(4,4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
     #ax.set_xlim(0, 10)
@@ -187,13 +187,12 @@ def plot_hypothesis5():
     plt.show()
 
 def plot_g_h_results(measurements, filtered_data, 
-                     title='', z_label='Scale', ):    
+                     title='', z_label='Measurements', **kwargs):  
+    book_plots.plot_filter(filtered_data, **kwargs)
     book_plots.plot_measurements(measurements, label=z_label)
-    book_plots.plot_filter(filtered_data)
     book_plots.show_legend()
     plt.title(title)
     plt.gca().set_xlim(left=0,right=len(measurements))
-    plt.show()
     
 if __name__ == '__main__':
     create_predict_update_chart()
