@@ -11,6 +11,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 import stats
 
+def plot_height_std(x, lw=10):
+    m = np.mean(x)
+    s = np.std(x)
+
+    for i, height in enumerate(x):
+        plt.plot([i+1, i+1], [0, height], color='k', lw=lw)
+    plt.xlim(0,len(x)+1)
+    plt.axhline(m-s, ls='--')
+    plt.axhline(m+s, ls='--')
+    plt.fill_between((0, len(x)+1), m-s, m+s, 
+                     facecolor='yellow', alpha=0.4)
+    plt.xlabel('student')
+    plt.ylabel('height (m)')
+    plt.show()
+
+    
 def plot_gaussian (mu, variance,
                    mu_line=False,
                    xlim=None,
@@ -31,8 +47,6 @@ def plot_gaussian (mu, variance,
     plt.show()
 
 def display_stddev_plot():
-    figsize = pylab.rcParams['figure.figsize']
-    pylab.rcParams['figure.figsize'] = 12,6
     xs = np.arange(10,30,0.1)
     var = 8; stddev = math.sqrt(var)
     p2, = plt.plot (xs,[stats.gaussian(x, 20, var) for x in xs])

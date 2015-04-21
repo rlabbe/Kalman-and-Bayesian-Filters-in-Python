@@ -72,19 +72,34 @@ def plot_residual_limits(Ps):
                  facecolor='#ffff00', alpha=0.3)
 
 
-def plot_track(xs, ys=None, label='Track', c='k', lw=2):
+def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
     if ys is not None:
-        plt.plot(xs, ys, c=c, lw=lw, label=label)
+        plt.plot(xs, ys, c=c, lw=lw, label=label, **kwargs)
     else:
-        plt.plot(xs, c=c, lw=lw, label=label)
+        plt.plot(xs, c=c, lw=lw, label=label, **kwargs)
 
 
 #c='#013afe'
-def plot_filter(xs, ys=None, c='#6d904f', label='Filter', **kwargs):
-    if ys is not None:
-        plt.plot(xs, ys, c=c, label=label, **kwargs)
-    else:
-        plt.plot(xs, c=c, label=label, **kwargs)
+def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
+
+    if ys is None:
+        ys = xs
+        xs = range(len(ys))
+
+    plt.plot(xs, ys, c=c, label=label, **kwargs)
+        
+    if vars is None:
+        return
+    vars = np.asarray(vars)
+    
+    std = np.sqrt(vars)
+    std_top = ys+std
+    std_btm = ys-std
+
+    plt.plot(xs, ys+std, linestyle=':', c='k', lw=2)
+    plt.plot(xs, ys-std, linestyle=':', c='k', lw=2)
+    plt.fill_between(xs, std_btm, std_top,
+                     facecolor='yellow', alpha=0.2)
 
 
 if __name__ == "__main__":
