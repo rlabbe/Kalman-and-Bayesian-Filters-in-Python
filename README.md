@@ -1,22 +1,19 @@
-**Note: You need to be running IPython 3.0 or later to run and edit these notebooks. If you are running an older version you will likely get the unhelpful error message "Bad request" when you try to open the notebook. Note that this is the version number for _IPython_, which provides the IPython Notebook software, and not the Python version. I.e. you can run these notebooks with Python 2.7, so long as you have IPython 3.0 installed. IPython 3.0 was released on Febuary 27, 2015, so if your install is later than that you will have to update IPython.**
-
-[*Read Online Now*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb)
-
-[Online PDF Version](http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/Kalman_and_Bayesian_Filters_in_Python.pdf)
-
-
-Introductory textbook for Kalman filters and Bayesian filters. All code is written in Python, and the book itself is written in IPython Notebook so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
+Introductory textbook for Kalman and Bayesian filters. All code is written in Python, and the book itself is written in IPython Notebook (now known as Jupyter) so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
 
 ![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif)
 
 
 Reading Online
 -----
+Github is now able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters are named 01_XXX, 02_XXX, and so on. Just go in order to read the book, or pick whatever chapter you want.
 
-You may access this book via nbviewer at any time by using this address:
+Alternatively You may access this book via nbviewer at any time by using this address. This seems to render the books more quickly than Github. 
 [*Read Online Now*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb)
 
-The quickest way to get starting with reading the book is to read it online using the link above. The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. Perhaps more importantly, the book uses animations to demonstrate how the algorithms perform over time. The PDF version of the book, discussed in the next paragraph, cannot show the animations. 
+[Online PDF Version](http://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/Kalman_and_Bayesian_Filters_in_Python.pdf)
+
+
+The quickest way to get starting with reading the book is to read it online using Github or one of the links above. The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. Perhaps more importantly, the book uses animations to demonstrate how the algorithms perform over time. The PDF version of the book, discussed in the next paragraph, cannot show the animations. 
 
 The preface available from the link above has all the information in this README and more, so feel free to follow the link now.
 
@@ -33,8 +30,7 @@ All of the filters used in this book as well as others not in this book are impl
 Downloading the book
 -----
 
-** Breaking change: I have upgraded to IPython 3.0. This release alters the notebook format (.ipynb) files. IPython 2.4 can read the files, but not write them. I apologize if you are using an earlier version, but this is an unavoidable change and I'd rather change now instead of later. This will not affect you if you are reading online, only if you are running the notebooks on your local computer. Please note that this has nothing to do with *Python 3 - you can run Python 2.7 in IPython 3 so far as I know**.
-
+** Breaking change: I have upgraded to IPython 3.0. This release alters the notebook format (.ipynb) files. If you are running an older version you will likely get the unhelpful error message "Bad request" when you try to open the notebook. Note that this is the version number for _IPython_, which provides the IPython Notebook software, and not the Python version. I.e. you can run these notebooks with Python 2.7, so long as you have IPython 3.0 installed. IPython 3.0 was released on Febuary 27, 2015, so if your install is later than that you will have to update IPython. IPython 2.4 can read the files, but not write them. I apologize if you are using an earlier version, but this is an unavoidable change and I'd rather change now instead of later. This will not affect you if you are reading online, only if you are running the notebooks on your local computer. Please note that this has nothing to do with *Python 3 - you can run Python 2.7 in IPython 3 so far as I know**.
 
 However, this book is intended to be interactive and I recommend using it in that form. If you install IPython on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
