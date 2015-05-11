@@ -286,6 +286,49 @@ def plot_3d_sampled_covariance(mean, cov):
     ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
 
 
+from filterpy.common import plot_covariance_ellipse
+def plot_3_covariances():
+
+    P = [[2, 0], [0, 2]]
+    plt.subplot(131)
+    plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
+                            title='|2 0|\n|0 2|', axis_equal=False)
+    plt.ylim((4, 10))
+    plt.gca().set_aspect('equal', adjustable='box')
+
+    plt.subplot(132)
+    P = [[2, 0], [0, 9]]
+    plt.ylim((4, 10))
+    plt.gca().set_aspect('equal', adjustable='box')
+    plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
+                            axis_equal=False, title='|2 0|\n|0 9|')
+
+    plt.subplot(133)
+    P = [[2, 1.2], [1.2, 2]]
+    plt.ylim((4, 10))
+    plt.gca().set_aspect('equal', adjustable='box')
+    plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
+                            axis_equal=False,
+                            title='|2 1.2|\n|1.2 2|')
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_correlation_covariance():
+    P = [[4, 3.9], [3.9, 4]]
+    plot_covariance_ellipse((5, 10), P, edgecolor='k',
+                            variance=[1, 2**2, 3**2])
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.gca().autoscale(tight=True)
+    plt.axvline(7.5, ls='--', lw=1)
+    plt.axhline(12.5, ls='--', lw=1)
+    plt.scatter(7.5, 12.5, s=2000, alpha=0.5)
+    plt.title('|4.0 3.9|\n|3.9 4.0|')
+    plt.show()
+
+
 if __name__ == "__main__":
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
