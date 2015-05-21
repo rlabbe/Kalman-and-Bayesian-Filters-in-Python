@@ -211,7 +211,10 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:85,
+                    scale:100,
+                    availableFonts: ["Neo-Euler"],
+                    preferredFont: "Neo-Euler",
+                    webFont: "Neo-Euler",
                     styles: {'.MathJax_Display': {"margin": 4}}
                 }
         });
