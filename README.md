@@ -11,6 +11,16 @@ The book is written as a collection of IPython Notebooks, an interactive, browse
 
 The preface available from the link above has all the information in this README and more, so feel free to follow the link now.
 
+PDF Version
+-----
+I used to keep a PDF version of the book in this repository. However, git does not do well with binary blobs like that, and the repository was getting too big. I deleted it and it's history from git. I am now providing it in a couple of places; I haven't decided on a final home. 
+
+On PDF-archive you can access it [here](http://document.li/ZS1b)
+
+From my google drive page you can acces it [here](https://drive.google.com/file/d/0By_SW19c1BfhSVFzNHc0SjduNzg/view?usp=sharing)
+
+The PDF will usually lag behind what is in github as I don't update it for every minor check in.
+
 
 Downloading the book
 -----
