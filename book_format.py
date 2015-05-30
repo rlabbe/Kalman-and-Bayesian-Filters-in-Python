@@ -12,7 +12,7 @@ sys.path.insert(0,'./code') # allow us to import book_format
 
 def test_filterpy_version():
     import filterpy
-    min_version = [0,0,10]
+    min_version = [0,0,18]
     v = filterpy.__version__
     tokens = v.split('.')
     for i,v in enumerate(tokens):
@@ -22,7 +22,8 @@ def test_filterpy_version():
     i = len(tokens) - 1
     if min_version[i] > int(tokens[i]):
        raise Exception("Minimum FilterPy version supported is {}.{}.{}.\n"
-                       "Please install a more recent version." .format(
+                       "Please install a more recent version.\n"
+                       "   ex: pip install filterpy --upgrade".format(
              *min_version))
     v = int(tokens[0]*1000)
 

@@ -38,6 +38,36 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
     return f1
 
 
+def plot_bicycle():
+    plt.clf()
+    plt.axes()
+    ax = plt.gca()
+    #ax.add_patch(plt.Rectangle((10,0), 10, 20,  fill=False, ec='k')) #car
+    ax.add_patch(plt.Rectangle((21,1), .75, 2,  fill=False, ec='k')) #wheel
+    ax.add_patch(plt.Rectangle((21.33,10), .75, 2,  fill=False, ec='k', angle=20)) #wheel
+    ax.add_patch(plt.Rectangle((21.,4.), .75, 2,  fill=True, ec='k', angle=5, ls='dashdot', alpha=0.3)) #wheel
+
+    plt.arrow(0, 2,  20.5, 0,  fc='k', ec='k', head_width=0.5, head_length=0.5)
+    plt.arrow(0, 2,  20.4, 3,  fc='k', ec='k', head_width=0.5, head_length=0.5)
+    plt.arrow(21.375, 2., 0, 8.5,  fc='k', ec='k', head_width=0.5, head_length=0.5)
+    plt.arrow(23, 2,  0, 2.5,  fc='k', ec='k', head_width=0.5, head_length=0.5)
+
+    #ax.add_patch(plt.Rectangle((10,0), 10, 20,  fill=False, ec='k'))
+    plt.text(11, 1.0, "R", fontsize=18)
+    plt.text(8, 2.2, r"$\beta$", fontsize=18)
+    plt.text(20.4, 13.5, r"$\alpha$", fontsize=18)
+    plt.text(21.6, 7, "w (wheelbase)", fontsize=18)
+    plt.text(0, 1, "C", fontsize=18)
+    plt.text(24, 3, "d", fontsize=18)
+    plt.plot([21.375, 21.25], [11, 14], color='k', lw=1)
+    plt.plot([21.375, 20.2], [11, 14], color='k', lw=1)
+    plt.axis('scaled')
+    plt.xlim(0,25)
+    plt.axis('off')
+    plt.show()
+
+#plot_bicycle()
+
 class BaseballPath(object):
     def __init__(self, x0, y0, launch_angle_deg, velocity_ms, noise=(1.0,1.0)):
         """ Create baseball path object in 2D (y=height above ground)
