@@ -40,8 +40,8 @@ def residual(a,b):
     return y
 
 
-sigma_r = 0.1
-sigma_h =  np.radians(1)
+sigma_r = 1
+sigma_h =  .1#np.radians(1)
 sigma_steer =  np.radians(1)
 
 #only partway through. predict is using old control and movement code. computation of m uses
@@ -130,8 +130,8 @@ def H_of(x, p):
     dist = np.sqrt(hyp)
 
     H = array(
-        [[-(px - x[0, 0]) / dist, -(py - x[1, 0]) / dist, 0],
-         [ (py - x[1, 0]) / hyp,  -(px - x[0, 0]) / hyp, -1]])
+        [[(-px + x[0, 0]) / dist, (-py + x[1, 0]) / dist, 0.],
+         [ -(-py + x[1, 0]) / hyp,  -(px - x[0, 0]) / hyp, -1.]])
     return H
 
 
