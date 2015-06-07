@@ -6,7 +6,8 @@ Created on Mon Jun  1 18:13:23 2015
 """
 
 from filterpy.common import plot_covariance_ellipse
-from filterpy.kalman import ScaledUnscentedKalmanFilter as UKF
+from filterpy.kalman import UnscentedKalmanFilter as UKF
+from filterpy.kalman import MerweScaledSigmaPoints
 from math import tan, sin, cos, sqrt, atan2
 import matplotlib.pyplot as plt
 from numpy import array
@@ -163,8 +164,8 @@ def Hx(x, landmark):
     Hx = array([dist, atan2(py - x[1], px - x[0]) - x[2]])
     return Hx
 
-
-ukf= UKF(dim_x=3, dim_z=2, fx=fx, hx=Hx, dt=dt, alpha=1.e-3, beta=.1, kappa=0)
+points = MerweScaledSigmaPoints(n=3, alpha=1.e-3, beta=2, kappa=0)
+ukf= UKF(dim_x=3, dim_z=2, fx=fx, hx=Hx, dt=dt, points=points)
 ukf.x = array([2, 6, .3])
 ukf.P = np.diag([.1, .1, .2])
 ukf.R = np.diag([sigma_r**2, sigma_h**2])
