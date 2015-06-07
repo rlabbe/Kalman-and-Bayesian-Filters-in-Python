@@ -17,7 +17,6 @@ from math import cos, sin, sqrt, atan2, tan
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import array, dot
-from numpy.linalg import pinv
 from numpy.random import randn
 from filterpy.common import plot_covariance_ellipse
 from filterpy.kalman import ExtendedKalmanFilter as EKF
@@ -44,8 +43,6 @@ sigma_r = 1
 sigma_h =  .1#np.radians(1)
 sigma_steer =  np.radians(1)
 
-#only partway through. predict is using old control and movement code. computation of m uses
-#old u.
 
 class RobotEKF(EKF):
     def __init__(self, dt, wheelbase):
@@ -122,7 +119,7 @@ class RobotEKF(EKF):
 
 def H_of(x, p):
     """ compute Jacobian of H matrix where h(x) computes the range and
-    bearing to a landmark for state x """
+    bearing to a landmark 'p' for state x """
 
     px = p[0]
     py = p[1]
@@ -157,15 +154,16 @@ m = array([[5, 10],
            [15, 15]])
 
 ekf.x = array([[2, 6, .3]]).T
-u = array([1.1, .01])
 ekf.P = np.diag([.1, .1, .1])
 ekf.R = np.diag([sigma_r**2, sigma_h**2])
-c = [0, 1, 2]
+
+u = array([1.1, .01])
 
 xp = ekf.x.copy()
 
+plt.figure()
 plt.scatter(m[:, 0], m[:, 1])
-for i in range(150):
+for i in range(250):
     xp = ekf.move(xp, u, dt/10.) # simulate robot
     plt.plot(xp[0], xp[1], ',', color='g')
 
@@ -173,7 +171,7 @@ for i in range(150):
 
         ekf.predict(u=u)
 
-        plot_covariance_ellipse((ekf.x[0,0], ekf.x[1,0]), ekf.P[0:2, 0:2], std=10,
+        plot_covariance_ellipse((ekf.x[0,0], ekf.x[1,0]), ekf.P[0:2, 0:2], std=3,
                                 facecolor='b', alpha=0.08)
 
         for lmark in m:
@@ -184,11 +182,12 @@ for i in range(150):
             ekf.update(z, HJacobian=H_of, Hx=Hx, residual=residual,
                        args=(lmark), hx_args=(lmark))
 
-        plot_covariance_ellipse((ekf.x[0,0], ekf.x[1,0]), ekf.P[0:2, 0:2], std=10,
+        plot_covariance_ellipse((ekf.x[0,0], ekf.x[1,0]), ekf.P[0:2, 0:2], std=3,
                                 facecolor='g', alpha=0.4)
 
     #plt.plot(ekf.x[0], ekf.x[1], 'x', color='r')
 
 plt.axis('equal')
+plt.title("EKF Robot localization")
 plt.show()
 

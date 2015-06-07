@@ -85,7 +85,7 @@ def show_sigma_transform():
     P = np.array([[4, -2.2], [-2.2, 3]])
 
     plot_covariance_ellipse(x, P, facecolor='b', variance=9, alpha=0.5)
-    S = UKF.sigma_points(x=x, P=P, kappa=0)
+    S = UKF.sigma_points(x=x, P=P, alpha=.5, kappa=0)
     plt.scatter(S[:,0], S[:,1], c='k', s=80)
 
     x = np.array([15, 5])
