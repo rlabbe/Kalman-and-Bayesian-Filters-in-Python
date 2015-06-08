@@ -58,77 +58,36 @@ def move(x, u, dt, wheelbase):
 
 
 
-
-
-def state_unscented_transform(Sigmas, Wm, Wc, noise_cov):
-    """ Computes unscented transform of a set of sigma points and weights.
-    returns the mean and covariance in a tuple.
-    """
-
-    kmax, n = Sigmas.shape
-
+def state_mean(sigmas, Wm):
     x = np.zeros(3)
     sum_sin, sum_cos = 0., 0.
 
-    for i in range(len(Sigmas)):
-        s = Sigmas[i]
+    for i in range(len(sigmas)):
+        s = sigmas[i]
         x[0] += s[0] * Wm[i]
         x[1] += s[1] * Wm[i]
         sum_sin += sin(s[2])*Wm[i]
         sum_cos += cos(s[2])*Wm[i]
 
     x[2] = atan2(sum_sin, sum_cos)
+    return x
 
 
-    # new covariance is the sum of the outer product of the residuals
-    # times the weights
-    P = np. zeros((n, n))
-    for k in range(kmax):
-        y = residual_x(Sigmas[k],  x)
-        P += Wc[k] * np.outer(y, y)
-
-    if noise_cov is not None:
-        P += noise_cov
-
-    return (x, P)
-
-
-
-def z_unscented_transform(Sigmas, Wm, Wc, noise_cov):
-    """ Computes unscented transform of a set of sigma points and weights.
-    returns the mean and covariance in a tuple.
-    """
-
-    kmax, n = Sigmas.shape
-
+def z_mean(sigmas, Wm):
     x = np.zeros(2)
     sum_sin, sum_cos = 0., 0.
 
-    for i in range(len(Sigmas)):
-        s = Sigmas[i]
+    for i in range(len(sigmas)):
+        s = sigmas[i]
         x[0] += s[0] * Wm[i]
         sum_sin += sin(s[1])*Wm[i]
         sum_cos += cos(s[1])*Wm[i]
 
     x[1] = atan2(sum_sin, sum_cos)
+    return x
 
 
-    # new covariance is the sum of the outer product of the residuals
-    # times the weights
-    P = np.zeros((n, n))
-    for k in range(kmax):
-        y = residual_h(Sigmas[k], x)
-
-        P += Wc[k] * np.outer(y, y)
-
-
-    if noise_cov is not None:
-        P += noise_cov
-
-    return (x, P)
-
-
-sigma_r = 1.
+sigma_r = .3
 sigma_h =  .1#np.radians(1)
 sigma_steer =  np.radians(.01)
 dt = 1.0
@@ -136,7 +95,8 @@ wheelbase = 0.5
 
 m = array([[5, 10],
            [10, 5],
-           [15, 15]])
+           [15, 15],
+           [20, 5]])
 
 
 def fx(x, dt, u):
@@ -155,7 +115,9 @@ def Hx(x, landmark):
     return Hx
 
 points = MerweScaledSigmaPoints(n=3, alpha=1.e-3, beta=2, kappa=0)
-ukf= UKF(dim_x=3, dim_z=2, fx=fx, hx=Hx, dt=dt, points=points)
+ukf= UKF(dim_x=3, dim_z=2, fx=fx, hx=Hx, dt=dt, points=points,
+         x_mean_fn=state_mean, z_mean_fn=z_mean,
+         residual_x=residual_x, residual_z=residual_h)
 ukf.x = array([2, 6, .3])
 ukf.P = np.diag([.1, .1, .2])
 ukf.R = np.diag([sigma_r**2, sigma_h**2])
@@ -169,12 +131,12 @@ xp = ukf.x.copy()
 plt.figure()
 plt.scatter(m[:, 0], m[:, 1])
 
-for i in range(250):
+for i in range(200):
     xp = move(xp, u, dt/10., wheelbase) # simulate robot
     plt.plot(xp[0], xp[1], ',', color='g')
 
     if i % 10 == 0:
-        ukf.predict(fx_args=u, UT=state_unscented_transform)
+        ukf.predict(fx_args=u)
 
         plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=3,
                                 facecolor='b', alpha=0.08)
@@ -184,8 +146,7 @@ for i in range(250):
             a = atan2(lmark[1] - xp[1], lmark[0] - xp[0]) - xp[2] + randn()*sigma_h
             z = np.array([d, a])
 
-            ukf.update(z, hx_args=(lmark,), UT=z_unscented_transform,
-                       residual_x=residual_x, residual_h=residual_h)
+            ukf.update(z, hx_args=(lmark,))
 
         plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=3,
                                 facecolor='g', alpha=0.4)
@@ -196,3 +157,4 @@ for i in range(250):
 plt.axis('equal')
 plt.title("UKF Robot localization")
 plt.show()
+print(ukf.P.diagonal())
