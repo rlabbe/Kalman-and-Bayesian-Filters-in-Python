@@ -16,33 +16,23 @@ from numpy.random import randn
 
 
 
-def normalize_angle(x, index):
-    def normalize(x):
-        if x > np.pi:
-            x -= 2*np.pi
-        if x < -np.pi:
-            x = 2*np.pi
-        return x
+def normalize_angle(x):
+    if x > np.pi:
+        x -= 2*np.pi
+    if x < -np.pi:
+        x = 2*np.pi
+    return x
 
-    if x.ndim > 1:
-        for i in range(len(x)):
-            x[i, index] = normalize(x[i, index])
-
-    else:
-        x[index] = normalize(x[index])
-
-
-def residual(a,b , index=1):
+def residual_h(a, b):
     y = a - b
-    normalize_angle(y, index)
+    y[1] = normalize_angle(y[1])
     return y
 
 
-def residual_h(a, b):
-    return residual(a, b, 1)
-
 def residual_x(a, b):
-    return residual(a, b, 2)
+    y = a - b
+    y[2] = normalize_angle(y[2])
+    return y
 
 
 def move(x, u, dt, wheelbase):

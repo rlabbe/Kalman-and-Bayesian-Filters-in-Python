@@ -4,12 +4,13 @@ Created on Tue May 27 21:21:19 2014
 
 @author: rlabbe
 """
+from filterpy.kalman import UnscentedKalmanFilter as UKF
+from filterpy.kalman import MerweScaledSigmaPoints
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse,Arrow
-import stats
-import numpy as np
 import math
-from filterpy.kalman import UnscentedKalmanFilter as UKF
+import numpy as np
+import stats
 from stats import plot_covariance_ellipse
 
 def _sigma_points(mean, sigma, kappa):
@@ -59,8 +60,6 @@ def show_three_gps():
     plt.show()
 
 
-
-
 def show_four_gps():
     circle1=plt.Circle((-4,2),5,color='#004080',fill=False,linewidth=20, alpha=.7)
     circle2=plt.Circle((5.5,1),5,color='#E24A33', fill=False, linewidth=8, alpha=.7)
@@ -77,21 +76,24 @@ def show_four_gps():
 
     plt.axis('equal')
     plt.show()
-def show_sigma_transform():
+
+
+def show_sigma_transform(with_text=False):
     fig = plt.figure()
     ax=fig.gca()
 
     x = np.array([0, 5])
     P = np.array([[4, -2.2], [-2.2, 3]])
 
-    plot_covariance_ellipse(x, P, facecolor='b', variance=9, alpha=0.5)
-    S = UKF.sigma_points(x=x, P=P, alpha=.5, kappa=0)
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=9)
+    sigmas = MerweScaledSigmaPoints(2, alpha=.5, beta=2., kappa=0.)
+
+    S = sigmas.sigma_points(x=x, P=P)
     plt.scatter(S[:,0], S[:,1], c='k', s=80)
 
     x = np.array([15, 5])
     P = np.array([[3, 1.2],[1.2, 6]])
-    plot_covariance_ellipse(x, P, facecolor='g', variance=9, alpha=0.5)
-
+    plot_covariance_ellipse(x, P, facecolor='g', variance=9, alpha=0.3)
 
     ax.add_artist(arrow(S[0,0], S[0,1], 11, 4.1, 0.6))
     ax.add_artist(arrow(S[1,0], S[1,1], 13, 7.7, 0.6))
@@ -102,21 +104,30 @@ def show_sigma_transform():
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
 
+    if with_text:
+        plt.text(2.5, 1.5, r"$\chi$", fontsize=32)
+        plt.text(13, -1, r"$\mathcal{Y}$", fontsize=32)
+
     #plt.axis('equal')
     plt.show()
 
 
+
 def show_2d_transform():
 
+    plt.cla()
     ax=plt.gca()
 
     ax.add_artist(Ellipse(xy=(2,5), width=2, height=3,angle=70,linewidth=1,ec='k'))
-    ax.add_artist(Ellipse(xy=(7,5), width=2.2, alpha=0.3, height=3.8,angle=150,linewidth=1,ec='k'))
+    ax.add_artist(Ellipse(xy=(7,5), width=2.2, alpha=0.3, height=3.8,angle=150,fc='g',linewidth=1,ec='k'))
 
     ax.add_artist(arrow(2, 5, 6, 4.8))
-
     ax.add_artist(arrow(1.5, 5.5, 7, 3.8))
     ax.add_artist(arrow(2.3, 4.1, 8, 6))
+    ax.add_artist(arrow(3.3, 5.1, 6.5, 4.3))
+    ax.add_artist(arrow(1.3, 4.8, 7.2, 6.3))
+    ax.add_artist(arrow(1.1, 5.2, 8.2, 5.3))
+    ax.add_artist(arrow(2, 4.4, 7.3, 4.5))
 
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
@@ -139,25 +150,32 @@ def show_3_sigma_points():
 
 def show_sigma_selections():
     ax=plt.gca()
-    ax.add_artist(Ellipse(xy=(2,5), alpha=0.5, width=2, height=3,angle=0,linewidth=1,ec='k'))
-    ax.add_artist(Ellipse(xy=(5,5), alpha=0.5, width=2, height=3,angle=0,linewidth=1,ec='k'))
-    ax.add_artist(Ellipse(xy=(8,5), alpha=0.5, width=2, height=3,angle=0,linewidth=1,ec='k'))
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)
 
-    plt.scatter([1.5,2,2.5],[5,5,5],c='k', s=50)
-    plt.scatter([2,2],[4.5, 5.5],c='k', s=50)
+    x = np.array([2, 5])
+    P = np.array([[3, 1.1], [1.1, 4]])
 
-    plt.scatter([4.8,5,5.2],[5,5,5],c='k', s=50)
-    plt.scatter([5,5],[4.8, 5.2],c='k', s=50)
+    points = MerweScaledSigmaPoints(2, .05, 2., 1.)
+    sigmas = points.sigma_points(x, P)
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
+    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
 
-    plt.scatter([7.2,8,8.8],[5,5,5],c='k', s=50)
-    plt.scatter([8,8],[4,6],c='k' ,s=50)
+    x = np.array([5, 5])
+    points = MerweScaledSigmaPoints(2, .15, 2., 1.)
+    sigmas = points.sigma_points(x, P)
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
+    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
+
+    x = np.array([8, 5])
+    points = MerweScaledSigmaPoints(2, .4, 2., 1.)
+    sigmas = points.sigma_points(x, P)
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
+    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
 
     plt.axis('equal')
     plt.xlim(0,10); plt.ylim(0,10)
     plt.show()
-
 
 
 def show_sigmas_for_2_kappas():
@@ -190,9 +208,41 @@ def show_sigmas_for_2_kappas():
     plt.show()
 
 
+def plot_sigma_points():
+    x = np.array([0, 0])
+    P = np.array([[4, 2], [2, 4]])
+
+    sigmas = MerweScaledSigmaPoints(n=2, alpha=.3, beta=2., kappa=1.)
+    S0 = sigmas.sigma_points(x, P)
+    Wm0, Wc0 = sigmas.weights()
+
+    sigmas = MerweScaledSigmaPoints(n=2, alpha=1., beta=2., kappa=1.)
+    S1 = sigmas.sigma_points(x, P)
+    Wm1, Wc1 = sigmas.weights()
+
+    def plot_sigmas(s, w, **kwargs):
+        min_w = min(abs(w))
+        scale_factor = 100 / min_w
+        return plt.scatter(s[:, 0], s[:, 1], s=abs(w)*scale_factor, alpha=.5, **kwargs)
+
+    plt.subplot(121)
+    plot_sigmas(S0, Wc0, c='b')
+    plot_covariance_ellipse(x, P, facecolor='g', alpha=0.2, variance=[1, 4])
+    plt.title('alpha=0.3')
+    plt.subplot(122)
+    plot_sigmas(S1, Wc1,  c='b', label='Kappa=2')
+    plot_covariance_ellipse(x, P, facecolor='g', alpha=0.2, variance=[1, 4])
+    plt.title('alpha=1')
+    plt.show()
+    print(sum(Wc0))
 
 if __name__ == '__main__':
-    show_four_gps()
+
+    #show_2d_transform()
+    #show_sigma_selections()
+
+    show_sigma_transform(True)
+    #show_four_gps()
     #show_sigma_transform()
     #show_sigma_selections()
 
