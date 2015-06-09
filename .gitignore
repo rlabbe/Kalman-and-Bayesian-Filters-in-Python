@@ -4,4 +4,10 @@ __pycache__
 *.pyc
 short.pdf
 11*
+*.aux
+*.out
+book.ipynb
+*.tex
+*.toc
 Kalman_and_Bayesian_Filters_in_Python.pdf
+book_files
