@@ -12,7 +12,7 @@ sys.path.insert(0,'./code') # allow us to import book_format
 
 def test_filterpy_version():
     import filterpy
-    min_version = [0,0,19]
+    min_version = [0,0,20]
     v = filterpy.__version__
     tokens = v.split('.')
     for i,v in enumerate(tokens):
@@ -38,9 +38,9 @@ def equal_axis():
     pylab.rcParams['figure.figsize'] = 10,10
     plt.axis('equal')
 
-	
+
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 11, 4 
+    pylab.rcParams['figure.figsize'] = 11, 4
 
 def set_figsize(x=11, y=4):
     pylab.rcParams['figure.figsize'] = x, y
@@ -61,14 +61,14 @@ def numpy_precision(precision):
 	np.set_printoptions(precision=precision)
 	yield
 	np.set_printoptions(old)
-	
+
 @contextmanager
 def printoptions(*args, **kwargs):
     original = np.get_printoptions()
     np.set_printoptions(*args, **kwargs)
-    yield 
+    yield
     np.set_printoptions(**original)
-	
+
 def _decode_list(data):
     rv = []
     for item in data:
