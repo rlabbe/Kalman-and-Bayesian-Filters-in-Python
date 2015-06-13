@@ -7,8 +7,8 @@ Created on Mon Jun  1 18:13:23 2015
 
 from filterpy.common import plot_covariance_ellipse
 from filterpy.kalman import UnscentedKalmanFilter as UKF
-from filterpy.kalman import MerweScaledSigmaPoints, JulierSigmaPoints
-from math import tan, sin, cos, sqrt, atan2, radians, sqrt
+from filterpy.kalman import MerweScaledSigmaPoints
+from math import tan, sin, cos, sqrt, atan2, radians
 import matplotlib.pyplot as plt
 from numpy import array
 import numpy as np
@@ -25,7 +25,8 @@ def normalize_angle(x):
 
 def residual_h(aa, bb):
     y = aa - bb
-    y[1] = normalize_angle(y[1])
+    for i in range(0, len(y), 2):
+        y[i + 1] = normalize_angle(y[i + 1])
     return y
 
 
@@ -58,42 +59,28 @@ def move(x, u, dt, wheelbase):
 
 def state_mean(sigmas, Wm):
     x = np.zeros(3)
-    sum_sin, sum_cos = 0., 0.
 
-    for i in range(len(sigmas)):
-        s = sigmas[i]
-        x[0] += s[0] * Wm[i]
-        x[1] += s[1] * Wm[i]
-        sum_sin += sin(s[2])*Wm[i]
-        sum_cos += cos(s[2])*Wm[i]
+    sum_sin = np.sum(np.dot(np.sin(sigmas[:, 2]), Wm))
+    sum_cos = np.sum(np.dot(np.cos(sigmas[:, 2]), Wm))
 
+    x[0] = np.sum(np.dot(sigmas[:, 0], Wm))
+    x[1] = np.sum(np.dot(sigmas[:, 1], Wm))
     x[2] = atan2(sum_sin, sum_cos)
+
     return x
 
 
 def z_mean(sigmas, Wm):
-    x = np.zeros(2)
-    sum_sin, sum_cos = 0., 0.
+    z_count = sigmas.shape[1]
+    x = np.zeros(z_count)
 
-    for i in range(len(sigmas)):
-        s = sigmas[i]
-        x[0] += s[0] * Wm[i]
-        sum_sin += sin(s[1])*Wm[i]
-        sum_cos += cos(s[1])*Wm[i]
+    for z in range(0, z_count, 2):
+        sum_sin = np.sum(np.dot(np.sin(sigmas[:, z+1]), Wm))
+        sum_cos = np.sum(np.dot(np.cos(sigmas[:, z+1]), Wm))
 
-    x[1] = atan2(sum_sin, sum_cos)
+        x[z] = np.sum(np.dot(sigmas[:,z], Wm))
+        x[z+1] = atan2(sum_sin, sum_cos)
     return x
-
-
-sigma_r = .3
-sigma_h =  .01#radians(.5)#np.radians(1)
-#sigma_steer =  radians(10)
-dt = 0.1
-wheelbase = 0.5
-
-m = array([[5., 10], [10, 5], [15, 15], [20, 5], [0, 30], [50, 30], [40, 10]])
-#m = array([[5, 10], [10, 5], [15, 15], [20, 5],[5,5], [8, 8.4]])#, [0, 30], [50, 30], [40, 10]])
-m = array([[5, 10], [10, 5]])#, [0, 30], [50, 30], [40, 10]])
 
 
 def fx(x, dt, u):
@@ -104,21 +91,38 @@ def Hx(x, landmark):
     """ takes a state variable and returns the measurement that would
     correspond to that state.
     """
-    px, py = landmark
-    dist = sqrt((px - x[0])**2 + (py - x[1])**2)
-    angle = atan2(py - x[1], px - x[0])
-    return array([dist, normalize_angle(angle - x[2])])
+
+    hx = []
+    for lmark in landmark:
+        px, py = lmark
+        dist = sqrt((px - x[0])**2 + (py - x[1])**2)
+        angle = atan2(py - x[1], px - x[0])
+        hx.extend([dist, normalize_angle(angle - x[2])])
+    return np.array(hx)
 
 
-points = MerweScaledSigmaPoints(n=3, alpha=.1, beta=2, kappa=0)
+m = array([[5., 10], [10, 5], [15, 15], [20., 16], [0, 30], [50, 30], [40, 10]])
+#m = array([[5, 10], [10, 5], [15, 15], [20, 5],[5,5], [8, 8.4]])#, [0, 30], [50, 30], [40, 10]])
+#m = array([[5, 10], [10, 5]])#, [0, 30], [50, 30], [40, 10]])
+#m = array([[5., 10], [10, 5]])
+#m = array([[5., 10], [10, 5]])
+
+
+sigma_r = .3
+sigma_h =  .1#radians(.5)#np.radians(1)
+#sigma_steer =  radians(10)
+dt = 0.1
+wheelbase = 0.5
+
+points = MerweScaledSigmaPoints(n=3, alpha=.1, beta=2, kappa=0, subtract=residual_x)
 #points = JulierSigmaPoints(n=3,  kappa=3)
-ukf= UKF(dim_x=3, dim_z=2, fx=fx, hx=Hx, dt=dt, points=points,
+ukf= UKF(dim_x=3, dim_z=2*len(m), fx=fx, hx=Hx, dt=dt, points=points,
          x_mean_fn=state_mean, z_mean_fn=z_mean,
          residual_x=residual_x, residual_z=residual_h)
 ukf.x = array([2, 6, .3])
-ukf.P = np.diag([.1, .1, .2])
-ukf.R = np.diag([sigma_r**2, sigma_h**2])
-ukf.Q = None#np.eye(3)*.00000
+ukf.P = np.diag([.1, .1, .05])
+ukf.R = np.diag([sigma_r**2, sigma_h**2]* len(m))
+ukf.Q =np.eye(3)*.00001
 
 
 u = array([1.1, 0.])
@@ -142,9 +146,6 @@ cmds.extend([cmds[-1]]*200)
 cmds.extend([[v, a] for a in np.linspace(-np.radians(2), 0, 15)])
 cmds.extend([cmds[-1]]*150)
 
-#cmds.extend([[v, a] for a in np.linspace(0, -np.radians(1), 25)])
-
-
 
 seed(12)
 cmds = np.array(cmds)
@@ -154,6 +155,7 @@ u = cmds[0]
 
 track = []
 
+std = 16
 while cindex < len(cmds):
     u = cmds[cindex]
     xp = move(xp, u, dt, wheelbase) # simulate robot
@@ -161,29 +163,33 @@ while cindex < len(cmds):
 
     ukf.predict(fx_args=u)
 
-    if cindex % 20 == 30:
-        plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=18,
+    if cindex % 20 == 0:
+        plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=std,
                                 facecolor='b', alpha=0.58)
 
     #print(cindex, ukf.P.diagonal())
-    print(xp)
+    #print(ukf.P.diagonal())
+    z = []
     for lmark in m:
-
         d = sqrt((lmark[0] - xp[0])**2 + (lmark[1] - xp[1])**2) + randn()*sigma_r
         bearing = atan2(lmark[1] - xp[1], lmark[0] - xp[0])
         a = normalize_angle(bearing - xp[2] + randn()*sigma_h)
-        z = np.array([d, a])
+        z.extend([d, a])
 
-        if cindex % 20 == 0:
-            plt.plot([lmark[0], lmark[0] - d*cos(a+xp[2])], [lmark[1], lmark[1]-d*sin(a+xp[2])], color='r')
+        #if cindex % 20 == 0:
+        #    plt.plot([lmark[0], lmark[0] - d*cos(a+xp[2])], [lmark[1], lmark[1]-d*sin(a+xp[2])], color='r')
 
-        ukf.update(z, hx_args=(lmark,))
-        print(ukf.P)
-    print()
+        if cindex  == 1197:
+            plt.plot([lmark[0], lmark[0] - d2*cos(a2+xp[2])],
+                     [lmark[1], lmark[1] - d2*sin(a2+xp[2])], color='r')
+            plt.plot([lmark[0], lmark[0] - d*cos(a+xp[2])],
+                     [lmark[1], lmark[1] - d*sin(a+xp[2])], color='k')
+
+    ukf.update(np.array(z), hx_args=(m,))
 
     if cindex % 20 == 0:
-        plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=15,
-                                facecolor='g', alpha=0.99)
+        plot_covariance_ellipse((ukf.x[0], ukf.x[1]), ukf.P[0:2, 0:2], std=std,
+                                 facecolor='g', alpha=0.5)
     cindex += 1
 
 
@@ -193,4 +199,3 @@ plt.plot(track[:, 0], track[:,1], color='k')
 plt.axis('equal')
 plt.title("UKF Robot localization")
 plt.show()
-print(ukf.P.diagonal())
