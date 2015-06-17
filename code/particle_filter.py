@@ -30,11 +30,13 @@ class ParticleFilter(object):
 
 
 
-    def create_particles(self, mu, var):
-        self.particles[:, 0] = mu[0] + randn(self.N)* np.sqrt(var)
-        self.particles[:, 1] = mu[1] + randn(self.N)* np.sqrt(var)
+    def create_particles(self, mean, variance):
+        """ create particles with the specied mean and variance"""
+        self.particles[:, 0] = mean[0] + randn(self.N) * np.sqrt(variance)
+        self.particles[:, 1] = mean[1] + randn(self.N) * np.sqrt(variance)
 
     def create_particle(self):
+        """ create particles uniformly distributed over entire space"""
         return [uniform(0, self.x_range), uniform(0, self.y_range), 0, 0]
 
 
@@ -49,23 +51,22 @@ class ParticleFilter(object):
         self.particles[:, 1] += dx[1]
 
 
-    def move(self, h, v, t=1.):
+    def move(self, hdg, vel, t=1.):
         """ move the particles according to their speed and direction for the
         specified time duration t"""
-        h = math.atan2(h[1], h[0])
+        h = math.atan2(hdg[1], hdg[0])
         h = randn(self.N) * .4 + h
-        vs = v + randn(self.N) * 0.1
-        vx = v * np.cos(h)
-        vy = v * np.sin(h)
+        vs = vel + randn(self.N) * 0.1
+        vx = vel * np.cos(h)
+        vy = vel * np.sin(h)
 
-
-        #vx = self.particles[:, 2] * np.cos(self.particles[:, 3]) + randn(self.N)*0.5
-        #vy = self.particles[:, 2] * np.sin(self.particles[:, 3]) + randn(self.N)*0.5
         self.particles[:, 0] = (self.particles[:, 0] + vx*t)
         self.particles[:, 1] = (self.particles[:, 1] + vy*t)
 
 
     def move2(self, u):
+        """ move according to control input u"""
+
         dx = u[0] + randn(self.N) * 1.9
         dy = u[1] + randn(self.N) * 1.9
         self.particles[:, 0] = (self.particles[:, 0] + dx)
@@ -87,11 +88,12 @@ class ParticleFilter(object):
         self.weights *= prob
         self.weights /= sum(self.weights) # normalize
 
+
     def neff(self):
         return 1. / np.sum(np.square(self.weights))
 
-    def resample(self):
 
+    def resample(self):
         p = np.zeros((self.N, 4))
         w = np.zeros(self.N)
 
@@ -103,6 +105,7 @@ class ParticleFilter(object):
 
         self.particles = p
         self.weights = w / np.sum(w)
+
 
     def estimate(self):
         """ returns mean and variance """
@@ -140,14 +143,15 @@ def plot(pf, xlim=100, ylim=100, weights=True):
 
 if __name__ == '__main__':
     pf = ParticleFilter(5000, 100, 100)
-    pf.particles[:,3] = np.random.randn(pf.N)*np.radians(10)  + np.radians(45)
+    pf.particles[:,3] = np.random.randn(pf.N)*np.radians(10) + np.radians(45)
 
     z = np.array([20, 20])
-    pf.create_particles(z, 40)
+    pf.create_particles(mean=z, variance=40)
 
     mu0 = np.array([0., 0.])
+    plot(pf, weights=False)
 
-    for x in range(60):
+    for x in range(10):
 
         z[0] += 1.0 + randn()*0.3
         z[1] += 1.0 + randn()*0.3
@@ -170,7 +174,7 @@ if __name__ == '__main__':
         plt.scatter(mu[0], mu[1], c='g', s=100)#,
                     #s=min(500, abs((1./np.sum(var)))*20), alpha=0.5)
         plt.tight_layout()
-        plt.pause(.02)
+        plt.pause(.22)
 
         #pf.assign_speed_by_gaussian(1, 1.5)
         #pf.move(h=[1,1], v=1.4, t=1)

@@ -8,6 +8,7 @@ Created on Sun May 18 11:09:23 2014
 from __future__ import division
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy.random import normal
 import scipy.stats
 
 
@@ -84,6 +85,90 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     print("fuck")
 
 
+import math
+def plot_ekf_vs_mc():
+
+    def fx(x):
+        return x**3
+
+    def dfx(x):
+        return 3*x**2
+
+    mean = 1
+    var = .1
+    std = math.sqrt(var)
+
+    data = normal(loc=mean, scale=std, size=50000)
+    d_t = fx(data)
+
+    mean_ekf = fx(mean)
+
+    slope = dfx(mean)
+    std_ekf = abs(slope*std)
+
+
+    norm = scipy.stats.norm(mean_ekf, std_ekf)
+    xs = np.linspace(-3, 5, 200)
+    plt.plot(xs, norm.pdf(xs), lw=2, ls='--', color='b')
+    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+
+    actual_mean = d_t.mean()
+    plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
+    plt.axvline(mean_ekf, lw=2, ls='--', color='b', label='EKF')
+    plt.legend()
+    plt.show()
+
+    print('actual mean={:.2f}, std={:.2f}'.format(d_t.mean(), d_t.std()))
+    print('EKF    mean={:.2f}, std={:.2f}'.format(mean_ekf, std_ekf))
+
+
+from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
+
+def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
+
+    def fx(x):
+        return x**3
+
+    def dfx(x):
+        return 3*x**2
+
+    mean = 1
+    var = .1
+    std = math.sqrt(var)
+
+    data = normal(loc=mean, scale=std, size=50000)
+    d_t = fx(data)
+
+
+    points = MerweScaledSigmaPoints(1, alpha, beta, kappa)
+    Wm, Wc = points.weights()
+    sigmas = points.sigma_points(mean, var)
+
+    sigmas_f = np.zeros((3, 1))
+    for i in range(3):
+        sigmas_f[i] = fx(sigmas[i, 0])
+
+    ### pass through unscented transform
+    ukf_mean, ukf_cov = unscented_transform(sigmas_f, Wm, Wc)
+    ukf_mean = ukf_mean[0]
+    ukf_std = math.sqrt(ukf_cov[0])
+
+    norm = scipy.stats.norm(ukf_mean, ukf_std)
+    xs = np.linspace(-3, 5, 200)
+    plt.plot(xs, norm.pdf(xs), ls='--', lw=1, color='b')
+    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=1, color='g')
+
+    actual_mean = d_t.mean()
+    plt.axvline(actual_mean, lw=1, color='g', label='Monte Carlo')
+    plt.axvline(ukf_mean, lw=1, ls='--', color='b', label='UKF')
+    plt.legend()
+    plt.show()
+
+    print('actual mean={:.2f}, std={:.2f}'.format(d_t.mean(), d_t.std()))
+    print('UKF    mean={:.2f}, std={:.2f}'.format(ukf_mean, ukf_std))
+
+
+
 def test_plot():
     import math
     from numpy.random import normal
@@ -124,8 +209,9 @@ if __name__ == "__main__":
     from numpy.random import normal
     import numpy as np
 
+    plot_ukf_vs_mc()
 
-    x0 = (1, 1)
+    '''x0 = (1, 1)
     data = normal(loc=x0[0], scale=x0[1], size=500000)
 
     def g(x):
@@ -137,3 +223,4 @@ if __name__ == "__main__":
     #plot_transfer_func (data, g, lims=(-3,3), num_bins=100)
     plot_nonlinear_func (data, g, gaussian=x0,
                         num_bins=100)
+    '''
