@@ -35,7 +35,6 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     out_lims = [y-std*3, y+std*3]
 
 
-
     #plot output
     h = np.histogram(ys, num_bins, density=False)
     plt.subplot(2,2,4)
@@ -51,13 +50,13 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
 
     norm = scipy.stats.norm(y, in_std)
 
-    min_x = norm.ppf(0.001)
+    '''min_x = norm.ppf(0.001)
     max_x = norm.ppf(0.999)
     xs = np.arange(min_x, max_x, (max_x - min_x) / 1000)
     pdf = norm.pdf(xs)
     plt.plot(pdf * max(h[0])/max(pdf), xs, lw=1, color='k')
-    print(max(norm.pdf(xs)))
-    return
+    print(max(norm.pdf(xs)))'''
+
 
 
     # plot transfer function
@@ -83,7 +82,6 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
 
     plt.show()
     print("fuck")
-
 
 
 def test_plot():
@@ -121,8 +119,6 @@ def test_plot():
     plt.plot(h[1][1:], h[0], lw=4)
 
 
-test_plot()
-1/0
 
 if __name__ == "__main__":
     from numpy.random import normal
