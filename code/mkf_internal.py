@@ -12,30 +12,56 @@ from mpl_toolkits.mplot3d import Axes3D
 from numpy.random import multivariate_normal
 import stats
 
-def show_residual_chart():
-    plt.xlim([0.9,2.5])
-    plt.ylim([1.5,3.5])
 
-    plt.scatter ([1,2,2],[2,3,2.3])
-    plt.scatter ([2],[2.8],marker='o')
-    ax = plt.axes()
-    ax.annotate('', xy=(2,3), xytext=(1,2),
+def show_residual_chart():
+    est_y = ((164.2-158)*.8 + 158)
+
+    ax = plt.axes(xticks=[], yticks=[], frameon=False)
+    ax.annotate('', xy=[1,159], xytext=[0,158],
+                arrowprops=dict(arrowstyle='->',
+                                ec='r', lw=3, shrinkA=6, shrinkB=5))
+
+    ax.annotate('', xy=[1,159], xytext=[1,164.2],
+                arrowprops=dict(arrowstyle='-',
+                                ec='k', lw=1, shrinkA=8, shrinkB=8))
+
+    ax.annotate('', xy=(1., est_y), xytext=(0.9, est_y),
                 arrowprops=dict(arrowstyle='->', ec='#004080',
                                 lw=2,
                                 shrinkA=3, shrinkB=4))
-    ax.annotate('prediction', xy=(2.04,3.), color='#004080')
-    ax.annotate('measurement', xy=(2.05, 2.28))
-    ax.annotate('prior estimate', xy=(1, 1.9))
-    ax.annotate('residual', xy=(2.04,2.6), color='#e24a33')
-    ax.annotate('new estimate', xy=(2,2.8),xytext=(2.1,2.8),
-                arrowprops=dict(arrowstyle='->', ec="k", shrinkA=3, shrinkB=4))
-    ax.annotate('', xy=(2,3), xytext=(2,2.3),
-                arrowprops=dict(arrowstyle="-",
-                                ec="#e24a33",
-                                lw=2,
-                                shrinkA=5, shrinkB=5))
-    plt.title("Kalman Filter Predict and Update")
-    plt.axis('equal')
+
+
+    plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
+    plt.scatter ([1], [164.2], c='b',s=128)
+    plt.scatter ([1], [159], c='r', s=128)
+    plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
+    plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
+    plt.text (0, 157.8, "prior estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
+    plt.text (1.02, est_y-1.5, "residual", ha='left', va='center',fontsize=18)
+    plt.text (0.9, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
+    plt.xlabel('time')
+    ax.yaxis.set_label_position("right")
+    plt.ylabel('state')
+    plt.xlim(-0.5, 1.5)
+    plt.show()
+
+
+def plot_gaussian_multiply():
+    xs = np.arange(-5, 10, 0.1)
+
+    mean1, var1 = 0, 5
+    mean2, var2 = 5, 1
+    mean, var = stats.mul(mean1, var1, mean2, var2)
+
+    ys = [stats.gaussian(x, mean1, var1) for x in xs]
+    plt.plot(xs, ys, label='M1')
+
+    ys = [stats.gaussian(x, mean2, var2) for x in xs]
+    plt.plot(xs, ys, label='M2')
+
+    ys = [stats.gaussian(x, mean, var) for x in xs]
+    plt.plot(xs, ys, label='M1 x M2')
+    plt.legend()
     plt.show()
 
 
@@ -329,6 +355,61 @@ def plot_correlation_covariance():
     plt.show()
 
 
+import book_plots as bp
+def plot_track(ps, zs, cov,
+               plot_P=True, y_lim=None,
+               title='Kalman Filter'):
+
+    count = len(zs)
+    actual = np.linspace(0, count - 1, count)
+    cov = np.asarray(cov)
+    std = np.sqrt(cov[:,0,0])
+    std_top = np.minimum(actual+std, [count + 10])
+    std_btm = np.maximum(actual-std, [-50])
+
+    std_top = actual+std
+    std_btm = actual-std
+
+    bp.plot_track(actual)
+    bp.plot_measurements(range(1, count + 1), zs)
+    bp.plot_filter(range(1, count + 1), ps)
+
+    plt.plot(std_top, linestyle=':', color='k', lw=2)
+    plt.plot(std_btm, linestyle=':', color='k', lw=2)
+    plt.fill_between(range(len(std_top)), std_top, std_btm,
+                     facecolor='yellow', alpha=0.2, interpolate=True)
+    plt.legend(loc=4)
+    if y_lim is not None:
+        plt.ylim(y_lim)
+    else:
+        plt.ylim((-50, count + 10))
+
+    plt.xlim((0,count))
+    plt.title(title)
+    plt.show()
+
+    if plot_P:
+        ax = plt.subplot(121)
+        ax.set_title("$\sigma^2_x$")
+        plot_covariance(cov, (0, 0))
+        ax = plt.subplot(122)
+        ax.set_title("$\sigma^2_y$")
+        plot_covariance(cov, (1, 1))
+        plt.show()
+
+def plot_covariance(P, index=(0, 0)):
+    ps = []
+    for p in P:
+        ps.append(p[index[0], index[1]])
+    plt.plot(ps)
+
+
+def test_fill():
+    plt.fill_between([0,1,2,3,4], [1,1,1,1,1], [4,4,4,4,4])
+    plt.plot([0,6], [6,1])
+   # plt.ylim(2,5)
+    plt.show()
+
 if __name__ == "__main__":
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
@@ -336,5 +417,6 @@ if __name__ == "__main__":
     #show_residual_chart()
 
     #show_position_chart()
-    show_x_error_chart(4)
+    #show_x_error_chart(4)
+    test_fill()
 

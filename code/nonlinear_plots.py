@@ -22,14 +22,10 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     #b = f(x) - x*m
 
     # compute new mean and variance based on EKF equations
-
-
-
     ys = f(data)
     x0 = gaussian[0]
     in_std = np.sqrt(gaussian[1])
     y = f(x0)
-    #m = np.mean(ys)
     std = np.std(ys)
 
     in_lims = [x0-in_std*3, x0+in_std*3]
@@ -40,7 +36,6 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     h = np.histogram(ys, num_bins, density=False)
     plt.subplot(2,2,4)
     plt.plot(h[0], h[1][1:], lw=4, alpha=0.5)
-    print(max(h[0]))
     plt.ylim(out_lims[1], out_lims[0])
     plt.gca().xaxis.set_ticklabels([])
     plt.title('output')
@@ -57,8 +52,6 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     pdf = norm.pdf(xs)
     plt.plot(pdf * max(h[0])/max(pdf), xs, lw=1, color='k')
     print(max(norm.pdf(xs)))'''
-
-
 
     # plot transfer function
     plt.subplot(2,2,3)
@@ -82,7 +75,6 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     plt.title('input')
 
     plt.show()
-    print("fuck")
 
 
 import math
