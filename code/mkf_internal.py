@@ -370,12 +370,12 @@ def plot_track(ps, zs, cov,
     std_top = actual+std
     std_btm = actual-std
 
-    bp.plot_track(actual)
+    bp.plot_track(actual,c='k')
     bp.plot_measurements(range(1, count + 1), zs)
     bp.plot_filter(range(1, count + 1), ps)
 
-    plt.plot(std_top, linestyle=':', color='k', lw=2)
-    plt.plot(std_btm, linestyle=':', color='k', lw=2)
+    plt.plot(std_top, linestyle=':', color='k', lw=1, alpha=0.4)
+    plt.plot(std_btm, linestyle=':', color='k', lw=1, alpha=0.4)
     plt.fill_between(range(len(std_top)), std_top, std_btm,
                      facecolor='yellow', alpha=0.2, interpolate=True)
     plt.legend(loc=4)
@@ -404,13 +404,9 @@ def plot_covariance(P, index=(0, 0)):
     plt.plot(ps)
 
 
-def test_fill():
-    plt.fill_between([0,1,2,3,4], [1,1,1,1,1], [4,4,4,4,4])
-    plt.plot([0,6], [6,1])
-   # plt.ylim(2,5)
-    plt.show()
 
 if __name__ == "__main__":
+    pass
     #show_position_chart()
     #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
     #plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
@@ -418,5 +414,4 @@ if __name__ == "__main__":
 
     #show_position_chart()
     #show_x_error_chart(4)
-    test_fill()
 

@@ -197,11 +197,77 @@ def test_plot():
 
 
 
+def plot_bivariate_colormap(xs, ys):
+    xs = np.asarray(xs)
+    ys = np.asarray(ys)
+    xmin = xs.min()
+    xmax = xs.max()
+    ymin = ys.min()
+    ymax = ys.max()
+    values = np.vstack([xs, ys])
+    kernel = scipy.stats.gaussian_kde(values)
+    X, Y = np.mgrid[xmin:xmax:100j, ymin:ymax:100j]
+    positions = np.vstack([X.ravel(), Y.ravel()])
+
+    Z = np.reshape(kernel.evaluate(positions).T, X.shape)
+    plt.gca().imshow(np.rot90(Z), cmap=plt.cm.Greys,
+                     extent=[xmin, xmax, ymin, ymax])
+
+
+
+def plot_monte_carlo_mean(xs, ys, f, mean_fx, label):
+    fxs, fys = f(xs, ys)
+
+    computed_mean_x = np.average(fxs)
+    computed_mean_y = np.average(fys)
+
+    plt.subplot(121)
+    plt.gca().grid(b=False)
+
+    plot_bivariate_colormap(xs, ys)
+    plt.scatter(xs, ys, marker='.', alpha=0.02, color='k')
+    plt.xlim(-20, 20)
+    plt.ylim(-20, 20)
+
+    plt.subplot(122)
+    plt.gca().grid(b=False)
+
+    plt.scatter(fxs, fys, marker='.', alpha=0.02, color='k')
+    plt.scatter(mean_fx[0], mean_fx[1],
+                marker='v', s=300, c='r', label='Linearized Mean')
+    plt.scatter(computed_mean_x, computed_mean_y,
+                marker='*',s=120, c='r', label='Computed Mean')
+    plot_bivariate_colormap(fxs, fys)
+    plt.ylim([-10, 200])
+    plt.xlim([-100, 100])
+    plt.legend(loc='best', scatterpoints=1)
+    print ('Difference in mean x={:.3f}, y={:.3f}'.format(
+           computed_mean_x-mean_fx[0], computed_mean_y-mean_fx[1]))
+
+
+
+def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
+    side = np.linspace(-3,3,24)
+    X,Y = np.meshgrid(side,side)
+
+    pos = np.empty(X.shape + (2,))
+    pos[:, :, 0] = X;
+    pos[:, :, 1] = Y
+    plt.axes(xticks=[], yticks=[], frameon=True)
+    rv = scipy.stats.multivariate_normal((0,0), cov)
+    plt.gca().grid(b=False)
+    plt.gca().imshow(rv.pdf(pos), cmap=plt.cm.Greys, origin='lower')
+    plt.show()
+
+
+
 if __name__ == "__main__":
+    plot_cov_ellipse_colormap(cov=[[2, 1.2], [1.2, 2]])
+    '''
     from numpy.random import normal
     import numpy as np
 
-    plot_ukf_vs_mc()
+    plot_ukf_vs_mc()'''
 
     '''x0 = (1, 1)
     data = normal(loc=x0[0], scale=x0[1], size=500000)

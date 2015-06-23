@@ -34,7 +34,7 @@
   "ytick.minor.size": 0,
   "axes.linewidth": 3.0,
   "font.size":14.0,
-  "lines.linewidth": 4,
+  "lines.linewidth": 3,
   "lines.solid_capstyle": "butt",
   "savefig.edgecolor": "#f0f0f0",
   "savefig.facecolor": "#f0f0f0",

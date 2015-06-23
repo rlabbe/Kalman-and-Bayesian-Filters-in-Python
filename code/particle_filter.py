@@ -151,7 +151,11 @@ if __name__ == '__main__':
     mu0 = np.array([0., 0.])
     plot(pf, weights=False)
 
-    for x in range(10):
+    fig = plt.gcf()
+    fig.show()
+    fig.canvas.draw()
+
+    for x in range(50):
 
         z[0] += 1.0 + randn()*0.3
         z[1] += 1.0 + randn()*0.3
@@ -169,12 +173,11 @@ if __name__ == '__main__':
         #print(var)
 
         plot(pf, weights=False)
-        plt.scatter(z[0], z[1], c='r', s=40)
-
+        plt.plot(z[0], z[1], marker='v', c='r', ms=10)
         plt.scatter(mu[0], mu[1], c='g', s=100)#,
                     #s=min(500, abs((1./np.sum(var)))*20), alpha=0.5)
         plt.tight_layout()
-        plt.pause(.22)
+        fig.canvas.draw()
 
         #pf.assign_speed_by_gaussian(1, 1.5)
         #pf.move(h=[1,1], v=1.4, t=1)

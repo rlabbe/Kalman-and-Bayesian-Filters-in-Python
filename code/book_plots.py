@@ -19,8 +19,8 @@ def plot_errorbars(bars, xlims):
     show_legend()
     plt.gca().axes.yaxis.set_ticks([])
     plt.show()
-    
-        
+
+
 
 
 def show_legend():
@@ -39,7 +39,7 @@ def bar_plot(pos, ylim=(0,1), title=None):
         plt.title(title)
 
 
-def plot_measurements(xs, ys=None, c='r', lw=2, label='Measurements', **kwargs):
+def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwargs):
     """ Helper function to give a consistant way to display
     measurements in the book.
     """
@@ -57,47 +57,47 @@ def plot_measurements(xs, ys=None, c='r', lw=2, label='Measurements', **kwargs):
            plt.plot(range(len(xs)), xs, lw=1, c=c, alpha=alpha)'''
 
     if ys is not None:
-        plt.plot(xs, ys, c=c, lw=lw, linestyle='--', label=label, **kwargs)
+        plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
     else:
-        plt.plot(xs, c=c, lw=lw, linestyle='--', label=label, **kwargs)
+        plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
 
 
 
 def plot_residual_limits(Ps):
     std = np.sqrt(Ps)
 
-    plt.plot(-std, c='k', ls=':', lw=2)
-    plt.plot(std, c='k', ls=':', lw=2)
+    plt.plot(-std, color='k', ls=':', lw=2)
+    plt.plot(std, color='k', ls=':', lw=2)
     plt.fill_between(range(len(std)), -std, std,
                  facecolor='#ffff00', alpha=0.3)
 
 
 def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
     if ys is not None:
-        plt.plot(xs, ys, c=c, lw=lw, label=label, **kwargs)
+        plt.plot(xs, ys, color=c, lw=lw, ls=':', label=label, **kwargs)
     else:
-        plt.plot(xs, c=c, lw=lw, label=label, **kwargs)
+        plt.plot(xs, color=c, lw=lw, ls=':', label=label, **kwargs)
 
 
-#c='#013afe'
-def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
+def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
+#def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
 
     if ys is None:
         ys = xs
         xs = range(len(ys))
 
-    plt.plot(xs, ys, c=c, label=label, **kwargs)
-        
+    plt.plot(xs, ys, color=c, label=label, **kwargs)
+
     if vars is None:
         return
     vars = np.asarray(vars)
-    
+
     std = np.sqrt(vars)
     std_top = ys+std
     std_btm = ys-std
 
-    plt.plot(xs, ys+std, linestyle=':', c='k', lw=2)
-    plt.plot(xs, ys-std, linestyle=':', c='k', lw=2)
+    plt.plot(xs, ys+std, linestyle=':', color='k', lw=2)
+    plt.plot(xs, ys-std, linestyle=':', color='k', lw=2)
     plt.fill_between(xs, std_btm, std_top,
                      facecolor='yellow', alpha=0.2)
 
