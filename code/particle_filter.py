@@ -17,7 +17,7 @@ import random
 class ParticleFilter(object):
 
     def __init__(self, N, x_range, y_range):
-        self.particles = np.zeros((N, 4))
+        self.particles = np.zeros((N, 3))  # x, y, speed, hdg
         self.N = N
         self.x_range = x_range
         self.y_range = y_range
@@ -26,12 +26,11 @@ class ParticleFilter(object):
         self.weights = np.array([1./N] * N)
         self.particles[:, 0] = uniform(0, x_range, size=N)
         self.particles[:, 1] = uniform(0, y_range, size=N)
-        self.particles[:, 3] = uniform(0, 2*np.pi, size=N)
-
+        self.particles[:, 2] = uniform(0, 2*np.pi, size=N)
 
 
     def create_particles(self, mean, variance):
-        """ create particles with the specied mean and variance"""
+        """ create particles with the specified mean and variance"""
         self.particles[:, 0] = mean[0] + randn(self.N) * np.sqrt(variance)
         self.particles[:, 1] = mean[1] + randn(self.N) * np.sqrt(variance)
 
@@ -40,11 +39,11 @@ class ParticleFilter(object):
         return [uniform(0, self.x_range), uniform(0, self.y_range), 0, 0]
 
 
-    def assign_speed_by_gaussian(self, speed, var):
+    '''def assign_speed_by_gaussian(self, speed, var):
         """ move every particle by the specified speed (assuming time=1.)
         with the specified variance, assuming Gaussian distribution. """
 
-        self.particles[:, 2] = np.random.normal(speed, var, self.N)
+        self.particles[:, 2] = np.random.normal(speed, var, self.N)'''
 
     def control(self, dx):
         self.particles[:, 0] += dx[0]
@@ -56,7 +55,7 @@ class ParticleFilter(object):
         specified time duration t"""
         h = math.atan2(hdg[1], hdg[0])
         h = randn(self.N) * .4 + h
-        vs = vel + randn(self.N) * 0.1
+        #vs = vel + randn(self.N) * 0.1
         vx = vel * np.cos(h)
         vy = vel * np.sin(h)
 
@@ -94,7 +93,7 @@ class ParticleFilter(object):
 
 
     def resample(self):
-        p = np.zeros((self.N, 4))
+        p = np.zeros((self.N, 3))
         w = np.zeros(self.N)
 
         cumsum = np.cumsum(self.weights)
@@ -121,17 +120,24 @@ def plot(pf, xlim=100, ylim=100, weights=True):
     if weights:
         a = plt.subplot(221)
         a.cla()
+
         plt.xlim(0, ylim)
-        plt.ylim(0, 1)
+        #plt.ylim(0, 1)
+        a.set_yticklabels('')
         plt.scatter(pf.particles[:, 0], pf.weights, marker='.', s=1)
+        a.set_ylim(bottom=0)
+
         a = plt.subplot(224)
         a.cla()
+        a.set_xticklabels('')
         plt.scatter(pf.weights, pf.particles[:, 1], marker='.', s=1)
         plt.ylim(0, xlim)
-        plt.xlim(0, 1)
+        a.set_xlim(left=0)
+        #plt.xlim(0, 1)
 
         a = plt.subplot(223)
         a.cla()
+
     else:
         plt.cla()
     plt.scatter(pf.particles[:, 0], pf.particles[:, 1], marker='.', s=1)
@@ -142,14 +148,15 @@ def plot(pf, xlim=100, ylim=100, weights=True):
 
 
 if __name__ == '__main__':
-    pf = ParticleFilter(5000, 100, 100)
-    pf.particles[:,3] = np.random.randn(pf.N)*np.radians(10) + np.radians(45)
+    pf = ParticleFilter(50000, 100, 100)
+    pf.particles[:,2] = np.random.randn(pf.N)*np.radians(10) + np.radians(45)
 
     z = np.array([20, 20])
-    pf.create_particles(mean=z, variance=40)
+    #pf.create_particles(mean=z, variance=40)
 
     mu0 = np.array([0., 0.])
     plot(pf, weights=False)
+
 
     fig = plt.gcf()
     fig.show()
@@ -157,26 +164,31 @@ if __name__ == '__main__':
 
     for x in range(50):
 
-        z[0] += 1.0 + randn()*0.3
-        z[1] += 1.0 + randn()*0.3
+        z[0] = x+1 + randn()*0.3
+        z[1] = x+1 + randn()*0.3
 
 
         pf.move2((1,1))
-        pf.weight(z, 5.2)
-#        pf.weight((z[0] + randn()*0.2, z[1] + randn()*0.2), 5.2)
-        pf.resample()
+        pf.weight(z=z, var=.8)
+        neff = pf.neff()
+
+        #print('neff', neff)
+        if neff < 1000:
+            pf.resample()
         mu, var = pf.estimate()
         if x == 0:
             mu0 = mu
-        print(mu - z)
-        print('neff', pf.neff())
+        #print(mu - z)
         #print(var)
 
-        plot(pf, weights=False)
-        plt.plot(z[0], z[1], marker='v', c='r', ms=10)
+        plot(pf, weights=True)
+        #plt.plot(z[0], z[1], marker='v', c='r', ms=10)
+        plt.plot(x+1, x+1, marker='*', c='r', ms=10)
         plt.scatter(mu[0], mu[1], c='g', s=100)#,
                     #s=min(500, abs((1./np.sum(var)))*20), alpha=0.5)
+        plt.plot([0,100], [0,100])
         plt.tight_layout()
+
         fig.canvas.draw()
 
         #pf.assign_speed_by_gaussian(1, 1.5)

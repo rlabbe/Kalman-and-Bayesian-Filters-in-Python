@@ -6,11 +6,14 @@ Created on Sun May 18 11:09:23 2014
 """
 
 from __future__ import division
-import matplotlib.pyplot as plt
-import numpy as np
-from numpy.random import normal
-import scipy.stats
 
+from filterpy.common import multivariate_gaussian
+from matplotlib import cm
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+from numpy.random import normal, multivariate_normal
+import scipy.stats
 
 def plot_nonlinear_func(data, f, gaussian, num_bins=300):
 
@@ -215,7 +218,7 @@ def plot_bivariate_colormap(xs, ys):
 
 
 
-def plot_monte_carlo_mean(xs, ys, f, mean_fx, label):
+def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
     fxs, fys = f(xs, ys)
 
     computed_mean_x = np.average(fxs)
@@ -225,6 +228,7 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label):
     plt.gca().grid(b=False)
 
     plot_bivariate_colormap(xs, ys)
+
     plt.scatter(xs, ys, marker='.', alpha=0.02, color='k')
     plt.xlim(-20, 20)
     plt.ylim(-20, 20)
@@ -237,6 +241,7 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label):
                 marker='v', s=300, c='r', label='Linearized Mean')
     plt.scatter(computed_mean_x, computed_mean_y,
                 marker='*',s=120, c='r', label='Computed Mean')
+
     plot_bivariate_colormap(fxs, fys)
     plt.ylim([-10, 200])
     plt.xlim([-100, 100])
@@ -259,6 +264,28 @@ def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
     plt.gca().imshow(rv.pdf(pos), cmap=plt.cm.Greys, origin='lower')
     plt.show()
 
+
+
+def plot_multiple_gaussians(xs, ps, x_range, y_range, N):
+    """ given a list of 2d states (x,y) and 2x2 covariance matrices, produce
+    a surface plot showing all of the gaussians"""
+
+
+    xs = np.asarray(xs)
+    x = np.linspace (x_range[0], x_range[1], N)
+    y = np.linspace (y_range[0], y_range[1], N)
+    xx, yy = np.meshgrid(x, y)
+    zv = np.zeros((N, N))
+
+    for mean, cov in zip(xs, ps):
+        zs = np.array([multivariate_gaussian(np.array([i ,j]), mean, cov)
+                   for i, j in zip(np.ravel(xx), np.ravel(yy))])
+        zv += zs.reshape(xx.shape)
+
+    ax = plt.figure().add_subplot(111, projection='3d')
+    ax.plot_surface(xx, yy, zv, rstride=1, cstride=1, lw=.5, edgecolors='#191919',
+                    antialiased=True, shade=True, cmap=cm.autumn)
+    ax.view_init(elev=40., azim=250)
 
 
 if __name__ == "__main__":
