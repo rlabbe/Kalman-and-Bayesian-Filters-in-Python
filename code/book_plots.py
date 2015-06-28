@@ -153,10 +153,6 @@ def hinton(W, maxweight=None):
     if reenable:
         plt.ion()
 
-if __name__ == "__main__":
-    hinton(np.random.randn(20, 20))
-    plt.title('Example Hinton diagram - 20x20 random normal')
-    plt.show()
 
 if __name__ == "__main__":
     p = [0.2245871, 0.06288015, 0.06109133, 0.0581008, 0.09334062, 0.2245871,
