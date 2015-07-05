@@ -5,9 +5,14 @@ Introductory textbook for Kalman and Bayesian filters. All code is written in Py
 
 Reading Online
 -----
-Github is now able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on. J
+The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. 
 
-The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
+Github is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on. Rendering may be a bit slow or imperfect.
+
+The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
+
+If you have comments, you can write an issue so that everyone can read it along with my response. Please don't view it as a way to report bugs only. Alternatively I've created a gitter room for more informal discussion. [![Join the chat at https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 The preface available from the link above has all the information in this README and more, so feel free to follow the link now.
 
