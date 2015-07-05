@@ -45,7 +45,7 @@ if __name__ == '__main__':
          '../08_Nonlinear_Filtering.ipynb',
          '../09_Unscented_Kalman_Filter.ipynb',
          '../10_Extended_Kalman_Filters.ipynb',
-         #'../11_Particle_Filters.ipynb',
+         '../11_Particle_Filters.ipynb',
          '../12_Smoothing.ipynb',
          '../13_Adaptive_Filtering.ipynb',
          '../Appendix_A_Installation.ipynb',
