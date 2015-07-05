@@ -70,33 +70,22 @@ class RobotLocalizationParticleFilter(object):
 
 
     def resample(self):
-        p = np.zeros((self.N, 3))
-        w = np.zeros(self.N)
+        cumulative_sum = np.cumsum(self.weights)
+        cumulative_sum[-1] = 1. # avoid round-off error
+        indexes = np.searchsorted(cumulative_sum, random(self.N))
 
-        cumsum = np.cumsum(self.weights)
-        for i in range(self.N):
-            index = np.searchsorted(cumsum, random())
-            p[i] = self.particles[index]
-            w[i] = self.weights[index]
-
-        self.particles = p
-        assert np.sum(w) != 0
-        assert w[0] is not np.nan
-        self.weights = w / np.sum(w)
+        # resample according to indexes
+        self.particles = self.particles[indexes]
+        self.weights = self.weights[indexes]
+        self.weights /= np.sum(self.weights) # normalize
 
 
     def resample_from_index(self, indexes):
         assert len(indexes) == self.N
 
-        p = np.zeros((self.N, 3))
-        w = np.zeros(self.N)
-        for i, index in enumerate(indexes):
-            p[i] = self.particles[index]
-            w[i] = self.weights[index]
-
-        self.particles = p
-        self.weights = w / np.sum(w)
-
+        self.particles = self.particles[indexes]
+        self.weights = self.weights[indexes]
+        self.weights /= np.sum(self.weights)
 
 
     def estimate(self):
