@@ -215,11 +215,11 @@ def show_two_pf_plots():
             mu, var = pf.estimate()
             plot_pf(pf, 20, 20, weights=False)
             if x == 0:
-                plt.plot(x+1, x+1, marker='*', color='r', ms=10)
                 plt.scatter(mu[0], mu[1], color='g', s=100)
+                plt.scatter(x+1, x+1, marker='x', color='r', s=180, lw=3)
             else:
                 plt.scatter(mu[0], mu[1], color='g', s=100, label="PF")
-                plt.scatter([x+1], [x+1], marker='*', color='r', s=60, label="True")
+                plt.scatter([x+1], [x+1], marker='x', color='r', s=180, label="True", lw=3)
                 plt.legend(scatterpoints=1)
             plt.tight_layout()
 
