@@ -4,14 +4,14 @@ Created on Thu May  1 16:56:49 2014
 
 @author: rlabbe
 """
+import filterpy.stats as stats
+from filterpy.stats import plot_covariance_ellipse
 import numpy as np
 from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from numpy.random import multivariate_normal
-import stats
-
 
 def show_residual_chart():
     est_y = ((164.2-158)*.8 + 158)
@@ -312,7 +312,6 @@ def plot_3d_sampled_covariance(mean, cov):
     ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
 
 
-from filterpy.common import plot_covariance_ellipse
 def plot_3_covariances():
 
     P = [[2, 0], [0, 2]]

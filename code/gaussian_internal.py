@@ -9,7 +9,7 @@ import math
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import numpy as np
-import stats
+import filterpy.stats as stats
 
 def plot_height_std(x, lw=10):
     m = np.mean(x)
@@ -20,13 +20,13 @@ def plot_height_std(x, lw=10):
     plt.xlim(0,len(x)+1)
     plt.axhline(m-s, ls='--')
     plt.axhline(m+s, ls='--')
-    plt.fill_between((0, len(x)+1), m-s, m+s, 
+    plt.fill_between((0, len(x)+1), m-s, m+s,
                      facecolor='yellow', alpha=0.4)
     plt.xlabel('student')
     plt.ylabel('height (m)')
     plt.show()
 
-    
+
 def plot_gaussian (mu, variance,
                    mu_line=False,
                    xlim=None,

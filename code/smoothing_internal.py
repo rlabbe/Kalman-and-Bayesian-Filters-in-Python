@@ -4,14 +4,7 @@ Created on Tue May 27 21:21:19 2014
 
 @author: rlabbe
 """
-from filterpy.kalman import UnscentedKalmanFilter as UKF
-from filterpy.kalman import MerweScaledSigmaPoints
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse,Arrow
-import math
-import numpy as np
-import stats
-from stats import plot_covariance_ellipse
 
 
 def show_fixed_lag_numberline():

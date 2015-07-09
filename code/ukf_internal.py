@@ -6,12 +6,12 @@ Created on Tue May 27 21:21:19 2014
 """
 from filterpy.kalman import UnscentedKalmanFilter as UKF
 from filterpy.kalman import MerweScaledSigmaPoints
+import filterpy.stats as stats
+from filterpy.stats import plot_covariance_ellipse
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse,Arrow
 import math
 import numpy as np
-import stats
-from stats import plot_covariance_ellipse
 
 def _sigma_points(mean, sigma, kappa):
     sigma1 = mean + math.sqrt((1+kappa)*sigma)

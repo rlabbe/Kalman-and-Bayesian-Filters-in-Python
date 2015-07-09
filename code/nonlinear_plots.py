@@ -7,7 +7,7 @@ Created on Sun May 18 11:09:23 2014
 
 from __future__ import division
 
-from filterpy.common import multivariate_gaussian
+from filterpy.stats import multivariate_gaussian
 from matplotlib import cm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
