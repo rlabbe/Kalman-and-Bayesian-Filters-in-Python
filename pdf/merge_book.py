@@ -50,4 +50,6 @@ if __name__ == '__main__':
          '../13_Adaptive_Filtering.ipynb',
          '../Appendix_A_Installation.ipynb',
          '../Appendix_B_Symbols_and_Notations.ipynb',
-         '../Appendix_C_Walking_Through_KF_Code.ipynb'])
+         '../Appendix_C_Walking_Through_KF_Code.ipynb',
+         '../Appendix_D_HInfinity_Filters.ipynb',
+         '../Appendix_E_Ensemble_Kalman_Filters.ipynb'])
