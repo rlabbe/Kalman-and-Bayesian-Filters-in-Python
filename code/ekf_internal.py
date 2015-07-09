@@ -4,6 +4,8 @@ Created on Fri Jul 18 23:23:08 2014
 
 @author: rlabbe
 """
+
+import book_plots as bp
 from math import radians, sin, cos, sqrt, exp
 import numpy.random as random
 import matplotlib.pyplot as plt
@@ -37,6 +39,31 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
 
     return f1
 
+
+def plot_radar(xs, track, time):
+
+    plt.figure()
+    bp.plot_track(time, track[:, 0])
+    bp.plot_filter(time, xs[:, 0])
+    plt.legend(loc=4)
+    plt.xlabel('time (sec)')
+    plt.ylabel('position (m)')
+
+    plt.figure()
+    bp.plot_track(time, track[:, 1])
+    bp.plot_filter(time, xs[:, 1])
+    plt.legend(loc=4)
+    plt.xlabel('time (sec)')
+    plt.ylabel('velocity (m/s)')
+
+    plt.figure()
+    bp.plot_track(time, track[:, 2])
+    bp.plot_filter(time, xs[:, 2])
+    plt.ylabel('altitude (m)')
+    plt.legend(loc=4)
+    plt.xlabel('time (sec)')
+    plt.ylim((900, 1600))
+    plt.show()
 
 def plot_bicycle():
     plt.clf()

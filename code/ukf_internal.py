@@ -236,6 +236,62 @@ def plot_sigma_points():
     plt.show()
     print(sum(Wc0))
 
+def plot_radar(xs, t, plot_x=True, plot_vel=True, plot_alt=True):
+    xs = np.asarray(xs)
+    if plot_x:
+        plt.figure()
+        plt.plot(t, xs[:, 0]/1000.)
+        plt.xlabel('time(sec)')
+        plt.ylabel('position(km)')
+    if plot_vel:
+        plt.figure()
+        plt.plot(t, xs[:, 1])
+        plt.xlabel('time(sec)')
+        plt.ylabel('velocity')
+    if plot_alt:
+        plt.figure()
+        plt.plot(t, xs[:,2])
+        plt.xlabel('time(sec)')
+        plt.ylabel('altitude')
+    plt.show()
+
+def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
+    points = MerweScaledSigmaPoints(n, alpha, beta, kappa)
+    print('sigmas: ', points.sigma_points(mean,  cov).T[0])
+    Wm, Wc = points.weights()
+    print('mean weights:', Wm)
+    print('cov weights:', Wc)
+    print('lambda:', alpha**2 *(n+kappa) - n)
+    print('sum cov', sum(Wc))
+
+
+def plot_rts_output(xs, Ms, t):
+    plt.figure()
+    plt.plot(t, xs[:, 0]/1000., label='KF', lw=2)
+    plt.plot(t, Ms[:, 0]/1000., c='k', label='RTS', lw=2)
+    plt.xlabel('time(sec)')
+    plt.ylabel('x')
+    plt.legend(loc=4)
+
+    plt.figure()
+
+    plt.plot(t, xs[:, 1], label='KF')
+    plt.plot(t, Ms[:, 1], c='k', label='RTS')
+    plt.xlabel('time(sec)')
+    plt.ylabel('x velocity')
+    plt.legend(loc=4)
+
+    plt.figure()
+    plt.plot(t, xs[:, 2], label='KF')
+    plt.plot(t, Ms[:, 2], c='k', label='RTS')
+    plt.xlabel('time(sec)')
+    plt.ylabel('Altitude(m)')
+    plt.legend(loc=4)
+
+    np.set_printoptions(precision=4)
+    print('Difference in position in meters:', xs[-6:-1, 0] - Ms[-6:-1, 0])
+
+
 if __name__ == '__main__':
 
     #show_2d_transform()

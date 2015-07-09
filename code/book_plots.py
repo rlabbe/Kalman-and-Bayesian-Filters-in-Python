@@ -39,6 +39,26 @@ def bar_plot(pos, ylim=(0,1), title=None):
         plt.title(title)
 
 
+def set_labels(title=None, x=None, y=None):
+    """ helps make code in book shorter. Optional set title, xlabel and ylabel
+    """
+    if x is not None:
+        plt.xlabel(x)
+    if y is not None:
+        plt.ylabel(y)
+    if title is not None:
+        plt.title(title)
+
+
+def set_limits(x, y):
+    """ helper function to make code in book shorter. Set the limits for the x
+    and y axis.
+    """
+
+    plt.gca().set_xlim(x)
+    plt.gca().set_ylim(y)
+
+
 def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwargs):
     """ Helper function to give a consistant way to display
     measurements in the book.
