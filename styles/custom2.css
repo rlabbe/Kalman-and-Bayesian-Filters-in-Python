@@ -34,9 +34,11 @@
         margin-top: 1em;
         display: block;
         white-space: wrap;
+        text-align: left;
     } 
     h2 {
         font-family: 'Open sans',verdana,arial,sans-serif;
+        text-align: left;
     }
     .text_cell_render h2 {
         font-weight: 200;
@@ -46,8 +48,9 @@
         color:#c76c0c;
         margin-bottom: 0.5em;
         margin-top: 1.5em;
-        display: inline;
+        display: block;
         white-space: wrap;
+        text-align: left;
     } 
     h3 {
         font-family: 'Open sans',verdana,arial,sans-serif;
@@ -60,7 +63,8 @@
         margin-bottom: 0.5em;
         margin-top: 2em;
         display: block;
-        white-space: nowrap;
+        white-space: wrap;
+        text-align: left;
     }
     h4 {
         font-family: 'Open sans',verdana,arial,sans-serif;
