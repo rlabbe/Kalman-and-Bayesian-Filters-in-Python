@@ -39,6 +39,7 @@ if __name__ == '__main__':
          '../02_Discrete_Bayes.ipynb',
          '../03_Gaussians.ipynb',
          '../04_One_Dimensional_Kalman_Filters.ipynb',
+         '../05_Multivariate_Gaussians.ipynb',
          '../05_Multivariate_Kalman_Filters.ipynb',
          '../06_Kalman_Filter_Math.ipynb',
          '../07_Designing_Kalman_Filters.ipynb',

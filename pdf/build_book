@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "merging book..."
+#echo "merging book..."
 python merge_book.py
 
 echo "creating pdf..."

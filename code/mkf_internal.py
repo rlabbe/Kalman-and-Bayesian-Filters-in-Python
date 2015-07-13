@@ -355,14 +355,16 @@ def plot_correlation_covariance():
 
 
 import book_plots as bp
-def plot_track(ps, zs, cov,
+def plot_track(ps, zs, cov, std_scale=1,
                plot_P=True, y_lim=None,
                title='Kalman Filter'):
+
+    print(std_scale)
 
     count = len(zs)
     actual = np.linspace(0, count - 1, count)
     cov = np.asarray(cov)
-    std = np.sqrt(cov[:,0,0])
+    std = std_scale*np.sqrt(cov[:,0,0])
     std_top = np.minimum(actual+std, [count + 10])
     std_btm = np.maximum(actual-std, [-50])
 
