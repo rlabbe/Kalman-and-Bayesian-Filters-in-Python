@@ -359,8 +359,6 @@ def plot_track(ps, zs, cov, std_scale=1,
                plot_P=True, y_lim=None,
                title='Kalman Filter'):
 
-    print(std_scale)
-
     count = len(zs)
     actual = np.linspace(0, count - 1, count)
     cov = np.asarray(cov)

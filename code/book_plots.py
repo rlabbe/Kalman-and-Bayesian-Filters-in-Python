@@ -83,8 +83,13 @@ def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwar
 
 
 
-def plot_residual_limits(Ps):
-    std = np.sqrt(Ps)
+def plot_residual_limits(Ps, stds=1.):
+    """ plots standand deviation given in Ps as a yellow shaded region. One std
+    by default, use stds for a different choice (e.g. stds=3 for 3 standard
+    deviations.
+    """
+
+    std = np.sqrt(Ps) * stds
 
     plt.plot(-std, color='k', ls=':', lw=2)
     plt.plot(std, color='k', ls=':', lw=2)
