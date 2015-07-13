@@ -215,7 +215,7 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:100,
+                    scale:85,
                     availableFonts: ["Neo-Euler"],
                     preferredFont: "Neo-Euler",
                     webFont: "Neo-Euler",
