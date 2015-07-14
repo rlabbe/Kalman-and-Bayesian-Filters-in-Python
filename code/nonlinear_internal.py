@@ -12,7 +12,7 @@ import numpy as np
 
 
 def plot1():
-
+    P = np.array([[6, 2.5], [2.5, .6]])
     stats.plot_covariance_ellipse((10, 2), P, facecolor='g', alpha=0.2)
 
 

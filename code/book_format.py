@@ -96,7 +96,7 @@ def _decode_dict(data):
     return rv
 
 
-def load_style(directory = '.', name='/styles/custom2.css'):
+def load_style(directory = '.', name='/code/custom.css'):
     if sys.version_info[0] >= 3:
         s = json.load(open(directory + "/code/538.json"))
     else:
