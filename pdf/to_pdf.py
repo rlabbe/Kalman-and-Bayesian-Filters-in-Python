@@ -1,6 +1,12 @@
 import IPython.nbconvert.exporters.pdf as pdf
+import sys
 
-f = open('book.tex', 'r',  encoding="iso-8859-1")
+if len(sys.argv) == 2:
+    name = sys.argv[1]
+else:
+    name = 'book.tex'
+    
+f = open(name, 'r',  encoding="iso-8859-1")
 filedata = f.read()
 f.close()
 
@@ -11,5 +17,5 @@ f.write(newdata)
 f.close()
 
 p = pdf.PDFExporter()
-p.run_latex('book.tex')
+p.run_latex(name)
 

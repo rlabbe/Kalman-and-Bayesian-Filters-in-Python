@@ -238,7 +238,7 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
 
     plt.scatter(fxs, fys, marker='.', alpha=0.02, color='k')
     plt.scatter(mean_fx[0], mean_fx[1],
-                marker='v', s=300, c='r', label='Linearized Mean')
+                marker='v', s=300, c='r', label=label)
     plt.scatter(computed_mean_x, computed_mean_y,
                 marker='*',s=120, c='r', label='Computed Mean')
 

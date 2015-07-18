@@ -11,7 +11,9 @@ from filterpy.stats import plot_covariance_ellipse
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse,Arrow
 import math
+from math import cos, sin, atan2, pi
 import numpy as np
+from numpy.random import randn
 
 def _sigma_points(mean, sigma, kappa):
     sigma1 = mean + math.sqrt((1+kappa)*sigma)
@@ -148,6 +150,13 @@ def show_3_sigma_points():
     plt.plot(xs, ys)
     plt.show()
 
+def _plot_sigmas(s, w, alpha=0.5, **kwargs):
+    min_w = min(abs(w))
+    scale_factor = 100 / min_w
+    return plt.scatter(s[:, 0], s[:, 1], s=abs(w)*scale_factor,
+                       alpha=alpha, **kwargs)
+
+
 def show_sigma_selections():
     ax=plt.gca()
     ax.axes.get_xaxis().set_visible(False)
@@ -156,22 +165,25 @@ def show_sigma_selections():
     x = np.array([2, 5])
     P = np.array([[3, 1.1], [1.1, 4]])
 
-    points = MerweScaledSigmaPoints(2, .05, 2., 1.)
+    points = MerweScaledSigmaPoints(2, .09, 2., 1.)
     sigmas = points.sigma_points(x, P)
-    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
-    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
+    Wm, Wc = points.weights()
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=.3, variance=[.5])
+    _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([5, 5])
-    points = MerweScaledSigmaPoints(2, .15, 2., 1.)
+    points = MerweScaledSigmaPoints(2, .15, 1., .15)
     sigmas = points.sigma_points(x, P)
-    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
-    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
+    Wm, Wc = points.weights()
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
+    _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([8, 5])
-    points = MerweScaledSigmaPoints(2, .4, 2., 1.)
+    points = MerweScaledSigmaPoints(2, .2, 3., 10)
     sigmas = points.sigma_points(x, P)
-    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.6, variance=[.5])
-    plt.scatter(sigmas[:,0], sigmas[:, 1], c='k', s=50)
+    Wm, Wc = points.weights()
+    plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
+    _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     plt.axis('equal')
     plt.xlim(0,10); plt.ylim(0,10)
@@ -290,6 +302,105 @@ def plot_rts_output(xs, Ms, t):
 
     np.set_printoptions(precision=4)
     print('Difference in position in meters:', xs[-6:-1, 0] - Ms[-6:-1, 0])
+
+
+def plot_scatter_of_bearing_error():
+    d = 100
+    xs, ys = [], []
+
+    for i in range (3000):
+        a = math.radians(30) + randn() * math.radians(1)
+        xs.append(d*math.cos(a))
+        ys.append(d*math.sin(a))
+    plt.scatter(xs, ys)
+
+
+def plot_scatter_moving_target():
+    pos = np.array([5., 5.])
+    for i in range(5):
+        pos += (0.5, 1.)
+        actual_angle = math.atan2(pos[1], pos[0])
+        d = math.sqrt(pos[0]**2 + pos[1]**2)
+
+        xs, ys = [], []
+        for i in range (100):
+            a = actual_angle + randn() * math.radians(1)
+            xs.append(d*math.cos(a))
+            ys.append(d*math.sin(a))
+        plt.scatter(xs, ys)
+
+    plt.axis('equal')
+    plt.plot([5.5, pos[0]], [6, pos[1]], c='g', linestyle='--')
+
+
+def _isct(pa, pb, alpha, beta):
+    """ Returns the (x, y) intersections of points pa and pb
+    given the bearing ba for point pa and bearing bb for
+    point pb.
+    """
+
+    B = [pb[0] - pa[0], pb[1] - pa[1]]
+    AB = math.sqrt((pa[0] - pb[0])**2 + (pa[1] - pb[1])**2)
+    ab = atan2(B[1], B[0])
+    a = alpha - ab
+    b = pi - beta - ab
+    p = pi - b - a
+
+    AP = (sin(b) / sin(p)) * AB
+    x = cos(alpha) * AP + pa[0]
+    y = sin(alpha) * AP + pa[1]
+    return x, y
+
+
+def _plot_iscts(pos, sa, sb, N=4):
+    for i in range(N):
+        pos += (0.5, 1.)
+        actual_angle_a = math.atan2(pos[1] - sa[1], pos[0] - sa[0])
+        actual_angle_b = math.atan2(pos[1] - sb[1], pos[0] - sb[0])
+
+        da = math.sqrt((sa[0] - pos[0])**2 + (sa[1] - pos[1])**2)
+        db = math.sqrt((sb[0] - pos[0])**2 + (sb[1] - pos[1])**2)
+
+        xs, ys, xs_a, xs_b, ys_a, ys_b = [], [], [], [], [], []
+
+        for i in range (300):
+            a_a = actual_angle_a + randn() * math.radians(1)
+            a_b = actual_angle_b + randn() * math.radians(1)
+
+            x,y = _isct(sa, sb, a_a, a_b)
+            xs.append(x)
+            ys.append(y)
+
+            xs_a.append(da*math.cos(a_a) + sa[0])
+            ys_a.append(da*math.sin(a_a) + sa[1])
+
+            xs_b.append(db*math.cos(a_b) + sb[0])
+            ys_b.append(db*math.sin(a_b) + sb[1])
+
+        plt.scatter(xs, ys, c='r', marker='.')
+        plt.scatter(xs_a, ys_a)
+        plt.scatter(xs_b, ys_b)
+    plt.gca().set_aspect('equal')
+    plt.show()
+
+def plot_iscts_two_sensors():
+    pos = np.array([4., 4,])
+    sa = [0., 2.]
+    sb = [8., 2.]
+
+    plt.scatter(*sa, s=100)
+    plt.scatter(*sb, s=100)
+    _plot_iscts(pos, sa, sb, N=4)
+
+
+def plot_iscts_two_sensors_changed_sensors():
+    sa = [3, 4]
+    sb = [3, 7]
+    pos= np.array([3., 3.])
+
+    plt.scatter(*sa, s=100)
+    plt.scatter(*sb, s=100)
+    _plot_iscts(pos, sa, sb, N=5)
 
 
 if __name__ == '__main__':
