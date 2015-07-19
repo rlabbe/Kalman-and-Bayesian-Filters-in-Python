@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
+
+
+from contextlib import contextmanager
 from IPython.core.display import HTML
+import json
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
-import json
 import numpy as np
+import os.path
 import sys
-from contextlib import contextmanager
 
 
-sys.path.insert(0,'./code') # allow us to import book_format
+sys.path.insert(0, './code') # allow us to import book_format
 
 def test_filterpy_version():
     import filterpy
@@ -96,14 +99,14 @@ def _decode_dict(data):
     return rv
 
 
-def load_style(directory = '.', name='/code/custom.css'):
+def load_style(directory = '.', name='code/custom.css'):
     if sys.version_info[0] >= 3:
-        s = json.load(open(directory + "/code/538.json"))
+        s = json.load(open(os.path.join(directory, "code/538.json")))
     else:
         s = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
     plt.rcParams.update(s)
     reset_axis ()
     np.set_printoptions(suppress=True)
 
-    styles = open(directory + name, 'r').read()
+    styles = open(os.path.join(directory, name), 'r').read()
     return HTML(styles)

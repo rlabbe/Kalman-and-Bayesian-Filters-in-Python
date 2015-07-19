@@ -213,12 +213,12 @@
                     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
                     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
                 },
-                displayAlign: 'center', // Change this to 'center' to center equations.
+                displayAlign: 'left', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:85,
-                    availableFonts: ["Neo-Euler"],
-                    preferredFont: "Neo-Euler",
-                    webFont: "Neo-Euler",
+                    scale:100,
+                        availableFonts: [],
+                        preferredFont:null,
+                        webFont: "TeX",
                     styles: {'.MathJax_Display': {"margin": 4}}
                 }
         });
