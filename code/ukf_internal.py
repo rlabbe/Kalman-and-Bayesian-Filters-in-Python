@@ -381,7 +381,7 @@ def _plot_iscts(pos, sa, sb, N=4):
         plt.scatter(xs_a, ys_a)
         plt.scatter(xs_b, ys_b)
     plt.gca().set_aspect('equal')
-    plt.show()
+
 
 def plot_iscts_two_sensors():
     pos = np.array([4., 4,])
@@ -401,6 +401,7 @@ def plot_iscts_two_sensors_changed_sensors():
     plt.scatter(*sa, s=100)
     plt.scatter(*sb, s=100)
     _plot_iscts(pos, sa, sb, N=5)
+    plt.ylim(3.8, 8.5)
 
 
 if __name__ == '__main__':
