@@ -356,11 +356,12 @@ def plot_correlation_covariance():
 
 import book_plots as bp
 def plot_track(ps, zs, cov, std_scale=1,
-               plot_P=True, y_lim=None,
+               plot_P=True, y_lim=None, dt=1.,
+               xlabel='time', ylabel='position',
                title='Kalman Filter'):
 
     count = len(zs)
-    actual = np.linspace(0, count - 1, count)
+    actual = np.linspace(0, count - 1, count) * dt
     cov = np.asarray(cov)
     std = std_scale*np.sqrt(cov[:,0,0])
     std_top = np.minimum(actual+std, [count + 10])
@@ -378,6 +379,8 @@ def plot_track(ps, zs, cov, std_scale=1,
     plt.fill_between(range(len(std_top)), std_top, std_btm,
                      facecolor='yellow', alpha=0.2, interpolate=True)
     plt.legend(loc=4)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
     if y_lim is not None:
         plt.ylim(y_lim)
     else:
@@ -389,10 +392,10 @@ def plot_track(ps, zs, cov, std_scale=1,
 
     if plot_P:
         ax = plt.subplot(121)
-        ax.set_title("$\sigma^2_x$")
+        ax.set_title("$\sigma^2_x$ (pos variance)")
         plot_covariance(cov, (0, 0))
         ax = plt.subplot(122)
-        ax.set_title("$\sigma^2_y$")
+        ax.set_title("$\sigma^2_y$ (vel variance)")
         plot_covariance(cov, (1, 1))
         plt.show()
 

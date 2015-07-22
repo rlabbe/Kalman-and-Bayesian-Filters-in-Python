@@ -59,7 +59,8 @@ def set_limits(x, y):
     plt.gca().set_ylim(y)
 
 
-def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwargs):
+def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
+                      lines=False, **kwargs):
     """ Helper function to give a consistant way to display
     measurements in the book.
     """
@@ -76,11 +77,16 @@ def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwar
         if connect:
            plt.plot(range(len(xs)), xs, lw=1, c=c, alpha=alpha)'''
 
-    if ys is not None:
-        plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
+    if lines:
+        if ys is not None:
+            plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
+        else:
+            plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
     else:
-        plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
-
+        if ys is not None:
+            plt.scatter(xs, ys, edgecolor=color, facecolor='none', lw=2, label=label, **kwargs)
+        else:
+            plt.scatter(range(len(xs)), xs, edgecolor=color, facecolor='none', lw=2, label=label, **kwargs)
 
 
 def plot_residual_limits(Ps, stds=1.):

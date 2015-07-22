@@ -270,7 +270,6 @@ def plot_multiple_gaussians(xs, ps, x_range, y_range, N):
     """ given a list of 2d states (x,y) and 2x2 covariance matrices, produce
     a surface plot showing all of the gaussians"""
 
-
     xs = np.asarray(xs)
     x = np.linspace (x_range[0], x_range[1], N)
     y = np.linspace (y_range[0], y_range[1], N)
@@ -285,11 +284,11 @@ def plot_multiple_gaussians(xs, ps, x_range, y_range, N):
     ax = plt.figure().add_subplot(111, projection='3d')
     ax.plot_surface(xx, yy, zv, rstride=1, cstride=1, lw=.5, edgecolors='#191919',
                     antialiased=True, shade=True, cmap=cm.autumn)
-    ax.view_init(elev=40., azim=250)
+    ax.view_init(elev=40., azim=230)
 
 
 if __name__ == "__main__":
-    plot_cov_ellipse_colormap(cov=[[2, 1.2], [1.2, 2]])
+    #plot_cov_ellipse_colormap(cov=[[2, 1.2], [1.2, 2]])
     '''
     from numpy.random import normal
     import numpy as np
@@ -309,3 +308,25 @@ if __name__ == "__main__":
     plot_nonlinear_func (data, g, gaussian=x0,
                         num_bins=100)
     '''
+
+    Ps = np.array([[[ 2.85841814,  0.71772898],
+        [ 0.71772898,  0.93786824]],
+
+       [[ 3.28939458,  0.52634978],
+        [ 0.52634978,  0.13435503]],
+
+       [[ 2.40532661,  0.29692055],
+        [ 0.29692055,  0.07671416]],
+
+       [[ 2.23084082,  0.27823192],
+        [ 0.27823192,  0.07488681]]])
+
+    Ms = np.array([[  0.68040795,   0.17084572],
+       [  8.46201389,   1.15070342],
+       [ 13.7992229 ,   0.96022707],
+       [ 19.95838208,   0.87524265]])
+
+    plot_multiple_gaussians(Ms, Ps, (-5,25), (-5, 5), 75)
+
+
+
