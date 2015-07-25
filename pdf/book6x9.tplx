@@ -4,12 +4,10 @@
 ((* set cell_style = 'style_ipython.tplx' *))
 
 ((* block margins *))
-\geometry{verbose,papersize={6in, 9in}, tmargin=.5in,bmargin=.5in,lmargin=.5in,rmargin=.5in}
+\geometry{verbose,papersize={6in, 9in}, tmargin=.5in,bmargin=.5in,lmargin=.75in,rmargin=.75in}
 ((* endblock margins *))
 
 ((*- block in_prompt -*))
-\mbox{ }\\ \\
-{In [{}(((cell.execution_count)))]:}
 ((*- endblock in_prompt -*))
 
 ((* block input scoped *))
@@ -17,8 +15,6 @@
 ((* endblock input *))
 
 ((* block output_prompt *))
-\mbox{ }\\
-Out [{}(((cell.execution_count)))]:
 ((* endblock output_prompt *))
 
 
