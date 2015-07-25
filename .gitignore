@@ -8,5 +8,6 @@ short.pdf
 book.ipynb
 *.tex
 *.toc
+book.pdf
 Kalman_and_Bayesian_Filters_in_Python.pdf
 book_files

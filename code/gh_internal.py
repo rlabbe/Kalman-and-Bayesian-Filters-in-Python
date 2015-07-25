@@ -2,6 +2,41 @@ import numpy as np
 import pylab as plt
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
 import book_plots
+import book_format
+
+def plot_errorbar1():
+    with book_format.figsize(y=1.5):
+        book_plots.plot_errorbars([(160, 8, 'A'), (170, 8, 'B')],
+                                   xlims=(145, 185))
+
+def plot_errorbar2():
+    with book_format.figsize(y=1.5):
+        book_plots.plot_errorbars([(160, 3, 'A'), (170, 9, 'B')],
+                                   xlims=(145, 185))
+
+def plot_errorbar3():
+    with book_format.figsize(y=1.5):
+        book_plots.plot_errorbars([(160, 1, 'A'), (170, 9, 'B')], xlims=(145, 185))
+
+
+
+def plot_gh_results(weights, estimates, predictions):
+    n = len(weights)
+
+    xs = list(range(n+1))
+    book_plots.plot_filter(xs, estimates, marker='o')
+    book_plots.plot_measurements(xs[1:], weights, color='k', label='Scale', lines=False)
+    book_plots.plot_track([0, n], [160, 160+n], c='k', label='Actual Weight')
+    book_plots.plot_track(xs[1:], predictions, c='r', label='Predictions', marker='v')
+    book_plots.show_legend()
+    book_plots.set_labels(x='day', y='weight (lbs)')
+    plt.xlim([0, n])
+    plt.show()
+
+
+def print_results(estimates, prediction, weight):
+    print('previous: {:.2f}, prediction: {:.2f} estimate {:.2f}'.format(
+          estimates[-2], prediction, weight))
 
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
