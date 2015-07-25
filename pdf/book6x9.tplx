@@ -13,9 +13,8 @@
 ((*- endblock in_prompt -*))
 
 ((* block input scoped *))
-    ((( cell.source | highlight2latex )))
+    ((( cell.source | highlight2latex | indent(3) )))
 ((* endblock input *))
-
 
 ((* block output_prompt *))
 \mbox{ }\\
