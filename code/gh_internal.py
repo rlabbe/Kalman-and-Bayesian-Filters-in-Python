@@ -80,6 +80,8 @@ def plot_estimate_chart_1():
     plt.scatter ([1], [159], c='r')
     plt.xlabel('day')
     plt.ylabel('weight (lbs)')
+    ax.xaxis.grid(True, which="major", linestyle='dotted')
+    ax.yaxis.grid(True, which="major", linestyle='dotted')
     plt.show()
 
 
@@ -95,7 +97,9 @@ def plot_estimate_chart_2():
     plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
     plt.text (0, 157.8, "estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
     plt.xlabel('day')
-    plt.ylabel('weight (lbs)')    
+    plt.ylabel('weight (lbs)')
+    ax.xaxis.grid(True, which="major", linestyle='dotted')
+    ax.yaxis.grid(True, which="major", linestyle='dotted')
     plt.show()
 
 def plot_estimate_chart_3():
@@ -106,7 +110,7 @@ def plot_estimate_chart_3():
 
     ax.annotate('', xy=[1,159], xytext=[1,164.2],
                 arrowprops=dict(arrowstyle='-',
-                                ec='k', lw=1, shrinkA=8, shrinkB=8))
+                                ec='k', lw=3, shrinkA=8, shrinkB=8))
 
     est_y = ((164.2-158)*.8 + 158)
     plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
@@ -118,10 +122,12 @@ def plot_estimate_chart_3():
     plt.text (0.95, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
     plt.xlabel('day')
     plt.ylabel('weight (lbs)')
+    ax.xaxis.grid(True, which="major", linestyle='dotted')
+    ax.yaxis.grid(True, which="major", linestyle='dotted')
     plt.show()
 
 def plot_hypothesis():
-    plt.errorbar([1, 2, 3], [170, 161, 169], 
+    plt.errorbar([1, 2, 3], [170, 161, 169],
                  xerr=0, yerr=10, fmt='bo', capthick=2, capsize=10)
 
     plt.plot([1, 3], [180, 160], color='g', ls='--')
@@ -133,18 +139,18 @@ def plot_hypothesis():
     plt.ylabel('lbs')
     plt.tight_layout()
     plt.show()
-    
+
 def plot_hypothesis2():
-    plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170], 
+    plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170],
                  xerr=0, yerr=6, fmt='bo', capthick=2, capsize=10)
     plt.plot([1, 10], [169, 170.5], color='g', ls='--')
     plt.xlim(0, 11); plt.ylim(150, 185)
     plt.xlabel('day')
     plt.ylabel('lbs')
     plt.show()
-    
-    
-def plot_hypothesis3():   
+
+
+def plot_hypothesis3():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
            169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
     plt.errorbar(range(1, 13), weights,
@@ -155,7 +161,7 @@ def plot_hypothesis3():
     plt.ylabel('weight (lbs)')
     plt.show()
 
-    
+
 def plot_hypothesis4():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
            169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
@@ -170,8 +176,8 @@ def plot_hypothesis4():
     book_plots.show_legend()
     plt.show()
 
-    
-def plot_hypothesis5():   
+
+def plot_hypothesis5():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
            169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
 
@@ -186,13 +192,13 @@ def plot_hypothesis5():
     book_plots.show_legend()
     plt.show()
 
-def plot_g_h_results(measurements, filtered_data, 
-                     title='', z_label='Measurements', **kwargs):  
+def plot_g_h_results(measurements, filtered_data,
+                     title='', z_label='Measurements', **kwargs):
     book_plots.plot_filter(filtered_data, **kwargs)
     book_plots.plot_measurements(measurements, label=z_label)
     book_plots.show_legend()
     plt.title(title)
     plt.gca().set_xlim(left=0,right=len(measurements))
-    
+
 if __name__ == '__main__':
     create_predict_update_chart()
