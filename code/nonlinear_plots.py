@@ -266,7 +266,7 @@ def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
 
 
 
-def plot_multiple_gaussians(xs, ps, x_range, y_range, N):
+def plot_gaussians(xs, ps, x_range, y_range, N):
     """ given a list of 2d states (x,y) and 2x2 covariance matrices, produce
     a surface plot showing all of the gaussians"""
 

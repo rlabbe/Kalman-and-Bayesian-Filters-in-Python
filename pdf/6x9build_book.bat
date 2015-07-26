@@ -1,4 +1,5 @@
-copy /Y  ..\01-g-h-filter.ipynb book.ipynb
+copy /Y  ..\14-Adaptive-Filtering.ipynb book.ipynb
+REM python merge_book.py
 
 ipython nbconvert --to latex --template book6x9 book.ipynb
 ipython to_pdf.py

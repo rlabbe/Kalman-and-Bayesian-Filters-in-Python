@@ -301,7 +301,7 @@ def plot_rts_output(xs, Ms, t):
     plt.legend(loc=4)
 
     np.set_printoptions(precision=4)
-    print('Difference in position in meters:', xs[-6:-1, 0] - Ms[-6:-1, 0])
+    print('Difference in position in meters:\n\t', xs[-6:-1, 0] - Ms[-6:-1, 0])
 
 
 def plot_scatter_of_bearing_error():

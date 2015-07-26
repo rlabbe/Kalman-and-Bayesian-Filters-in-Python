@@ -13,6 +13,50 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from numpy.random import multivariate_normal
 
+
+
+def zs_var_240():
+    return [3.59, 1.73, -2.575, 4.38, 9.71, 2.88, 10.08,
+      8.97, 3.74, 12.81, 11.15, 9.25, 3.93, 11.11,
+      19.29, 16.20, 19.63, 9.54, 26.27, 23.29, 25.18,
+      26.21, 17.1, 25.27, 26.86,33.70, 25.92, 28.82,
+      32.13, 25.0, 38.56, 26.97, 22.49, 40.77, 32.95,
+      38.20, 40.93, 39.42, 35.49, 36.31, 31.56, 50.29,
+      40.20, 54.49, 50.38, 42.79, 37.89, 56.69, 41.47, 53.66]
+
+def zs_var_375():
+    return [-6.947, 12.467, 6.899, 2.643, 6.980, 5.820, 5.788, 10.614, 5.210,
+      14.338, 11.401, 19.138, 14.169, 19.572, 25.471, 13.099, 27.090,
+      12.209, 14.274, 21.302, 14.678, 28.655, 15.914, 28.506, 23.181,
+      18.981, 28.197, 39.412, 27.640, 31.465, 34.903, 28.420, 33.889,
+      46.123, 31.355, 30.473, 49.861, 41.310, 42.526, 38.183, 41.383,
+      41.919, 52.372, 42.048, 48.522, 44.681, 32.989, 37.288, 49.141,
+      54.235, 62.974, 61.742, 54.863, 52.831, 61.122, 61.187, 58.441,
+      47.769, 56.855, 53.693, 61.534, 70.665, 60.355, 65.095, 63.386]
+
+
+
+def plot_track_ellipses(N, zs, ps, cov, title):
+    bp.plot_measurements(range(1,N + 1), zs)
+    plt.plot(range(1, N + 1), ps, c='b', lw=2, label='filter')
+    plt.legend(loc='best')
+    plt.title(title)
+
+    for i,p in enumerate(cov):
+        plot_covariance_ellipse(
+              (i+1, ps[i]), cov=p, variance=4,
+               axis_equal=False, ec='g', alpha=0.5)
+
+        if i == len(cov)-1:
+            s = ('$\sigma^2_{pos} = %.2f$' % p[0,0])
+            plt.text (20, 5, s, fontsize=18)
+            s = ('$\sigma^2_{vel} = %.2f$' % p[1, 1])
+            plt.text (20, 0, s, fontsize=18)
+    plt.xlim(-10, 80)
+    plt.gca().set_aspect('equal')
+    plt.show()
+
+
 def show_residual_chart():
     est_y = ((164.2-158)*.8 + 158)
 
@@ -23,7 +67,7 @@ def show_residual_chart():
 
     ax.annotate('', xy=[1,159], xytext=[1,164.2],
                 arrowprops=dict(arrowstyle='-',
-                                ec='k', lw=1, shrinkA=8, shrinkB=8))
+                                ec='k', lw=3, shrinkA=8, shrinkB=8))
 
     ax.annotate('', xy=(1., est_y), xytext=(0.9, est_y),
                 arrowprops=dict(arrowstyle='->', ec='#004080',

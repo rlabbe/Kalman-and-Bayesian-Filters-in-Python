@@ -13,7 +13,7 @@ import math
 class DogSimulation(object):
 
     def __init__(self, x0=0, velocity=1,
-                 measurement_variance=0.0, process_variance=0.0):
+                 measurement_var=0.0, process_var=0.0):
         """ x0 - initial position
             velocity - (+=right, -=left)
             measurement_variance - variance in measurement m^2
@@ -21,8 +21,8 @@ class DogSimulation(object):
         """
         self.x = x0
         self.velocity = velocity
-        self.measurement_noise = math.sqrt(measurement_variance)
-        self.process_noise = math.sqrt(process_variance)
+        self.measurement_noise = math.sqrt(measurement_var)
+        self.process_noise = math.sqrt(process_var)
 
 
     def move(self, dt=1.0):

@@ -58,6 +58,27 @@ def set_limits(x, y):
     plt.gca().set_xlim(x)
     plt.gca().set_ylim(y)
 
+def plot_predictions(p, rng=None):
+    if rng is None:
+        rng = range(len(p))
+    plt.scatter(rng, p, marker='v', s=40, edgecolor='r',
+                facecolor='None', lw=2, label='prediction')
+
+
+
+def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
+    plot_filter(filter_xs[:, 0])
+    plot_track(xs[:, 0])
+
+    if zs is not None:
+        plot_measurements(zs)
+    show_legend()
+    set_labels(title=title, x='meters', y='time (sec)')
+    if aspect_equal:
+        plt.gca().set_aspect('equal')
+    plt.xlim((-1, len(xs)))
+    plt.show()
+
 
 def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
                       lines=False, **kwargs):
@@ -84,9 +105,11 @@ def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
             plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
     else:
         if ys is not None:
-            plt.scatter(xs, ys, edgecolor=color, facecolor='none', lw=2, label=label, **kwargs)
+            plt.scatter(xs, ys, edgecolor=color, facecolor='none',
+                        lw=2, label=label, **kwargs)
         else:
-            plt.scatter(range(len(xs)), xs, edgecolor=color, facecolor='none', lw=2, label=label, **kwargs)
+            plt.scatter(range(len(xs)), xs, edgecolor=color, facecolor='none',
+                        lw=2, label=label, **kwargs)
 
 
 def plot_residual_limits(Ps, stds=1.):
