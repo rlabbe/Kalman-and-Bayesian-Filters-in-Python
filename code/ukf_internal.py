@@ -277,6 +277,8 @@ def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
     print('sum cov', sum(Wc))
 
 
+
+
 def plot_rts_output(xs, Ms, t):
     plt.figure()
     plt.plot(t, xs[:, 0]/1000., label='KF', lw=2)
