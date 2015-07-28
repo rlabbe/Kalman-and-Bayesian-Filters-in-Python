@@ -48,23 +48,42 @@ def plot_gaussian (mu, variance,
 
 def display_stddev_plot():
     xs = np.arange(10,30,0.1)
-    var = 8; stddev = math.sqrt(var)
+    var = 8;
+    stddev = math.sqrt(var)
     p2, = plt.plot (xs,[stats.gaussian(x, 20, var) for x in xs])
     x = 20+stddev
+    # 1std vertical lines
     y = stats.gaussian(x, 20, var)
     plt.plot ([x,x], [0,y],'g')
     plt.plot ([20-stddev, 20-stddev], [0,y], 'g')
+
+    #2std vertical lines
+    x = 20+2*stddev
+    y = stats.gaussian(x, 20, var)
+    plt.plot ([x,x], [0,y],'g')
+    plt.plot ([20-2*stddev, 20-2*stddev], [0,y], 'g')
+
     y = stats.gaussian(20,20,var)
     plt.plot ([20,20],[0,y],'b')
+
+    x = 20+stddev
     ax = plt.axes()
     ax.annotate('68%', xy=(20.3, 0.045))
     ax.annotate('', xy=(20-stddev,0.04), xytext=(x,0.04),
                 arrowprops=dict(arrowstyle="<->",
                                 ec="r",
                                 shrinkA=2, shrinkB=2))
-    ax.xaxis.set_ticks ([20-stddev, 20, 20+stddev])
-    ax.xaxis.set_ticklabels(['$-\sigma$','$\mu$','$\sigma$'])
+    ax.annotate('95%', xy=(20.3, 0.02))
+    ax.annotate('', xy=(20-2*stddev,0.015), xytext=(20+2*stddev,0.015),
+                arrowprops=dict(arrowstyle="<->",
+                                ec="r",
+                                shrinkA=2, shrinkB=2))
+
+
+    ax.xaxis.set_ticks ([20-2*stddev, 20-stddev, 20, 20+stddev, 20+2*stddev])
+    ax.xaxis.set_ticklabels(['$-2\sigma$', '$-1\sigma$','$\mu$','$1\sigma$', '$2\sigma$'])
     ax.yaxis.set_ticks([])
+    ax.grid(None, 'both', lw=0)
     plt.show()
 
 if __name__ == '__main__':
