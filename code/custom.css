@@ -2,6 +2,7 @@
 @import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
 @import url('http://fonts.googleapis.com/css?family=Vollkorn');
 @import url('http://fonts.googleapis.com/css?family=Arimo');
+@import url('http://fonts.googleapis.com/css?family=Fira_sans');
 
     div.cell{
         width: 900px;
@@ -92,9 +93,9 @@
         white-space: nowrap;
     }
     div.text_cell_render{
-        font-family: 'Arimo',verdana,arial,sans-serif;
+        font-family: 'Fira sans', verdana,arial,sans-serif;
         line-height: 125%;
-        font-size: 120%;
+        font-size: 115%;
         text-align:justify;
         text-justify:inter-word;
     }
