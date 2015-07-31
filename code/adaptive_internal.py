@@ -11,7 +11,8 @@ import book_plots as bp
 
 def plot_track_and_residuals(t, xs, z_xs, res):
     plt.subplot(121)
-    bp.plot_measurements(t, z_xs, label='z')
+    if z_xs is not None:
+        bp.plot_measurements(t, z_xs, label='z')
     bp.plot_filter(t, xs)
     plt.legend(loc=2)
     plt.xlabel('time (sec)')

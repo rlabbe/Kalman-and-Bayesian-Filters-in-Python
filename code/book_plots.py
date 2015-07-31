@@ -136,6 +136,7 @@ def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
 def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
 #def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
 
+
     if ys is None:
         ys = xs
         xs = range(len(ys))
@@ -144,6 +145,7 @@ def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
 
     if vars is None:
         return
+    print('here')
     vars = np.asarray(vars)
 
     std = np.sqrt(vars)
