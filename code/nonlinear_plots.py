@@ -9,7 +9,7 @@ Kalman and Bayesian Filters in Python
 https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
 
 
-This is licensed under an MIT license. See the readme.MD file
+This is licensed under an MIT license. See the LICENSE.txt file
 for more information.
 """
 
