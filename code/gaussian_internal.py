@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May  8 23:16:31 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
 
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import filterpy.stats as stats
 import math
-import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import numpy as np
-import filterpy.stats as stats
 
 def plot_height_std(x, lw=10):
     m = np.mean(x)

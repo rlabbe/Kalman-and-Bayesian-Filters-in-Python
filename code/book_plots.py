@@ -1,9 +1,22 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri May  2 12:21:40 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
+
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -133,7 +146,7 @@ def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
         plt.plot(xs, color=c, lw=lw, ls=':', label=label, **kwargs)
 
 
-def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
+def plot_filter(xs, ys=None, c='#013afe', label='Filter', var=None, **kwargs):
 #def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
 
 
@@ -143,12 +156,12 @@ def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
 
     plt.plot(xs, ys, color=c, label=label, **kwargs)
 
-    if vars is None:
+    if var is None:
         return
-    print('here')
-    vars = np.asarray(vars)
 
-    std = np.sqrt(vars)
+    var = np.asarray(var)
+
+    std = np.sqrt(var)
     std_top = ys+std
     std_btm = ys-std
 

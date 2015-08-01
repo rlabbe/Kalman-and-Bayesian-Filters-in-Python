@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun May 18 11:09:23 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
 
-from __future__ import division
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from filterpy.stats import multivariate_gaussian
 from matplotlib import cm

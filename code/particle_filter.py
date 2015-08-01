@@ -1,26 +1,29 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat May  2 09:46:06 2015
 
-@author: Roger
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 
 import math
+import matplotlib.pyplot as plt
 import numpy as np
 from numpy.random import uniform
 from numpy.random import randn
 import scipy.stats
-import matplotlib.pyplot as plt
 import random
-
-
-
-
-
-
-
-
-
 
 
 
@@ -33,7 +36,7 @@ if __name__ == '__main__':
     #pf.create_particles(mean=z, variance=40)
 
     mu0 = np.array([0., 0.])
-    plot(pf, weights=False)
+    plt.plot(pf, weights=False)
 
 
     fig = plt.gcf()

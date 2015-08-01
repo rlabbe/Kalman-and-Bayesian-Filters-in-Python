@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
+"""
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from contextlib import contextmanager
 from IPython.core.display import HTML

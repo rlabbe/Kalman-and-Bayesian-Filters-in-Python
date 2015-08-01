@@ -1,14 +1,24 @@
 # -*- coding: utf-8 -*-
+
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
-Created on Sun May 11 13:21:39 2014
 
-@author: rlabbe
-"""
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
-from __future__ import print_function, division
 
-from numpy.random import randn
 import math
+from numpy.random import randn
 
 class DogSimulation(object):
 

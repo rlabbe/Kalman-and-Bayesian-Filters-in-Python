@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Jul 25 17:13:23 2015
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import book_plots as bp
 import matplotlib.pyplot as plt
@@ -20,8 +31,8 @@ def plot_dog_track(xs, measurement_var, process_var):
 
 
 def print_gh(predict, update, z):
-    predict_template = 'PREDICT: {: 6.2f} {: 6.2f}'
-    update_template = 'UPDATE: {: 6.2f} {: 6.2f}\tZ: {:.2f}'
+    predict_template = '         {: 7.3f} {: 8.3f}'
+    update_template = '{: 7.3f} {: 7.3f}\t   {:.3f}'
 
     print(predict_template.format(predict[0], predict[1]),end='\t')
     print(update_template.format(update[0], update[1], z))

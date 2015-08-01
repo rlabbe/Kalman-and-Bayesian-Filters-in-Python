@@ -1,12 +1,23 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 30 19:48:21 2015
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
 
-import matplotlib.pyplot as plt
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import book_plots as bp
+import matplotlib.pyplot as plt
 
 
 def plot_track_and_residuals(t, xs, z_xs, res):
@@ -26,6 +37,3 @@ def plot_track_and_residuals(t, xs, z_xs, res):
     plt.ylabel('residual')
     plt.title('residuals')
     plt.show()
-
-
-

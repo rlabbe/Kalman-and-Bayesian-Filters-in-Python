@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 18 23:23:08 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import book_plots as bp
-from math import radians, sin, cos, sqrt, exp
-import numpy.random as random
-import matplotlib.pyplot as plt
 import filterpy.kalman as kf
+from math import radians, sin, cos, sqrt, exp
+import matplotlib.pyplot as plt
 import numpy as np
+import numpy.random as random
 
 def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
 

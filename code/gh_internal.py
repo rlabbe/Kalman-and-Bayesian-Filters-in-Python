@@ -1,8 +1,26 @@
-import numpy as np
-import pylab as plt
-from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
-import book_plots
+# -*- coding: utf-8 -*-
+
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
+"""
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import book_format
+import book_plots
+import numpy as np
+from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
+import pylab as plt
 
 def plot_errorbar1():
     with book_format.figsize(y=1.5):

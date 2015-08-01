@@ -1,16 +1,28 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May  1 16:56:49 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the readme.MD file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import filterpy.stats as stats
 from filterpy.stats import plot_covariance_ellipse
-import numpy as np
 from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 from numpy.random import multivariate_normal
 
 
