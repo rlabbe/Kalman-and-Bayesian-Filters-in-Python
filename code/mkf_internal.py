@@ -16,6 +16,7 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
+import book_plots as bp
 import filterpy.stats as stats
 from filterpy.stats import plot_covariance_ellipse
 from matplotlib.patches import Ellipse
@@ -27,17 +28,22 @@ from numpy.random import multivariate_normal
 
 
 
-def zs_var_240():
-    return [3.59, 1.73, -2.575, 4.38, 9.71, 2.88, 10.08,
+def zs_var_27_6():
+
+
+    zs = [3.59, 1.73, -2.575, 4.38, 9.71, 2.88, 10.08,
       8.97, 3.74, 12.81, 11.15, 9.25, 3.93, 11.11,
       19.29, 16.20, 19.63, 9.54, 26.27, 23.29, 25.18,
       26.21, 17.1, 25.27, 26.86,33.70, 25.92, 28.82,
       32.13, 25.0, 38.56, 26.97, 22.49, 40.77, 32.95,
       38.20, 40.93, 39.42, 35.49, 36.31, 31.56, 50.29,
       40.20, 54.49, 50.38, 42.79, 37.89, 56.69, 41.47, 53.66]
+    xs = list(range(len(zs)))
 
-def zs_var_375():
-    return [-6.947, 12.467, 6.899, 2.643, 6.980, 5.820, 5.788, 10.614, 5.210,
+    return np.array([xs, zs]).T
+
+def zs_var_275():
+    zs = [-6.947, 12.467, 6.899, 2.643, 6.980, 5.820, 5.788, 10.614, 5.210,
       14.338, 11.401, 19.138, 14.169, 19.572, 25.471, 13.099, 27.090,
       12.209, 14.274, 21.302, 14.678, 28.655, 15.914, 28.506, 23.181,
       18.981, 28.197, 39.412, 27.640, 31.465, 34.903, 28.420, 33.889,
@@ -45,6 +51,10 @@ def zs_var_375():
       41.919, 52.372, 42.048, 48.522, 44.681, 32.989, 37.288, 49.141,
       54.235, 62.974, 61.742, 54.863, 52.831, 61.122, 61.187, 58.441,
       47.769, 56.855, 53.693, 61.534, 70.665, 60.355, 65.095, 63.386]
+    xs = list(range(len(zs)))
+
+    return np.array([xs, zs]).T
+
 
 
 
@@ -432,21 +442,21 @@ def plot_correlation_covariance():
     plt.show()
 
 
-import book_plots as bp
-def plot_track(ps, zs, cov, std_scale=1,
+def plot_track(ps, actual, zs, cov, std_scale=1,
                plot_P=True, y_lim=None, dt=1.,
                xlabel='time', ylabel='position',
                title='Kalman Filter'):
 
     count = len(zs)
-    actual = np.linspace(0, count - 1, count) * dt
+    zs = np.asarray(zs)
+
     cov = np.asarray(cov)
     std = std_scale*np.sqrt(cov[:,0,0])
     std_top = np.minimum(actual+std, [count + 10])
     std_btm = np.maximum(actual-std, [-50])
 
-    std_top = actual+std
-    std_btm = actual-std
+    std_top = actual + std
+    std_btm = actual - std
 
     bp.plot_track(actual,c='k')
     bp.plot_measurements(range(1, count + 1), zs)

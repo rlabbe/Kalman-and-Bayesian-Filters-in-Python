@@ -17,7 +17,9 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
+import copy
 import math
+import numpy as np
 from numpy.random import randn
 
 class DogSimulation(object):
@@ -40,15 +42,32 @@ class DogSimulation(object):
         passed since the last update.'''
         # compute new position based on velocity. Add in some
         # process noise
-        velocity = self.velocity + randn() * self.process_noise
+        velocity = self.velocity + randn() * self.process_noise * dt
         self.x += velocity * dt
+
 
     def sense_position(self):
         # simulate measuring the position with noise
-        measurement = self.x + randn() * self.measurement_noise
-        return measurement
+        return self.x + randn() * self.measurement_noise
+
 
     def move_and_sense(self, dt=1.0):
         self.move(dt)
+        x = copy.deepcopy(self.x)
+        return x, self.sense_position()
 
-        return self.sense_position()
+
+    def run_simulation(self, dt=1, count=1):
+        """ simulate the dog moving over a period of time.
+
+        **Returns**
+        data : np.array[float, float]
+            2D array, first column contains actual position of dog,
+            second column contains the measurement of that position
+        """
+        return np.array([self.move_and_sense(dt) for i in range(count)])
+
+
+
+
+
