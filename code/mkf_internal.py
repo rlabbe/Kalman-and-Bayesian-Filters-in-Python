@@ -300,17 +300,30 @@ def plot_3d_covariance(mean, cov):
     xv, yv = np.meshgrid (xs, ys)
 
     zs = np.array([100.* stats.multivariate_gaussian(np.array([x,y]),mean,cov) \
-                   for x,y in zip(np.ravel(xv), np.ravel(yv))])
+                   for x, y in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
 
-    ax = plt.figure().add_subplot(111, projection='3d')
+    maxz = np.max(zs)
+
+    #ax = plt.figure().add_subplot(111, projection='3d')
+    ax = plt.gca(projection='3d')
     ax.plot_surface(xv, yv, zv, rstride=1, cstride=1, cmap=cm.autumn)
 
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
-    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.autumn)
-    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
+
+    x = mean[0]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for _, y in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+
+    y = mean[1]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for x, _ in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
 
 
 def plot_3d_sampled_covariance(mean, cov):
@@ -364,8 +377,17 @@ def plot_3d_sampled_covariance(mean, cov):
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
-    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.autumn)
-    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
+    x = mean[0]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for _, y in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+
+    y = mean[1]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for x, _ in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
 
 
 def plot_3_covariances():
@@ -464,9 +486,10 @@ def plot_covariance(P, index=(0, 0)):
 
 
 if __name__ == "__main__":
-    pass
+
+
     #show_position_chart()
-    #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
+    plot_3d_covariance((2,7), np.array([[8.,0],[0,1.]]))
     #plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
     #show_residual_chart()
 
