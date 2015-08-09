@@ -483,7 +483,7 @@ def plot_track(ps, actual, zs, cov, std_scale=1,
         ax.set_title("$\sigma^2_x$ (pos variance)")
         plot_covariance(cov, (0, 0))
         ax = plt.subplot(122)
-        ax.set_title("$\sigma^2_y$ (vel variance)")
+        ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
         plot_covariance(cov, (1, 1))
         plt.show()
 
