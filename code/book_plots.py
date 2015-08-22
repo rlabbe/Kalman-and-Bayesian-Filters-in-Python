@@ -86,7 +86,7 @@ def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
     if zs is not None:
         plot_measurements(zs)
     show_legend()
-    set_labels(title=title, x='meters', y='time (sec)')
+    set_labels(title=title, y='meters', x='time (sec)')
     if aspect_equal:
         plt.gca().set_aspect('equal')
     plt.xlim((-1, len(xs)))

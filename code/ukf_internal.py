@@ -327,6 +327,8 @@ def plot_scatter_of_bearing_error():
         xs.append(d*math.cos(a))
         ys.append(d*math.sin(a))
     plt.scatter(xs, ys)
+    plt.xlabel('x')
+    plt.ylabel('y')
 
 
 def plot_scatter_moving_target():
