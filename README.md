@@ -1,14 +1,17 @@
+#[Kalman and Bayesian Filters in Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+
+
 Introductory textbook for Kalman and Bayesian filters. All code is written in Python, and the book itself is written in IPython Notebook (now known as Jupyter) so that you can run and modify the code in the book in place, seeing the results inside the book. What better way to learn?
 
 
-*"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed* - Allen Downey, Professor and O'Reilly author of several math and programming textbooks, on twitter.
+**"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author of several math and programming textbooks, on twitter.
 
 
 ![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif)
 
 
-Reading Online
------
+## Reading Online
+
 The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. 
 
 Github is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on. Rendering may be a bit slow or imperfect.
@@ -38,8 +41,8 @@ As an experiment I have generated a version for 6x9 paper size. I find it a bit 
 https://drive.google.com/file/d/0By_SW19c1BfhTHRXWFJ1RUtvaDQ/view?usp=sharing
 
 
-Downloading the book
------
+## Downloading the book
+
 
 However, this book is intended to be interactive and I recommend using it in that form. It's a little more to set up, but worth it. If you install IPython and some supporting libraries  on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
