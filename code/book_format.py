@@ -30,7 +30,7 @@ sys.path.insert(0, './code') # allow us to import book_format
 
 def test_filterpy_version():
     import filterpy
-    min_version = [0,0,26]
+    min_version = [0,0,28]
     v = filterpy.__version__
     tokens = v.split('.')
     for i,v in enumerate(tokens):
