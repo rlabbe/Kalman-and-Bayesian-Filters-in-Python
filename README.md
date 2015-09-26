@@ -20,7 +20,7 @@ GitHub is able to render the notebooks directly. The quickest way to view a note
 
 ### binder
 
-I am experimentally trying a new service, binder. binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. I have not experimented with it much. I'm not sure, but I think anyone can edit and save the notebooks. If so, PLEASE do not be destructive; if you make a mistake and save something you shouldn't have just email me and I can easily restore it. Please raise an issue on my GitHub page if anything fails. I'm not officially supporting this as it is in beta, but I'm quite excited about the possibilities.
+I am experimentally trying a new service, binder. binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. I have not experimented with it much. Please raise an issue on my GitHub page if anything fails. I'm not officially supporting this as it is in beta, but I'm quite excited about the possibilities.
 
 [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
 
