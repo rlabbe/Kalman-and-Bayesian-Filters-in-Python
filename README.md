@@ -12,11 +12,22 @@ Introductory text for Kalman and Bayesian filters. All code is written in Python
 
 ## Reading Online
 
-The book is written as a collection of IPython Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. 
+The book is written as a collection of Jupyter Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. There are multiple ways to read these online, listed below.
+
+### Github
 
 Github is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on. Rendering may be a bit slow or imperfect.
 
-The website http://nbviewer.org provides an IPython Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
+### binder
+
+I am experimentally trying a new service, binder. binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. I have not experimented with it much, and currently it only supports Python 2, not 3. I develop in 3, so you may find incompatibilities. Please raise an issue on my GitHub page if anything fails. I'm not officially supporting this as it is in beta, but I'm quite excited about the possibilities.
+
+[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+
+
+### nbviewer
+
+The website http://nbviewer.org provides an Jupyter Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
 
 The Preface contains instructions on how to host the book online, for free, on a cloud server (cloud.sagemath.com) that allows you to run and alter the code insde the Notebooks. It takes 5 minutes to set up. 
 
