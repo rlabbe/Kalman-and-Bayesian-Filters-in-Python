@@ -78,7 +78,9 @@ This is admittedly a somewhat cumbersome interface to a book; I am following in 
 
 Companion Software
 -----
-
+.. image:: https://img.shields.io/pypi/v/filterpy.svg
+        :target: https://pypi.python.org/pypi/filterpy
+        
 All of the filters used in this book as well as others not in this book are implemented in my Python library FilterPy, available [here](https://github.com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
 
 
