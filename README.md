@@ -29,7 +29,9 @@ I am experimentally trying a new service, binder. binder serves interactive note
 
 The website http://nbviewer.org provides an Jupyter Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. 
 
-The Preface contains instructions on how to host the book online, for free, on a cloud server (cloud.sagemath.com) that allows you to run and alter the code insde the Notebooks. It takes 5 minutes to set up. 
+### SageMathCloud
+
+The Preface contains instructions on how to host the book online, for free, on SageMath's cloud server (cloud.sagemath.com) that allows you to run and alter the code insde the Notebooks. It takes 5 minutes to set up. We are working to make this easier to use. 
 
 
 Issues or Questions
