@@ -165,7 +165,7 @@ def residual_resample2(w):
 def systemic_resample(w):
     N = len(w)
     Q = np.cumsum(w)
-    indexes = np.zeros(N)
+    indexes = np.zeros(N, 'int')
     t = np.linspace(0, 1-1/N, N) + random()/N
 
     i, j = 0, 0
