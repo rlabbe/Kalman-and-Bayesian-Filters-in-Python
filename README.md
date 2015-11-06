@@ -9,6 +9,16 @@ Introductory text for Kalman and Bayesian filters. All code is written in Python
 
 ![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif)
 
+What are Kalman and Bayesian Filters?
+-----
+
+We measure things in the world with sensors. For example, thermometers measure temperature, anemometers measure wind speed, scales measure weights. We measure distances with things like sonar, lasers, and calipers. 
+
+Unfortunately, no sensor is perfect. For example, a thermometer might only be accurate to within 2 degrees. A laser rangefinder might be accurate to a meter. A bathroom scale might be accurate to 1 kilogram, whereas a kitchen scale might be accurate to a gram or less. 
+
+Furthermore, a sensor might not present all of the information we would like. Suppose we want to know the map coordinates of a structure that we are surveying. A laser rangefinder tells us the distance to an object, but it does not tell us where in the world that object is. The measurement is *relative* to the position of the rangefinder. If the rangefinder does not provide an angle (bearing) to the measured object we can only state that the object lies somewhere within a donut shaped circle around the rangefinder. If we do know the location of the rangefinder and the angle then we can compute the coordinates of the structure. But how do we know the rangefinder's position? With sensors. How do we measure the angle? With sensors. And sensors are inaccurate, so both of those measurements have a degree of error in them.
+
+Is there a way to reduce the amount of error in the measurements? You may have some ideas already. What if you were to take ten measurements and average them? For many kinds of sensor errors this does improve our estimate. You might imagine 
 
 Motivation
 -----
