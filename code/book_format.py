@@ -17,8 +17,10 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 from contextlib import contextmanager
+from distutils.version import LooseVersion
 from IPython.core.display import HTML
 import json
+import matplotlib
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import numpy as np
@@ -119,9 +121,18 @@ def load_style(directory = '.', name='code/custom.css'):
         s = json.load(open(os.path.join(directory, "code/538.json")))
     else:
         s = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
+
+    # matplotlib has deprecated the use of axes.color_cycle as of version
+
+    version = [int(s) for s in matplotlib.__version__.split('.')]
+    if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
+        s["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
+        s.pop("axes.color_cycle", None)
+
     plt.rcParams.update(s)
     reset_axis ()
     np.set_printoptions(suppress=True)
 
     styles = open(os.path.join(directory, name), 'r').read()
     return HTML(styles)
+
