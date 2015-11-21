@@ -94,8 +94,9 @@
     }
     div.text_cell_render{
         font-family: 'Fira sans', verdana,arial,sans-serif;
-        line-height: 125%;
-        font-size: 115%;
+        line-height: 150%;
+        font-size: 110%;
+        font-weight: 400;
         text-align:justify;
         text-justify:inter-word;
     }
