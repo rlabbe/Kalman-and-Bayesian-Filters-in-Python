@@ -22,7 +22,7 @@ import numpy as np
 
 def plot_errorbars(bars, xlims):
 
-    i = 1.0
+    i = 0.0
     for bar in bars:
         plt.errorbar([bar[0]], [i], xerr=[bar[1]], fmt='o', label=bar[2] , capthick=2, capsize=10)
         i += 0.2
@@ -40,14 +40,15 @@ def show_legend():
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 
-def bar_plot(pos, ylim=(0,1), title=None):
+def bar_plot(pos, ylim=(0,1), x=None, title=None):
     plt.cla()
     ax = plt.gca()
-    x = np.arange(len(pos))
+    if x is None:
+        x = np.arange(len(pos))
     ax.bar(x, pos, color='#30a2da')
     if ylim:
         plt.ylim(ylim)
-    plt.xticks(x+0.4, x)
+    plt.xticks(np.asarray(x)+0.4, x)
     if title is not None:
         plt.title(title)
 
