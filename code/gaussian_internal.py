@@ -37,6 +37,24 @@ def plot_height_std(x, lw=10):
     plt.show()
 
 
+def plot_correlated_data(X, Y, xlabel=None, 
+                         ylabel=None, equal=True):
+
+    plt.scatter(X, Y)
+    
+    if xlabel is not None:
+        plt.xlabel('Height (in)'); 
+    
+    if ylabel is not None:
+        plt.ylabel('Weight (lbs)')
+
+    # fit line through data
+    m, b = np.polyfit(X, Y, 1)
+    plt.plot(X, np.asarray(X)*m + b,color='k')
+    if equal:
+        plt.gca().set_aspect('equal')
+    plt.show()
+
 def plot_gaussian (mu, variance,
                    mu_line=False,
                    xlim=None,

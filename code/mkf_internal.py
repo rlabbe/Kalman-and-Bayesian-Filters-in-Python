@@ -404,12 +404,16 @@ def plot_3_covariances():
 
     P = [[2, 0], [0, 2]]
     plt.subplot(131)
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
     plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
                             title='|2 0|\n|0 2|', axis_equal=False)
     plt.ylim((4, 10))
     plt.gca().set_aspect('equal', adjustable='box')
 
     plt.subplot(132)
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
     P = [[2, 0], [0, 9]]
     plt.ylim((4, 10))
     plt.gca().set_aspect('equal', adjustable='box')
@@ -417,6 +421,8 @@ def plot_3_covariances():
                             axis_equal=False, title='|2 0|\n|0 9|')
 
     plt.subplot(133)
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
     P = [[2, 1.2], [1.2, 2]]
     plt.ylim((4, 10))
     plt.gca().set_aspect('equal', adjustable='box')
@@ -437,7 +443,7 @@ def plot_correlation_covariance():
     plt.gca().autoscale(tight=True)
     plt.axvline(7.5, ls='--', lw=1)
     plt.axhline(12.5, ls='--', lw=1)
-    plt.scatter(7.5, 12.5, s=2000, alpha=0.5)
+    plt.scatter(7.5, 12.5, s=1500, alpha=0.5)
     plt.title('|4.0 3.9|\n|3.9 4.0|')
     plt.show()
 
