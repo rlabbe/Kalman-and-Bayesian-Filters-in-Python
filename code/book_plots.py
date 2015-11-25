@@ -20,14 +20,14 @@ from __future__ import (absolute_import, division, print_function,
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_errorbars(bars, xlims):
+def plot_errorbars(bars, xlims, ylims=(0, 2)):
 
     i = 0.0
     for bar in bars:
         plt.errorbar([bar[0]], [i], xerr=[bar[1]], fmt='o', label=bar[2] , capthick=2, capsize=10)
         i += 0.2
 
-    plt.ylim(0, 2)
+    plt.ylim(*ylims)
     plt.xlim(xlims[0], xlims[1])
     show_legend()
     plt.gca().axes.yaxis.set_ticks([])

@@ -25,16 +25,17 @@ import pylab as plt
 def plot_errorbar1():
     with book_format.figsize(y=1.5):
         book_plots.plot_errorbars([(160, 8, 'A'), (170, 8, 'B')],
-                                   xlims=(145, 185))
+                                   xlims=(145, 185), ylims=(-1, 2))
 
 def plot_errorbar2():
     with book_format.figsize(y=1.5):
         book_plots.plot_errorbars([(160, 3, 'A'), (170, 9, 'B')],
-                                   xlims=(145, 185))
+                                   xlims=(145, 185), ylims=(-1, 2))
 
 def plot_errorbar3():
     with book_format.figsize(y=1.5):
-        book_plots.plot_errorbars([(160, 1, 'A'), (170, 9, 'B')], xlims=(145, 185))
+        book_plots.plot_errorbars([(160, 1, 'A'), (170, 9, 'B')], 
+                                  xlims=(145, 185), ylims=(-1, 2))
 
 
 
