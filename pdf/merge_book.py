@@ -1,6 +1,6 @@
 from __future__ import print_function
 import io
-import IPython.nbformat as nbformat
+import nbformat
 import sys
 from formatting import *
 
@@ -28,10 +28,8 @@ def merge_notebooks(outfile, filenames):
 
 if __name__ == '__main__':
     f = open('book.ipynb', 'w', encoding='utf-8')
-    '''merge_notebooks(
-        ['../00_Preface.ipynb',
-         '../01_g-h_filter.ipynb',
-         '../Appendix_A_Installation.ipynb'])'''
+    '''merge_notebooks(f,
+        ['../02-Discrete-Bayes.ipynb'])'''
 
     merge_notebooks(f,
         ['../00-Preface.ipynb',

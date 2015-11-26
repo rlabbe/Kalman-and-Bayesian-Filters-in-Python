@@ -101,17 +101,6 @@ def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
     """
 
     plt.autoscale(tight=True)
-    '''if ys is not None:
-        plt.scatter(xs, ys, marker=marker, c=c, s=s,
-                    label=label, alpha=alpha)
-        if connect:
-           plt.plot(xs, ys, c=c, lw=1, alpha=alpha)
-    else:
-        plt.scatter(range(len(xs)), xs, marker=marker, c=c, s=s,
-                    label=label, alpha=alpha)
-        if connect:
-           plt.plot(range(len(xs)), xs, lw=1, c=c, alpha=alpha)'''
-
     if lines:
         if ys is not None:
             plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)

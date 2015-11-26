@@ -4,6 +4,9 @@
 @import url('http://fonts.googleapis.com/css?family=Arimo');
 @import url('http://fonts.googleapis.com/css?family=Fira_sans');
 
+.CodeMirror pre {
+    font-family: 'Source Code Pro', Consolas, monocco, monospace;
+}
     div.cell{
         width: 900px;
         margin-left: 0% !important;
@@ -23,7 +26,7 @@
 	
     div.input_area {
         background: #F6F6F9;
-        border: 1px solid #586e75;
+        border: 1px solid #586e75;      
     }
 
     .text_cell_render h1 {
@@ -82,6 +85,7 @@
     h5 {
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
+
     .text_cell_render h5 {
         font-weight: 200;
         font-style: normal;
@@ -116,7 +120,8 @@
 }
 
     code{
-      font-size: 70%;
+        font-size: 6pt;
+
     }
     .rendered_html code{
     background-color: transparent;
@@ -209,7 +214,8 @@
 <script>
     MathJax.Hub.Config({
                         TeX: {
-                           extensions: ["AMSmath.js", "autobold.js"]
+                           extensions: ["AMSmath.js"],
+                           equationNumbers: { autoNumber: "AMS", useLabelIds: true}
                            },
                 tex2jax: {
                     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -217,7 +223,7 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:100,
+                    scale:95,
                         availableFonts: [],
                         preferredFont:null,
                         webFont: "TeX",

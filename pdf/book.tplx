@@ -1,10 +1,12 @@
 % Inherit from report
-((* extends 'report.tplx' *))
+%((* extends 'report.tplx' *))
  
+((* set cell_style = 'style_ipython.tplx' *))
  
 ((* block docclass *))
 \documentclass{book}
 \setcounter{chapter}{0}
+\raggedbottom
 ((* endblock docclass *))
  
 ((* block preamble *))
@@ -14,7 +16,9 @@
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
 ((* endblock title *))
- 
+
 ((* block markdowncell scoped *))
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
     ((( cell.source | citation2latex | strip_files_prefix | markdown2latex(extra_args=["--chapters"]) )))
 ((* endblock markdowncell *))
