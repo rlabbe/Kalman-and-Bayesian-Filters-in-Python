@@ -16,6 +16,7 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
+from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
 from filterpy.stats import multivariate_gaussian
 from matplotlib import cm
 import matplotlib.pyplot as plt
@@ -47,10 +48,10 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     #plot output
     h = np.histogram(ys, num_bins, density=False)
     plt.subplot(2,2,4)
-    plt.plot(h[0], h[1][1:], lw=4, alpha=0.5)
+    plt.plot(h[0], h[1][1:], lw=4, alpha=0.8)
     plt.ylim(out_lims[1], out_lims[0])
     plt.gca().xaxis.set_ticklabels([])
-    plt.title('output')
+    plt.title('Output')
 
     plt.axhline(np.mean(ys), ls='--', lw=2)
     plt.axhline(f(x0), lw=1)
@@ -66,16 +67,16 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     print(max(norm.pdf(xs)))'''
 
     # plot transfer function
-    plt.subplot(2,2,3)
+    plt.subplot(2, 2, 3)
     x = np.arange(in_lims[0], in_lims[1], 0.1)
     y = f(x)
-    plt.plot (x,y, 'k')
+    plt.plot (x, y, 'k')
     isct = f(x0)
     plt.plot([x0, x0, in_lims[1]], [out_lims[1], isct, isct], color='r', lw=1)
     plt.xlim(in_lims)
     plt.ylim(out_lims)
     #plt.axis('equal')
-    plt.title('function')
+    plt.title('f(x)')
 
     # plot input
     h = np.histogram(data, num_bins, density=True)
@@ -84,7 +85,7 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     plt.plot(h[1][1:], h[0], lw=4)
     plt.xlim(in_lims)
     plt.gca().yaxis.set_ticklabels([])
-    plt.title('input')
+    plt.title('Input')
 
     plt.show()
 
@@ -106,10 +107,8 @@ def plot_ekf_vs_mc():
     d_t = fx(data)
 
     mean_ekf = fx(mean)
-
     slope = dfx(mean)
     std_ekf = abs(slope*std)
-
 
     norm = scipy.stats.norm(mean_ekf, std_ekf)
     xs = np.linspace(-3, 5, 200)
@@ -125,8 +124,6 @@ def plot_ekf_vs_mc():
     print('actual mean={:.2f}, std={:.2f}'.format(d_t.mean(), d_t.std()))
     print('EKF    mean={:.2f}, std={:.2f}'.format(mean_ekf, std_ekf))
 
-
-from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
 
 def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
 
@@ -159,12 +156,12 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
 
     norm = scipy.stats.norm(ukf_mean, ukf_std)
     xs = np.linspace(-3, 5, 200)
-    plt.plot(xs, norm.pdf(xs), ls='--', lw=1, color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=1, color='g')
+    plt.plot(xs, norm.pdf(xs), ls='--', lw=2, color='b')
+    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
-    plt.axvline(actual_mean, lw=1, color='g', label='Monte Carlo')
-    plt.axvline(ukf_mean, lw=1, ls='--', color='b', label='UKF')
+    plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
+    plt.axvline(ukf_mean, lw=2, ls='--', color='b', label='UKF')
     plt.legend()
     plt.show()
 

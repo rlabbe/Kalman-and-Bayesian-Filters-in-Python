@@ -118,6 +118,7 @@ def plot_random_pd():
         #plt.setp(plt.gca().get_yticklabels(), visible=False)
         plt.axes(xticks=[], yticks=[], frameon=False)
         plt.plot(x, y2)
+        plt.ylim([0, max(y2)+.1])
 
 
 def plot_monte_carlo_ukf():

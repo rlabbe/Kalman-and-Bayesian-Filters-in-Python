@@ -52,7 +52,6 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
 
 
 def plot_radar(xs, track, time):
-
     plt.figure()
     bp.plot_track(time, track[:, 0])
     bp.plot_filter(time, xs[:, 0])
@@ -76,6 +75,7 @@ def plot_radar(xs, track, time):
     plt.ylim((900, 1600))
     plt.show()
 
+    
 def plot_bicycle():
     plt.clf()
     plt.axes()
@@ -215,11 +215,11 @@ def show_radar_chart():
 
 
 
-    ax.annotate('$\Theta$', xy=(1.2, 1.1), color='b')
+    ax.annotate('$\Theta$', xy=(1.2, 1.05), color='b')
     ax.annotate('Aircraft', xy=(2.04,2.), color='b')
-    ax.annotate('altitude', xy=(2.04,1.5), color='k')
-    ax.annotate('X', xy=(1.5, .9))
-    ax.annotate('Radar', xy=(.95, 0.9))
+    ax.annotate('altitude (y)', xy=(2.04,1.5), color='k')
+    ax.annotate('x', xy=(1.5, .9))
+    ax.annotate('Radar', xy=(.95, 0.8))
     ax.annotate('Slant\n  (r)', xy=(1.5,1.62), color='r')
 
     plt.title("Radar Tracking")

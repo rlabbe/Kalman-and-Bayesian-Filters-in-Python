@@ -279,6 +279,17 @@ def plot_radar(xs, t, plot_x=True, plot_vel=True, plot_alt=True):
         plt.ylabel('altitude')
     plt.show()
 
+    
+def plot_altitude(xs, t, track):
+    xs = np.asarray(xs)
+
+    plt.plot(t, xs[:,2], label='filter', )
+    plt.plot(t, track, label='Aircraft', lw=2, ls='--', c='k')
+    plt.xlabel('time(sec)')
+    plt.ylabel('altitude')
+    plt.legend(loc=4)
+
+    
 def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
     points = MerweScaledSigmaPoints(n, alpha, beta, kappa)
     print('sigmas: ', points.sigma_points(mean,  cov).T[0])
