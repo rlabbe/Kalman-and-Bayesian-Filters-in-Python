@@ -35,9 +35,9 @@ class RobotLocalizationParticleFilter(object):
         # distribute particles randomly with uniform weight
         self.weights = np.empty(N)
         #self.weights.fill(1./N)
-        self.particles[:, 0] = uniform(0, x_dim, size=N)
+        '''self.particles[:, 0] = uniform(0, x_dim, size=N)
         self.particles[:, 1] = uniform(0, y_dim, size=N)
-        self.particles[:, 2] = uniform(0, 2*np.pi, size=N)
+        self.particles[:, 2] = uniform(0, 2*np.pi, size=N)'''
 
 
     def create_uniform_particles(self, x_range, y_range, hdg_range):
@@ -190,6 +190,7 @@ def Gaussian(mu, sigma, x):
         g[i] = max(g[i], 1.e-229)
     return g
 
+
 if __name__ == '__main__':
 
     DO_PLOT_PARTICLES = False
@@ -199,7 +200,7 @@ if __name__ == '__main__':
     #plt.figure()
 
     seed(5)
-    for count in range(1):
+    for count in range(10):
         print()
         print(count)
         #numpy.random.set_state(fail_state)
@@ -236,6 +237,7 @@ if __name__ == '__main__':
 
             # move diagonally forward to (x+1, x+1)
             pf.predict((0.00, 1.414), (.2, .05))
+
             pf.update(z=zs)
             if x == 0:
                 print(max(pf.weights))
