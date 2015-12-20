@@ -38,21 +38,17 @@ np.set_printoptions(precision=3)
 sys.path.insert(0, './code') # allow us to import book_format
 
 def test_filterpy_version():
-    import filterpy
-    min_version = [0,0,28]
-    v = filterpy.__version__
-    tokens = v.split('.')
-    for i,v in enumerate(tokens):
-        if int(v) > min_version[i]:
-            return
 
-    i = len(tokens) - 1
-    if min_version[i] > int(tokens[i]):
-       raise Exception("Minimum FilterPy version supported is {}.{}.{}.\n"
+    import filterpy
+    from distutils.version import LooseVersion
+    
+    v = filterpy.__version__
+    min_version = "0.1.0"
+    if LooseVersion(v) < LooseVersion(min_version):       
+       raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
                        "   ex: pip install filterpy --upgrade".format(
-             *min_version))
-    v = int(tokens[0]*1000)
+             min_version))
 
 
 # ensure that we have the correct filterpy loaded. This is
