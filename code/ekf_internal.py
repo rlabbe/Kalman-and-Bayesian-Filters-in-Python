@@ -75,7 +75,7 @@ def plot_radar(xs, track, time):
     plt.ylim((900, 1600))
     plt.show()
 
-    
+
 def plot_bicycle():
     plt.clf()
     plt.axes()
@@ -227,6 +227,22 @@ def show_radar_chart():
     ax.yaxis.set_ticklabels([])
     ax.xaxis.set_ticks([])
     ax.yaxis.set_ticks([])
+    plt.show()
 
 
+def show_linearization():
+    xs =  np.arange(0, 2, 0.01)
+    ys = [x**2 - 2*x for x in xs]
+
+    def y(x):
+        return x - 2.25
+
+    plt.plot(xs, ys, label='$f(x)=x^2−2x$')
+    plt.plot([1, 2], [y(1), y(2)], color='k', ls='--', label='linearization')
+    plt.axes().axvline(1.5, lw=1, c='k')
+    plt.xlim(0, 2)
+    plt.ylim([-1.5, 0.0])
+    plt.title('Linearization of $f(x)$ at $x=1.5$')
+    plt.xlabel('$x=1.5$')
+    plt.legend(loc=4)
     plt.show()
