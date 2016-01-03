@@ -1,4 +1,4 @@
-import IPython.nbconvert.exporters.pdf as pdf
+import nbconvert.exporters.pdf as pdf
 import sys
 
 if len(sys.argv) == 2:
@@ -12,7 +12,7 @@ f.close()
 
 newdata = filedata.replace('\chapter{Preface}', '\chapter*{Preface}')
 
-f = open('book.tex', 'w', encoding="iso-8859-1")
+f = open(name, 'w', encoding="iso-8859-1")
 f.write(newdata)
 f.close()
 
