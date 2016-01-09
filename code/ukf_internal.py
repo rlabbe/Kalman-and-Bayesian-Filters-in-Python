@@ -279,7 +279,7 @@ def plot_radar(xs, t, plot_x=True, plot_vel=True, plot_alt=True):
         plt.ylabel('altitude')
     plt.show()
 
-    
+
 def plot_altitude(xs, t, track):
     xs = np.asarray(xs)
 
@@ -289,7 +289,7 @@ def plot_altitude(xs, t, track):
     plt.ylabel('altitude')
     plt.legend(loc=4)
 
-    
+
 def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
     points = MerweScaledSigmaPoints(n, alpha, beta, kappa)
     print('sigmas: ', points.sigma_points(mean,  cov).T[0])
@@ -404,20 +404,24 @@ def _plot_iscts(pos, sa, sb, N=4):
             xs_b.append(db*math.cos(a_b) + sb[0])
             ys_b.append(db*math.sin(a_b) + sb[1])
 
-        plt.scatter(xs, ys, c='r', marker='.')
-        plt.scatter(xs_a, ys_a)
-        plt.scatter(xs_b, ys_b)
+        plt.scatter(xs, ys, c='r', marker='.', alpha=0.5)
+        plt.scatter(xs_a, ys_a, c='k', edgecolor='k')
+        plt.scatter(xs_b, ys_b, marker='v', edgecolor=None)
     plt.gca().set_aspect('equal')
 
 
 def plot_iscts_two_sensors():
+    plt.subplot(121)
     pos = np.array([4., 4,])
     sa = [0., 2.]
     sb = [8., 2.]
 
-    plt.scatter(*sa, s=100)
-    plt.scatter(*sb, s=100)
+    plt.scatter(*sa, s=200, c='k', marker='v')
+    plt.scatter(*sb, s=200, marker='s')
     _plot_iscts(pos, sa, sb, N=4)
+    plt.subplot(122)
+    plot_iscts_two_sensors_changed_sensors()
+
 
 
 def plot_iscts_two_sensors_changed_sensors():
@@ -425,8 +429,8 @@ def plot_iscts_two_sensors_changed_sensors():
     sb = [3, 7]
     pos= np.array([3., 3.])
 
-    plt.scatter(*sa, s=100)
-    plt.scatter(*sb, s=100)
+    plt.scatter(*sa, s=200, c='k', marker='v')
+    plt.scatter(*sb, s=200, marker='s')
     _plot_iscts(pos, sa, sb, N=5)
     plt.ylim(3.8, 8.5)
 

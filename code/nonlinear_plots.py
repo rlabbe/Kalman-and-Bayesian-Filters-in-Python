@@ -246,7 +246,7 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
     plt.scatter(mean_fx[0], mean_fx[1],
                 marker='v', s=300, c='r', label=label)
     plt.scatter(computed_mean_x, computed_mean_y,
-                marker='*',s=120, c='r', label='Computed Mean')
+                marker='*',s=120, c='b', label='Computed Mean')
 
     plot_bivariate_colormap(fxs, fys)
     plt.ylim([-10, 200])
