@@ -19,6 +19,8 @@ from __future__ import (absolute_import, division, print_function,
 from matplotlib import animation
 import matplotlib.pyplot as plt
 
+
+    
 def animate(filename, func, frames, interval, fig=None, figsize=(6.5, 6.5)):
     """ Creates an animated GIF of a matplotlib.
 
@@ -43,19 +45,16 @@ def animate(filename, func, frames, interval, fig=None, figsize=(6.5, 6.5)):
        size of the figure in inches. Defaults to 6.5" by 6.5"
     """
 
-
-
-    def forward(frame):
-        # I don't know if it is a bug or what, but FuncAnimation calls twice
-        # with the first frame number. That breaks any animation that uses
-        # the frame number in computations
-        if forward.first:
-            forward.first = False
-            return
-        func(frame)
+    def init_func():
+        """ This draws the 'blank' frame of the video. To work around a bug
+        in matplotlib 1.5.1 (#5399) you must supply an empty init function
+        for the save to work."""
+        
+        pass
 
     if fig is None:
         fig = plt.figure(figsize=figsize)
-    forward.first = True
-    anim = animation.FuncAnimation(fig, forward, frames=frames, interval=interval)
+
+    anim = animation.FuncAnimation(fig, func, init_func=init_func,
+        frames=frames, interval=interval)
     anim.save(filename, writer='imagemagick')
