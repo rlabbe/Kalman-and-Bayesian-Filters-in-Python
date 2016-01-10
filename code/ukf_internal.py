@@ -330,16 +330,26 @@ def plot_rts_output(xs, Ms, t):
 
 
 def plot_scatter_of_bearing_error():
-    d = 100
-    xs, ys = [], []
+    def plot_scatter(theta):
+        theta = math.radians(theta)
+        d = 100
+        xs, ys = [], []
+        for i in range (3000):
+            a = theta + randn() * math.radians(1)
+            xs.append(d*math.cos(a))
+            ys.append(d*math.sin(a))
+        plt.scatter(xs, ys)
+        plt.xlabel('x')
+        plt.ylabel('y')
 
-    for i in range (3000):
-        a = math.radians(30) + randn() * math.radians(1)
-        xs.append(d*math.cos(a))
-        ys.append(d*math.sin(a))
-    plt.scatter(xs, ys)
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.subplot(121)
+    plot_scatter(45)
+    plt.gca().set_aspect('equal')
+    plt.title("45° bearing")
+    plt.subplot(122)
+    plot_scatter(180)
+    plt.xlim((-101, -99))
+    plt.title("180° bearing")
 
 
 def plot_scatter_moving_target():
@@ -439,8 +449,9 @@ if __name__ == '__main__':
 
     #show_2d_transform()
     #show_sigma_selections()
+    plot_scatter_of_bearing_error()
 
-    show_sigma_transform(True)
+    #show_sigma_transform(True)
     #show_four_gps()
     #show_sigma_transform()
     #show_sigma_selections()
