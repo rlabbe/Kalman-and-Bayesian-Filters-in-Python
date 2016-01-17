@@ -43,7 +43,7 @@ def test_filterpy_version():
     from distutils.version import LooseVersion
     
     v = filterpy.__version__
-    min_version = "0.1.0"
+    min_version = "0.1.1"
     if LooseVersion(v) < LooseVersion(min_version):       
        raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
