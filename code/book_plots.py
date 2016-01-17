@@ -40,18 +40,71 @@ def show_legend():
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 
-def bar_plot(pos, ylim=(0,1), x=None, title=None):
-    plt.cla()
+def bar_plot(pos, x=None, ylim=(0,1), title=None, c='#30a2da',
+             **kwargs):
+    """ plot the values in `pos` as a bar plot. 
+    
+    **Parameters**
+    
+    pos : list-like
+        list of values to plot as bars
+        
+    x : list-like, optional
+         If provided, specifies the x value for each value in pos. If not
+         provided, the first pos element is plotted at x == 0, the second
+         at 1, etc.
+         
+    ylim : (lower, upper), default = (0,1)
+        specifies the lower and upper limits for the y-axis
+        
+    title : str, optional
+        If specified, provides a title for the plot
+    
+    c : color, default='#30a2da'
+        Color for the bars
+        
+    **kwargs : keywords, optional
+        extra keyword arguments passed to ax.bar()        
+        
+    """
+    
     ax = plt.gca()
     if x is None:
         x = np.arange(len(pos))
-    ax.bar(x, pos, color='#30a2da')
+    ax.bar(x, pos, color=c, **kwargs)
     if ylim:
         plt.ylim(ylim)
     plt.xticks(np.asarray(x)+0.4, x)
     if title is not None:
         plt.title(title)
 
+
+def plot_belief_vs_prior(belief, prior, **kwargs):
+    """ plots two discrete probability distributions side by side, with
+    titles "belief" and "prior"
+    """
+    
+    plt.subplot(121)
+    bar_plot(belief, title='belief', **kwargs)
+    plt.subplot(122)
+    bar_plot(prior, title='prior', **kwargs)    
+
+
+def plot_prior_vs_posterior(prior, posterior, reverse=False, **kwargs):
+    """ plots two discrete probability distributions side by side, with
+    titles "prior" and "posterior"
+    """
+    if reverse:
+        plt.subplot(121)
+        bar_plot(posterior, title='posterior', **kwargs)    
+        plt.subplot(122)
+        bar_plot(prior, title='prior', **kwargs)
+    else:
+        plt.subplot(121)
+        bar_plot(prior, title='prior', **kwargs)
+        plt.subplot(122)
+        bar_plot(posterior, title='posterior', **kwargs)    
+        
 
 def set_labels(title=None, x=None, y=None):
     """ helps make code in book shorter. Optional set title, xlabel and ylabel

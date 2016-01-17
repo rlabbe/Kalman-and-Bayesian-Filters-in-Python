@@ -2,7 +2,7 @@
 @import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
 @import url('http://fonts.googleapis.com/css?family=Vollkorn');
 @import url('http://fonts.googleapis.com/css?family=Arimo');
-@import url('http://fonts.googleapis.com/css?family=Fira_sans');
+@import url('http://fonts.googleapis.com/css?family=Fira+sans');
 
 .CodeMirror pre {
     font-family: 'Source Code Pro', Consolas, monocco, monospace;
@@ -16,7 +16,7 @@
         background: transparent;
         color: #000000;
         font-weight: 600;
-        font-size: 11pt;
+        font-size: 12pt;
         font-style: bold;
         font-family:  'Source Code Pro', Consolas, monocco, monospace;
    }
@@ -97,11 +97,10 @@
         white-space: nowrap;
     }
     div.text_cell_render{
-        font-family: 'Fira sans', verdana,arial,sans-serif;
+        /*font-family: 'Vollkorn', verdana,arial,sans-serif;*/
         line-height: 150%;
-        font-size: 110%;
-        font-weight: 400;
-        text-align:justify;
+        font-size: 130%;
+        text-align: justify;
         text-justify:inter-word;
     }
     div.output_subarea.output_text.output_pyout {

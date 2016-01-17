@@ -35,7 +35,7 @@ if matplotlib.__version__ == '1.4.3':
     warnings.simplefilter(action="ignore", category=FutureWarning)
 
 np.set_printoptions(precision=3)
-sys.path.insert(0, './code') # allow us to import book_format
+sys.path.insert(0, './code') # allow us to import code
 
 def test_filterpy_version():
 
@@ -137,4 +137,3 @@ def load_style(directory = '.', name='code/custom.css'):
 
     styles = open(os.path.join(directory, name), 'r').read()
     return HTML(styles)
-
