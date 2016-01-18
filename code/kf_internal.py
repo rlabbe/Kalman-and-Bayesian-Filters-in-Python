@@ -19,9 +19,9 @@ from __future__ import (absolute_import, division, print_function,
 import book_plots as bp
 import matplotlib.pyplot as plt
 
-def plot_dog_track(xs, measurement_var, process_var):
+def plot_dog_track(xs, dog, measurement_var, process_var):
     N = len(xs)
-    bp.plot_track([0, N-1], [1, N])
+    bp.plot_track(dog)
     bp.plot_measurements(xs, label='Sensor')
     bp.set_labels('variance = {}, process variance = {}'.format(
               measurement_var, process_var), 'time', 'pos')
