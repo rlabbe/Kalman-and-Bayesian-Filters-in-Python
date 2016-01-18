@@ -17,7 +17,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-from filterpy.monte_carlo import stratified_resample
+from filterpy.monte_carlo import stratified_resample, residual_resample
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -25,7 +25,7 @@ import numpy as np
 from numpy.random import randn, random, uniform, multivariate_normal, seed
 #from nonlinear_plots import plot_monte_carlo_mean
 import scipy.stats
-from RobotLocalizationParticleFilter import *
+#from RobotLocalizationParticleFilter import *
 
 
 
