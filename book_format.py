@@ -41,10 +41,10 @@ def test_filterpy_version():
 
     import filterpy
     from distutils.version import LooseVersion
-    
+
     v = filterpy.__version__
     min_version = "0.1.1"
-    if LooseVersion(v) < LooseVersion(min_version):       
+    if LooseVersion(v) < LooseVersion(min_version):
        raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
                        "   ex: pip install filterpy --upgrade".format(
@@ -133,7 +133,8 @@ def load_style(directory = '.', name='code/custom.css'):
         style.pop("axes.color_cycle", None)
     plt.rcParams.update(style)
     reset_axis ()
-    np.set_printoptions(suppress=True)
+    np.set_printoptions(suppress=True,precision=3, linewidth=70,
+                        formatter={'float':lambda x:' {:.3}'.format(x)})
 
     styles = open(os.path.join(directory, name), 'r').read()
     return HTML(styles)
