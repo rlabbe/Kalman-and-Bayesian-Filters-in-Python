@@ -49,6 +49,5 @@ if __name__ == '__main__':
          '../14-Adaptive-Filtering.ipynb',
          '../Appendix-A-Installation.ipynb',
          '../Appendix-B-Symbols-and-Notations.ipynb',
-         #'../Appendix-C-Walking-Through-KF-Code.ipynb',
          '../Appendix-D-HInfinity-Filters.ipynb',
          '../Appendix-E-Ensemble-Kalman-Filters.ipynb'])

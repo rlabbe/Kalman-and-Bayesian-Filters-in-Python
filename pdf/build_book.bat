@@ -1,4 +1,4 @@
-python merge_book.py
+ipython merge_book.py
 
 ipython nbconvert --to latex --template book book.ipynb
 ipython to_pdf.py

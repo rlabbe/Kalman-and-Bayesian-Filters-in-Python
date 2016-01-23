@@ -79,7 +79,7 @@ def plot_track_ellipses(N, zs, ps, cov, title):
     plt.show()
 
 
-def show_residual_chart():
+def show_residual_chart(show_eq=True, show_H=False):
     est_y = ((164.2-158)*.8 + 158)
 
     ax = plt.axes(xticks=[], yticks=[], frameon=False)
@@ -105,10 +105,15 @@ def show_residual_chart():
     plt.text (1.0, 164.4, r"measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
     plt.text (0, 157.8, r"posterior ($x_{t-1}$)", ha='center', va='top',fontsize=18)
     plt.text (1.02, est_y-1.5, "residual($y$)", ha='left', va='center',fontsize=18)
-    plt.text (1.02, est_y-2.2, r"$y=z-\bar x_t$", ha='left', va='center',fontsize=18)
+    if show_eq:
+        if show_H:
+            plt.text (1.02, est_y-2.2, r"$y=z-H\bar x_t$", ha='left', va='center',fontsize=18)
+        else:
+            plt.text (1.02, est_y-2.2, r"$y=z-\bar x_t$", ha='left', va='center',fontsize=18)
     plt.text (0.9, est_y, "new estimate ($x_t$)", ha='right', va='center',fontsize=18)
     plt.text (0.8, est_y-0.5, "(posterior)", ha='right', va='center',fontsize=18)
-    plt.text (0.75, est_y-1.2, r"$\bar{x}_t + Ky$", ha='right', va='center',fontsize=18)
+    if show_eq:
+        plt.text (0.75, est_y-1.2, r"$\bar{x}_t + Ky$", ha='right', va='center',fontsize=18)
     plt.xlabel('time')
     ax.yaxis.set_label_position("right")
     plt.ylabel('state')
@@ -233,6 +238,7 @@ def show_x_error_chart(count):
         stats.plot_covariance_ellipse ((5,5), ellipse=e3, variance=sigma,
                                        edgecolor='r', alpha=0.25)
         stats.plot_covariance_ellipse (m4[:,0], ellipse=e4, variance=sigma)
+        plt.ylim((-9, 16))
 
     #plt.ylim([0,11])
     #plt.xticks(np.arange(1,4,1))
