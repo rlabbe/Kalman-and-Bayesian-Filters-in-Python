@@ -68,7 +68,6 @@ The website http://nbviewer.org provides an Jupyter Notebook server that renders
 
 The Preface contains instructions on how to host the book online, for free, on SageMath's cloud server (cloud.sagemath.com) that allows you to run and alter the code insde the Notebooks. It takes 5 minutes to set up. We are working to make this easier to use. 
 
-
 Issues or Questions
 ------
 
