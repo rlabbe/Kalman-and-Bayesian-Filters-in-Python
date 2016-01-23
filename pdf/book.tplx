@@ -7,6 +7,7 @@
 \documentclass{book}
 \setcounter{chapter}{0}
 \raggedbottom
+\usepackage{stix}
 ((* endblock docclass *))
  
 ((* block preamble *))
