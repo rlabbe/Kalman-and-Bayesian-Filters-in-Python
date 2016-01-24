@@ -181,8 +181,8 @@ def show_position_prediction_chart():
     plt.xlim([0,5])
     plt.ylim([0,5])
 
-    plt.xlabel("Position")
-    plt.ylabel("Time")
+    plt.xlabel("X")
+    plt.ylabel("Y")
 
     plt.xticks(np.arange(1,5,1))
     plt.yticks(np.arange(1,5,1))
@@ -417,27 +417,27 @@ def plot_3_covariances():
     plt.gca().grid(b=False)
     plt.gca().set_xticks([0,1,2,3,4])
     plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
-                            title='|2 0|\n|0 2|', axis_equal=False)
-    plt.ylim((4, 10))
+                            title='|2 0|\n|0 2|', std=[1,2,3], axis_equal=False)
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
 
     plt.subplot(132)
     plt.gca().grid(b=False)
     plt.gca().set_xticks([0,1,2,3,4])
-    P = [[2, 0], [0, 9]]
-    plt.ylim((4, 10))
+    P = [[2, 0], [0, 6]]
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            axis_equal=False, title='|2 0|\n|0 9|')
+                            std=[1,2,3],axis_equal=False, title='|2 0|\n|0 6|')
 
     plt.subplot(133)
     plt.gca().grid(b=False)
     plt.gca().set_xticks([0,1,2,3,4])
     P = [[2, 1.2], [1.2, 2]]
-    plt.ylim((4, 10))
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            axis_equal=False,
+                            axis_equal=False,std=[1,2,3],
                             title='|2 1.2|\n|1.2 2|')
 
     plt.tight_layout()

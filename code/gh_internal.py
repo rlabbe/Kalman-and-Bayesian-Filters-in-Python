@@ -60,7 +60,7 @@ def print_results(estimates, prediction, weight):
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(4,4), facecolor='w')
+    plt.figure(figsize=(3,3), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
     #ax.set_xlim(0, 10)
@@ -123,7 +123,7 @@ def create_predict_update_chart(box_bg = '#CCCCCC',
               ha='center', va='center', fontsize=18)
     plt.axis('equal')
     #plt.axis([0,8,0,8])
-    plt.show()
+    #plt.show()
 
 
 def plot_estimate_chart_1():

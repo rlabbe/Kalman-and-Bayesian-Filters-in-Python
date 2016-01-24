@@ -36,11 +36,11 @@ def plot_dog_track(xs, dog, measurement_var, process_var):
 
 
 def print_gh(predict, update, z):
-    predict_template = '         {: 7.3f} {: 8.3f}'
-    update_template = '{: 7.3f} {: 7.3f}\t   {:.3f}'
+    predict_template = '{: 7.3f} {: 8.3f}'
+    update_template = '{:.3f}\t{: 7.3f} {: 7.3f}'
 
     print(predict_template.format(predict[0], predict[1]),end='\t')
-    print(update_template.format(update[0], update[1], z))
+    print(update_template.format(z, update[0], update[1]))
 
 
 def print_variance(positions):
