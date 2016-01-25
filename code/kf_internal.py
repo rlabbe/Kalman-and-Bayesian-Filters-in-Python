@@ -36,6 +36,7 @@ def plot_dog_track(xs, dog, measurement_var, process_var):
 
 
 def print_gh(predict, update, z):
+    print(predict, update, z)
     predict_template = '{: 7.3f} {: 8.3f}'
     update_template = '{:.3f}\t{: 7.3f} {: 7.3f}'
 
