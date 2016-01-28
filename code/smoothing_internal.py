@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue May 27 21:21:19 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import matplotlib.pyplot as plt
 
 

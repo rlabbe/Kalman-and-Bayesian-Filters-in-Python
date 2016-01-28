@@ -1,13 +1,31 @@
-from filterpy.monte_carlo import stratified_resample
+# -*- coding: utf-8 -*-
+
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
+"""
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+
+from filterpy.monte_carlo import stratified_resample, residual_resample
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 import numpy as np
 from numpy.random import randn, random, uniform, multivariate_normal, seed
 #from nonlinear_plots import plot_monte_carlo_mean
-import pylab as plt
 import scipy.stats
-from RobotLocalizationParticleFilter import *
+#from RobotLocalizationParticleFilter import *
 
 
 
@@ -100,6 +118,7 @@ def plot_random_pd():
         #plt.setp(plt.gca().get_yticklabels(), visible=False)
         plt.axes(xticks=[], yticks=[], frameon=False)
         plt.plot(x, y2)
+        plt.ylim([0, max(y2)+.1])
 
 
 def plot_monte_carlo_ukf():

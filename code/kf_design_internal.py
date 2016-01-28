@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jul 13 13:20:27 2015
 
-@author: Roger
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from filterpy.kalman import UnscentedKalmanFilter as UKF
 from filterpy.kalman import JulierSigmaPoints

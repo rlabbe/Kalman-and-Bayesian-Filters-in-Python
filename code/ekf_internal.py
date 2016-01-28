@@ -1,16 +1,27 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 18 23:23:08 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import book_plots as bp
-from math import radians, sin, cos, sqrt, exp
-import numpy.random as random
-import matplotlib.pyplot as plt
 import filterpy.kalman as kf
+from math import radians, sin, cos, sqrt, exp
+import matplotlib.pyplot as plt
 import numpy as np
+import numpy.random as random
 
 def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
 
@@ -41,7 +52,6 @@ def ball_kf(x, y, omega, v0, dt, r=0.5, q=0.02):
 
 
 def plot_radar(xs, track, time):
-
     plt.figure()
     bp.plot_track(time, track[:, 0])
     bp.plot_filter(time, xs[:, 0])
@@ -64,6 +74,7 @@ def plot_radar(xs, track, time):
     plt.xlabel('time (sec)')
     plt.ylim((900, 1600))
     plt.show()
+
 
 def plot_bicycle():
     plt.clf()
@@ -204,11 +215,11 @@ def show_radar_chart():
 
 
 
-    ax.annotate('$\Theta$ (', xy=(1.2, 1.1), color='b')
+    ax.annotate('$\Theta$', xy=(1.2, 1.05), color='b')
     ax.annotate('Aircraft', xy=(2.04,2.), color='b')
-    ax.annotate('altitude', xy=(2.04,1.5), color='k')
-    ax.annotate('X', xy=(1.5, .9))
-    ax.annotate('Radar', xy=(.95, 0.9))
+    ax.annotate('altitude (y)', xy=(2.04,1.5), color='k')
+    ax.annotate('x', xy=(1.5, .9))
+    ax.annotate('Radar', xy=(.95, 0.8))
     ax.annotate('Slant\n  (r)', xy=(1.5,1.62), color='r')
 
     plt.title("Radar Tracking")
@@ -216,6 +227,22 @@ def show_radar_chart():
     ax.yaxis.set_ticklabels([])
     ax.xaxis.set_ticks([])
     ax.yaxis.set_ticks([])
+    plt.show()
 
 
+def show_linearization():
+    xs =  np.arange(0, 2, 0.01)
+    ys = [x**2 - 2*x for x in xs]
+
+    def y(x):
+        return x - 2.25
+
+    plt.plot(xs, ys, label='$f(x)=x^2−2x$')
+    plt.plot([1, 2], [y(1), y(2)], color='k', ls='--', label='linearization')
+    plt.axes().axvline(1.5, lw=1, c='k')
+    plt.xlim(0, 2)
+    plt.ylim([-1.5, 0.0])
+    plt.title('Linearization of $f(x)$ at $x=1.5$')
+    plt.xlabel('$x=1.5$')
+    plt.legend(loc=4)
     plt.show()

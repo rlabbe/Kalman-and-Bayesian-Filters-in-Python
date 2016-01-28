@@ -1,17 +1,30 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 30 19:48:21 2015
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
 
-import matplotlib.pyplot as plt
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import book_plots as bp
+from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
+import matplotlib.pyplot as plt
 
 
 def plot_track_and_residuals(t, xs, z_xs, res):
     plt.subplot(121)
-    bp.plot_measurements(t, z_xs, label='z')
+    if z_xs is not None:
+        bp.plot_measurements(t, z_xs, label='z')
     bp.plot_filter(t, xs)
     plt.legend(loc=2)
     plt.xlabel('time (sec)')
@@ -26,5 +39,63 @@ def plot_track_and_residuals(t, xs, z_xs, res):
     plt.title('residuals')
     plt.show()
 
+def plot_markov_chain():
 
 
+    plt.figure(figsize=(4,4), facecolor='w')
+    ax = plt.axes((0, 0, 1, 1),
+                  xticks=[], yticks=[], frameon=False)
+    #ax.set_xlim(0, 10)
+    #ax.set_ylim(0, 10)
+    box_bg = '#DDDDDD'
+
+    kf1c = Circle((4,5), 0.5, fc=box_bg)
+    kf2c = Circle((6,5), 0.5, fc=box_bg)
+    ax.add_patch (kf1c)
+    ax.add_patch (kf2c)
+
+    plt.text(4,5, "KF\nStraight",ha='center', va='center', fontsize=14)
+    plt.text(6,5, "KF\nTurn",ha='center', va='center', fontsize=14)
+
+
+    #btm
+    plt.text(5, 3.9, ".05", ha='center', va='center', fontsize=18)
+    ax.annotate('',
+                xy=(4.1, 4.5),  xycoords='data',
+                xytext=(6, 4.5), textcoords='data',
+                size=10,
+                arrowprops=dict(arrowstyle="->",
+                                ec="k",
+                                connectionstyle="arc3,rad=-0.5"))
+    #top
+    plt.text(5, 6.1, ".03", ha='center', va='center', fontsize=18)
+    ax.annotate('',
+                xy=(6, 5.5),  xycoords='data',
+                xytext=(4.1, 5.5), textcoords='data',
+                size=10,
+
+                arrowprops=dict(arrowstyle="->",
+                                ec="k",
+                                connectionstyle="arc3,rad=-0.5"))
+
+    plt.text(3.5, 5.6, ".97", ha='center', va='center', fontsize=18)
+    ax.annotate('',
+                xy=(3.9, 5.5),  xycoords='data',
+                xytext=(3.55, 5.2), textcoords='data',
+                size=10,
+                arrowprops=dict(arrowstyle="->",
+                                ec="k",
+                                connectionstyle="angle3,angleA=150,angleB=0"))
+
+    plt.text(6.5, 5.6, ".95", ha='center', va='center', fontsize=18)
+    ax.annotate('',
+                xy=(6.1, 5.5),  xycoords='data',
+                xytext=(6.45, 5.2), textcoords='data',
+                size=10,
+                arrowprops=dict(arrowstyle="->",
+                                fc="0.2", ec="k",
+                                connectionstyle="angle3,angleA=-150,angleB=2"))
+
+
+    plt.axis('equal')
+    plt.show()

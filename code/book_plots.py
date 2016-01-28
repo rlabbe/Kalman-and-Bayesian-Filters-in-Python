@@ -1,20 +1,33 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri May  2 12:21:40 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_errorbars(bars, xlims):
+def plot_errorbars(bars, xlims, ylims=(0, 2)):
 
-    i = 1.0
+    i = 0.0
     for bar in bars:
         plt.errorbar([bar[0]], [i], xerr=[bar[1]], fmt='o', label=bar[2] , capthick=2, capsize=10)
         i += 0.2
 
-    plt.ylim(0, 2)
+    plt.ylim(*ylims)
     plt.xlim(xlims[0], xlims[1])
     show_legend()
     plt.gca().axes.yaxis.set_ticks([])
@@ -27,17 +40,71 @@ def show_legend():
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 
-def bar_plot(pos, ylim=(0,1), title=None):
-    plt.cla()
+def bar_plot(pos, x=None, ylim=(0,1), title=None, c='#30a2da',
+             **kwargs):
+    """ plot the values in `pos` as a bar plot. 
+    
+    **Parameters**
+    
+    pos : list-like
+        list of values to plot as bars
+        
+    x : list-like, optional
+         If provided, specifies the x value for each value in pos. If not
+         provided, the first pos element is plotted at x == 0, the second
+         at 1, etc.
+         
+    ylim : (lower, upper), default = (0,1)
+        specifies the lower and upper limits for the y-axis
+        
+    title : str, optional
+        If specified, provides a title for the plot
+    
+    c : color, default='#30a2da'
+        Color for the bars
+        
+    **kwargs : keywords, optional
+        extra keyword arguments passed to ax.bar()        
+        
+    """
+    
     ax = plt.gca()
-    x = np.arange(len(pos))
-    ax.bar(x, pos, color='#30a2da')
+    if x is None:
+        x = np.arange(len(pos))
+    ax.bar(x, pos, color=c, **kwargs)
     if ylim:
         plt.ylim(ylim)
-    plt.xticks(x+0.4, x)
+    plt.xticks(np.asarray(x)+0.4, x)
     if title is not None:
         plt.title(title)
 
+
+def plot_belief_vs_prior(belief, prior, **kwargs):
+    """ plots two discrete probability distributions side by side, with
+    titles "belief" and "prior"
+    """
+    
+    plt.subplot(121)
+    bar_plot(belief, title='belief', **kwargs)
+    plt.subplot(122)
+    bar_plot(prior, title='prior', **kwargs)    
+
+
+def plot_prior_vs_posterior(prior, posterior, reverse=False, **kwargs):
+    """ plots two discrete probability distributions side by side, with
+    titles "prior" and "posterior"
+    """
+    if reverse:
+        plt.subplot(121)
+        bar_plot(posterior, title='posterior', **kwargs)    
+        plt.subplot(122)
+        bar_plot(prior, title='prior', **kwargs)
+    else:
+        plt.subplot(121)
+        bar_plot(prior, title='prior', **kwargs)
+        plt.subplot(122)
+        bar_plot(posterior, title='posterior', **kwargs)    
+        
 
 def set_labels(title=None, x=None, y=None):
     """ helps make code in book shorter. Optional set title, xlabel and ylabel
@@ -58,29 +125,47 @@ def set_limits(x, y):
     plt.gca().set_xlim(x)
     plt.gca().set_ylim(y)
 
+def plot_predictions(p, rng=None):
+    if rng is None:
+        rng = range(len(p))
+    plt.scatter(rng, p, marker='v', s=40, edgecolor='r',
+                facecolor='None', lw=2, label='prediction')
 
-def plot_measurements(xs, ys=None, color='r', lw=2, label='Measurements', **kwargs):
+
+
+def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
+    plot_filter(filter_xs[:, 0])
+    plot_track(xs[:, 0])
+
+    if zs is not None:
+        plot_measurements(zs)
+    show_legend()
+    set_labels(title=title, y='meters', x='time (sec)')
+    if aspect_equal:
+        plt.gca().set_aspect('equal')
+    plt.xlim((-1, len(xs)))
+    plt.show()
+
+
+def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
+                      lines=False, **kwargs):
     """ Helper function to give a consistant way to display
     measurements in the book.
     """
 
     plt.autoscale(tight=True)
-    '''if ys is not None:
-        plt.scatter(xs, ys, marker=marker, c=c, s=s,
-                    label=label, alpha=alpha)
-        if connect:
-           plt.plot(xs, ys, c=c, lw=1, alpha=alpha)
+    if lines:
+        if ys is not None:
+            plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
+        else:
+            plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
     else:
-        plt.scatter(range(len(xs)), xs, marker=marker, c=c, s=s,
-                    label=label, alpha=alpha)
-        if connect:
-           plt.plot(range(len(xs)), xs, lw=1, c=c, alpha=alpha)'''
-
-    if ys is not None:
-        plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
-    else:
-        plt.plot(xs, color=color, lw=lw, ls='--', label=label, **kwargs)
-
+        if ys is not None:
+            plt.scatter(xs, ys, edgecolor=color, facecolor='none',
+                        lw=2, label=label, **kwargs)
+        else:
+            plt.scatter(range(len(xs)), xs, edgecolor=color, facecolor='none',
+                        lw=2, label=label, **kwargs)
 
 
 def plot_residual_limits(Ps, stds=1.):
@@ -104,8 +189,9 @@ def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
         plt.plot(xs, color=c, lw=lw, ls=':', label=label, **kwargs)
 
 
-def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
+def plot_filter(xs, ys=None, c='#013afe', label='Filter', var=None, **kwargs):
 #def plot_filter(xs, ys=None, c='#6d904f', label='Filter', vars=None, **kwargs):
+
 
     if ys is None:
         ys = xs
@@ -113,11 +199,12 @@ def plot_filter(xs, ys=None, c='#013afe', label='Filter', vars=None, **kwargs):
 
     plt.plot(xs, ys, color=c, label=label, **kwargs)
 
-    if vars is None:
+    if var is None:
         return
-    vars = np.asarray(vars)
 
-    std = np.sqrt(vars)
+    var = np.asarray(var)
+
+    std = np.sqrt(var)
     std_top = ys+std
     std_btm = ys-std
 

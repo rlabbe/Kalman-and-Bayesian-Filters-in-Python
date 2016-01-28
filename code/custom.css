@@ -1,19 +1,62 @@
 <style>
 @import url('http://fonts.googleapis.com/css?family=Source+Code+Pro');
-@import url('http://fonts.googleapis.com/css?family=Vollkorn');
-@import url('http://fonts.googleapis.com/css?family=Arimo');
+@import url('http://fonts.googleapis.com/css?family=Lora');
 
+//@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+//@import url('http://fonts.googleapis.com/css?family=Vollkorn');
+//@import url('http://fonts.googleapis.com/css?family=Karla');
+//@import url('http://fonts.googleapis.com/css?family=Poppins');
+//@import url('http://fonts.googleapis.com/css?family=Arimo');
+//@import url('http://fonts.googleapis.com/css?family=Roboto');
+//@import url('http://fonts.googleapis.com/css?family=Lato');
+//@import url('http://fonts.googleapis.com/css?family=Domine');
+//@import url('http://fonts.googleapis.com/css?family=Chivo');
+//@import url('http://fonts.googleapis.com/css?family=Cardo');
+//@import url('http://fonts.googleapis.com/css?family=Arvo');
+//@import url('http://fonts.googleapis.com/css?family=Crimson+Text');
+//@import url('http://fonts.googleapis.com/css?family=Ubuntu');
+//@import url('http://fonts.googleapis.com/css?family=Fontin');
+//@import url('http://fonts.googleapis.com/css?family=Raleway');
+//@import url('http://fonts.googleapis.com/css?family=Merriweather');
+
+
+.CodeMirror pre {
+    font-family: 'Source Code Pro', Consolas, monocco, monospace;
+}
     div.cell{
-        width: 900px;
+        width: 850px;
         margin-left: 0% !important;
         margin-right: auto;
+    }
+    div.text_cell_render{
+        font-family: 'Lora';
+        //font-family: 'Open Sans';
+        //font-family: 'Karla',verdana,arial,sans-serif;
+        //font-family: 'Roboto',verdana,arial,sans-serif;
+        //font-family: 'Lato',verdana,arial,sans-serif;
+        //font-family: 'Domine',verdana,arial,sans-serif;
+        //font-family: 'Chivo',verdana,arial,sans-serif;
+        //font-family: 'Cardo',verdana,arial,sans-serif;
+        //font-family: 'Arvo',verdana,arial,sans-serif;
+        //font-family: 'Poppins',verdana,arial,sans-serif;   
+        //font-family: 'Ubuntu',verdana,arial,sans-serif;
+        //font-family: 'Fontin',verdana,arial,sans-serif;
+        //font-family: 'Raleway',verdana,arial,sans-serif;
+        //font-family: 'Merriweather',verdana,arial,sans-serif;
+        //font-family: 'Crimson Text', verdana,arial,sans-serif;
+        //font-family: verdana,arial,sans-serif;
+        //font-family: arial,sans-serif;
+        line-height: 125%;
+        font-size: 130%;
+        text-align: justify;
+        text-justify:inter-word;
     }
     div.text_cell code {
         background: transparent;
         color: #000000;
-        font-weight: 600;
-        font-size: 11pt;
-        font-style: bold;
+        font-weight: 400;
+        font-size: 12pt;
+        //font-style: bold;
         font-family:  'Source Code Pro', Consolas, monocco, monospace;
    }
     h1 {
@@ -22,7 +65,7 @@
 	
     div.input_area {
         background: #F6F6F9;
-        border: 1px solid #586e75;
+        border: 1px solid #586e75;      
     }
 
     .text_cell_render h1 {
@@ -81,6 +124,7 @@
     h5 {
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
+
     .text_cell_render h5 {
         font-weight: 200;
         font-style: normal;
@@ -90,13 +134,6 @@
         margin-top: 0.5em;
         display: block;
         white-space: nowrap;
-    }
-    div.text_cell_render{
-        font-family: 'Arimo',verdana,arial,sans-serif;
-        line-height: 125%;
-        font-size: 120%;
-        text-align:justify;
-        text-justify:inter-word;
     }
     div.output_subarea.output_text.output_pyout {
         overflow-x: auto;
@@ -114,7 +151,8 @@
 }
 
     code{
-      font-size: 70%;
+        font-size: 6pt;
+
     }
     .rendered_html code{
     background-color: transparent;
@@ -207,7 +245,8 @@
 <script>
     MathJax.Hub.Config({
                         TeX: {
-                           extensions: ["AMSmath.js"]
+                           extensions: ["AMSmath.js"],
+                           equationNumbers: { autoNumber: "AMS", useLabelIds: true}
                            },
                 tex2jax: {
                     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -215,10 +254,10 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:85,
-                    availableFonts: ["Neo-Euler"],
-                    preferredFont: "Neo-Euler",
-                    webFont: "Neo-Euler",
+                    scale:95,
+                        availableFonts: [],
+                        preferredFont:null,
+                        webFont: "TeX",
                     styles: {'.MathJax_Display': {"margin": 4}}
                 }
         });

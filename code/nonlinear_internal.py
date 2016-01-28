@@ -1,18 +1,28 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jul  9 13:02:32 2015
 
-@author: Roger Labbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import filterpy.stats as stats
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse
 import numpy as np
 
 
 def plot1():
-
+    P = np.array([[6, 2.5], [2.5, .6]])
     stats.plot_covariance_ellipse((10, 2), P, facecolor='g', alpha=0.2)
 
 

@@ -1,19 +1,85 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May  1 16:56:49 2014
 
-@author: rlabbe
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
 """
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import book_plots as bp
 import filterpy.stats as stats
 from filterpy.stats import plot_covariance_ellipse
-import numpy as np
 from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 from numpy.random import multivariate_normal
 
-def show_residual_chart():
+
+
+def zs_var_27_6():
+
+
+    zs = [3.59, 1.73, -2.575, 4.38, 9.71, 2.88, 10.08,
+      8.97, 3.74, 12.81, 11.15, 9.25, 3.93, 11.11,
+      19.29, 16.20, 19.63, 9.54, 26.27, 23.29, 25.18,
+      26.21, 17.1, 25.27, 26.86,33.70, 25.92, 28.82,
+      32.13, 25.0, 38.56, 26.97, 22.49, 40.77, 32.95,
+      38.20, 40.93, 39.42, 35.49, 36.31, 31.56, 50.29,
+      40.20, 54.49, 50.38, 42.79, 37.89, 56.69, 41.47, 53.66]
+    xs = list(range(len(zs)))
+
+    return np.array([xs, zs]).T
+
+def zs_var_275():
+    zs = [-6.947, 12.467, 6.899, 2.643, 6.980, 5.820, 5.788, 10.614, 5.210,
+      14.338, 11.401, 19.138, 14.169, 19.572, 25.471, 13.099, 27.090,
+      12.209, 14.274, 21.302, 14.678, 28.655, 15.914, 28.506, 23.181,
+      18.981, 28.197, 39.412, 27.640, 31.465, 34.903, 28.420, 33.889,
+      46.123, 31.355, 30.473, 49.861, 41.310, 42.526, 38.183, 41.383,
+      41.919, 52.372, 42.048, 48.522, 44.681, 32.989, 37.288, 49.141,
+      54.235, 62.974, 61.742, 54.863, 52.831, 61.122, 61.187, 58.441,
+      47.769, 56.855, 53.693, 61.534, 70.665, 60.355, 65.095, 63.386]
+    xs = list(range(len(zs)))
+
+    return np.array([xs, zs]).T
+
+
+
+
+def plot_track_ellipses(N, zs, ps, cov, title):
+    bp.plot_measurements(range(1,N + 1), zs)
+    plt.plot(range(1, N + 1), ps, c='b', lw=2, label='filter')
+    plt.legend(loc='best')
+    plt.title(title)
+
+    for i,p in enumerate(cov):
+        plot_covariance_ellipse(
+              (i+1, ps[i]), cov=p, variance=4,
+               axis_equal=False, ec='g', alpha=0.5)
+
+        if i == len(cov)-1:
+            s = ('$\sigma^2_{pos} = %.2f$' % p[0,0])
+            plt.text (20, 5, s, fontsize=18)
+            s = ('$\sigma^2_{vel} = %.2f$' % p[1, 1])
+            plt.text (20, 0, s, fontsize=18)
+    plt.xlim(-10, 80)
+    plt.gca().set_aspect('equal')
+    plt.show()
+
+
+def show_residual_chart(show_eq=True, show_H=False):
     est_y = ((164.2-158)*.8 + 158)
 
     ax = plt.axes(xticks=[], yticks=[], frameon=False)
@@ -23,7 +89,7 @@ def show_residual_chart():
 
     ax.annotate('', xy=[1,159], xytext=[1,164.2],
                 arrowprops=dict(arrowstyle='-',
-                                ec='k', lw=1, shrinkA=8, shrinkB=8))
+                                ec='k', lw=3, shrinkA=8, shrinkB=8))
 
     ax.annotate('', xy=(1., est_y), xytext=(0.9, est_y),
                 arrowprops=dict(arrowstyle='->', ec='#004080',
@@ -34,11 +100,20 @@ def show_residual_chart():
     plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
     plt.scatter ([1], [164.2], c='b',s=128)
     plt.scatter ([1], [159], c='r', s=128)
-    plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
-    plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
-    plt.text (0, 157.8, "prior estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
-    plt.text (1.02, est_y-1.5, "residual", ha='left', va='center',fontsize=18)
-    plt.text (0.9, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
+    plt.text (1.05, 158.8, r"prior $(\bar{x}_t)$", ha='center',va='top',fontsize=18,color='red')
+    plt.text (0.5, 159.6, "prediction", ha='center',va='top',fontsize=18,color='red')
+    plt.text (1.0, 164.4, r"measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
+    plt.text (0, 157.8, r"posterior ($x_{t-1}$)", ha='center', va='top',fontsize=18)
+    plt.text (1.02, est_y-1.5, "residual($y$)", ha='left', va='center',fontsize=18)
+    if show_eq:
+        if show_H:
+            plt.text (1.02, est_y-2.2, r"$y=z-H\bar x_t$", ha='left', va='center',fontsize=18)
+        else:
+            plt.text (1.02, est_y-2.2, r"$y=z-\bar x_t$", ha='left', va='center',fontsize=18)
+    plt.text (0.9, est_y, "new estimate ($x_t$)", ha='right', va='center',fontsize=18)
+    plt.text (0.8, est_y-0.5, "(posterior)", ha='right', va='center',fontsize=18)
+    if show_eq:
+        plt.text (0.75, est_y-1.2, r"$\bar{x}_t + Ky$", ha='right', va='center',fontsize=18)
     plt.xlabel('time')
     ax.yaxis.set_label_position("right")
     plt.ylabel('state')
@@ -106,8 +181,8 @@ def show_position_prediction_chart():
     plt.xlim([0,5])
     plt.ylim([0,5])
 
-    plt.xlabel("Position")
-    plt.ylabel("Time")
+    plt.xlabel("X")
+    plt.ylabel("Y")
 
     plt.xticks(np.arange(1,5,1))
     plt.yticks(np.arange(1,5,1))
@@ -163,6 +238,7 @@ def show_x_error_chart(count):
         stats.plot_covariance_ellipse ((5,5), ellipse=e3, variance=sigma,
                                        edgecolor='r', alpha=0.25)
         stats.plot_covariance_ellipse (m4[:,0], ellipse=e4, variance=sigma)
+        plt.ylim((-9, 16))
 
     #plt.ylim([0,11])
     #plt.xticks(np.arange(1,4,1))
@@ -244,17 +320,30 @@ def plot_3d_covariance(mean, cov):
     xv, yv = np.meshgrid (xs, ys)
 
     zs = np.array([100.* stats.multivariate_gaussian(np.array([x,y]),mean,cov) \
-                   for x,y in zip(np.ravel(xv), np.ravel(yv))])
+                   for x, y in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
 
-    ax = plt.figure().add_subplot(111, projection='3d')
+    maxz = np.max(zs)
+
+    #ax = plt.figure().add_subplot(111, projection='3d')
+    ax = plt.gca(projection='3d')
     ax.plot_surface(xv, yv, zv, rstride=1, cstride=1, cmap=cm.autumn)
 
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
-    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.autumn)
-    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
+
+    x = mean[0]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for _, y in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+
+    y = mean[1]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for x, _ in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
 
 
 def plot_3d_sampled_covariance(mean, cov):
@@ -308,32 +397,47 @@ def plot_3d_sampled_covariance(mean, cov):
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
-    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.autumn)
-    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.BuGn)
+    x = mean[0]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for _, y in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+
+    y = mean[1]
+    zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
+                   for x, _ in zip(np.ravel(xv), np.ravel(yv))])
+    zv = zs.reshape(xv.shape)
+    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
 
 
 def plot_3_covariances():
 
     P = [[2, 0], [0, 2]]
     plt.subplot(131)
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
     plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
-                            title='|2 0|\n|0 2|', axis_equal=False)
-    plt.ylim((4, 10))
+                            title='|2 0|\n|0 2|', std=[1,2,3], axis_equal=False)
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
 
     plt.subplot(132)
-    P = [[2, 0], [0, 9]]
-    plt.ylim((4, 10))
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
+    P = [[2, 0], [0, 6]]
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            axis_equal=False, title='|2 0|\n|0 9|')
+                            std=[1,2,3],axis_equal=False, title='|2 0|\n|0 6|')
 
     plt.subplot(133)
+    plt.gca().grid(b=False)
+    plt.gca().set_xticks([0,1,2,3,4])
     P = [[2, 1.2], [1.2, 2]]
-    plt.ylim((4, 10))
+    plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            axis_equal=False,
+                            axis_equal=False,std=[1,2,3],
                             title='|2 1.2|\n|1.2 2|')
 
     plt.tight_layout()
@@ -349,25 +453,26 @@ def plot_correlation_covariance():
     plt.gca().autoscale(tight=True)
     plt.axvline(7.5, ls='--', lw=1)
     plt.axhline(12.5, ls='--', lw=1)
-    plt.scatter(7.5, 12.5, s=2000, alpha=0.5)
+    plt.scatter(7.5, 12.5, s=1500, alpha=0.5)
     plt.title('|4.0 3.9|\n|3.9 4.0|')
     plt.show()
 
 
-import book_plots as bp
-def plot_track(ps, zs, cov, std_scale=1,
-               plot_P=True, y_lim=None,
+def plot_track(ps, actual, zs, cov, std_scale=1,
+               plot_P=True, y_lim=None, dt=1.,
+               xlabel='time', ylabel='position',
                title='Kalman Filter'):
 
     count = len(zs)
-    actual = np.linspace(0, count - 1, count)
+    zs = np.asarray(zs)
+
     cov = np.asarray(cov)
     std = std_scale*np.sqrt(cov[:,0,0])
     std_top = np.minimum(actual+std, [count + 10])
     std_btm = np.maximum(actual-std, [-50])
 
-    std_top = actual+std
-    std_btm = actual-std
+    std_top = actual + std
+    std_btm = actual - std
 
     bp.plot_track(actual,c='k')
     bp.plot_measurements(range(1, count + 1), zs)
@@ -378,6 +483,8 @@ def plot_track(ps, zs, cov, std_scale=1,
     plt.fill_between(range(len(std_top)), std_top, std_btm,
                      facecolor='yellow', alpha=0.2, interpolate=True)
     plt.legend(loc=4)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
     if y_lim is not None:
         plt.ylim(y_lim)
     else:
@@ -389,10 +496,10 @@ def plot_track(ps, zs, cov, std_scale=1,
 
     if plot_P:
         ax = plt.subplot(121)
-        ax.set_title("$\sigma^2_x$")
+        ax.set_title("$\sigma^2_x$ (pos variance)")
         plot_covariance(cov, (0, 0))
         ax = plt.subplot(122)
-        ax.set_title("$\sigma^2_y$")
+        ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
         plot_covariance(cov, (1, 1))
         plt.show()
 
@@ -405,9 +512,10 @@ def plot_covariance(P, index=(0, 0)):
 
 
 if __name__ == "__main__":
-    pass
+
+
     #show_position_chart()
-    #plot_3d_covariance((2,7), np.array([[8.,0],[0,4.]]))
+    plot_3d_covariance((2,7), np.array([[8.,0],[0,1.]]))
     #plot_3d_sampled_covariance([2,7], [[8.,0],[0,4.]])
     #show_residual_chart()
 

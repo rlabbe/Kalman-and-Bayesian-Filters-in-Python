@@ -1,31 +1,54 @@
 # -*- coding: utf-8 -*-
+
+"""Copyright 2015 Roger R Labbe Jr.
+
+
+Code supporting the book
+
+Kalman and Bayesian Filters in Python
+https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python
+
+
+This is licensed under an MIT license. See the LICENSE.txt file
+for more information.
+"""
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+from contextlib import contextmanager
+from distutils.version import LooseVersion
 from IPython.core.display import HTML
+import json
+import matplotlib
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
-import json
 import numpy as np
+import os.path
 import sys
-from contextlib import contextmanager
+import warnings
 
+# version 1.4.3 of matplotlib has a bug that makes
+# it issue a spurious warning on every plot that
+# clutters the notebook output
+if matplotlib.__version__ == '1.4.3':
+    warnings.simplefilter(action="ignore", category=FutureWarning)
 
-sys.path.insert(0,'./code') # allow us to import book_format
+np.set_printoptions(precision=3)
+sys.path.insert(0, './code') # allow us to import code
 
 def test_filterpy_version():
-    import filterpy
-    min_version = [0,0,22]
-    v = filterpy.__version__
-    tokens = v.split('.')
-    for i,v in enumerate(tokens):
-        if int(v) > min_version[i]:
-            return
 
-    i = len(tokens) - 1
-    if min_version[i] > int(tokens[i]):
-       raise Exception("Minimum FilterPy version supported is {}.{}.{}.\n"
+    import filterpy
+    from distutils.version import LooseVersion
+
+    v = filterpy.__version__
+    min_version = "0.1.2"
+    if LooseVersion(v) < LooseVersion(min_version):
+       raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
                        "   ex: pip install filterpy --upgrade".format(
-             *min_version))
-    v = int(tokens[0]*1000)
+             min_version))
 
 
 # ensure that we have the correct filterpy loaded. This is
@@ -40,7 +63,7 @@ def equal_axis():
 
 
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 11, 4
+    pylab.rcParams['figure.figsize'] = 11, 3
 
 def set_figsize(x=11, y=4):
     pylab.rcParams['figure.figsize'] = x, y
@@ -96,14 +119,22 @@ def _decode_dict(data):
     return rv
 
 
-def load_style(directory = '.', name='/styles/custom2.css'):
+def load_style(directory = '.', name='code/custom.css'):
     if sys.version_info[0] >= 3:
-        s = json.load(open(directory + "/code/538.json"))
+        style = json.load(open(os.path.join(directory, "code/538.json")))
     else:
-        s = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
-    plt.rcParams.update(s)
-    reset_axis ()
-    np.set_printoptions(suppress=True)
+        style = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
 
-    styles = open(directory + name, 'r').read()
+    # matplotlib has deprecated the use of axes.color_cycle as of version
+
+    version = [int(version_no) for version_no in matplotlib.__version__.split('.')]
+    if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
+        style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
+        style.pop("axes.color_cycle", None)
+    plt.rcParams.update(style)
+    reset_axis ()
+    np.set_printoptions(suppress=True,precision=3, linewidth=70,
+                        formatter={'float':lambda x:' {:.3}'.format(x)})
+
+    styles = open(os.path.join(directory, name), 'r').read()
     return HTML(styles)

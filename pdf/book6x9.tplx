@@ -1,0 +1,45 @@
+% Inherit from report
+((* extends 'report.tplx' *))
+ 
+
+((* block margins *))
+\geometry{verbose,papersize={6in, 9in}, tmargin=.5in,bmargin=.5in,lmargin=.75in,rmargin=.75in}
+((* endblock margins *))
+
+((*- block in_prompt -*))
+((*- endblock in_prompt -*))
+
+((* block input scoped *))
+$\fontsize{5}{1.5}
+\selectfont$
+$\noindent\rule{8cm}{0.4pt}$
+    ((( cell.source | highlight2latex | indent(0) )))
+$\noindent\rule{8cm}{0.4pt}$
+((* endblock input *))
+
+((* block output_prompt *))
+((* endblock output_prompt *))
+
+
+((* block docclass *))
+\documentclass{book}
+\setcounter{chapter}{0}
+\raggedbottom
+((* endblock docclass *))
+ 
+((* block document *))
+((* endblock document *))
+ 
+((* block title *))
+\title{Kalman and Bayesian Filters in Python}
+\author{Roger R Labbe Jr}
+((* endblock title *))
+ 
+((* block markdowncell scoped *))
+\fontsize{10}{1.5}
+\selectfont
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+    ((( cell.source | citation2latex | strip_files_prefix | markdown2latex(extra_args=["--chapters"]) )))
+((* endblock markdowncell *))
+
