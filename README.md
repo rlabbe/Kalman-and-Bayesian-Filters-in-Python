@@ -6,6 +6,12 @@ Introductory text for Kalman and Bayesian filters. All code is written in Python
 
 **"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author of several math and programming textbooks, via twitter.
 
+Start reading online now:
+
+
+[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+
+
 
 ![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif)
 
