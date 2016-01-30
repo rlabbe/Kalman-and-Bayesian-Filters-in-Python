@@ -258,7 +258,7 @@ def plot_sigma_points():
     plot_covariance_ellipse(x, P, facecolor='g', alpha=0.2, variance=[1, 4])
     plt.title('alpha=1')
     plt.show()
-    print(sum(Wc0))
+
 
 def plot_radar(xs, t, plot_x=True, plot_vel=True, plot_alt=True):
     xs = np.asarray(xs)
@@ -267,16 +267,19 @@ def plot_radar(xs, t, plot_x=True, plot_vel=True, plot_alt=True):
         plt.plot(t, xs[:, 0]/1000.)
         plt.xlabel('time(sec)')
         plt.ylabel('position(km)')
+        plt.tight_layout()
     if plot_vel:
         plt.figure()
         plt.plot(t, xs[:, 1])
         plt.xlabel('time(sec)')
         plt.ylabel('velocity')
+        plt.tight_layout()
     if plot_alt:
         plt.figure()
         plt.plot(t, xs[:,2])
         plt.xlabel('time(sec)')
         plt.ylabel('altitude')
+        plt.tight_layout()
     plt.show()
 
 

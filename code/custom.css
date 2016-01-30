@@ -184,19 +184,15 @@
         margin-top: 0.2em; 
     }
     a:link{
-       font-weight: bold;
        color:#447adb;
     }
     a:visited{
-       font-weight: bold;
        color: #1d3b84;
     }
     a:hover{
-       font-weight: bold;
        color: #1d3b84;
     }
     a:focus{
-       font-weight: bold;
        color:#447adb;
     }
     a:active{

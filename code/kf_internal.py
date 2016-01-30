@@ -36,7 +36,6 @@ def plot_dog_track(xs, dog, measurement_var, process_var):
 
 
 def print_gh(predict, update, z):
-    print(predict, update, z)
     predict_template = '{: 7.3f} {: 8.3f}'
     update_template = '{:.3f}\t{: 7.3f} {: 7.3f}'
 
@@ -45,7 +44,6 @@ def print_gh(predict, update, z):
 
 
 def print_variance(positions):
-    print('Variance:')
     for i in range(0, len(positions), 5):
         print('\t{:.4f} {:.4f} {:.4f} {:.4f} {:.4f}'.format(
                 *[v[1] for v in positions[i:i+5]]))
