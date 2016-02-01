@@ -19,6 +19,7 @@ from __future__ import (absolute_import, division, print_function,
 import book_plots as bp
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def plot_track_and_residuals(t, xs, z_xs, res):
@@ -40,8 +41,6 @@ def plot_track_and_residuals(t, xs, z_xs, res):
     plt.show()
 
 def plot_markov_chain():
-
-
     plt.figure(figsize=(4,4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
@@ -54,8 +53,8 @@ def plot_markov_chain():
     ax.add_patch (kf1c)
     ax.add_patch (kf2c)
 
-    plt.text(4,5, "KF\nStraight",ha='center', va='center', fontsize=14)
-    plt.text(6,5, "KF\nTurn",ha='center', va='center', fontsize=14)
+    plt.text(4,5, "Straight",ha='center', va='center', fontsize=14)
+    plt.text(6,5, "Turn",ha='center', va='center', fontsize=14)
 
 
     #btm
@@ -99,3 +98,37 @@ def plot_markov_chain():
 
     plt.axis('equal')
     plt.show()
+
+
+def turning_target(N=600, turn_start=400):
+    """ simulate a moving target blah"""
+
+    #r = 1.
+    dt = 1.
+    phi_sim = np.array(
+        [[1, dt, 0, 0],
+         [0, 1, 0, 0],
+         [0, 0, 1, dt],
+         [0, 0, 0, 1]])
+
+    gam = np.array([[dt**2/2, 0],
+                    [dt, 0],
+                    [0, dt**2/2],
+                    [0, dt]])
+
+    x = np.array([[2000, 0, 10000, -15.]]).T
+
+    simxs = []
+
+    for i in range(N):
+        x = np.dot(phi_sim, x)
+        if i >= turn_start:
+            x += np.dot(gam, np.array([[.075, .075]]).T)
+        simxs.append(x)
+    simxs = np.array(simxs)
+
+    return simxs
+
+
+if __name__ ==  "__main__":
+    d = turning_target()
