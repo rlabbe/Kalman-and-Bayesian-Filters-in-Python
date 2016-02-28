@@ -93,7 +93,7 @@ def show_four_gps():
 
 
 def show_sigma_transform(with_text=False):
-    fig = plt.figure()
+    fig = plt.gcf()
     ax=fig.gca()
 
     x = np.array([0, 5])
