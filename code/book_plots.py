@@ -17,28 +17,27 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
+
+from book_format import figsize
+from contextlib import contextmanager
 import matplotlib.pyplot as plt
 import numpy as np
-from contextlib import contextmanager
-
-
 import sys
-sys.path.insert(0, '..')
-from book_format import figsize
+import time
 
 try:
     import seaborn
 except:
     pass
 
+sys.path.insert(0, '..')
 
 
 
 def end_interactive(fig):
     """ end interaction in a plot created with %matplotlib notebook """
-    import time
     plt.gcf().canvas.draw()
-    time.sleep(0.1)
+    time.sleep(0.2)
     plt.close(fig)
 
 

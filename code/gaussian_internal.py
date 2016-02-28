@@ -34,17 +34,16 @@ def plot_height_std(x, lw=10):
                      facecolor='yellow', alpha=0.4)
     plt.xlabel('student')
     plt.ylabel('height (m)')
-    plt.show()
 
 
-def plot_correlated_data(X, Y, xlabel=None, 
+def plot_correlated_data(X, Y, xlabel=None,
                          ylabel=None, equal=True):
 
     plt.scatter(X, Y)
-    
+
     if xlabel is not None:
-        plt.xlabel('Height (in)'); 
-    
+        plt.xlabel('Height (in)');
+
     if ylabel is not None:
         plt.ylabel('Weight (lbs)')
 
@@ -112,7 +111,6 @@ def display_stddev_plot():
     ax.xaxis.set_ticklabels(['$-2\sigma$', '$-1\sigma$','$\mu$','$1\sigma$', '$2\sigma$'])
     ax.yaxis.set_ticks([])
     ax.grid(None, 'both', lw=0)
-    plt.show()
 
 if __name__ == '__main__':
     display_stddev_plot()
