@@ -28,6 +28,11 @@ import os.path
 import sys
 import warnings
 
+try:
+    import seaborn
+except:
+    pass
+
 # version 1.4.3 of matplotlib has a bug that makes
 # it issue a spurious warning on every plot that
 # clutters the notebook output
@@ -56,6 +61,15 @@ def test_filterpy_version():
 # chapter so the reader can see that they need to update FilterPy.
 test_filterpy_version()
 
+pylab.rcParams['figure.max_open_warning'] = 50
+
+
+def end_interactive(fig):
+    """ end interaction in a plot created with %matplotlib notebook """
+    import time
+    plt.gcf().canvas.draw()
+    time.sleep(0.1)
+    plt.close(fig)
 
 def equal_axis():
     pylab.rcParams['figure.figsize'] = 10,10
@@ -77,6 +91,7 @@ def figsize(x=11, y=4):
     set_figsize(x, y)
     yield
     pylab.rcParams['figure.figsize'] = size
+
 
 @contextmanager
 def numpy_precision(precision):
@@ -127,11 +142,15 @@ def load_style(directory = '.', name='code/custom.css'):
 
     # matplotlib has deprecated the use of axes.color_cycle as of version
 
-    version = [int(version_no) for version_no in matplotlib.__version__.split('.')]
-    if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
-        style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
-        style.pop("axes.color_cycle", None)
-    plt.rcParams.update(style)
+    try:
+        import seaborn
+    except:
+        version = [int(version_no) for version_no in matplotlib.__version__.split('.')]
+        if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
+            style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
+            style.pop("axes.color_cycle", None)
+        plt.rcParams.update(style)
+
     reset_axis ()
     np.set_printoptions(suppress=True,precision=3, linewidth=70,
                         formatter={'float':lambda x:' {:.3}'.format(x)})

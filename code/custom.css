@@ -24,7 +24,7 @@
     font-family: 'Source Code Pro', Consolas, monocco, monospace;
 }
     div.cell{
-        width: 850px;
+        //width: 950px;
         margin-left: 0% !important;
         margin-right: auto;
     }
@@ -38,7 +38,7 @@
         //font-family: 'Chivo',verdana,arial,sans-serif;
         //font-family: 'Cardo',verdana,arial,sans-serif;
         //font-family: 'Arvo',verdana,arial,sans-serif;
-        //font-family: 'Poppins',verdana,arial,sans-serif;   
+        //font-family: 'Poppins',verdana,arial,sans-serif;
         //font-family: 'Ubuntu',verdana,arial,sans-serif;
         //font-family: 'Fontin',verdana,arial,sans-serif;
         //font-family: 'Raleway',verdana,arial,sans-serif;
@@ -62,10 +62,10 @@
     h1 {
         font-family: 'Open sans',verdana,arial,sans-serif;
 	}
-	
+
     div.input_area {
         background: #F6F6F9;
-        border: 1px solid #586e75;      
+        border: 1px solid #586e75;
     }
 
     .text_cell_render h1 {
@@ -78,7 +78,7 @@
         display: block;
         white-space: wrap;
         text-align: left;
-    } 
+    }
     h2 {
         font-family: 'Open sans',verdana,arial,sans-serif;
         text-align: left;
@@ -94,7 +94,7 @@
         display: block;
         white-space: wrap;
         text-align: left;
-    } 
+    }
     h3 {
         font-family: 'Open sans',verdana,arial,sans-serif;
     }
@@ -161,27 +161,27 @@
         margin: 2em;
     }
     ul li{
-        padding-left: 0.5em; 
-        margin-bottom: 0.5em; 
-        margin-top: 0.5em; 
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
     }
     ul li li{
-        padding-left: 0.2em; 
-        margin-bottom: 0.2em; 
-        margin-top: 0.2em; 
+        padding-left: 0.2em;
+        margin-bottom: 0.2em;
+        margin-top: 0.2em;
     }
     ol{
         margin: 2em;
     }
     ol li{
-        padding-left: 0.5em; 
-        margin-bottom: 0.5em; 
-        margin-top: 0.5em; 
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
     }
     ul li{
-        padding-left: 0.5em; 
-        margin-bottom: 0.5em; 
-        margin-top: 0.2em; 
+        padding-left: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.2em;
     }
     a:link{
        color:#447adb;
@@ -200,10 +200,10 @@
        color:#447adb;
     }
     .rendered_html :link {
-       text-decoration: underline; 
+       text-decoration: underline;
     }
     .rendered_html :hover {
-       text-decoration: none; 
+       text-decoration: none;
     }
     .rendered_html :visited {
       text-decoration: none;
@@ -216,7 +216,7 @@
     }
     .warning{
         color: rgb( 240, 20, 20 )
-    } 
+    }
     hr {
       color: #f3f3f3;
       background-color: #f3f3f3;
