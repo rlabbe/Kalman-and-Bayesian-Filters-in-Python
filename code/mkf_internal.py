@@ -351,7 +351,7 @@ def plot_3d_sampled_covariance(mean, cov):
                    for xx,yy in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
 
-    ax = plt.figure().add_subplot(111, projection='3d')
+    ax = plt.gcf().add_subplot(111, projection='3d')
     ax.scatter(x,y, [0]*count, marker='.')
 
     ax.set_xlabel('X')
