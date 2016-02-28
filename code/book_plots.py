@@ -47,6 +47,7 @@ def interactive_plot(close=True, fig=None):
     if fig is None:
         fig = plt.figure()
     yield
+    plt.tight_layout()
     if close:
         end_interactive(fig)
 
