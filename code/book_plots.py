@@ -339,8 +339,11 @@ def show_residual_chart(show_eq=True, show_H=False):
     plt.xlabel('time')
     ax.yaxis.set_label_position("right")
     plt.ylabel('state')
-    plt.xlim(-0.5, 1.5)
-    plt.savefig('../figs/residual_chart.png', pad_inches=0.1)
+    plt.xlim(-0.1, 1.5)
+    if show_H:
+        plt.savefig('../figs/residual_chart_with_h.png', pad_inches=0.1)
+    else:
+        plt.savefig('../figs/residual_chart.png', pad_inches=0.1)
 
 
 
@@ -589,6 +592,7 @@ if __name__ == "__main__":
     plot_estimate_chart_3()
     create_predict_update_chart()
     show_residual_chart()
+    show_residual_chart(True, True)
     plt.close('all')
 
     '''p = [0.2245871, 0.06288015, 0.06109133, 0.0581008, 0.09334062, 0.2245871,

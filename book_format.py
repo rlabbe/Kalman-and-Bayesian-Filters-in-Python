@@ -77,14 +77,14 @@ def equal_axis():
 
 
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 11, 3
+    pylab.rcParams['figure.figsize'] = 9, 3
 
-def set_figsize(x=11, y=4):
+def set_figsize(x=9, y=4):
     pylab.rcParams['figure.figsize'] = x, y
 
 
 @contextmanager
-def figsize(x=11, y=4):
+def figsize(x=9, y=4):
     """Temporarily set the figure size using 'with figsize(a,b):'"""
 
     size = pylab.rcParams['figure.figsize']
@@ -150,10 +150,11 @@ def load_style(directory = '.', name='code/custom.css'):
             style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
             style.pop("axes.color_cycle", None)
         plt.rcParams.update(style)
-
+    set_figsize()
     reset_axis ()
     np.set_printoptions(suppress=True,precision=3, linewidth=70,
                         formatter={'float':lambda x:' {:.3}'.format(x)})
 
     styles = open(os.path.join(directory, name), 'r').read()
+    set_figsize()
     return HTML(styles)

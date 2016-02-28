@@ -417,51 +417,53 @@ def plot_correlation_covariance():
     plt.title('|4.0 3.9|\n|3.9 4.0|')
     plt.show()
 
+from book_plots import interactive_plot
 
 def plot_track(ps, actual, zs, cov, std_scale=1,
                plot_P=True, y_lim=None, dt=1.,
                xlabel='time', ylabel='position',
                title='Kalman Filter'):
 
-    count = len(zs)
-    zs = np.asarray(zs)
+    with interactive_plot():
+        count = len(zs)
+        zs = np.asarray(zs)
 
-    cov = np.asarray(cov)
-    std = std_scale*np.sqrt(cov[:,0,0])
-    std_top = np.minimum(actual+std, [count + 10])
-    std_btm = np.maximum(actual-std, [-50])
+        cov = np.asarray(cov)
+        std = std_scale*np.sqrt(cov[:,0,0])
+        std_top = np.minimum(actual+std, [count + 10])
+        std_btm = np.maximum(actual-std, [-50])
 
-    std_top = actual + std
-    std_btm = actual - std
+        std_top = actual + std
+        std_btm = actual - std
 
-    bp.plot_track(actual,c='k')
-    bp.plot_measurements(range(1, count + 1), zs)
-    bp.plot_filter(range(1, count + 1), ps)
+        bp.plot_track(actual,c='k')
+        bp.plot_measurements(range(1, count + 1), zs)
+        bp.plot_filter(range(1, count + 1), ps)
 
-    plt.plot(std_top, linestyle=':', color='k', lw=1, alpha=0.4)
-    plt.plot(std_btm, linestyle=':', color='k', lw=1, alpha=0.4)
-    plt.fill_between(range(len(std_top)), std_top, std_btm,
-                     facecolor='yellow', alpha=0.2, interpolate=True)
-    plt.legend(loc=4)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    if y_lim is not None:
-        plt.ylim(y_lim)
-    else:
-        plt.ylim((-50, count + 10))
+        plt.plot(std_top, linestyle=':', color='k', lw=1, alpha=0.4)
+        plt.plot(std_btm, linestyle=':', color='k', lw=1, alpha=0.4)
+        plt.fill_between(range(len(std_top)), std_top, std_btm,
+                         facecolor='yellow', alpha=0.2, interpolate=True)
+        plt.legend(loc=4)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        if y_lim is not None:
+            plt.ylim(y_lim)
+        else:
+            plt.ylim((-50, count + 10))
 
-    plt.xlim((0,count))
-    plt.title(title)
-    plt.show()
+        plt.xlim((0,count))
+        plt.title(title)
 
     if plot_P:
-        ax = plt.subplot(121)
-        ax.set_title("$\sigma^2_x$ (pos variance)")
-        plot_covariance(cov, (0, 0))
-        ax = plt.subplot(122)
-        ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
-        plot_covariance(cov, (1, 1))
-        plt.show()
+        with interactive_plot():
+            ax = plt.subplot(121)
+            ax.set_title("$\sigma^2_x$ (pos variance)")
+            plot_covariance(cov, (0, 0))
+            ax = plt.subplot(122)
+            ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
+            plot_covariance(cov, (1, 1))
+
 
 def plot_covariance(P, index=(0, 0)):
     ps = []
