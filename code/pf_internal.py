@@ -17,7 +17,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-from book_plots import figsize, end_interactive
+from code.book_plots import figsize, end_interactive
 from filterpy.monte_carlo import stratified_resample, residual_resample
 import matplotlib as mpl
 import matplotlib.pyplot as plt

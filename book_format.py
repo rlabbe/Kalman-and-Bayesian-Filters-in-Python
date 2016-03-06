@@ -40,7 +40,6 @@ if matplotlib.__version__ == '1.4.3':
     warnings.simplefilter(action="ignore", category=FutureWarning)
 
 np.set_printoptions(precision=3)
-sys.path.insert(0, './code') # allow us to import code
 
 def test_filterpy_version():
 

@@ -20,6 +20,7 @@ from __future__ import (absolute_import, division, print_function,
 
 from book_format import figsize
 from contextlib import contextmanager
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
@@ -30,24 +31,42 @@ try:
 except:
     pass
 
-sys.path.insert(0, '..')
+""" If the plot is inline (%matplotlib inline) we need to
+do special processing for the interactive_plot context manager,
+otherwise it outputs a lot of extra <matplotlib.figure.figure
+type output into the notebook.""" 
 
+IS_INLINE = mpl.get_backend().find('backend_inline') != -1
 
 
 def end_interactive(fig):
     """ end interaction in a plot created with %matplotlib notebook """
-    plt.gcf().canvas.draw()
+
+    if IS_INLINE:
+        return
+
+    fig.canvas.draw()
     time.sleep(1.)
     plt.close(fig)
 
-
+    
 @contextmanager
 def interactive_plot(close=True, fig=None):
-    if fig is None:
+    if fig is None and not IS_INLINE:
         fig = plt.figure()
+    
     yield
-    plt.tight_layout()
-    if close:
+    try:
+        # if the figure only uses annotations tight_output
+        # throws an exception
+        if not IS_INLINE: plt.tight_layout()
+    except:
+        pass
+
+    if not IS_INLINE: 
+        plt.show()
+
+    if close and not IS_INLINE:
         end_interactive(fig)
 
 

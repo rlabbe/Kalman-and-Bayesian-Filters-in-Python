@@ -16,7 +16,8 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-import book_plots as bp
+import code.book_plots as bp
+from code.book_plots import interactive_plot
 import filterpy.stats as stats
 from filterpy.stats import plot_covariance_ellipse
 from matplotlib.patches import Ellipse
@@ -417,7 +418,6 @@ def plot_correlation_covariance():
     plt.title('|4.0 3.9|\n|3.9 4.0|')
     plt.show()
 
-from book_plots import interactive_plot
 
 def plot_track(ps, actual, zs, cov, std_scale=1,
                plot_P=True, y_lim=None, dt=1.,

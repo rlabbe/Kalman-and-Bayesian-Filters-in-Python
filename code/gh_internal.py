@@ -16,16 +16,12 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-import sys
-sys.path.insert(0, '..')
-import book_plots
+
+import code.book_plots as book_plots
 import numpy as np
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
 import pylab as plt
 import time
-
-
-
 
 
 def plot_gh_results(weights, estimates, predictions, time_step=0):
