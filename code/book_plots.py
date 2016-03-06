@@ -37,7 +37,7 @@ sys.path.insert(0, '..')
 def end_interactive(fig):
     """ end interaction in a plot created with %matplotlib notebook """
     plt.gcf().canvas.draw()
-    time.sleep(0.2)
+    time.sleep(1.)
     plt.close(fig)
 
 
@@ -436,11 +436,11 @@ def set_limits(x, y):
     plt.gca().set_xlim(x)
     plt.gca().set_ylim(y)
 
-def plot_predictions(p, rng=None):
+def plot_predictions(p, rng=None, label='Prediction'):
     if rng is None:
         rng = range(len(p))
     plt.scatter(rng, p, marker='v', s=40, edgecolor='r',
-                facecolor='None', lw=2, label='prediction')
+                facecolor='None', lw=2, label=label)
 
 
 

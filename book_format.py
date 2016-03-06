@@ -64,12 +64,6 @@ test_filterpy_version()
 pylab.rcParams['figure.max_open_warning'] = 50
 
 
-def end_interactive(fig):
-    """ end interaction in a plot created with %matplotlib notebook """
-    import time
-    plt.gcf().canvas.draw()
-    time.sleep(0.1)
-    plt.close(fig)
 
 def equal_axis():
     pylab.rcParams['figure.figsize'] = 10,10
