@@ -79,7 +79,7 @@ def plot_g_h_results(measurements, filtered_data,
 
     book_plots.plot_filter(filtered_data, **kwargs)
     book_plots.plot_measurements(measurements, label=z_label)
-    book_plots.show_legend()
+    plt.legend(loc=4)
     plt.title(title)
     plt.gca().set_xlim(left=0,right=len(measurements))
 
