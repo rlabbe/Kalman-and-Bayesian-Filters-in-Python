@@ -1,6 +1,6 @@
 from __future__ import print_function
 import io
-import IPython.nbformat as nbformat
+import nbformat
 import sys
 
 
