@@ -215,7 +215,7 @@ def show_radar_chart():
 
 
 
-    ax.annotate('$\Theta$', xy=(1.2, 1.05), color='b')
+    ax.annotate('$\epsilon$', xy=(1.2, 1.05), color='b')
     ax.annotate('Aircraft', xy=(2.04,2.), color='b')
     ax.annotate('altitude (y)', xy=(2.04,1.5), color='k')
     ax.annotate('x', xy=(1.5, .9))
