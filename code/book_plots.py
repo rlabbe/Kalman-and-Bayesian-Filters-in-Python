@@ -236,7 +236,7 @@ def plot_estimate_chart_3():
                     arrowprops=dict(arrowstyle='-',
                                     ec='k', lw=3, shrinkA=8, shrinkB=8))
 
-        est_y = ((164.2-158)*.8 + 158)
+        est_y = (158 + .4*(164.2-158))
         plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
         plt.scatter ([1], [164.2], c='b',s=128)
         plt.scatter ([1], [159], c='r', s=128)
