@@ -89,9 +89,6 @@ on my google drive [here](https://drive.google.com/open?id=0By_SW19c1BfhSVFzNHc0
 
 The PDF will usually lag behind what is in github as I don't update it for every minor check in.
 
-As an experiment I have generated a version for 6x9 paper size. I find it a bit easier to read from a PDF viewer. I may or may not continue to support this format. At the moment the section and chapter names don't fit the top of the page. I know how to fix it, but that is not a top priority for me at the moment.
-
-https://drive.google.com/file/d/0By_SW19c1BfhTHRXWFJ1RUtvaDQ/view?usp=sharing
 
 
 ## Downloading the book
