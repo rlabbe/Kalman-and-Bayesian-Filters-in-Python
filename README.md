@@ -85,7 +85,7 @@ The preface available from the link above has all the information in this README
 PDF Version
 -----
 I used to keep a PDF version of the book in this repository. However, git does not do well with binary blobs like that, and the repository was getting too big. I deleted it and it's history from git. I am now providing it 
-on my google drive [here](https://drive.google.com/file/d/0By_SW19c1BfhSVFzNHc0SjduNzg/view?usp=sharing)
+on my google drive [here](https://drive.google.com/open?id=0By_SW19c1BfhSVFzNHc0SjduNzg)
 
 The PDF will usually lag behind what is in github as I don't update it for every minor check in.
 
