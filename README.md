@@ -18,24 +18,21 @@ Start reading online now by clicking the binder badge below:
 What are Kalman and Bayesian Filters?
 -----
 
-We measure things in the world with sensors. For example, thermometers measure temperature, anemometers measure wind speed, scales measure weights. We measure distances with sonar, lasers, and calipers. 
+Sensors are noisy. The world is full of data and events that we want to measure and track, but we cannot rely on sensors to give us perfect information. The GPS in my car reports altitude. Each time I pass the same point in the road it reports a slightly different altitude. My kitchen scale gives me different readings if I weigh the same object twice.
 
-Unfortunately, no sensor is perfect. For example, a thermometer might only be accurate to within 2 degrees. A laser rangefinder might be accurate to a meter. A bathroom scale might be accurate to 1 kilogram, whereas a kitchen scale might be accurate to a gram or less. 
+In simple cases the solution is obvious. If my scale gives slightly different readings I can just take a few readings and average them. Or I can replace it with a more accurate scale. But what do we do when the sensor is very noisy, or the environment makes data collection difficult? We may be trying to track the movement of a low flying aircraft. We may want to create an autopilot for a drone, or ensure that our farm tractor seeded the entire field. I work on computer vision, and I need to track moving objects in images, and the computer vision algorithms create very noisy and unreliable results.
 
-Furthermore, a sensor might not present all of the information we would like. A laser rangefinder tells us the distance to an object, but it does not tell us where it is. The measurement is *relative* to the position of the rangefinder. If the rangefinder does not provide an angle (bearing) to the measured object we can only state that the object lies somewhere within a donut shaped circle around the rangefinder. If we do know the location of the rangefinder and the angle then we can compute the coordinates of the structure. But how do we know the rangefinder's position? With sensors. How do we measure the angle? With sensors. And sensors are inaccurate, so both of those measurements have a degree of error in them.
+This book teaches you how to solve these sorts of filtering problems. I use many different algorithms, but they are all based on Bayesian probability. In simple terms Bayesian probability determines what is likely to be true based on past information.
 
-Is there a way to reduce the amount of error in the measurements? We often have another important source of knowledge. Assume we are tracking an aircraft with radar and the aircraft is flying North at roughly 300 kph. The next measurement implies that the aircraft is flying South at 900 kph. We know aircraft cannot change directions and speed instantly, so we can conclude that this measurement is very inaccurate. On the other hand, if the measurement closely matches what we predict the aircraft is doing then we can conclude that the measurement is not noisy.
+If I asked you the heading of my car at this moment you would have no idea. You'd proffer a number between 1∘∘ and 360∘∘ degrees, and have a 1 in 360 chance of being right. Now suppose I told you that 2 seconds ago its heading was 243∘∘. In 2 seconds my car could not turn very far so you could make a far more accurate prediction. You are using past information to more accurately infer information about the present or future.
 
-We model the behavior of a system using a *process model*. The process model is also noisy. Aircraft are buffeted by winds, and the pilot can change the velocity of the aircraft. 
+The world is also noisy. That prediction helps you make a better estimate, but it also subject to noise. I may have just braked for a dog or swerved around a pothole. Strong winds and ice on the road are external influences on the path of my car. In control literature we call this noise though you may not think of it that way.
 
-We are now confronted with a problem where both our measurements and process models are noisy. The problem may appear intractable. However, both are based on the behavior of a real, physical object. Bayesian filters models the noise of both probabilistically. We are measuring a physical object, so they must be *correlated* with the behavior of that object. We can use that knowledge to form better predictions of the object's behavior than if we just used the measurements. 
+There is more to Bayesian probability, but you have the main idea. Knowledge is uncertain, and we alter our beliefs based on the strength of the evidence. Kalman and Bayesian filters blend our noisy and limited knowledge of how a system behaves with the noisy and limited sensor readings to produce the best possible estimate of the state of the system. Our principle is to never discard information.
 
-This book covers many common ways of performing that computation. The *Kalman filter* is the best known example of this type of filter. Rudolf Kálmán published a mathematically elegant solution to this problem in 1960 which used the assumption that all of the errors are Gaussian-distributed. 
+Say we are tracking an object and a sensor reports that it suddenly changed direction. Did it really turn, or is the data noisy? It depends. If this is a jet fighter we'd be very inclined to believe the report of a sudden maneuver. If it is a freight train on a straight track we would discount it. We'd further modify our belief depending on how accurate the sensor is. Our beliefs depend on the past and on our knowledge of the system we are tracking and on the characteristics of the sensors.
 
-I will explain what that means later. The important results are that the Kalman filter can be computed very efficiently with a computer, and that the output is mathematically optimal in a certain sense if the assumptions are true. Shortly after publishing his original paper Dr. Kálmán visited NASA Ames Research Center. Engineers at Ames were struggling with how to compute the trajectory of the Apollo mission, and Stanley F. Schmidt recognized the applicability of the Kalman filter to the problem. The Apollo navigation filter is the first known practical use of the Kalman filter. 
-
-Kalman filters are now used everywhere. They are used for aircraft navigation, missile guidance, and robotics. A form called the *ensemble Kalman filter* is used in weather prediction. Wall street uses them in trading models. Drones use them in the flight computer. I've even received an email from somebody that uses them to track the milk production of cows! If your application uses sensors and accuracy is important to you, you need to understand Kalman filters.
-
+The Kalman filter was invented by Rudolf Emil Kálmán to solve this sort of problem in a mathematically optimal way. Its first use was on the Apollo missions to the moon, and since then it has been used in an enormous variety of domains. There are Kalman filters in aircraft, on submarines, and on cruise missiles. Wall street uses them to track the market. They are used in robots, in IoT (Internet of Things) sensors, and in laboratory instruments. Chemical plants use them to control and monitor reactions. They are used to perform medical imaging and to remove noise from cardiac signals. If it involves a sensor and/or time-series data, a Kalman filter or a close relative to the Kalman filter is usually involved.
 
 Motivation
 -----
@@ -58,17 +55,10 @@ This book has supporting libraries for computing statistics, plotting various th
 
 Finally, this book is free. The cost for the books required to learn Kalman filtering is somewhat prohibitive even for a Silicon Valley engineer like myself; I cannot believe the are within the reach of someone in a depressed economy, or a financially struggling student. I have gained so much from free software like Python, and free books like those from Allen B. Downey [here](http://www.greenteapress.com/). It's time to repay that. So, the book is free, it is hosted on free servers, and it uses only free and open software such as IPython and mathjax to create the book. 
 
-In Development
---------------
-This book is still very much in development. Chapters are incomplete, code and text could be incorrect. I strive for correctness during development, but I fail. Raise an issue on GitHub, or email me, if you find a problem and I will try to fix it as soon as possible.
 
 ## Reading Online
 
 The book is written as a collection of Jupyter Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. There are multiple ways to read these online, listed below.
-
-### GitHub
-
-GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on. Rendering may be a bit slow or imperfect. Notebooks are rendered statically - you can read them, but not modify or run the code.
 
 ### binder
 
@@ -80,6 +70,10 @@ I am experimentally trying a new service, binder. binder serves interactive note
 ### nbviewer
 
 The website http://nbviewer.org provides an Jupyter Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. Notebooks are rendered statically - you can read them, but not modify or run the code.
+
+### GitHub
+
+GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Note: I have found this to be buggy - sometimes it cannot open files that are readable by all the other methods here. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on.  Notebooks are rendered statically - you can read them, but not modify or run the code.
 
 ### SageMathCloud
 
@@ -101,11 +95,9 @@ on my google drive [here](https://drive.google.com/open?id=0By_SW19c1BfhSVFzNHc0
 The PDF will usually lag behind what is in github as I don't update it for every minor check in.
 
 
-
 ## Downloading the book
 
-
-However, this book is intended to be interactive and I recommend using it in that form. It's a little more to set up, but worth it. If you install IPython and some supporting libraries  on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
+However, this book is intended to be interactive and I recommend using it in that form. It's a little more effort to set up, but worth it. If you install IPython and some supporting libraries  on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
 The github pages for this project are at https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python You can clone it to your hard drive with the command 
 
@@ -122,8 +114,6 @@ Follow the instructions in **Installation and Software Requirements** below to i
 This will open a browser window showing the contents of the base directory. The book is organized into chapters. To read Chapter 2, click on the link for chapter 2. This will cause the browser to open that subdirectory. In each subdirectory there will be one or more IPython Notebooks (all notebooks have a .ipynb file extension). The chapter contents are in the notebook with the same name as the chapter name. There are sometimes supporting notebooks for doing things like generating animations that are displayed in the chapter. These are not intended to be read by the end user, but of course if you are curious as to how an animation is made go ahead and take a look.
 
 This is admittedly a somewhat cumbersome interface to a book; I am following in the footsteps of several other projects that are somewhat repurposing Jupyter Notebook to generate entire books. I feel the slight annoyances have a huge payoff - instead of having to download a separate code base and run it in an IDE while you try to read a book, all of the code and text is in one place. If you want to alter the code, you may do so and immediately see the effects of your change. If you find a bug, you can make a fix, and push it back to my repository so that everyone in the world benefits. And, of course, you will never encounter a problem I face all the time with traditional books - the book and the code are out of sync with each other, and you are left scratching your head as to which source to trust.
-
-**Breaking change: I have upgraded to IPython 3.0. This release alters the notebook format (.ipynb) files. If you are running an older version you will likely get the unhelpful error message "Bad request" when you try to open the notebook. Note that this is the version number for _IPython_, which provides the IPython Notebook software, and not the Python version. I.e. you can run these notebooks with Python 2.7, so long as you have IPython 3.0 installed. IPython 3.0 was released on Febuary 27, 2015, so if your install is later than that you will have to update IPython. IPython 2.4 can read the files, but not write them. I apologize if you are using an earlier version, but this is an unavoidable change and I'd rather change now instead of later. This will not affect you if you are reading online, only if you are running the notebooks on your local computer. Please note that this has nothing to do with Python 3 - you can run Python 2.7 in IPython 3.**
 
 
 Companion Software
