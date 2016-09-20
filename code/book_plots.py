@@ -22,12 +22,13 @@ from book_format import figsize
 from contextlib import contextmanager
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 import numpy as np
 import sys
 import time
 
 try:
-    import seaborn
+    import seabornee
 except:
     pass
 
@@ -90,7 +91,6 @@ def plot_errorbar1():
         plot_errorbars([(160, 8, 'A'), (170, 8, 'B')],
                        xlims=(145, 185), ylims=(-1, 1))
         plt.show()
-        plt.savefig('../figs/gh_errorbar1.png', pad_inches=0.)
 
 
 def plot_errorbar2():
@@ -98,14 +98,12 @@ def plot_errorbar2():
         plt.figure()
         plot_errorbars([(160, 3, 'A'), (170, 9, 'B')],
                        xlims=(145, 185), ylims=(-1, 1))
-        plt.savefig('../figs/gh_errorbar2.png', pad_inches=0.)
 
 def plot_errorbar3():
     with figsize(y=2):
         plt.figure()
         plot_errorbars([(160, 1, 'A'), (170, 9, 'B')],
                        xlims=(145, 185), ylims=(-1, 1))
-        plt.savefig('../figs/gh_errorbar3.png', pad_inches=0.1)
 
 
 def plot_hypothesis1():
@@ -122,7 +120,6 @@ def plot_hypothesis1():
         plt.xlabel('day')
         plt.ylabel('lbs')
         plt.tight_layout()
-    plt.savefig('../figs/gh_hypothesis1.png', pad_inches=0.1)
 
 
 def plot_hypothesis2():
@@ -134,7 +131,6 @@ def plot_hypothesis2():
         plt.xlim(0, 11); plt.ylim(150, 185)
         plt.xlabel('day')
         plt.ylabel('lbs')
-    plt.savefig('../figs/gh_hypothesis2.png', pad_inches=0.1)
 
 
 def plot_hypothesis3():
@@ -150,7 +146,6 @@ def plot_hypothesis3():
         plt.xlim(0, 13); plt.ylim(145, 185)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
-    plt.savefig('../figs/gh_hypothesis3.png', pad_inches=0.1)
 
 
 def plot_hypothesis4():
@@ -167,7 +162,6 @@ def plot_hypothesis4():
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         show_legend()
-    plt.savefig('../figs/gh_hypothesis4.png', pad_inches=0.1)
 
 
 def plot_hypothesis5():
@@ -186,7 +180,6 @@ def plot_hypothesis5():
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         show_legend()
-    plt.savefig('../figs/gh_hypothesis5.png', pad_inches=0.1)
 
 
 def plot_estimate_chart_1():
@@ -202,7 +195,6 @@ def plot_estimate_chart_1():
         ax.xaxis.grid(True, which="major", linestyle='dotted')
         ax.yaxis.grid(True, which="major", linestyle='dotted')
         plt.tight_layout()
-    plt.savefig('../figs/gh_estimate1.png', pad_inches=0.1)
 
 
 def plot_estimate_chart_2():
@@ -222,7 +214,7 @@ def plot_estimate_chart_2():
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
         ax.yaxis.grid(True, which="major", linestyle='dotted')
-    plt.savefig('../figs/gh_estimate2.png', pad_inches=0.1)
+
 
 def plot_estimate_chart_3():
     with figsize(y=2.5):
@@ -248,15 +240,13 @@ def plot_estimate_chart_3():
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
         ax.yaxis.grid(True, which="major", linestyle='dotted')
-    plt.savefig('../figs/gh_estimate3.png', pad_inches=0.1)
 
 
 
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(4, 2.), facecolor='w')
-    #plt.figure(figsize=(14,12.5), facecolor='w')
+    plt.figure(figsize=(4, 3.), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
 
@@ -316,7 +306,6 @@ def create_predict_update_chart(box_bg = '#CCCCCC',
               ha='center', va='center', fontsize=14)
     plt.axis('equal')
     plt.xlim(2,10)
-    plt.savefig('../figs/gh_predict_update.png', pad_inches=0.1)
 
 
 def show_residual_chart(show_eq=True, show_H=False):
@@ -359,11 +348,6 @@ def show_residual_chart(show_eq=True, show_H=False):
     ax.yaxis.set_label_position("right")
     plt.ylabel('state')
     plt.xlim(-0.1, 1.5)
-    if show_H:
-        plt.savefig('../figs/residual_chart_with_h.png', pad_inches=0.1)
-    else:
-        plt.savefig('../figs/residual_chart.png', pad_inches=0.1)
-
 
 
 def show_legend():

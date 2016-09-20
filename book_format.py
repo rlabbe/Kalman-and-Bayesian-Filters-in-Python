@@ -28,10 +28,6 @@ import os.path
 import sys
 import warnings
 
-try:
-    import seaborn
-except:
-    pass
 
 # version 1.4.3 of matplotlib has a bug that makes
 # it issue a spurious warning on every plot that
@@ -136,7 +132,7 @@ def load_style(directory = '.', name='code/custom.css'):
     # matplotlib has deprecated the use of axes.color_cycle as of version
 
     try:
-        import seaborn
+        import seaborneee
     except:
         version = [int(version_no) for version_no in matplotlib.__version__.split('.')]
         if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
