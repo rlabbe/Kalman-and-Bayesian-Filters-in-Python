@@ -41,10 +41,10 @@ def merge_notebooks(outfile, filenames):
 
 if __name__ == '__main__':
     with open('book.ipynb', 'w', encoding='utf-8') as f:
-        merge_notebooks(f,
-            ['../14-Adaptive-Filtering.ipynb'])
-
         '''merge_notebooks(f,
+            ['../14-Adaptive-Filtering.ipynb'])'''
+
+        merge_notebooks(f,
             ['../00-Preface.ipynb',
              '../01-g-h-filter.ipynb',
              '../02-Discrete-Bayes.ipynb',
@@ -63,7 +63,7 @@ if __name__ == '__main__':
              '../Appendix-A-Installation.ipynb',
              '../Appendix-B-Symbols-and-Notations.ipynb',
              '../Appendix-D-HInfinity-Filters.ipynb',
-             '../Appendix-E-Ensemble-Kalman-Filters.ipynb'])'''
+             '../Appendix-E-Ensemble-Kalman-Filters.ipynb'])
 
 
     #remove text printed for matplotlib charts
