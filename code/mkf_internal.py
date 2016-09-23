@@ -60,9 +60,8 @@ def zs_var_275():
 
 
 def plot_track_ellipses(N, zs, ps, cov, title):
-    bp.plot_measurements(range(1,N + 1), zs)
-    plt.plot(range(1, N + 1), ps, c='b', lw=2, label='filter')
-    plt.legend(loc='best')
+    #bp.plot_measurements(range(1,N + 1), zs)
+    #plt.plot(range(1, N + 1), ps, c='b', lw=2, label='filter')
     plt.title(title)
 
     for i,p in enumerate(cov):
@@ -75,11 +74,8 @@ def plot_track_ellipses(N, zs, ps, cov, title):
             plt.text (20, 5, s, fontsize=18)
             s = ('$\sigma^2_{vel} = %.2f$' % p[1, 1])
             plt.text (20, 0, s, fontsize=18)
-    plt.xlim(-10, 80)
+    plt.ylim(-5, 20)
     plt.gca().set_aspect('equal')
-    plt.show()
-
-
 
 
 def plot_gaussian_multiply():
