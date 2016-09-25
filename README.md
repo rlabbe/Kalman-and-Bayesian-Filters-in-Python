@@ -62,7 +62,7 @@ The book is written as a collection of Jupyter Notebooks, an interactive, browse
 
 ### binder
 
-I am experimentally trying a new service, binder. binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. I have not experimented with it much. Please raise an issue on my GitHub page if anything fails. I'm not officially supporting this as it is in beta, but I'm quite excited about the possibilities.
+binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. 
 
 [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
 
@@ -75,9 +75,6 @@ The website http://nbviewer.org provides an Jupyter Notebook server that renders
 
 GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Note: I have found this to be buggy - sometimes it cannot open files that are readable by all the other methods here. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on.  Notebooks are rendered statically - you can read them, but not modify or run the code.
 
-### SageMathCloud
-
-The Preface contains instructions on how to host the book online, for free, on SageMath's cloud server (cloud.sagemath.com) that allows you to run and alter the code insde the Notebooks. It takes 5 minutes to set up. We are working to make this easier to use. 
 
 Issues or Questions
 ------
