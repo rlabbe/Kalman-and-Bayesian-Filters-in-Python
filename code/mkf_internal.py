@@ -374,7 +374,7 @@ def plot_3_covariances():
     plt.gca().grid(b=False)
     plt.gca().set_xticks([0,1,2,3,4])
     plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
-                            title='|2 0|\n|0 2|', std=[1,2,3], axis_equal=False)
+                            title='|2 0|\n|0 2|', std=[3], axis_equal=False)
     plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
 
@@ -385,7 +385,7 @@ def plot_3_covariances():
     plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            std=[1,2,3],axis_equal=False, title='|2 0|\n|0 6|')
+                            std=[3],axis_equal=False, title='|2 0|\n|0 6|')
 
     plt.subplot(133)
     plt.gca().grid(b=False)
@@ -394,8 +394,8 @@ def plot_3_covariances():
     plt.ylim((0, 15))
     plt.gca().set_aspect('equal', adjustable='box')
     plot_covariance_ellipse((2, 7), P, facecolor='g', alpha=0.2,
-                            axis_equal=False,std=[1,2,3],
-                            title='|2 1.2|\n|1.2 2|')
+                            axis_equal=False,std=[3],
+                            title='|2.0 1.2|\n|1.2 2.0|')
 
     plt.tight_layout()
     plt.show()
@@ -450,15 +450,16 @@ def plot_track(ps, actual, zs, cov, std_scale=1,
 
         plt.xlim((0,count))
         plt.title(title)
+        plt.show()
 
     if plot_P:
-        with interactive_plot():
-            ax = plt.subplot(121)
-            ax.set_title("$\sigma^2_x$ (pos variance)")
-            plot_covariance(cov, (0, 0))
-            ax = plt.subplot(122)
-            ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
-            plot_covariance(cov, (1, 1))
+        ax = plt.subplot(121)
+        ax.set_title("$\sigma^2_x$ (pos variance)")
+        plot_covariance(cov, (0, 0))
+        ax = plt.subplot(122)
+        ax.set_title("$\sigma^2_\dot{x}$ (vel variance)")
+        plot_covariance(cov, (1, 1))
+        plt.show()
 
 
 def plot_covariance(P, index=(0, 0)):
