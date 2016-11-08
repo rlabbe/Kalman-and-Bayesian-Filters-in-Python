@@ -42,7 +42,7 @@ def merge_notebooks(outfile, filenames):
 if __name__ == '__main__':
     with open('book.ipynb', 'w', encoding='utf-8') as f:
         '''merge_notebooks(f,
-            ['../14-Adaptive-Filtering.ipynb'])'''
+            ['../04-One-Dimensional-Kalman-Filters.ipynb'])'''
 
         merge_notebooks(f,
             ['../00-Preface.ipynb',
