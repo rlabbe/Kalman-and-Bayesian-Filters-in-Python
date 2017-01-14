@@ -106,7 +106,7 @@ This will create a directory named Kalman-and-Bayesian-Filters-in-Python.
 
 Follow the instructions in **Installation and Software Requirements** below to install all the supporting sofware require. Then, navigate to the directory, and run IPython notebook with the command 
 
-    jupter notebook
+    jupyter notebook
 
 This will open a browser window showing the contents of the base directory. The book is organized into chapters. To read Chapter 2, click on the link for chapter 2. This will cause the browser to open that subdirectory. In each subdirectory there will be one or more IPython Notebooks (all notebooks have a .ipynb file extension). The chapter contents are in the notebook with the same name as the chapter name. There are sometimes supporting notebooks for doing things like generating animations that are displayed in the chapter. These are not intended to be read by the end user, but of course if you are curious as to how an animation is made go ahead and take a look.
 
