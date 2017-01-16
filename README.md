@@ -4,7 +4,9 @@
 Introductory text for Kalman and Bayesian filters. All code is written in Python, and the book itself is written using Juptyer Notebook so that you can run and modify the code in your browser. What better way to learn?
 
 
-**"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author of several math and programming textbooks, via twitter.
+**"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author.
+
+**Thanks for all your work on publishing your introductory text on Kalman Filtering, as well as the Python Kalman Filtering libraries. We’ve been using it internally to teach some key state estimation concepts to folks and it’s been a huge help.** - Sam Rodkey, SpaceX
 
 Start reading online now by clicking the binder badge below:
 
