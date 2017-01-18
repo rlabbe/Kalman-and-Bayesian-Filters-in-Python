@@ -14,3 +14,4 @@ rm --f chapter.pdf
 
 rmdir  /S /Q book_files
 rmdir  /S /Q chapter_files
+rmdir  /S /Q tmp
