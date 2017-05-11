@@ -124,6 +124,8 @@ def _decode_dict(data):
 
 
 def load_style(directory = '.', name='code/custom.css'):
+    if 'code' in sys.modules:
+        del sys.modules['code']
     if sys.version_info[0] >= 3:
         style = json.load(open(os.path.join(directory, "code/538.json")))
     else:
