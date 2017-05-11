@@ -17,7 +17,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-import code.book_plots as book_plots
+import kf_book.book_plots as book_plots
 import numpy as np
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
 import pylab as plt

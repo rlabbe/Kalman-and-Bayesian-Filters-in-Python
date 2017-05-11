@@ -18,9 +18,9 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-from book_format import figsize
 from contextlib import contextmanager
 import matplotlib as mpl
+import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
@@ -32,10 +32,34 @@ try:
 except:
     pass
 
+
+def equal_axis():
+    pylab.rcParams['figure.figsize'] = 10,10
+    plt.axis('equal')
+
+
+def reset_axis():
+    pylab.rcParams['figure.figsize'] = 9, 3
+
+def set_figsize(x=9, y=4):
+    pylab.rcParams['figure.figsize'] = x, y
+
+
+@contextmanager
+def figsize(x=9, y=4):
+    """Temporarily set the figure size using 'with figsize(a,b):'"""
+
+    size = pylab.rcParams['figure.figsize']
+    set_figsize(x, y)
+    yield
+    pylab.rcParams['figure.figsize'] = size
+
+
+
 """ If the plot is inline (%matplotlib inline) we need to
 do special processing for the interactive_plot context manager,
 otherwise it outputs a lot of extra <matplotlib.figure.figure
-type output into the notebook.""" 
+type output into the notebook."""
 
 IS_INLINE = mpl.get_backend().find('backend_inline') != -1
 
@@ -50,12 +74,12 @@ def end_interactive(fig):
     time.sleep(1.)
     plt.close(fig)
 
-    
+
 @contextmanager
 def interactive_plot(close=True, fig=None):
     if fig is None and not IS_INLINE:
         fig = plt.figure()
-    
+
     yield
     try:
         # if the figure only uses annotations tight_output
@@ -64,7 +88,7 @@ def interactive_plot(close=True, fig=None):
     except:
         pass
 
-    if not IS_INLINE: 
+    if not IS_INLINE:
         plt.show()
 
     if close and not IS_INLINE:

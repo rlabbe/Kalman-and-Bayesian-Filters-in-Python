@@ -17,7 +17,6 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 from contextlib import contextmanager
-from distutils.version import LooseVersion
 from IPython.core.display import HTML
 import json
 import matplotlib
@@ -27,7 +26,7 @@ import numpy as np
 import os.path
 import sys
 import warnings
-
+from kf_book.book_plots import set_figsize, reset_axis
 
 # version 1.4.3 of matplotlib has a bug that makes
 # it issue a spurious warning on every plot that
@@ -59,27 +58,6 @@ test_filterpy_version()
 pylab.rcParams['figure.max_open_warning'] = 50
 
 
-
-def equal_axis():
-    pylab.rcParams['figure.figsize'] = 10,10
-    plt.axis('equal')
-
-
-def reset_axis():
-    pylab.rcParams['figure.figsize'] = 9, 3
-
-def set_figsize(x=9, y=4):
-    pylab.rcParams['figure.figsize'] = x, y
-
-
-@contextmanager
-def figsize(x=9, y=4):
-    """Temporarily set the figure size using 'with figsize(a,b):'"""
-
-    size = pylab.rcParams['figure.figsize']
-    set_figsize(x, y)
-    yield
-    pylab.rcParams['figure.figsize'] = size
 
 
 @contextmanager
@@ -123,27 +101,27 @@ def _decode_dict(data):
     return rv
 
 
-def load_style(directory = '.', name='code/custom.css'):
-    if sys.version_info[0] >= 3:
-        style = json.load(open(os.path.join(directory, "code/538.json")))
-    else:
-        style = json.load(open(directory + "/code/538.json"), object_hook=_decode_dict)
-
-    # matplotlib has deprecated the use of axes.color_cycle as of version
-
-    try:
-        import seaborneee
-    except:
+def load_style(directory = '.', name='kf_book/custom.css'):
         version = [int(version_no) for version_no in matplotlib.__version__.split('.')]
-        if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
-            style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
-            style.pop("axes.color_cycle", None)
-        plt.rcParams.update(style)
-    set_figsize()
-    reset_axis ()
-    np.set_printoptions(suppress=True,precision=3, linewidth=70,
-                        formatter={'float':lambda x:' {:.3}'.format(x)})
 
-    styles = open(os.path.join(directory, name), 'r').read()
-    set_figsize()
-    return HTML(styles)
+        try:
+            if sys.version_info[0] >= 3:
+                style = json.load(open(os.path.join(directory, "kf_book/538.json")))
+            else:
+                style = json.load(open(directory + "/kf_book/538.json"), object_hook=_decode_dict)
+
+            # matplotlib has deprecated the use of axes.color_cycle as of version
+            if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
+                style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
+                style.pop("axes.color_cycle", None)
+            plt.rcParams.update(style)
+        except:
+            pass
+        set_figsize()
+        reset_axis ()
+        np.set_printoptions(suppress=True,precision=3, linewidth=70,
+                            formatter={'float':lambda x:' {:.3}'.format(x)})
+
+        styles = open(os.path.join(directory, name), 'r').read()
+        set_figsize()
+        return HTML(styles)

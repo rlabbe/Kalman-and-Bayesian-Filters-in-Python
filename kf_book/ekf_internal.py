@@ -16,7 +16,7 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-import code.book_plots as bp
+import kf_book.book_plots as bp
 import filterpy.kalman as kf
 from math import radians, sin, cos, sqrt, exp
 import matplotlib.pyplot as plt

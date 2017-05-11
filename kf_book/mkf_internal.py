@@ -16,13 +16,18 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-import code.book_plots as bp
+from mpl_toolkits.mplot3d import Axes3D
+
+try:
+    import kf_book.book_plots as bp
+except:
+    import book_plots as bp
+
 import filterpy.stats as stats
 from filterpy.stats import plot_covariance_ellipse
 from matplotlib.patches import Ellipse
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from numpy.random import multivariate_normal
 
@@ -273,33 +278,44 @@ def plot_3d_covariance(mean, cov):
 
     xs = np.arange(minx, maxx, (maxx-minx)/40.)
     ys = np.arange(miny, maxy, (maxy-miny)/40.)
-    xv, yv = np.meshgrid (xs, ys)
+    xv, yv = np.meshgrid(xs, ys)
 
     zs = np.array([100.* stats.multivariate_gaussian(np.array([x,y]),mean,cov) \
                    for x, y in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
 
     maxz = np.max(zs)
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
 
-    #ax = plt.figure().add_subplot(111, projection='3d')
-    ax = plt.gca(projection='3d')
+    #ax = plt.gca(projection='3d')
     ax.plot_surface(xv, yv, zv, rstride=1, cstride=1, cmap=cm.autumn)
 
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
 
-
+    # For unknown reasons this started failing in Jupyter notebook when
+    # using `%matplotlib inline` magic. Still works fine in IPython or when
+    # `%matplotlib notebook` magic is used.
     x = mean[0]
     zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
                    for _, y in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
-    ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+    try:
+        pass
+        #ax.contour(xv, yv, zv, zdir='x', offset=minx-1, cmap=cm.binary)
+    except:
+        pass
 
     y = mean[1]
     zs = np.array([100.* stats.multivariate_gaussian(np.array([x, y]),mean,cov)
                    for x, _ in zip(np.ravel(xv), np.ravel(yv))])
     zv = zs.reshape(xv.shape)
-    ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
+    try:
+        pass
+        #ax.contour(xv, yv, zv, zdir='y', offset=maxy, cmap=cm.binary)
+    except:
+        pass
 
 
 def plot_3d_sampled_covariance(mean, cov):
