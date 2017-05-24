@@ -535,10 +535,10 @@ def plot_filter(xs, ys=None, c='#013afe', label='Filter', var=None, **kwargs):
         ys = xs
         xs = range(len(ys))
 
-    plt.plot(xs, ys, color=c, label=label, **kwargs)
+    retval = plt.plot(xs, ys, color=c, label=label, **kwargs)
 
     if var is None:
-        return
+        return retval
 
     var = np.asarray(var)
 
@@ -550,6 +550,8 @@ def plot_filter(xs, ys=None, c='#013afe', label='Filter', var=None, **kwargs):
     plt.plot(xs, ys-std, linestyle=':', color='k', lw=2)
     plt.fill_between(xs, std_btm, std_top,
                      facecolor='yellow', alpha=0.2)
+
+    return retval
 
 
 
