@@ -54,13 +54,13 @@ def plot_gh_results(weights, estimates, predictions, time_step=0):
         plt.gcf().canvas.draw()
         time.sleep(time_step)
 
-        book_plots.plot_filter(xs[:i+1], estimates[:i+1], marker='o')
+        est, = book_plots.plot_filter(xs[:i+1], estimates[:i+1], marker='o')
         plt.xlim([-1, n+1])
         plt.ylim([156.0, 173])
         plt.gcf().canvas.draw()
         time.sleep(time_step)
 
-        plt.legend([act, scale, pred], ['Actual Weight', 'Measurement', 'Predictions'], loc=4)
+        plt.legend([act, scale, est, pred], ['Actual Weight', 'Measurement', 'Estimates', 'Predictions'], loc=4)
     book_plots.set_labels(x='day', y='weight (lbs)')
 
 
