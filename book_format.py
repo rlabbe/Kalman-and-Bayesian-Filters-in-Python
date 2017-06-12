@@ -56,7 +56,7 @@ def test_filterpy_version():
 test_filterpy_version()
 
 pylab.rcParams['figure.max_open_warning'] = 50
-
+pylab.rcParams['figure.figsize'] = 9, 4
 
 
 

@@ -41,6 +41,11 @@ def equal_axis():
 def reset_axis():
     pylab.rcParams['figure.figsize'] = 9, 3
 
+    
+def reset_figsize():
+    pylab.rcParams['figure.figsize'] = 9, 4
+
+
 def set_figsize(x=9, y=4):
     pylab.rcParams['figure.figsize'] = x, y
 
@@ -131,7 +136,7 @@ def plot_errorbar3():
 
 
 def plot_hypothesis1():
-    with figsize(y=2.5):
+    with figsize(y=3.5):
         plt.figure()
         plt.errorbar([1, 2, 3], [170, 161, 169],
                      xerr=0, yerr=10, fmt='bo', capthick=2, capsize=10)
@@ -270,7 +275,7 @@ def plot_estimate_chart_3():
 def create_predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(4, 3.), facecolor='w')
+    plt.figure(figsize=(4,4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
 
