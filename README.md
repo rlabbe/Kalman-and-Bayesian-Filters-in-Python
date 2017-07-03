@@ -11,7 +11,7 @@ Introductory text for Kalman and Bayesian filters. All code is written in Python
 Start reading online now by clicking the binder badge below:
 
 
-[![Binder](http://mybinder.org/badge.svg)](https://hub.binder-beta.omgwtf.in/user/ffcd1c9f-cf26-4c6d-b431-2a7d689df05a/tree?)
+[![Binder](http://mybinder.org/badge.svg)](https://beta.mybinder.org/v2/gh/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master)
 
 
 
