@@ -66,7 +66,7 @@ The book is written as a collection of Jupyter Notebooks, an interactive, browse
 
 binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter. 
 
-[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+[![Binder](http://mybinder.org/badge.svg)](https://beta.mybinder.org/v2/gh/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master)
 
 
 ### nbviewer
