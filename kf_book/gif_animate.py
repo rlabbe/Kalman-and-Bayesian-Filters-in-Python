@@ -57,4 +57,10 @@ def animate(filename, func, frames, interval, fig=None, figsize=(6.5, 6.5)):
 
     anim = animation.FuncAnimation(fig, func, init_func=init_func,
         frames=frames, interval=interval)
-    anim.save(filename, writer='imagemagick')
+        
+    import os
+    basename = os.path.splitext(filename)[0]
+    anim.save(basename + '.mp4', writer='ffmpeg')
+    
+    os.system("ffmpeg -y -i {}.mp4 {}.gif".format(basename, basename))
+    os.remove(basename + '.mp4')
