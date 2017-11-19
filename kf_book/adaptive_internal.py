@@ -22,7 +22,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_track_and_residuals(t, xs, z_xs, res):
+def plot_track_and_residuals(dt, xs, z_xs, res):
+    assert np.isscalar(dt)
+    t = np.arange(0, len(xs)*dt, dt)
     plt.subplot(121)
     if z_xs is not None:
         bp.plot_measurements(t, z_xs, label='z')
@@ -45,8 +47,7 @@ def plot_markov_chain():
     fig = plt.figure(figsize=(4,4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
-    #ax.set_xlim(0, 10)
-    #ax.set_ylim(0, 10)
+
     box_bg = '#DDDDDD'
 
     kf1c = Circle((4,5), 0.5, fc=box_bg)
@@ -99,7 +100,6 @@ def plot_markov_chain():
 
     plt.axis('equal')
     plt.show()
-    bp.end_interactive(fig)
 
 
 def turning_target(N=600, turn_start=400):

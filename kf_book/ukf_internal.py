@@ -367,7 +367,7 @@ def plot_scatter_moving_target():
             a = actual_angle + randn() * math.radians(1)
             xs.append(d*math.cos(a))
             ys.append(d*math.sin(a))
-        plt.scatter(xs, ys)
+        plt.scatter(xs, ys, c='C0')
 
     plt.axis('equal')
     plt.plot([5.5, pos[0]], [6, pos[1]], c='g', linestyle='--')
@@ -419,7 +419,7 @@ def _plot_iscts(pos, sa, sb, N=4):
 
         plt.scatter(xs, ys, c='r', marker='.', alpha=0.5)
         plt.scatter(xs_a, ys_a, c='k', edgecolor='k')
-        plt.scatter(xs_b, ys_b, marker='v', edgecolor=None)
+        plt.scatter(xs_b, ys_b, marker='v', edgecolor=None, c='C0')
     plt.gca().set_aspect('equal')
 
 
@@ -430,7 +430,7 @@ def plot_iscts_two_sensors():
     sb = [8., 2.]
 
     plt.scatter(*sa, s=200, c='k', marker='v')
-    plt.scatter(*sb, s=200, marker='s')
+    plt.scatter(*sb, s=200, marker='s', c='C0')
     _plot_iscts(pos, sa, sb, N=4)
     plt.subplot(122)
     plot_iscts_two_sensors_changed_sensors()

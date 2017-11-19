@@ -34,6 +34,7 @@ def plot_height_std(x, lw=10):
                      facecolor='yellow', alpha=0.4)
     plt.xlabel('student')
     plt.ylabel('height (m)')
+    plt.show()
 
 
 def plot_correlated_data(X, Y, xlabel=None,
@@ -54,11 +55,11 @@ def plot_correlated_data(X, Y, xlabel=None,
         plt.gca().set_aspect('equal')
     plt.show()
 
-def plot_gaussian (mu, variance,
-                   mu_line=False,
-                   xlim=None,
-                   xlabel=None,
-                   ylabel=None):
+def plot_gaussian(mu, variance,
+                  mu_line=False,
+                  xlim=None,
+                  xlabel=None,
+                  ylabel=None):
 
     xs = np.arange(mu-variance*2,mu+variance*2,0.1)
     ys = [stats.gaussian (x, mu, variance)*100 for x in xs]
@@ -72,6 +73,7 @@ def plot_gaussian (mu, variance,
     if ylabel:
        plt.ylabel(ylabel)
     plt.show()
+
 
 def display_stddev_plot():
     xs = np.arange(10,30,0.1)
@@ -94,7 +96,7 @@ def display_stddev_plot():
     plt.plot ([20,20],[0,y],'b')
 
     x = 20+stddev
-    ax = plt.axes()
+    ax = plt.gca()
     ax.annotate('68%', xy=(20.3, 0.045))
     ax.annotate('', xy=(20-stddev,0.04), xytext=(x,0.04),
                 arrowprops=dict(arrowstyle="<->",

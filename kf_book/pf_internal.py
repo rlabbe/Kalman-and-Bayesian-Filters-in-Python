@@ -111,12 +111,14 @@ def plot_random_pd():
     y2 =  (0.1 * np.sin(norm(x, 0.2, 0.05)) +  0.25 * norm(x, 0.6, 0.05) +
           .5*norm(x, .5, .08) +
            np.sqrt(norm(x, 0.8, 0.06)) +0.1 * (1 - sigmoid(x, 0.45, 0.15)))
-    with plt.xkcd():
-        #plt.setp(plt.gca().get_xticklabels(), visible=False)
-        #plt.setp(plt.gca().get_yticklabels(), visible=False)
-        plt.axes(xticks=[], yticks=[], frameon=False)
-        plt.plot(x, y2)
-        plt.ylim([0, max(y2)+.1])
+
+    # hack because of bug `with plt.xkcd()` doesn't return context correctly
+    saved_state = mpl.rcParams.copy()
+    plt.xkcd()
+    plt.axes(xticks=[], yticks=[], frameon=False)
+    plt.plot(x, y2)
+    plt.ylim([0, max(y2)+.1])
+    mpl.rcParams.update(saved_state)
 
 
 def plot_monte_carlo_ukf():

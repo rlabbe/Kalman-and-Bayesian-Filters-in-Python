@@ -33,25 +33,25 @@ except:
     pass
 
 
-def equal_axis():
-    pylab.rcParams['figure.figsize'] = 10,10
+def equal_axis(sz=10):
+    pylab.rcParams['figure.figsize'] = sz, sz
     plt.axis('equal')
 
 
 def reset_axis():
-    pylab.rcParams['figure.figsize'] = 9, 3
+    pylab.rcParams['figure.figsize'] = 8, 3
 
     
 def reset_figsize():
-    pylab.rcParams['figure.figsize'] = 9, 4
+    pylab.rcParams['figure.figsize'] = 8, 3
 
 
-def set_figsize(x=9, y=4):
+def set_figsize(x=8, y=3):
     pylab.rcParams['figure.figsize'] = x, y
 
 
 @contextmanager
-def figsize(x=9, y=4):
+def figsize(x=8, y=3):
     """Temporarily set the figure size using 'with figsize(a,b):'"""
 
     size = pylab.rcParams['figure.figsize']
@@ -100,18 +100,19 @@ def interactive_plot(close=True, fig=None):
         end_interactive(fig)
 
 
-def plot_errorbars(bars, xlims, ylims=(0, 2)):
+def plot_errorbars(bars, xlims, ylims=(-1, 1)):
 
-    i = 0.0
-    for bar in bars:
-        plt.errorbar([bar[0]], [i], xerr=[bar[1]], fmt='o', label=bar[2] , capthick=2, capsize=10)
-        i += 0.2
+    with figsize(y=2):
+        i = 0.0
+        for bar in bars:
+            plt.errorbar([bar[0]], [i], xerr=[bar[1]], fmt='o', label=bar[2] , capthick=2, capsize=10)
+            i += 0.2
 
-    plt.ylim(*ylims)
-    plt.xlim(xlims[0], xlims[1])
-    show_legend()
-    plt.gca().axes.yaxis.set_ticks([])
-    plt.show()
+        plt.ylim(*ylims)
+        plt.xlim(xlims[0], xlims[1])
+        show_legend()
+        plt.gca().axes.yaxis.set_ticks([])
+        plt.show()
 
 
 def plot_errorbar1():
@@ -237,12 +238,13 @@ def plot_estimate_chart_2():
         plt.scatter ([1], [164.2], c='b',s=128)
         plt.scatter ([1], [159], c='r', s=128)
         plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
-        plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0, 157.8, "estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
+        plt.text (1.0, 164.4, "measurement ($z_t$)",ha='center',va='bottom',fontsize=18,color='blue')
+        plt.text (0.0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
         ax.yaxis.grid(True, which="major", linestyle='dotted')
+        plt.ylim(157, 164.5)
 
 
 def plot_estimate_chart_3():
@@ -263,16 +265,16 @@ def plot_estimate_chart_3():
         plt.scatter ([1], [159], c='r', s=128)
         plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
         plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0, 157.8, "estimate ($\hat{x}_{t-1}$)", ha='center', va='top',fontsize=18)
+        plt.text (0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
         plt.text (0.95, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
         ax.yaxis.grid(True, which="major", linestyle='dotted')
+        plt.ylim(157, 164.5)
 
 
-
-def create_predict_update_chart(box_bg = '#CCCCCC',
+def predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
     plt.figure(figsize=(4,4), facecolor='w')
@@ -334,7 +336,7 @@ def create_predict_update_chart(box_bg = '#CCCCCC',
     plt.text (4, 3.7,'State Estimate ($\mathbf{\hat{x}_k}$)',
               ha='center', va='center', fontsize=14)
     plt.axis('equal')
-    plt.xlim(2,10)
+    plt.show()
 
 
 def show_residual_chart(show_eq=True, show_H=False):
@@ -417,7 +419,7 @@ def bar_plot(pos, x=None, ylim=(0,1), title=None, c='#30a2da',
     ax.bar(x, pos, color=c, **kwargs)
     if ylim:
         plt.ylim(ylim)
-    plt.xticks(np.asarray(x)+0.4, x)
+    plt.xticks(np.asarray(x), x)
     if title is not None:
         plt.title(title)
 
@@ -490,11 +492,14 @@ def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
     plt.show()
 
 
-def plot_measurements(xs, ys=None, color='k', lw=2, label='Measurements',
+def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements',
                       lines=False, **kwargs):
     """ Helper function to give a consistant way to display
     measurements in the book.
     """
+    if ys is None and dt is not None:
+        ys = xs
+        xs = np.arange(0, len(ys)*dt, dt)
 
     plt.autoscale(tight=True)
     if lines:
@@ -525,17 +530,23 @@ def plot_residual_limits(Ps, stds=1.):
                  facecolor='#ffff00', alpha=0.3)
 
 
-def plot_track(xs, ys=None, label='Track', c='k', lw=2, **kwargs):
+def plot_track(xs, ys=None, dt=None, label='Track', c='k', lw=2, **kwargs):
+    if ys is None and dt is not None:
+        ys = xs
+        xs = np.arange(0, len(ys)*dt, dt)
     if ys is not None:
         return plt.plot(xs, ys, color=c, lw=lw, ls=':', label=label, **kwargs)
     else:
         return plt.plot(xs, color=c, lw=lw, ls=':', label=label, **kwargs)
 
 
-def plot_filter(xs, ys=None, c='#013afe', label='Filter', var=None, **kwargs):
+def plot_filter(xs, ys=None, dt=None, c='C0', label='Filter', var=None, **kwargs):
     """ plot result of KF with color `c`, optionally displaying the variance
     of `xs`. Returns the list of lines generated by plt.plot()"""
  
+    if ys is None and dt is not None:
+        ys = xs
+        xs = np.arange(0, len(ys) * dt, dt)
     if ys is None:
         ys = xs
         xs = range(len(ys))
@@ -622,7 +633,7 @@ if __name__ == "__main__":
     plot_estimate_chart_1()
     plot_estimate_chart_2()
     plot_estimate_chart_3()
-    create_predict_update_chart()
+    predict_update_chart()
     show_residual_chart()
     show_residual_chart(True, True)
     plt.close('all')

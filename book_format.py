@@ -35,6 +35,10 @@ if matplotlib.__version__ == '1.4.3':
     warnings.simplefilter(action="ignore", category=FutureWarning)
 
 np.set_printoptions(precision=3)
+try:
+    matplotlib.style.use('default')
+except:
+    pass
 
 def test_filterpy_version():
 
@@ -42,7 +46,7 @@ def test_filterpy_version():
     from distutils.version import LooseVersion
 
     v = filterpy.__version__
-    min_version = "0.1.2"
+    min_version = "1.1.0"
     if LooseVersion(v) < LooseVersion(min_version):
        raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
@@ -56,7 +60,7 @@ def test_filterpy_version():
 test_filterpy_version()
 
 pylab.rcParams['figure.max_open_warning'] = 50
-pylab.rcParams['figure.figsize'] = 9, 4
+pylab.rcParams['figure.figsize'] = 8, 3
 
 
 
@@ -109,17 +113,12 @@ def load_style(directory = '.', name='kf_book/custom.css'):
                 style = json.load(open(os.path.join(directory, "kf_book/538.json")))
             else:
                 style = json.load(open(directory + "/kf_book/538.json"), object_hook=_decode_dict)
-
-            # matplotlib has deprecated the use of axes.color_cycle as of version
-            if version[0] > 1 or (version[0] == 1 and version[1] >= 5):
-                style["axes.prop_cycle"] = "cycler('color', ['#6d904f','#013afe', '#202020','#fc4f30','#e5ae38','#A60628','#30a2da','#008080','#7A68A6','#CF4457','#188487','#E24A33'])"
-                style.pop("axes.color_cycle", None)
             plt.rcParams.update(style)
         except:
             pass
         set_figsize()
         reset_axis ()
-        np.set_printoptions(suppress=True,precision=3, linewidth=70,
+        np.set_printoptions(suppress=True, precision=3, linewidth=70,
                             formatter={'float':lambda x:' {:.3}'.format(x)})
 
         styles = open(os.path.join(directory, name), 'r').read()

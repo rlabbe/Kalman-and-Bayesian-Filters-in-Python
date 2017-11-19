@@ -16,8 +16,7 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
-from filterpy.stats import multivariate_gaussian
+import math
 from matplotlib import cm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -25,8 +24,11 @@ import numpy as np
 from numpy.random import normal, multivariate_normal
 import scipy.stats
 
-def plot_nonlinear_func(data, f, gaussian, num_bins=300):
+from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
+from filterpy.stats import multivariate_gaussian
 
+
+def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     # linearize at mean to simulate EKF
     #x = gaussian[0]
 
@@ -44,11 +46,10 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     in_lims = [x0-in_std*3, x0+in_std*3]
     out_lims = [y-std*3, y+std*3]
 
-
     #plot output
     h = np.histogram(ys, num_bins, density=False)
     plt.subplot(2,2,4)
-    plt.plot(h[0], h[1][1:], lw=4, alpha=0.8)
+    plt.plot(h[0], h[1][1:], lw=2, alpha=0.8)
     plt.ylim(out_lims[1], out_lims[0])
     plt.gca().xaxis.set_ticklabels([])
     plt.title('Output')
@@ -82,15 +83,13 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     h = np.histogram(data, num_bins, density=True)
 
     plt.subplot(2,2,1)
-    plt.plot(h[1][1:], h[0], lw=4)
+    plt.plot(h[1][1:], h[0], lw=2)
     plt.xlim(in_lims)
     plt.gca().yaxis.set_ticklabels([])
     plt.title('Input')
-
     plt.show()
 
-
-import math
+    
 def plot_ekf_vs_mc():
 
     def fx(x):
@@ -205,7 +204,6 @@ def test_plot():
     plt.plot(h[1][1:], h[0], lw=4)
 
 
-
 def plot_bivariate_colormap(xs, ys):
     xs = np.asarray(xs)
     ys = np.asarray(ys)
@@ -230,17 +228,17 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
     computed_mean_x = np.average(fxs)
     computed_mean_y = np.average(fys)
 
-    plt.subplot(121)
-    plt.gca().grid(b=False)
+    ax = plt.subplot(121)
+    ax.grid(b=False)
 
     plot_bivariate_colormap(xs, ys)
 
     plt.scatter(xs, ys, marker='.', alpha=0.02, color='k')
-    plt.xlim(-20, 20)
-    plt.ylim(-20, 20)
+    ax.set_xlim(-20, 20)
+    ax.set_ylim(-20, 20)
 
-    plt.subplot(122)
-    plt.gca().grid(b=False)
+    ax = plt.subplot(122)
+    ax.grid(b=False)
 
     plt.scatter(fxs, fys, marker='.', alpha=0.02, color='k')
     plt.scatter(mean_fx[0], mean_fx[1],
@@ -249,16 +247,15 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
                 marker='*',s=120, c='b', label='Computed Mean')
 
     plot_bivariate_colormap(fxs, fys)
-    plt.ylim([-10, 200])
-    plt.xlim([-100, 100])
+    ax.set_xlim([-100, 100])
+    ax.set_ylim([-10, 200])
     plt.legend(loc='best', scatterpoints=1)
     print ('Difference in mean x={:.3f}, y={:.3f}'.format(
            computed_mean_x-mean_fx[0], computed_mean_y-mean_fx[1]))
 
 
-
 def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
-    side = np.linspace(-3,3,24)
+    side = np.linspace(-3, 3, 200)
     X,Y = np.meshgrid(side,side)
 
     pos = np.empty(X.shape + (2,))
@@ -269,7 +266,6 @@ def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
     plt.gca().grid(b=False)
     plt.gca().imshow(rv.pdf(pos), cmap=plt.cm.Greys, origin='lower')
     plt.show()
-
 
 
 def plot_gaussians(xs, ps, x_range, y_range, N):
