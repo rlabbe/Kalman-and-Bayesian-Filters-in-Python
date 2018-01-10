@@ -215,11 +215,14 @@
                 },
                 displayAlign: 'center', // Change this to 'center' to center equations.
                 "HTML-CSS": {
-                    scale:95,
+                    scale: 95,
                         availableFonts: [],
                         preferredFont:null,
                         webFont: "TeX",
                     styles: {'.MathJax_Display': {"margin": 4}}
+                },
+                 "fast-preview": {
+                    "disabled": false
                 }
         });
 </script>
