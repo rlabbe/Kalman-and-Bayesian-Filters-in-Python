@@ -74,9 +74,12 @@ binder serves interactive notebooks online, so you can run the code and change t
 
 The website http://nbviewer.org provides an Jupyter Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. Notebooks are rendered statically - you can read them, but not modify or run the code.
 
+nbviewer seems to lag the checked in version by a few days, so you might not be reading the most recent content.
+
+
 ### GitHub
 
-GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. Note: I have found this to be buggy - sometimes it cannot open files that are readable by all the other methods here. Chapters names are prefaced with numbers to indicate their order 01_gh_filter.ipynb, and so on.  Notebooks are rendered statically - you can read them, but not modify or run the code.
+GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. However, it renders the math incorrectly, and I cannot recommend using it if you are doing more than just dipping into the book.
 
 
 PDF Version
