@@ -1,7 +1,7 @@
 mkdir tmp
 copy ..\*.ipynb .\tmp
 copy ..\*.py .\tmp
-cp -r ..\kf_book\ .\tmp\kf_book\
+cp -r ..\kf_book\ .\tmp\
 
 cd tmp
 
