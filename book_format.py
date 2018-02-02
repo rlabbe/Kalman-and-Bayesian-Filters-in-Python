@@ -34,7 +34,6 @@ from kf_book.book_plots import set_figsize, reset_axis
 if matplotlib.__version__ == '1.4.3':
     warnings.simplefilter(action="ignore", category=FutureWarning)
 
-np.set_printoptions(precision=3)
 try:
     matplotlib.style.use('default')
 except:
@@ -46,7 +45,7 @@ def test_filterpy_version():
     from distutils.version import LooseVersion
 
     v = filterpy.__version__
-    min_version = "1.2.0"
+    min_version = "1.2.1"
     if LooseVersion(v) < LooseVersion(min_version):
        raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"
@@ -118,9 +117,13 @@ def load_style(directory = '.', name='kf_book/custom.css'):
             pass
         set_figsize()
         reset_axis ()
-        np.set_printoptions(suppress=True, precision=3, linewidth=70,
+        np.set_printoptions(suppress=True, precision=3, 
+		                    threshold=10000., linewidth=70,
                             formatter={'float':lambda x:' {:.3}'.format(x)})
-
         styles = open(os.path.join(directory, name), 'r').read()
         set_figsize()
+        # I don't know why I have to do this, but I have to call
+        # with suppress a second time or the notebook doesn't suppress
+        # exponents
+        np.set_printoptions(suppress=True)
         return HTML(styles)
