@@ -20,55 +20,29 @@ from __future__ import (absolute_import, division, print_function,
 import kf_book.book_plots as book_plots
 import numpy as np
 from matplotlib.patches import Circle, Rectangle, Polygon, Arrow, FancyArrow
-import pylab as plt
-import time
-
+import matplotlib.pylab as plt
 
 def plot_gh_results(weights, estimates, predictions, time_step=0):
 
-    plt.figure(figsize=(9,4))
     n = len(weights)
     if time_step > 0:
         rng = range(1, n+1)
     else:
         rng = range(n, n+1)
+    xs = range(n+1)
+    pred, = book_plots.plot_track(xs[1:], predictions, c='r', marker='v')
+    scale, = book_plots.plot_measurements(xs[1:], weights, color='k', lines=False)
+    est, = book_plots.plot_filter(xs, estimates, marker='o')
 
-    act, = book_plots.plot_track([0, n], [160, 160+n], c='k')
-    plt.gcf().canvas.draw()
-
-    for i in rng:
-        xs = list(range(i+1))
-        pred, = book_plots.plot_track(xs[1:], predictions[:i], c='r', marker='v')
-        plt.xlim([-1, n+1])
-        plt.ylim([156.0, 173])
-        plt.gcf().canvas.draw()
-        time.sleep(time_step)
-
-        scale, = book_plots.plot_measurements(xs[1:], weights[:i], color='k', lines=False)
-        plt.xlim([-1, n+1])
-        plt.ylim([156.0, 173])
-        plt.gcf().canvas.draw()
-        time.sleep(time_step)
-
-        est, = book_plots.plot_filter(xs[:i+1], estimates[:i+1], marker='o')
-        plt.xlim([-1, n+1])
-        plt.ylim([156.0, 173])
-        plt.gcf().canvas.draw()
-        time.sleep(time_step)
-
-        plt.legend([act, scale, est, pred], ['Actual Weight', 'Measurement', 'Estimates', 'Predictions'], loc=4)
+    plt.legend([scale, est, pred], ['Measurement', 'Estimates', 'Predictions'], loc=4)
     book_plots.set_labels(x='day', y='weight (lbs)')
     plt.xlim([-1, n+1])
     plt.ylim([156.0, 173])
 
 
-
-
 def print_results(estimates, prediction, weight):
     print('previous: {:.2f}, prediction: {:.2f} estimate {:.2f}'.format(
           estimates[-2], prediction, weight))
-
-
 
 
 def plot_g_h_results(measurements, filtered_data,
@@ -100,9 +74,5 @@ def plot_g_h_results(measurements, filtered_data,
             plt.gca().canvas.draw()
             time.sleep(0.5)
 
-
-
 if __name__ == '__main__':
-    import seaborn
     plot_errorbar1()
-    #create_predict_update_chart()

@@ -101,7 +101,31 @@ def interactive_plot(close=True, fig=None):
 
 
 def plot_errorbars(bars, xlims, ylims=(-1, 1)):
+    """Plots a list of error bars with optional x and y limits.
+    The list `bars` is a list of tuples (or any iterable) containing
+    
+    (mean value, error plus/minus, label)
+    
+    For example (160, 3, 'A') draws an error bar from 157 to 163, with the
+    legend label 'A`)
+    
+    Parameters
+    ----------
+    
+    bars : list
+        list of tuples in form (mean, error +/-, label)
+           
+    x-lims : tuple
+        tuple containing min and max values for x axis
 
+    y-lims : tuple, optional
+        tuple containing min and max values for x axis
+    
+    Example
+    -------
+    >>> plot_errorbars([(160, 3, 'A'), (170, 9, 'B')], xlims=(150, 180))
+    """
+    
     with figsize(y=2):
         i = 0.0
         for bar in bars:
@@ -146,7 +170,8 @@ def plot_hypothesis1():
         plt.plot([1, 3], [170, 170], color='g', ls='--')
         plt.plot([1, 3], [160, 175], color='g', ls='--')
         plt.plot([1, 2, 3], [180, 152, 179], color='g', ls='--')
-        plt.xlim(0,4); plt.ylim(150, 185)
+        plt.xlim(0,4)
+        plt.ylim(150, 185)
         plt.xlabel('day')
         plt.ylabel('lbs')
         plt.tight_layout()
@@ -158,7 +183,9 @@ def plot_hypothesis2():
         plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170],
                      xerr=0, yerr=6, fmt='bo', capthick=2, capsize=10)
         plt.plot([1, 10], [169, 170.5], color='g', ls='--')
-        plt.xlim(0, 11); plt.ylim(150, 185)
+        
+        plt.xlim(0, 11)
+        plt.ylim(150, 185)
         plt.xlabel('day')
         plt.ylabel('lbs')
 
@@ -173,7 +200,8 @@ def plot_hypothesis3():
         plt.errorbar(range(1, 13), weights,
                      xerr=0, yerr=6, fmt='o', capthick=2, capsize=10)
 
-        plt.xlim(0, 13); plt.ylim(145, 185)
+        plt.xlim(0, 13)
+        plt.ylim(145, 185)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
 
@@ -188,7 +216,8 @@ def plot_hypothesis4():
         plt.errorbar(range(1,13), weights, label='weights',
                      yerr=6, fmt='o', capthick=2, capsize=10)
         plt.plot([1, 12], [ave,ave], c='r', label='hypothesis')
-        plt.xlim(0, 13); plt.ylim(145, 185)
+        plt.xlim(0, 13)
+        plt.ylim(145, 185)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         show_legend()
@@ -206,7 +235,8 @@ def plot_hypothesis5():
         plt.errorbar(range(1, 13), weights, label='weights',
                      yerr=5, fmt='o', capthick=2, capsize=10)
         plt.plot (xs, line(xs), c='r', label='hypothesis')
-        plt.xlim(0, 13); plt.ylim(145, 185)
+        plt.xlim(0, 13)
+        plt.ylim(145, 185)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         show_legend()
@@ -239,7 +269,7 @@ def plot_estimate_chart_2():
         plt.scatter ([1], [159], c='r', s=128)
         plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
         plt.text (1.0, 164.4, "measurement ($z_t$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0.0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
+        plt.text (0.0, 159.8, "last estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
@@ -265,8 +295,8 @@ def plot_estimate_chart_3():
         plt.scatter ([1], [159], c='r', s=128)
         plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
         plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
-        plt.text (0.95, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
+        plt.text (0, 159.8, "last estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
+        plt.text (0.95, est_y, "estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         ax.xaxis.grid(True, which="major", linestyle='dotted')
