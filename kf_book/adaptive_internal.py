@@ -23,6 +23,11 @@ import numpy as np
 
 
 def plot_track_and_residuals(dt, xs, z_xs, res):
+    """ plots track and measurement on the left, and the residual
+    of the filter on the right. Helps to visualize the performance of
+    an adaptive filter.
+    """
+    
     assert np.isscalar(dt)
     t = np.arange(0, len(xs)*dt, dt)
     plt.subplot(121)
@@ -44,6 +49,9 @@ def plot_track_and_residuals(dt, xs, z_xs, res):
 
 
 def plot_markov_chain():
+    """ show a markov chain showing relative probability of an object
+    turning"""
+    
     fig = plt.figure(figsize=(4,4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
@@ -103,7 +111,7 @@ def plot_markov_chain():
 
 
 def turning_target(N=600, turn_start=400):
-    """ simulate a moving target blah"""
+    """ simulate a moving target"""
 
     #r = 1.
     dt = 1.
