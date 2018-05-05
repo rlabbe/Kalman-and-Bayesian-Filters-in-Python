@@ -45,7 +45,7 @@ def test_filterpy_version():
     from distutils.version import LooseVersion
 
     v = filterpy.__version__
-    min_version = "1.2.4"
+    min_version = "1.3.2"
     if LooseVersion(v) < LooseVersion(min_version):
        raise Exception("Minimum FilterPy version supported is {}.\n"
                        "Please install a more recent version.\n"

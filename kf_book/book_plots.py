@@ -19,13 +19,14 @@ from __future__ import (absolute_import, division, print_function,
 
 
 from contextlib import contextmanager
+import sys
+import time
+import ipywidgets
 import matplotlib as mpl
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
-import sys
-import time
 
 try:
     import seabornee
@@ -363,6 +364,22 @@ def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
     plt.xlim((-1, len(xs)))
     plt.show()
 
+    
+def FloatSlider(value, **kwargs):
+    """ 
+    Creates an ipwidgets FloatSlider with continuous update
+    turned off
+    """
+    return ipywidgets.FloatSlider(value, continuous_update=False, **kwargs)
+
+
+def IntSlider(value, **kwargs):
+    """ 
+    Creates an ipwidgets IntSlider with continuous update
+    turned off
+    """
+    return ipywidgets.IntSlider(value, continuous_update=False, **kwargs)
+
 
 def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements',
                       lines=False, **kwargs):
@@ -373,7 +390,7 @@ def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements
         ys = xs
         xs = np.arange(0, len(ys)*dt, dt)
 
-    plt.autoscale(tight=True)
+    plt.autoscale(tight=False)
     if lines:
         if ys is not None:
             return plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)
