@@ -179,21 +179,21 @@ def show_sigma_selections():
 
     points = MerweScaledSigmaPoints(2, .09, 2., 1.)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([5, 5])
     points = MerweScaledSigmaPoints(2, .15, 1., .15)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([8, 5])
     points = MerweScaledSigmaPoints(2, .2, 3., 10)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
@@ -232,17 +232,25 @@ def show_sigmas_for_2_kappas():
     plt.show()
 
 
+def plot_sigmas(sigmas, x, cov):
+    if not np.isscalar(cov):
+        cov = np.atleast_2d(cov)
+    pts = sigmas.sigma_points(x=x, P=cov)
+    plt.scatter(pts[:, 0], pts[:, 1], s=sigmas.Wm*1000)
+    plt.axis('equal')
+    
+
 def plot_sigma_points():
     x = np.array([0, 0])
     P = np.array([[4, 2], [2, 4]])
 
     sigmas = MerweScaledSigmaPoints(n=2, alpha=.3, beta=2., kappa=1.)
     S0 = sigmas.sigma_points(x, P)
-    Wm0, Wc0 = sigmas.weights()
+    Wm0, Wc0 = sigmas.Wm, sigmas.Wc
 
     sigmas = MerweScaledSigmaPoints(n=2, alpha=1., beta=2., kappa=1.)
     S1 = sigmas.sigma_points(x, P)
-    Wm1, Wc1 = sigmas.weights()
+    Wm1, Wc1 = sigmas.Wm, sigmas.Wc
 
     def plot_sigmas(s, w, **kwargs):
         min_w = min(abs(w))
@@ -296,7 +304,7 @@ def plot_altitude(xs, t, track):
 def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
     points = MerweScaledSigmaPoints(n, alpha, beta, kappa)
     print('sigmas: ', points.sigma_points(mean,  cov).T[0])
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     print('mean weights:', Wm)
     print('cov weights:', Wc)
     print('lambda:', alpha**2 *(n+kappa) - n)
