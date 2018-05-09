@@ -2,7 +2,7 @@
 
 ((= IPython input/output style =))
 
-((*- extends 'base.tplx' -*))
+((*- extends 'report.tplx' -*))
 
  
 ((* block docclass *))
@@ -19,6 +19,11 @@
 \title{Kalman and Bayesian Filters in Python}
 \author{Roger R Labbe Jr}
 ((* endblock title *))
+
+((* block predoc *))
+    ((( super() )))
+    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+((* endblock predoc *))
 
 ((* block markdowncell scoped *))
 \normalem
