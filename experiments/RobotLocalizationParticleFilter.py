@@ -191,6 +191,73 @@ def Gaussian(mu, sigma, x):
     return g
 
 
+def test_pf():
+
+    #seed(1234)
+    N = 10000
+    R = .2
+    landmarks = [[-1, 2], [20,4], [10,30], [18,25]]
+    #landmarks = [[-1, 2], [2,4]]
+
+    pf = RobotLocalizationParticleFilter(N, 20, 20, landmarks, R)
+
+    plot_pf(pf, 20, 20, weights=False)
+
+    dt = .01
+    plt.pause(dt)
+
+    for x in range(18):
+
+        zs = []
+        pos=(x+3, x+3)
+
+        for landmark in landmarks:
+            d = np.sqrt((landmark[0]-pos[0])**2 +  (landmark[1]-pos[1])**2)
+            zs.append(d + randn()*R)
+
+        pf.predict((0.01, 1.414), (.2, .05))
+        pf.update(z=zs)
+        pf.resample()
+        #print(x, np.array(list(zip(pf.particles, pf.weights))))
+
+        mu, var = pf.estimate()
+        plot_pf(pf, 20, 20, weights=False)
+        plt.plot(pos[0], pos[1], marker='*', color='r', ms=10)
+        plt.scatter(mu[0], mu[1], color='g', s=100)
+        plt.tight_layout()
+        plt.pause(dt)
+
+
+def test_pf2():
+    N = 1000
+    sensor_std_err = .2
+    landmarks = [[-1, 2], [20,4], [-20,6], [18,25]]
+
+    pf = RobotLocalizationParticleFilter(N, 20, 20, landmarks, sensor_std_err)
+
+    xs = []
+    for x in range(18):
+        zs = []
+        pos=(x+1, x+1)
+
+        for landmark in landmarks:
+            d = np.sqrt((landmark[0]-pos[0])**2 +  (landmark[1]-pos[1])**2)
+            zs.append(d + randn()*sensor_std_err)
+
+        # move diagonally forward to (x+1, x+1)
+        pf.predict((0.00, 1.414), (.2, .05))
+        pf.update(z=zs)
+        pf.resample()
+
+        mu, var = pf.estimate()
+        xs.append(mu)
+
+    xs = np.array(xs)
+    plt.plot(xs[:, 0], xs[:, 1])
+    plt.show()
+
+
+
 if __name__ == '__main__':
 
     DO_PLOT_PARTICLES = False
