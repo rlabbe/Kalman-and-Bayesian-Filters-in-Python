@@ -29,7 +29,6 @@ from filterpy.stats import multivariate_gaussian
 
 
 def plot_nonlinear_func(data, f, out_lim=None, num_bins=300):
-
     ys = f(data)
     x0 = np.mean(data)
     in_std = np.std(data)
@@ -110,7 +109,11 @@ def plot_ekf_vs_mc():
     norm = scipy.stats.norm(mean_ekf, std_ekf)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), lw=2, ls='--', color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
@@ -154,7 +157,11 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
     norm = scipy.stats.norm(ukf_mean, ukf_std)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), ls='--', lw=2, color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
