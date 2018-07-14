@@ -1,0 +1,4 @@
+# Auto detect text files and perform LF normalization
+* text=lf
+*.py eol=lf
+*.ipynb eol=lf
