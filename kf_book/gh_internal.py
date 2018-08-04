@@ -38,6 +38,7 @@ def plot_hypothesis1():
         plt.ylim(150, 185)
         plt.xlabel('day')
         plt.ylabel('lbs')
+        plt.grid(False)
         plt.tight_layout()
 
 
@@ -52,6 +53,7 @@ def plot_hypothesis2():
         plt.ylim(150, 185)
         plt.xlabel('day')
         plt.ylabel('lbs')
+        plt.grid(False)
 
 def plot_hypothesis3():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
@@ -67,6 +69,7 @@ def plot_hypothesis3():
         plt.ylim(145, 185)
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
+        plt.grid(False)
 
 
 def plot_hypothesis4():
@@ -84,7 +87,8 @@ def plot_hypothesis4():
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         book_plots.show_legend()
-    
+        plt.grid(False)
+
     
 def plot_hypothesis5():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
@@ -103,6 +107,7 @@ def plot_hypothesis5():
         plt.xlabel('day')
         plt.ylabel('weight (lbs)')
         book_plots.show_legend()
+        plt.grid(False)
         
     
 def plot_estimate_chart_1():

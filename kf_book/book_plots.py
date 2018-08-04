@@ -50,7 +50,7 @@ def reset_figsize():
     pylab.rcParams['figure.figsize'] = 8, 3
 
 
-def set_figsize(x=8, y=3):
+def set_figsize(x=10, y=4):
     """ set the figure size of the plot to the specified size in inches"""
     
     pylab.rcParams['figure.figsize'] = x, y
