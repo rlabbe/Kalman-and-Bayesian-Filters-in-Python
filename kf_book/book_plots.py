@@ -34,31 +34,26 @@ except:
     pass
 
 
-def equal_axis(sz=10):
+_default_size=(9, 4)
+def equal_axis(sz=_default_size[0]):
     """ set size of axis in inches, using the same for each"""
     pylab.rcParams['figure.figsize'] = sz, sz
     plt.axis('equal')
-
-
-def reset_axis():
-    """ reest axis size in inches to the default size for the book"""
-    pylab.rcParams['figure.figsize'] = 8, 3
-
     
 def reset_figsize():
     """ reest axis size in inches to the default size for the book"""
-    pylab.rcParams['figure.figsize'] = 8, 3
+    mpl.rcParams['figure.figsize'] = _default_size
 
 
-def set_figsize(x=10, y=4):
+def set_figsize(x=_default_size[0], y=_default_size[1]):
     """ set the figure size of the plot to the specified size in inches"""
     
-    pylab.rcParams['figure.figsize'] = x, y
+    mpl.rcParams['figure.figsize'] = x, y
 
 
 @contextmanager
 def figsize(x=8, y=3):
-    """Temporarily set the figure size using 'with figsize(a,b):'"""
+    """Temporarily set the figure size using 'with figsize(a, b):'"""
 
     size = pylab.rcParams['figure.figsize']
     set_figsize(x, y)
@@ -73,37 +68,6 @@ otherwise it outputs a lot of extra <matplotlib.figure.figure
 type output into the notebook."""
 
 IS_INLINE = mpl.get_backend().find('backend_inline') != -1
-
-
-def end_interactive(fig):
-    """ end interaction in a plot created with %matplotlib notebook """
-
-    if IS_INLINE:
-        return
-
-    fig.canvas.draw()
-    time.sleep(1.)
-    plt.close(fig)
-
-
-@contextmanager
-def interactive_plot(close=True, fig=None):
-    if fig is None and not IS_INLINE:
-        fig = plt.figure()
-
-    yield
-    try:
-        # if the figure only uses annotations tight_output
-        # throws an exception
-        if not IS_INLINE: plt.tight_layout()
-    except:
-        pass
-
-    if not IS_INLINE:
-        plt.show()
-
-    if close and not IS_INLINE:
-        end_interactive(fig)
 
 
 def plot_errorbars(bars, xlims, ylims=(-1, 1)):
@@ -150,17 +114,17 @@ def plot_errorbars(bars, xlims, ylims=(-1, 1)):
 def predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(4,4), facecolor='w')
+    plt.figure(figsize=(4, 4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
 
-    pc = Circle((4,5), 0.7, fc=box_bg)
-    uc = Circle((6,5), 0.7, fc=box_bg)
+    pc = Circle((4, 5), 0.7, fc=box_bg)
+    uc = Circle((6, 5), 0.7, fc=box_bg)
     ax.add_patch (pc)
     ax.add_patch (uc)
 
-    plt.text(4,5, "Predict\nStep",ha='center', va='center', fontsize=12)
-    plt.text(6,5, "Update\nStep",ha='center', va='center', fontsize=12)
+    plt.text(4, 5, "Predict\nStep",ha='center', va='center', fontsize=12)
+    plt.text(6, 5, "Update\nStep",ha='center', va='center', fontsize=12)
 
     #btm arrow from update to predict
     ax.annotate('',
@@ -214,14 +178,14 @@ def predict_update_chart(box_bg = '#CCCCCC',
 
 def show_residual_chart(show_eq=True, show_H=False):
     plt.figure(figsize=(11, 3.), facecolor='w')
-    est_y = ((164.2-158)*.8 + 158)
+    est_y = ((164.2 - 158)*.8 + 158)
 
     ax = plt.axes(xticks=[], yticks=[], frameon=False)
-    ax.annotate('', xy=[1,159], xytext=[0,158],
+    ax.annotate('', xy=[1,159], xytext=[0, 158],
                 arrowprops=dict(arrowstyle='->',
                                 ec='r', lw=3, shrinkA=6, shrinkB=5))
 
-    ax.annotate('', xy=[1,159], xytext=[1,164.2],
+    ax.annotate('', xy=[1, 159], xytext=[1, 164.2],
                 arrowprops=dict(arrowstyle='-',
                                 ec='k', lw=3, shrinkA=8, shrinkB=8))
 
