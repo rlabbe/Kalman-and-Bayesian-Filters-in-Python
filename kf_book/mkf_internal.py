@@ -149,7 +149,7 @@ def show_position_prediction_chart():
     plt.yticks(np.arange(1,5,1))
 
     plt.scatter ([4], [4], s=128, color='#8EBA42')
-    ax = plt.axes()
+    ax = plt.gca()
     ax.annotate('', xy=(4,4), xytext=(3,3),
                 arrowprops=dict(arrowstyle='->',
                                 ec='g',

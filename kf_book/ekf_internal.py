@@ -201,8 +201,7 @@ def show_radar_chart():
     plt.ylim([0.5,2.5])
 
     plt.scatter ([1,2],[1,2])
-    #plt.scatter ([2],[1],marker='o')
-    ax = plt.axes()
+    ax = plt.gca()
 
     ax.annotate('', xy=(2,2), xytext=(1,1),
                 arrowprops=dict(arrowstyle='->', ec='r',shrinkA=3, shrinkB=4))
@@ -239,7 +238,7 @@ def show_linearization():
 
     plt.plot(xs, ys, label='$f(x)=x^2−2x$')
     plt.plot([1, 2], [y(1), y(2)], color='k', ls='--', label='linearization')
-    plt.axes().axvline(1.5, lw=1, c='k')
+    plt.gca().axvline(1.5, lw=1, c='k')
     plt.xlim(0, 2)
     plt.ylim([-1.5, 0.0])
     plt.title('Linearization of $f(x)$ at $x=1.5$')

@@ -24,7 +24,7 @@ def merge_notebooks(outfile, filenames):
     for fname in filenames:
         with io.open(fname, 'r', encoding='utf-8') as f:
             nb = nbformat.read(f, nbformat.NO_CONVERT)
-            remove_formatting(nb)
+            #remove_formatting(nb)
             if not added_appendix and fname[0:8] == 'Appendix':
                 remove_links_add_appendix(nb)
                 added_appendix = True
@@ -41,8 +41,6 @@ def merge_notebooks(outfile, filenames):
 
 if __name__ == '__main__':
     with open('book.ipynb', 'w', encoding='utf-8') as f:
-        '''merge_notebooks(f,
-            ['../04-One-Dimensional-Kalman-Filters.ipynb'])'''
 
         merge_notebooks(f,
             ['./tmp/00-Preface.ipynb',

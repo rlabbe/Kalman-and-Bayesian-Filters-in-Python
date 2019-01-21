@@ -179,21 +179,21 @@ def show_sigma_selections():
 
     points = MerweScaledSigmaPoints(2, .09, 2., 1.)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([5, 5])
     points = MerweScaledSigmaPoints(2, .15, 1., .15)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
     x = np.array([8, 5])
     points = MerweScaledSigmaPoints(2, .2, 3., 10)
     sigmas = points.sigma_points(x, P)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     plot_covariance_ellipse(x, P, facecolor='b', alpha=0.3, variance=[.5])
     _plot_sigmas(sigmas, Wc, alpha=1.0, facecolor='k')
 
@@ -232,17 +232,25 @@ def show_sigmas_for_2_kappas():
     plt.show()
 
 
+def plot_sigmas(sigmas, x, cov):
+    if not np.isscalar(cov):
+        cov = np.atleast_2d(cov)
+    pts = sigmas.sigma_points(x=x, P=cov)
+    plt.scatter(pts[:, 0], pts[:, 1], s=sigmas.Wm*1000)
+    plt.axis('equal')
+    
+
 def plot_sigma_points():
     x = np.array([0, 0])
     P = np.array([[4, 2], [2, 4]])
 
     sigmas = MerweScaledSigmaPoints(n=2, alpha=.3, beta=2., kappa=1.)
     S0 = sigmas.sigma_points(x, P)
-    Wm0, Wc0 = sigmas.weights()
+    Wm0, Wc0 = sigmas.Wm, sigmas.Wc
 
     sigmas = MerweScaledSigmaPoints(n=2, alpha=1., beta=2., kappa=1.)
     S1 = sigmas.sigma_points(x, P)
-    Wm1, Wc1 = sigmas.weights()
+    Wm1, Wc1 = sigmas.Wm, sigmas.Wc
 
     def plot_sigmas(s, w, **kwargs):
         min_w = min(abs(w))
@@ -296,7 +304,7 @@ def plot_altitude(xs, t, track):
 def print_sigmas(n=1, mean=5, cov=3, alpha=.1, beta=2., kappa=2):
     points = MerweScaledSigmaPoints(n, alpha, beta, kappa)
     print('sigmas: ', points.sigma_points(mean,  cov).T[0])
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     print('mean weights:', Wm)
     print('cov weights:', Wc)
     print('lambda:', alpha**2 *(n+kappa) - n)
@@ -367,7 +375,7 @@ def plot_scatter_moving_target():
             a = actual_angle + randn() * math.radians(1)
             xs.append(d*math.cos(a))
             ys.append(d*math.sin(a))
-        plt.scatter(xs, ys)
+        plt.scatter(xs, ys, c='C0')
 
     plt.axis('equal')
     plt.plot([5.5, pos[0]], [6, pos[1]], c='g', linestyle='--')
@@ -419,7 +427,7 @@ def _plot_iscts(pos, sa, sb, N=4):
 
         plt.scatter(xs, ys, c='r', marker='.', alpha=0.5)
         plt.scatter(xs_a, ys_a, c='k', edgecolor='k')
-        plt.scatter(xs_b, ys_b, marker='v', edgecolor=None)
+        plt.scatter(xs_b, ys_b, marker='v', edgecolor=None, c='C0')
     plt.gca().set_aspect('equal')
 
 
@@ -430,7 +438,7 @@ def plot_iscts_two_sensors():
     sb = [8., 2.]
 
     plt.scatter(*sa, s=200, c='k', marker='v')
-    plt.scatter(*sb, s=200, marker='s')
+    plt.scatter(*sb, s=200, marker='s', c='C0')
     _plot_iscts(pos, sa, sb, N=4)
     plt.subplot(122)
     plot_iscts_two_sensors_changed_sensors()

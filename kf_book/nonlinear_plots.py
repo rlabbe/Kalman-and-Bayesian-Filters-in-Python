@@ -16,8 +16,7 @@ for more information.
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
-from filterpy.stats import multivariate_gaussian
+import math
 from matplotlib import cm
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -25,36 +24,34 @@ import numpy as np
 from numpy.random import normal, multivariate_normal
 import scipy.stats
 
-def plot_nonlinear_func(data, f, gaussian, num_bins=300):
+from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
+from filterpy.stats import multivariate_gaussian
 
-    # linearize at mean to simulate EKF
-    #x = gaussian[0]
 
-    # equation of linearization
-    #m = df(x)
-    #b = f(x) - x*m
-
-    # compute new mean and variance based on EKF equations
+def plot_nonlinear_func(data, f, out_lim=None, num_bins=300):
     ys = f(data)
-    x0 = gaussian[0]
-    in_std = np.sqrt(gaussian[1])
+    x0 = np.mean(data)
+    in_std = np.std(data)
+    
     y = f(x0)
     std = np.std(ys)
 
-    in_lims = [x0-in_std*3, x0+in_std*3]
-    out_lims = [y-std*3, y+std*3]
+    in_lims = [x0 - in_std*3, x0 + in_std*3]
+    if out_lim is None:
+        out_lim = [y - std*3, y + std*3]
 
-
-    #plot output
+    # plot output
     h = np.histogram(ys, num_bins, density=False)
-    plt.subplot(2,2,4)
-    plt.plot(h[0], h[1][1:], lw=4, alpha=0.8)
-    plt.ylim(out_lims[1], out_lims[0])
-    plt.gca().xaxis.set_ticklabels([])
+    plt.subplot(221)
+    plt.plot(h[1][1:], h[0], lw=2, alpha=0.8)
+    if out_lim is not None:
+        plt.xlim(out_lim[0], out_lim[1])
+
+    plt.gca().yaxis.set_ticklabels([])
     plt.title('Output')
 
-    plt.axhline(np.mean(ys), ls='--', lw=2)
-    plt.axhline(f(x0), lw=1)
+    plt.axvline(np.mean(ys), ls='--', lw=2)
+    plt.axvline(f(x0), lw=1)
 
 
     norm = scipy.stats.norm(y, in_std)
@@ -72,25 +69,24 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     y = f(x)
     plt.plot (x, y, 'k')
     isct = f(x0)
-    plt.plot([x0, x0, in_lims[1]], [out_lims[1], isct, isct], color='r', lw=1)
+    plt.plot([x0, x0, in_lims[1]], [out_lim[1], isct, isct], color='r', lw=1)
     plt.xlim(in_lims)
-    plt.ylim(out_lims)
+    plt.ylim(out_lim)
     #plt.axis('equal')
     plt.title('f(x)')
 
     # plot input
     h = np.histogram(data, num_bins, density=True)
 
-    plt.subplot(2,2,1)
-    plt.plot(h[1][1:], h[0], lw=4)
-    plt.xlim(in_lims)
-    plt.gca().yaxis.set_ticklabels([])
+    plt.subplot(2,2,4)
+    plt.plot(h[0], h[1][1:], lw=2)
+    #plt.ylim(in_lims)
+    plt.gca().xaxis.set_ticklabels([])
     plt.title('Input')
-
+    plt.tight_layout()
     plt.show()
 
-
-import math
+    
 def plot_ekf_vs_mc():
 
     def fx(x):
@@ -113,7 +109,11 @@ def plot_ekf_vs_mc():
     norm = scipy.stats.norm(mean_ekf, std_ekf)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), lw=2, ls='--', color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
@@ -142,7 +142,7 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
 
 
     points = MerweScaledSigmaPoints(1, alpha, beta, kappa)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     sigmas = points.sigma_points(mean, var)
 
     sigmas_f = np.zeros((3, 1))
@@ -157,7 +157,11 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
     norm = scipy.stats.norm(ukf_mean, ukf_std)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), ls='--', lw=2, color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
@@ -205,7 +209,6 @@ def test_plot():
     plt.plot(h[1][1:], h[0], lw=4)
 
 
-
 def plot_bivariate_colormap(xs, ys):
     xs = np.asarray(xs)
     ys = np.asarray(ys)
@@ -230,17 +233,17 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
     computed_mean_x = np.average(fxs)
     computed_mean_y = np.average(fys)
 
-    plt.subplot(121)
-    plt.gca().grid(b=False)
+    ax = plt.subplot(121)
+    ax.grid(b=False)
 
     plot_bivariate_colormap(xs, ys)
 
     plt.scatter(xs, ys, marker='.', alpha=0.02, color='k')
-    plt.xlim(-20, 20)
-    plt.ylim(-20, 20)
+    ax.set_xlim(-20, 20)
+    ax.set_ylim(-20, 20)
 
-    plt.subplot(122)
-    plt.gca().grid(b=False)
+    ax = plt.subplot(122)
+    ax.grid(b=False)
 
     plt.scatter(fxs, fys, marker='.', alpha=0.02, color='k')
     plt.scatter(mean_fx[0], mean_fx[1],
@@ -249,16 +252,15 @@ def plot_monte_carlo_mean(xs, ys, f, mean_fx, label, plot_colormap=True):
                 marker='*',s=120, c='b', label='Computed Mean')
 
     plot_bivariate_colormap(fxs, fys)
-    plt.ylim([-10, 200])
-    plt.xlim([-100, 100])
+    ax.set_xlim([-100, 100])
+    ax.set_ylim([-10, 200])
     plt.legend(loc='best', scatterpoints=1)
     print ('Difference in mean x={:.3f}, y={:.3f}'.format(
            computed_mean_x-mean_fx[0], computed_mean_y-mean_fx[1]))
 
 
-
 def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
-    side = np.linspace(-3,3,24)
+    side = np.linspace(-3, 3, 200)
     X,Y = np.meshgrid(side,side)
 
     pos = np.empty(X.shape + (2,))
@@ -269,7 +271,6 @@ def plot_cov_ellipse_colormap(cov=[[1,1],[1,1]]):
     plt.gca().grid(b=False)
     plt.gca().imshow(rv.pdf(pos), cmap=plt.cm.Greys, origin='lower')
     plt.show()
-
 
 
 def plot_gaussians(xs, ps, x_range, y_range, N):
