@@ -1,10 +1,15 @@
-% Inherit from report
 
-((= IPython input/output style =))
+% Default to the notebook output style
+((* if not cell_style is defined *))
+    ((* set cell_style = 'style_ipython.tplx' *))
+((* endif *))
 
-((*- extends 'base.tplx' -*))
+% Inherit from the specified cell style.
+((* extends cell_style *))
 
- 
+
+
+
 ((* block docclass *))
 \documentclass{book}
 \setcounter{chapter}{0}
@@ -20,72 +25,12 @@
 \author{Roger R Labbe Jr}
 ((* endblock title *))
 
+((* block predoc *))
+    ((( super() )))
+    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+((* endblock predoc *))
+
 ((* block markdowncell scoped *))
-\normalem
-\setlength{\parindent}{0em}
-\setlength{\parskip}{0.5em}
-    ((( cell.source | citation2latex | strip_files_prefix | markdown2latex(extra_args=["--top-level-division=chapter"]) )))
+((( cell.source | citation2latex | strip_files_prefix | convert_pandoc('markdown+tex_math_double_backslash', 'json',extra_args=[]) | resolve_references | convert_pandoc('json','latex', extra_args=["--top-level-division=chapter"]) )))
 ((* endblock markdowncell *))
 
-
-% Custom definitions
-((* block definitions *))
-    ((( super() )))
-
-    % Pygments definitions
-    ((( resources.latex.pygments_definitions )))
-
-    % Exact colors from NB
-    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
-    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
-
-((* endblock definitions *))
-
-%===============================================================================
-% Input
-%===============================================================================
-
-((* block input scoped *))
-%\noindent\rule[0.5ex]{\linewidth}{1pt}
-((*- if resources.global_content_filter.include_input_prompt *))
-    ((( add_prompt(cell.source | highlight_code(strip_verbatim=True, metadata=cell.metadata), cell, 'in :', 'incolor') )))
-((* endif *))
-((* endblock input *))
-
-
-%===============================================================================
-% Output
-%===============================================================================
-
-((* block execute_result scoped *))
-%\noindent\rule[1.0ex]{\linewidth}{1pt}
-%    Output:
-    ((*- for type in output.data | filter_data_type -*))
-        ((*- if resources.global_content_filter.include_output_prompt -*))
-            ((*- if type in ['text/plain'] *))
-((( add_prompt(output.data['text/plain'] | escape_latex, cell, 'out:', 'outcolor') )))
-            ((* else -*))
-\texttt{\color{outcolor}out:[{\color{outcolor}((( cell.execution_count )))}]:}((( super() )))
-            ((*- endif -*))
-        ((*- endif -*))
-    ((*- endfor -*))
-((* endblock execute_result *))
-
-
-%==============================================================================
-% Support Macros
-%==============================================================================
-
-% Name: draw_prompt
-% Purpose: Renders an output/input prompt
-((* macro add_prompt(text, cell, prompt, prompt_color) -*))
-    ((*- if cell.execution_count is defined -*))
-    ((*- set execution_count = "" ~ (cell.execution_count | replace(None, " ")) -*))
-    ((*- else -*))
-    ((*- set execution_count = " " -*))
-    ((*- endif -*))
-    ((*- set indention =  "    " -*))
-\begin{Verbatim}[commandchars=\\\{\}]
-((( text  )))
-\end{Verbatim}
-((*- endmacro *))

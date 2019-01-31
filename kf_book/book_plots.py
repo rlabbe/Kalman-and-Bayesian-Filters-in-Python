@@ -19,13 +19,14 @@ from __future__ import (absolute_import, division, print_function,
 
 
 from contextlib import contextmanager
+import sys
+import time
+import ipywidgets
 import matplotlib as mpl
 import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
-import sys
-import time
 
 try:
     import seabornee
@@ -33,26 +34,26 @@ except:
     pass
 
 
-def equal_axis(sz=10):
+_default_size=(9, 4)
+def equal_axis(sz=_default_size[0]):
+    """ set size of axis in inches, using the same for each"""
     pylab.rcParams['figure.figsize'] = sz, sz
     plt.axis('equal')
-
-
-def reset_axis():
-    pylab.rcParams['figure.figsize'] = 8, 3
-
     
 def reset_figsize():
-    pylab.rcParams['figure.figsize'] = 8, 3
+    """ reest axis size in inches to the default size for the book"""
+    mpl.rcParams['figure.figsize'] = _default_size
 
 
-def set_figsize(x=8, y=3):
-    pylab.rcParams['figure.figsize'] = x, y
+def set_figsize(x=_default_size[0], y=_default_size[1]):
+    """ set the figure size of the plot to the specified size in inches"""
+    
+    mpl.rcParams['figure.figsize'] = x, y
 
 
 @contextmanager
 def figsize(x=8, y=3):
-    """Temporarily set the figure size using 'with figsize(a,b):'"""
+    """Temporarily set the figure size using 'with figsize(a, b):'"""
 
     size = pylab.rcParams['figure.figsize']
     set_figsize(x, y)
@@ -69,39 +70,32 @@ type output into the notebook."""
 IS_INLINE = mpl.get_backend().find('backend_inline') != -1
 
 
-def end_interactive(fig):
-    """ end interaction in a plot created with %matplotlib notebook """
-
-    if IS_INLINE:
-        return
-
-    fig.canvas.draw()
-    time.sleep(1.)
-    plt.close(fig)
-
-
-@contextmanager
-def interactive_plot(close=True, fig=None):
-    if fig is None and not IS_INLINE:
-        fig = plt.figure()
-
-    yield
-    try:
-        # if the figure only uses annotations tight_output
-        # throws an exception
-        if not IS_INLINE: plt.tight_layout()
-    except:
-        pass
-
-    if not IS_INLINE:
-        plt.show()
-
-    if close and not IS_INLINE:
-        end_interactive(fig)
-
-
 def plot_errorbars(bars, xlims, ylims=(-1, 1)):
+    """Plots a list of error bars with optional x and y limits.
+    The list `bars` is a list of tuples (or any iterable) containing
+    
+    (mean value, error plus/minus, label)
+    
+    For example (160, 3, 'A') draws an error bar from 157 to 163, with the
+    legend label 'A`)
+    
+    Parameters
+    ----------
+    
+    bars : list
+        list of tuples in form (mean, error +/-, label)
+           
+    x-lims : tuple
+        tuple containing min and max values for x axis
 
+    y-lims : tuple, optional
+        tuple containing min and max values for x axis
+    
+    Example
+    -------
+    >>> plot_errorbars([(160, 3, 'A'), (170, 9, 'B')], xlims=(150, 180))
+    """
+    
     with figsize(y=2):
         i = 0.0
         for bar in bars:
@@ -115,179 +109,22 @@ def plot_errorbars(bars, xlims, ylims=(-1, 1)):
         plt.show()
 
 
-def plot_errorbar1():
-    with figsize(y=2):
-        plt.figure()
-        plot_errorbars([(160, 8, 'A'), (170, 8, 'B')],
-                       xlims=(145, 185), ylims=(-1, 1))
-        plt.show()
-
-
-def plot_errorbar2():
-    with figsize(y=2):
-        plt.figure()
-        plot_errorbars([(160, 3, 'A'), (170, 9, 'B')],
-                       xlims=(145, 185), ylims=(-1, 1))
-
-def plot_errorbar3():
-    with figsize(y=2):
-        plt.figure()
-        plot_errorbars([(160, 1, 'A'), (170, 9, 'B')],
-                       xlims=(145, 185), ylims=(-1, 1))
-
-
-def plot_hypothesis1():
-    with figsize(y=3.5):
-        plt.figure()
-        plt.errorbar([1, 2, 3], [170, 161, 169],
-                     xerr=0, yerr=10, fmt='bo', capthick=2, capsize=10)
-
-        plt.plot([1, 3], [180, 160], color='g', ls='--')
-        plt.plot([1, 3], [170, 170], color='g', ls='--')
-        plt.plot([1, 3], [160, 175], color='g', ls='--')
-        plt.plot([1, 2, 3], [180, 152, 179], color='g', ls='--')
-        plt.xlim(0,4); plt.ylim(150, 185)
-        plt.xlabel('day')
-        plt.ylabel('lbs')
-        plt.tight_layout()
-
-
-def plot_hypothesis2():
-    with figsize(y=2.5):
-        plt.figure()
-        plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170],
-                     xerr=0, yerr=6, fmt='bo', capthick=2, capsize=10)
-        plt.plot([1, 10], [169, 170.5], color='g', ls='--')
-        plt.xlim(0, 11); plt.ylim(150, 185)
-        plt.xlabel('day')
-        plt.ylabel('lbs')
-
-
-def plot_hypothesis3():
-    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
-           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
-
-    with figsize(y=2.5):
-        plt.figure()
-
-        plt.errorbar(range(1, 13), weights,
-                     xerr=0, yerr=6, fmt='o', capthick=2, capsize=10)
-
-        plt.xlim(0, 13); plt.ylim(145, 185)
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-
-
-def plot_hypothesis4():
-    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
-           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
-
-    with figsize(y=2.5):
-        plt.figure()
-        ave = np.sum(weights) / len(weights)
-        plt.errorbar(range(1,13), weights, label='weights',
-                     yerr=6, fmt='o', capthick=2, capsize=10)
-        plt.plot([1, 12], [ave,ave], c='r', label='hypothesis')
-        plt.xlim(0, 13); plt.ylim(145, 185)
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-        show_legend()
-
-
-def plot_hypothesis5():
-    weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
-           169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
-
-    xs = range(1, len(weights)+1)
-    line = np.poly1d(np.polyfit(xs, weights, 1))
-
-    with figsize(y=2.5):
-        plt.figure()
-        plt.errorbar(range(1, 13), weights, label='weights',
-                     yerr=5, fmt='o', capthick=2, capsize=10)
-        plt.plot (xs, line(xs), c='r', label='hypothesis')
-        plt.xlim(0, 13); plt.ylim(145, 185)
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-        show_legend()
-
-
-def plot_estimate_chart_1():
-    with figsize(y=2.5):
-        plt.figure()
-        ax = plt.axes()
-        ax.annotate('', xy=[1,159], xytext=[0,158],
-                    arrowprops=dict(arrowstyle='->', ec='r',shrinkA=6, lw=3,shrinkB=5))
-        plt.scatter ([0], [158], c='b')
-        plt.scatter ([1], [159], c='r')
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-        ax.xaxis.grid(True, which="major", linestyle='dotted')
-        ax.yaxis.grid(True, which="major", linestyle='dotted')
-        plt.tight_layout()
-
-
-def plot_estimate_chart_2():
-    with figsize(y=2.5):
-        plt.figure()
-        ax = plt.axes()
-        ax.annotate('', xy=[1,159], xytext=[0,158],
-                    arrowprops=dict(arrowstyle='->',
-                                    ec='r', lw=3, shrinkA=6, shrinkB=5))
-        plt.scatter ([0], [158.0], c='k',s=128)
-        plt.scatter ([1], [164.2], c='b',s=128)
-        plt.scatter ([1], [159], c='r', s=128)
-        plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
-        plt.text (1.0, 164.4, "measurement ($z_t$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0.0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-        ax.xaxis.grid(True, which="major", linestyle='dotted')
-        ax.yaxis.grid(True, which="major", linestyle='dotted')
-        plt.ylim(157, 164.5)
-
-
-def plot_estimate_chart_3():
-    with figsize(y=2.5):
-        plt.figure()
-        ax = plt.axes()
-        ax.annotate('', xy=[1,159], xytext=[0,158],
-                    arrowprops=dict(arrowstyle='->',
-                                    ec='r', lw=3, shrinkA=6, shrinkB=5))
-
-        ax.annotate('', xy=[1,159], xytext=[1,164.2],
-                    arrowprops=dict(arrowstyle='-',
-                                    ec='k', lw=3, shrinkA=8, shrinkB=8))
-
-        est_y = (158 + .4*(164.2-158))
-        plt.scatter ([0,1], [158.0,est_y], c='k',s=128)
-        plt.scatter ([1], [164.2], c='b',s=128)
-        plt.scatter ([1], [159], c='r', s=128)
-        plt.text (1.0, 158.8, "prediction ($x_t)$", ha='center',va='top',fontsize=18,color='red')
-        plt.text (1.0, 164.4, "measurement ($z$)",ha='center',va='bottom',fontsize=18,color='blue')
-        plt.text (0, 159.8, "estimate ($\hat{x}_{t-1}$)", ha='left', va='top',fontsize=18)
-        plt.text (0.95, est_y, "new estimate ($\hat{x}_{t}$)", ha='right', va='center',fontsize=18)
-        plt.xlabel('day')
-        plt.ylabel('weight (lbs)')
-        ax.xaxis.grid(True, which="major", linestyle='dotted')
-        ax.yaxis.grid(True, which="major", linestyle='dotted')
-        plt.ylim(157, 164.5)
 
 
 def predict_update_chart(box_bg = '#CCCCCC',
                 arrow1 = '#88CCFF',
                 arrow2 = '#88FF88'):
-    plt.figure(figsize=(4,4), facecolor='w')
+    plt.figure(figsize=(4, 4), facecolor='w')
     ax = plt.axes((0, 0, 1, 1),
                   xticks=[], yticks=[], frameon=False)
 
-    pc = Circle((4,5), 0.7, fc=box_bg)
-    uc = Circle((6,5), 0.7, fc=box_bg)
+    pc = Circle((4, 5), 0.7, fc=box_bg)
+    uc = Circle((6, 5), 0.7, fc=box_bg)
     ax.add_patch (pc)
     ax.add_patch (uc)
 
-    plt.text(4,5, "Predict\nStep",ha='center', va='center', fontsize=12)
-    plt.text(6,5, "Update\nStep",ha='center', va='center', fontsize=12)
+    plt.text(4, 5, "Predict\nStep",ha='center', va='center', fontsize=12)
+    plt.text(6, 5, "Update\nStep",ha='center', va='center', fontsize=12)
 
     #btm arrow from update to predict
     ax.annotate('',
@@ -341,14 +178,14 @@ def predict_update_chart(box_bg = '#CCCCCC',
 
 def show_residual_chart(show_eq=True, show_H=False):
     plt.figure(figsize=(11, 3.), facecolor='w')
-    est_y = ((164.2-158)*.8 + 158)
+    est_y = ((164.2 - 158)*.8 + 158)
 
     ax = plt.axes(xticks=[], yticks=[], frameon=False)
-    ax.annotate('', xy=[1,159], xytext=[0,158],
+    ax.annotate('', xy=[1,159], xytext=[0, 158],
                 arrowprops=dict(arrowstyle='->',
                                 ec='r', lw=3, shrinkA=6, shrinkB=5))
 
-    ax.annotate('', xy=[1,159], xytext=[1,164.2],
+    ax.annotate('', xy=[1, 159], xytext=[1, 164.2],
                 arrowprops=dict(arrowstyle='-',
                                 ec='k', lw=3, shrinkA=8, shrinkB=8))
 
@@ -491,6 +328,22 @@ def plot_kf_output(xs, filter_xs, zs, title=None, aspect_equal=True):
     plt.xlim((-1, len(xs)))
     plt.show()
 
+    
+def FloatSlider(value, **kwargs):
+    """ 
+    Creates an ipwidgets FloatSlider with continuous update
+    turned off
+    """
+    return ipywidgets.FloatSlider(value, continuous_update=False, **kwargs)
+
+
+def IntSlider(value, **kwargs):
+    """ 
+    Creates an ipwidgets IntSlider with continuous update
+    turned off
+    """
+    return ipywidgets.IntSlider(value, continuous_update=False, **kwargs)
+
 
 def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements',
                       lines=False, **kwargs):
@@ -501,7 +354,7 @@ def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements
         ys = xs
         xs = np.arange(0, len(ys)*dt, dt)
 
-    plt.autoscale(tight=True)
+    plt.autoscale(tight=False)
     if lines:
         if ys is not None:
             return plt.plot(xs, ys, color=color, lw=lw, ls='--', label=label, **kwargs)

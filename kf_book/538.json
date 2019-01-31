@@ -8,7 +8,7 @@
   "patch.edgecolor": "#f0f0f0",
   "examples.directory": "",
   "figure.facecolor": "#ffffff",
-  "grid.linestyle": "-",
+  "grid.linestyle": "dotted",
   "grid.linewidth": 2.0,
   "grid.color": "#cbcbcb",
   "axes.edgecolor":"#f0f0f0",

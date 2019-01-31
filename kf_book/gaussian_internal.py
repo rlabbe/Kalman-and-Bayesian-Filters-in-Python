@@ -27,7 +27,7 @@ def plot_height_std(x, lw=10):
 
     for i, height in enumerate(x):
         plt.plot([i+1, i+1], [0, height], color='k', lw=lw)
-    plt.xlim(0,len(x)+1)
+    plt.xlim(0, len(x)+1)
     plt.axhline(m-s, ls='--')
     plt.axhline(m+s, ls='--')
     plt.fill_between((0, len(x)+1), m-s, m+s,

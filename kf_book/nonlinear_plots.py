@@ -28,34 +28,30 @@ from filterpy.kalman import MerweScaledSigmaPoints, unscented_transform
 from filterpy.stats import multivariate_gaussian
 
 
-def plot_nonlinear_func(data, f, gaussian, num_bins=300):
-    # linearize at mean to simulate EKF
-    #x = gaussian[0]
-
-    # equation of linearization
-    #m = df(x)
-    #b = f(x) - x*m
-
-    # compute new mean and variance based on EKF equations
+def plot_nonlinear_func(data, f, out_lim=None, num_bins=300):
     ys = f(data)
-    x0 = gaussian[0]
-    in_std = np.sqrt(gaussian[1])
+    x0 = np.mean(data)
+    in_std = np.std(data)
+    
     y = f(x0)
     std = np.std(ys)
 
-    in_lims = [x0-in_std*3, x0+in_std*3]
-    out_lims = [y-std*3, y+std*3]
+    in_lims = [x0 - in_std*3, x0 + in_std*3]
+    if out_lim is None:
+        out_lim = [y - std*3, y + std*3]
 
-    #plot output
+    # plot output
     h = np.histogram(ys, num_bins, density=False)
-    plt.subplot(2,2,4)
-    plt.plot(h[0], h[1][1:], lw=2, alpha=0.8)
-    plt.ylim(out_lims[1], out_lims[0])
-    plt.gca().xaxis.set_ticklabels([])
+    plt.subplot(221)
+    plt.plot(h[1][1:], h[0], lw=2, alpha=0.8)
+    if out_lim is not None:
+        plt.xlim(out_lim[0], out_lim[1])
+
+    plt.gca().yaxis.set_ticklabels([])
     plt.title('Output')
 
-    plt.axhline(np.mean(ys), ls='--', lw=2)
-    plt.axhline(f(x0), lw=1)
+    plt.axvline(np.mean(ys), ls='--', lw=2)
+    plt.axvline(f(x0), lw=1)
 
 
     norm = scipy.stats.norm(y, in_std)
@@ -73,20 +69,21 @@ def plot_nonlinear_func(data, f, gaussian, num_bins=300):
     y = f(x)
     plt.plot (x, y, 'k')
     isct = f(x0)
-    plt.plot([x0, x0, in_lims[1]], [out_lims[1], isct, isct], color='r', lw=1)
+    plt.plot([x0, x0, in_lims[1]], [out_lim[1], isct, isct], color='r', lw=1)
     plt.xlim(in_lims)
-    plt.ylim(out_lims)
+    plt.ylim(out_lim)
     #plt.axis('equal')
     plt.title('f(x)')
 
     # plot input
     h = np.histogram(data, num_bins, density=True)
 
-    plt.subplot(2,2,1)
-    plt.plot(h[1][1:], h[0], lw=2)
-    plt.xlim(in_lims)
-    plt.gca().yaxis.set_ticklabels([])
+    plt.subplot(2,2,4)
+    plt.plot(h[0], h[1][1:], lw=2)
+    #plt.ylim(in_lims)
+    plt.gca().xaxis.set_ticklabels([])
     plt.title('Input')
+    plt.tight_layout()
     plt.show()
 
     
@@ -112,7 +109,11 @@ def plot_ekf_vs_mc():
     norm = scipy.stats.norm(mean_ekf, std_ekf)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), lw=2, ls='--', color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
@@ -141,7 +142,7 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
 
 
     points = MerweScaledSigmaPoints(1, alpha, beta, kappa)
-    Wm, Wc = points.weights()
+    Wm, Wc = points.Wm, points.Wc
     sigmas = points.sigma_points(mean, var)
 
     sigmas_f = np.zeros((3, 1))
@@ -156,7 +157,11 @@ def plot_ukf_vs_mc(alpha=0.001, beta=3., kappa=1.):
     norm = scipy.stats.norm(ukf_mean, ukf_std)
     xs = np.linspace(-3, 5, 200)
     plt.plot(xs, norm.pdf(xs), ls='--', lw=2, color='b')
-    plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
+    try:
+        plt.hist(d_t, bins=200, density=True, histtype='step', lw=2, color='g')
+    except:
+        # older versions of matplotlib don't have the density keyword
+        plt.hist(d_t, bins=200, normed=True, histtype='step', lw=2, color='g')
 
     actual_mean = d_t.mean()
     plt.axvline(actual_mean, lw=2, color='g', label='Monte Carlo')
