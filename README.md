@@ -135,11 +135,11 @@ If you have conda or miniconda installed, you can create environment by
 
 and use
 
-    source activate kf_bf
+    conda activate kf_bf
 
 and
 
-    source deactivate kf_bf
+    conda deactivate kf_bf
 
 to activate and deactivate the environment.
 
