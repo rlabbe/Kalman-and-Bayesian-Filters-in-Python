@@ -58,7 +58,9 @@ def test_filterpy_version():
 # chapter so the reader can see that they need to update FilterPy.
 test_filterpy_version()
 
-pylab.rcParams['figure.max_open_warning'] = 50
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", matplotlib.MatplotlibDeprecationWarning)
+    pylab.rcParams['figure.max_open_warning'] = 50
 
 
 @contextmanager
@@ -110,7 +112,10 @@ def set_style():
             style = json.load(open("./kf_book/538.json"))
         else:
             style = json.load(open(".//kf_book/538.json"), object_hook=_decode_dict)
-        plt.rcParams.update(style)
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", matplotlib.MatplotlibDeprecationWarning)
+            plt.rcParams.update(style)
     except:
         pass
     np.set_printoptions(suppress=True, precision=3, 
