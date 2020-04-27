@@ -125,7 +125,7 @@ If you do not have pip, you may follow the instructions here: https://pip.pypa.i
 All of the filters used in this book as well as others not in this book are implemented in my Python library FilterPy, available [here](https://github.com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
 
 
-FilterPy is hosted github at (https://github.com/rlabbe/filterpy).  If you want the bleading edge release you will want to grab a copy from github, and follow your Python installation's instructions for adding it to the Python search path. This might expose you to some instability since you might not get a tested release, but as a benefit you will also get all of the test scripts used to test the library. You can examine these scripts to see many examples of writing and running filters while not in the Jupyter Notebook environment.
+FilterPy is hosted on github at (https://github.com/rlabbe/filterpy).  If you want the bleeding edge release you will want to grab a copy from github, and follow your Python installation's instructions for adding it to the Python search path. This might expose you to some instability since you might not get a tested release, but as a benefit you will also get all of the test scripts used to test the library. You can examine these scripts to see many examples of writing and running filters while not in the Jupyter Notebook environment.
 
 Alternative Way of Running the Book in Conda environment
 ----
@@ -135,11 +135,11 @@ If you have conda or miniconda installed, you can create environment by
 
 and use
 
-    source activate kf_bf
+    conda activate kf_bf
 
 and
 
-    source deactivate kf_bf
+    conda deactivate kf_bf
 
 to activate and deactivate the environment.
 

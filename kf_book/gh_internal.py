@@ -172,26 +172,25 @@ def plot_estimate_chart_3():
         plt.ylim(157, 164.5)
 
 
-def plot_gh_results(weights, estimates, predictions, time_step=0):
-
+def plot_gh_results(weights, estimates, predictions, actual, time_step=0):
     n = len(weights)
     if time_step > 0:
         rng = range(1, n+1)
     else:
         rng = range(n, n+1)
     xs = range(n+1)
-    pred, = book_plots.plot_track(xs[1:], predictions, c='r', marker='v')
-    scale, = book_plots.plot_measurements(xs[1:], weights, color='k', lines=False)
-    est, = book_plots.plot_filter(xs, estimates, marker='o')
-
-    plt.legend([scale, est, pred], ['Measurement', 'Estimates', 'Predictions'], loc=4)
+    book_plots.plot_measurements(xs[1:], weights, color='k', lines=False)
+    book_plots.plot_filter(xs, estimates, marker='o', label='Estimates')
+    book_plots.plot_track(xs[1:], predictions, c='r', marker='v', label='Predictions')
+    plt.plot([xs[0], xs[-1]], actual, c='k', lw=1, label='Actual')
+    plt.legend(loc=4)
     book_plots.set_labels(x='day', y='weight (lbs)')
     plt.xlim([-1, n+1])
     plt.ylim([156.0, 173])
 
 
 def print_results(estimates, prediction, weight):
-    print('previous: {:.2f}, prediction: {:.2f} estimate {:.2f}'.format(
+    print('previous estimate: {:.2f}, prediction: {:.2f}, estimate {:.2f}'.format(
           estimates[-2], prediction, weight))
 
 

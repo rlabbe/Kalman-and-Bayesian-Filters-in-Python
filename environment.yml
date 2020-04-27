@@ -1,6 +1,8 @@
 name: kf_bf
 dependencies:
+- pip
 - python
+- pip
 - ipython
 - jupyter
 - matplotlib
