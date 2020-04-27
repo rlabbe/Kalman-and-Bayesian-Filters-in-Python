@@ -17,6 +17,8 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
+import warnings
+
 from filterpy.monte_carlo import stratified_resample, residual_resample
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -112,13 +114,17 @@ def plot_random_pd():
           .5*norm(x, .5, .08) +
            np.sqrt(norm(x, 0.8, 0.06)) +0.1 * (1 - sigmoid(x, 0.45, 0.15)))
 
-    # hack because of bug `with plt.xkcd()` doesn't return context correctly
-    saved_state = mpl.rcParams.copy()
-    plt.xkcd()
-    plt.axes(xticks=[], yticks=[], frameon=False)
-    plt.plot(x, y2)
-    plt.ylim([0, max(y2)+.1])
-    mpl.rcParams.update(saved_state)
+    with warnings.catch_warnings():
+        # matplotlib warns about deprecated rcParams when you copy. Oye.
+        warnings.simplefilter("ignore", mpl.MatplotlibDeprecationWarning)
+
+        # hack because of bug `with plt.xkcd()` doesn't return context correctly
+        saved_state = mpl.rcParams.copy()
+        plt.xkcd()
+        plt.axes(xticks=[], yticks=[], frameon=False)
+        plt.plot(x, y2)
+        plt.ylim([0, max(y2)+.1])
+        mpl.rcParams.update(saved_state)
 
 
 def plot_monte_carlo_ukf():
