@@ -179,7 +179,7 @@ def plot_gh_results(weights, estimates, predictions, actual, time_step=0):
     else:
         rng = range(n, n+1)
     xs = range(n+1)
-    book_plots.plot_measurements(xs[1:], weights, color='k', lines=False)
+    book_plots.plot_measurements(weights, color='k', lines=False)
     book_plots.plot_filter(xs, estimates, marker='o', label='Estimates')
     book_plots.plot_track(xs[1:], predictions, c='r', marker='v', label='Predictions')
     plt.plot([xs[0], xs[-1]], actual, c='k', lw=1, label='Actual')
