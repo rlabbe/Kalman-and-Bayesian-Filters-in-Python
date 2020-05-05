@@ -1,5 +1,4 @@
 filterpy
-seaborn
 jupyter
 notebook
 sympy
