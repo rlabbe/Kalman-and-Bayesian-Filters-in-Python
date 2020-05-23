@@ -62,6 +62,25 @@ def zs_var_275():
     return np.array([xs, zs]).T
 
 
+def plot_track_ellipses(N, zs, ps, cov, title):
+    #bp.plot_measurements(range(1,N + 1), zs)
+    #plt.plot(range(1, N + 1), ps, c='b', lw=2, label='filter')
+    plt.title(title)
+
+    for i,p in enumerate(cov):
+        plot_covariance_ellipse(
+              (i+1, ps[i]), cov=p, variance=4,
+               axis_equal=False, ec='g', alpha=0.5)
+
+        if i == len(cov)-1:
+            s = ('$\sigma^2_{pos} = %.2f$' % p[0,0])
+            plt.text (20, 5, s, fontsize=18)
+            s = ('$\sigma^2_{vel} = %.2f$' % p[1, 1])
+            plt.text (20, 0, s, fontsize=18)
+    plt.ylim(-5, 20)
+    plt.gca().set_aspect('equal')
+
+
 def plot_gaussian_multiply():
     xs = np.arange(-5, 10, 0.1)
 
