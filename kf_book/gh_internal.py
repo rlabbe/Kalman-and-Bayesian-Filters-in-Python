@@ -48,7 +48,7 @@ def plot_hypothesis2():
         plt.errorbar(range(1, 11), [169, 170, 169,171, 170, 171, 169, 170, 169, 170],
                      xerr=0, yerr=6, fmt='bo', capthick=2, capsize=10)
         plt.plot([1, 10], [169, 170.5], color='g', ls='--')
-        
+
         plt.xlim(0, 11)
         plt.ylim(150, 185)
         plt.xlabel('day')
@@ -89,7 +89,7 @@ def plot_hypothesis4():
         book_plots.show_legend()
         plt.grid(False)
 
-    
+
 def plot_hypothesis5():
     weights = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6,
            169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
@@ -108,8 +108,8 @@ def plot_hypothesis5():
         plt.ylabel('weight (lbs)')
         book_plots.show_legend()
         plt.grid(False)
-        
-    
+
+
 def plot_estimate_chart_1():
     with figsize(y=2.5):
         plt.figure()
@@ -179,7 +179,7 @@ def plot_gh_results(weights, estimates, predictions, actual, time_step=0):
     else:
         rng = range(n, n+1)
     xs = range(n+1)
-    book_plots.plot_measurements(weights, color='k', lines=False)
+    book_plots.plot_measurements(range(1, len(weights)+1), weights, color='k', lines=False)
     book_plots.plot_filter(xs, estimates, marker='o', label='Estimates')
     book_plots.plot_track(xs[1:], predictions, c='r', marker='v', label='Predictions')
     plt.plot([xs[0], xs[-1]], actual, c='k', lw=1, label='Actual')
