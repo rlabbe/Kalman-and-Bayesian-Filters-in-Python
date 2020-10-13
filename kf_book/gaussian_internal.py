@@ -40,13 +40,27 @@ def plot_height_std(x, lw=10):
 def plot_correlated_data(X, Y, xlabel=None,
                          ylabel=None, equal=True):
 
+    """Plot correlation between x and y by performing
+    linear regression between X and Y.
+
+    X: x data
+    Y: y data
+    xlabel: str
+        optional label for x axis
+    ylabel: str
+        optional label for y axis
+    equal: bool, default True
+        use equal scale for x and y axis
+    """
+
+
     plt.scatter(X, Y)
 
     if xlabel is not None:
-        plt.xlabel('Height (in)');
+        plt.xlabel(xlabel);
 
     if ylabel is not None:
-        plt.ylabel('Weight (lbs)')
+        plt.ylabel(ylabel)
 
     # fit line through data
     m, b = np.polyfit(X, Y, 1)
