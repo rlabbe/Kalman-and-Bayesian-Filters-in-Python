@@ -80,7 +80,7 @@ def plot_errorbars(bars, xlims, ylims=(-1, 1)):
         tuple containing min and max values for x axis
 
     y-lims : tuple, optional
-        tuple containing min and max values for x axis
+        tuple containing min and max values for y axis ( the default is (-1, 1))
 
     Example
     -------
