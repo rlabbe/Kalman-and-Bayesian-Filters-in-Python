@@ -13,9 +13,6 @@ This is licensed under an MIT license. See the LICENSE.txt file
 for more information.
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 from contextlib import contextmanager
 from IPython.core.display import HTML
 import json
@@ -62,23 +59,16 @@ def test_installation():
 
 
     v = matplotlib.__version__
-    min_version = "1.5.0" # this is really old!!!
+    min_version = "3.0" # this is really old!!!
     if LooseVersion(v) < LooseVersion(min_version):
        print("Minimum Matplotlib version supported is {}. "
              "Please install a more recent version.".format(min_version))
 
-    # require Python 2.7, or 3.5+
-
+    # require Python 3.6+
     import sys
     v = sys.version_info
-    if v.major > 3:
-        # I guess if we are this far in the future it'll work? Who knows.
-        # I just don't want to start getting issue reports when Python goes
-        # to 4.0
-        return
-
-    if (v.major == 2 and v.minor != 7) or (v.major == 3 and v.minor < 5):
-        print('You must use Python version 2.7 or 3.5+ for the notebooks to work correctly')
+    if v.major < 3 or (v.major == 3 and v.minor < 6):
+        print('You must use Python version 3.6 or later for the notebooks to work correctly')
 
 
     # need to add test for IPython. I think I want to be at 6, which also implies
@@ -97,11 +87,6 @@ import matplotlib.pylab as pylab
 import matplotlib.pyplot as plt
 import numpy as np
 
-# version 1.4.3 of matplotlib has a bug that makes
-# it issue a spurious warning on every plot that
-# clutters the notebook output
-if matplotlib.__version__ == '1.4.3':
-    warnings.simplefilter(action="ignore", category=FutureWarning)
 
 try:
     matplotlib.style.use('default')
@@ -169,7 +154,7 @@ def set_style():
             plt.rcParams.update(style)
     except:
         pass
-    np.set_printoptions(suppress=True, precision=3, 
+    np.set_printoptions(suppress=True, precision=3,
                         threshold=10000., linewidth=70,
                         formatter={'float':lambda x:' {:.3}'.format(x)})
 
@@ -183,7 +168,7 @@ def set_style():
         <style>
         .output_wrapper, .output {
             height:auto !important;
-            max-height:100000px; 
+            max-height:100000px;
         }
         .output_scroll {
             box-shadow:none !important;
