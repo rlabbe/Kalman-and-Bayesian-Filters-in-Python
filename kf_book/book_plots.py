@@ -334,7 +334,7 @@ def IntSlider(value, **kwargs):
 
 def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements',
                       lines=False, **kwargs):
-    """ Helper function to give a consistant way to display
+    """ Helper function to give a consistent way to display
     measurements in the book.
     """
     if ys is None and dt is not None:
@@ -357,7 +357,7 @@ def plot_measurements(xs, ys=None, dt=None, color='k', lw=1, label='Measurements
 
 
 def plot_residual_limits(Ps, stds=1.):
-    """ plots standand deviation given in Ps as a yellow shaded region. One std
+    """ plots standard deviation given in Ps as a yellow shaded region. One std
     by default, use stds for a different choice (e.g. stds=3 for 3 standard
     deviations.
     """
