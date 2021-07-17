@@ -48,7 +48,7 @@ class gaussian(object):
         return (self.mean, self.variance)
 
     def __getitem__ (self,index):
-        """ maybe silly, allows you to access obect as a tuple:
+        """ maybe silly, allows you to access object as a tuple:
         a = gaussian(3,4)
         print (tuple(a))
         """
