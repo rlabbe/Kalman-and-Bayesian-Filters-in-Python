@@ -1,7 +1,7 @@
 # [Kalman and Bayesian Filters in Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
 
 
-Introductory text for Kalman and Bayesian filters. All code is written in Python, and the book itself is written using Juptyer Notebook so that you can run and modify the code in your browser. What better way to learn?
+Introductory text for Kalman and Bayesian filters. All code is written in Python, and the book itself is written using Jupyter Notebook so that you can run and modify the code in your browser. What better way to learn?
 
 
 **"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author.
