@@ -85,7 +85,7 @@ GitHub is able to render the notebooks directly. The quickest way to view a note
 PDF Version
 -----
 
-A PDF version of the book is available [here](https://drive.google.com/open?id=0By_SW19c1BfhSVFzNHc0SjduNzg)
+A PDF version of the book is available [here]https://drive.google.com/file/d/0By_SW19c1BfhSVFzNHc0SjduNzg/view?usp=sharing&resourcekey=0-41olC9ht9xE3wQe2zHZ45A)
 
 
 The PDF will usually lag behind what is in github as I don't update it for every minor check in.
