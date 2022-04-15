@@ -1,14 +1,14 @@
-# [Kalman and Bayesian Filters in Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+# [Фильтры Калмана и Байеса в Python](https://github.com/kiri11-mi1/Kalman-and-Bayesian-Filters-in-Python)
 
 
-Introductory text for Kalman and Bayesian filters. All code is written in Python, and the book itself is written using Juptyer Notebook so that you can run and modify the code in your browser. What better way to learn?
+Вводный текст для фильтров Калмана и Байеса. Весь код написан на Python, а сама книга написана с использованием Jupyter Notebook, так что вы можете запускать и изменять код в своем браузере. Что может быть лучше для обучения?
 
 
-**"Kalman and Bayesian Filters in Python" looks amazing! ... your book is just what I needed** - Allen Downey, Professor and O'Reilly author.
+**"Фильтры Калмана и Байеса в Python" выглядят потрясающе! ... ваша книга - это как раз то, что мне было нужно** - Аллен Дауни, профессор и автор книги О'Рейли.
 
-**Thanks for all your work on publishing your introductory text on Kalman Filtering, as well as the Python Kalman Filtering libraries. We’ve been using it internally to teach some key state estimation concepts to folks and it’s been a huge help.** - Sam Rodkey, SpaceX
+**Спасибо за всю вашу работу по публикации вводного текста по фильтрации Калмана, а также библиотек фильтрации Калмана на Python. Мы использовали его внутри компании, чтобы научить людей некоторым ключевым концепциям оценки состояния, и это оказало огромную помощь.** - Сэм Родки, SpaceX
 
-Start reading online now by clicking the binder or Azure badge below:
+Начните читать онлайн прямо сейчас, нажав на значок binder или Azure ниже:
 
 
 [![Binder](http://mybinder.org/badge.svg)](https://beta.mybinder.org/v2/gh/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master)
@@ -18,139 +18,137 @@ Start reading online now by clicking the binder or Azure badge below:
 
 ![alt tag](https://raw.githubusercontent.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master/animations/05_dog_track.gif)
 
-What are Kalman and Bayesian Filters?
+Что такое фильтры Калмана и Байеса?
 -----
 
-Sensors are noisy. The world is full of data and events that we want to measure and track, but we cannot rely on sensors to give us perfect information. The GPS in my car reports altitude. Each time I pass the same point in the road it reports a slightly different altitude. My kitchen scale gives me different readings if I weigh the same object twice.
+Датчики шумят. Мир полон данных и событий, которые мы хотим измерять и отслеживать, но мы не можем полагаться на датчики, чтобы получить точную информацию. GPS в моей машине сообщает о высоте. Каждый раз, когда я проезжаю одну и ту же точку на дороге, он сообщает немного другую высоту. Мои кухонные весы дают мне разные показания, если я взвешиваю один и тот же предмет дважды.
 
-In simple cases the solution is obvious. If my scale gives slightly different readings I can just take a few readings and average them. Or I can replace it with a more accurate scale. But what do we do when the sensor is very noisy, or the environment makes data collection difficult? We may be trying to track the movement of a low flying aircraft. We may want to create an autopilot for a drone, or ensure that our farm tractor seeded the entire field. I work on computer vision, and I need to track moving objects in images, and the computer vision algorithms create very noisy and unreliable results.
+В простых случаях решение очевидно. Если моя шкала дает немного другие показания, я могу просто взять несколько показаний и усреднить их. Или я могу заменить его более точной шкалой. Но что мы делаем, когда датчик сильно шумит или окружающая среда затрудняет сбор данных? Возможно, мы пытаемся отследить движение низко летящего самолета. Возможно, мы захотим создать автопилот для дрона или убедиться, что наш сельскохозяйственный трактор засеял все поле. Я работаю над компьютерным зрением, и мне нужно отслеживать движущиеся объекты на изображениях, а алгоритмы компьютерного зрения создают очень шумные и ненадежные результаты.
 
-This book teaches you how to solve these sorts of filtering problems. I use many different algorithms, but they are all based on Bayesian probability. In simple terms Bayesian probability determines what is likely to be true based on past information.
+Эта книга научит вас, как решать такого рода проблемы с фильтрацией. У меня так много разных алгоритмов, но все они основаны на байесовской вероятности. Проще говоря, байесовская вероятность определяет, что, вероятно, будет правдой, основываясь на прошлой информации.
 
-If I asked you the heading of my car at this moment you would have no idea. You'd proffer a number between 1° and 360° degrees, and have a 1 in 360 chance of being right. Now suppose I told you that 2 seconds ago its heading was 243°. In 2 seconds my car could not turn very far, so you could make a far more accurate prediction. You are using past information to more accurately infer information about the present or future.
+Если бы я спросил вас, куда направляется моя машина в этот момент, вы бы понятия не имели. Вы бы предложили число от 1 ° до 360° градусов, и у вас был бы шанс оказаться правым 1 из 360. Теперь предположим, что я сказал вам, что 2 секунды назад его курс был 243°. За 2 секунды моя машина не смогла развернуться очень далеко, так что вы могли бы сделать гораздо более точный прогноз. Вы используете прошлую информацию для более точного определения информации о настоящем или будущем.
 
-The world is also noisy. That prediction helps you make a better estimate, but it also subject to noise. I may have just braked for a dog or swerved around a pothole. Strong winds and ice on the road are external influences on the path of my car. In control literature we call this noise though you may not think of it that way.
+Мир тоже шумный. Это предсказание помогает вам сделать более точную оценку, но оно также подвержено влиянию шума. Возможно, я просто затормозил из-за собаки или объехал выбоину. Сильный ветер и гололед на дороге - это внешние факторы, влияющие на траекторию движения моей машины. В литературе по управлению мы называем это шумом, хотя вы, возможно, и не думаете об этом таким образом.
 
-There is more to Bayesian probability, but you have the main idea. Knowledge is uncertain, and we alter our beliefs based on the strength of the evidence. Kalman and Bayesian filters blend our noisy and limited knowledge of how a system behaves with the noisy and limited sensor readings to produce the best possible estimate of the state of the system. Our principle is to never discard information.
+В байесовской вероятности есть нечто большее, но у вас есть основная идея. Знание неопределенно, и мы меняем наши убеждения, основываясь на силе доказательств. Фильтры Калмана и Байеса объединяют наши зашумленные и ограниченные знания о том, как ведет себя система, с зашумленными и ограниченными показаниями датчиков, чтобы получить наилучшую возможную оценку состояния системы. Наш принцип заключается в том, чтобы никогда не отбрасывать информацию.
 
-Say we are tracking an object and a sensor reports that it suddenly changed direction. Did it really turn, or is the data noisy? It depends. If this is a jet fighter we'd be very inclined to believe the report of a sudden maneuver. If it is a freight train on a straight track we would discount it. We'd further modify our belief depending on how accurate the sensor is. Our beliefs depend on the past and on our knowledge of the system we are tracking and on the characteristics of the sensors.
+Допустим, мы отслеживаем объект, и датчик сообщает, что он внезапно изменил направление. Действительно ли он включился, или данные зашумлены? Это зависит. Если это реактивный истребитель, мы были бы очень склонны поверить сообщению о внезапном маневре. Если бы это был грузовой поезд на прямом пути, мы бы сделали скидку на это. Мы бы еще больше изменили наши убеждения в зависимости от того, насколько точен датчик. Наши убеждения зависят от прошлого и от наших знаний о системе, которую мы отслеживаем, а также от характеристик датчиков.
 
-The Kalman filter was invented by Rudolf Emil Kálmán to solve this sort of problem in a mathematically optimal way. Its first use was on the Apollo missions to the moon, and since then it has been used in an enormous variety of domains. There are Kalman filters in aircraft, on submarines, and on cruise missiles. Wall street uses them to track the market. They are used in robots, in IoT (Internet of Things) sensors, and in laboratory instruments. Chemical plants use them to control and monitor reactions. They are used to perform medical imaging and to remove noise from cardiac signals. If it involves a sensor and/or time-series data, a Kalman filter or a close relative to the Kalman filter is usually involved.
+Фильтр Калмана был изобретен Эмилем Кальманом для решения такого рода задач математически оптимальным способом. Его первое применение было во время полетов "Аполлона" на Луну, и с тех пор он использовался в самых разных областях. Фильтры Калмана есть в самолетах, на подводных лодках и на крылатых ракетах. Уолл-стрит использует их для отслеживания рынка. Они используются в роботах, в датчиках Интернета вещей (IoT) и в лабораторных приборах. Химические заводы используют их для контроля и мониторинга реакций. Они используются для выполнения медицинской визуализации и для удаления шума из сердечных сигналов. Если это связано с датчиком и / или данными временных рядов, обычно используется фильтр Калмана или близкий родственник фильтра Калмана.
 
-Motivation
+Мотивация
 -----
 
-The motivation for this book came out of my desire for a gentle introduction to Kalman filtering. I'm a software engineer that spent almost two decades in the avionics field, and so I have always been 'bumping elbows' with the Kalman filter, but never implemented one myself. As I moved into solving tracking problems with computer vision the need became urgent. There are classic textbooks in the field, such as Grewal and Andrew's excellent *Kalman Filtering*. But sitting down and trying to read many of these books is a dismal experience if you do not have the required background. Typically the first few chapters fly through several years of undergraduate math, blithely referring you to textbooks on topics such as Itō calculus, and present an entire semester's worth of statistics in a few brief paragraphs. They are good texts for an upper undergraduate course, and an invaluable reference to researchers and professionals, but the going is truly difficult for the more casual reader. Symbology is introduced without explanation, different texts use different terms and variables for the same concept, and the books are almost devoid of examples or worked problems. I often found myself able to parse the words and comprehend the mathematics of a definition, but had no idea as to what real world phenomena they describe. "But what does that *mean?*" was my repeated thought.
+Мотивацией для этой книги послужило мое желание мягко познакомить с фильтрацией по Калману. Я инженер-программист, который провел почти два десятилетия в области авионики, и поэтому я всегда сталкивался с фильтром Калмана, но никогда не внедрял его сам. По мере того как я переходил к решению задач отслеживания с помощью компьютерного зрения, необходимость в этом стала насущной. В этой области есть классические учебники, такие как отличная работа Гревала и Эндрю *Фильтрация Калмана*. Но сесть и попытаться прочитать многие из этих книг - это печальный опыт, если у вас нет необходимого опыта. Обычно первые несколько глав охватывают несколько лет обучения математике в бакалавриате, беспечно отсылая вас к учебникам по таким темам, как математическое исчисление Ито, и представляют статистику за целый семестр в нескольких кратких абзацах. Это хорошие тексты для старших курсов бакалавриата и бесценная ссылка для исследователей и профессионалов, но для более случайного читателя это действительно сложно. Символика вводится без объяснений, в разных текстах используются разные термины и переменные для одной и той же концепции, а книги почти лишены примеров или проработанных проблем. Я часто обнаруживал, что могу разобрать слова и понять математику определения, но понятия не имел о том, какие явления реального мира они описывают. "Но что это *значит?*" - была моя повторяющаяся мысль.
 
-However, as I began to finally understand the Kalman filter I realized the underlying concepts are quite straightforward. A few simple probability rules, some intuition about how we integrate disparate knowledge to explain events in our everyday life and the core concepts of the Kalman filter are accessible. Kalman filters have a reputation for difficulty, but shorn of much of the formal terminology the beauty of the subject and of their math became clear to me, and I fell in love with the topic.
+Однако, когда я начал, наконец, понимать фильтр Калмана, я понял, что лежащие в его основе концепции довольно просты. Доступны несколько простых правил вероятности, некоторая интуиция о том, как мы объединяем разрозненные знания для объяснения событий в нашей повседневной жизни, а также основные концепции фильтра Калмана. Фильтры Калмана имеют репутацию сложных, но, лишенный большей части формальной терминологии, красота предмета и их математика стали мне понятны, и я влюбился в эту тему.
 
-As I began to understand the math and theory more difficulties present themselves. A book or paper's author makes some statement of fact and presents a graph as proof.  Unfortunately, why the statement is true is not clear to me, nor is the method for making that plot obvious. Or maybe I wonder "is this true if R=0?"  Or the author provides pseudocode at such a high level that the implementation is not obvious. Some books offer Matlab code, but I do not have a license to that expensive package. Finally, many books end each chapter with many useful exercises. Exercises which you need to understand if you want to implement Kalman filters for yourself, but exercises with no answers. If you are using the book in a classroom, perhaps this is okay, but it is terrible for the independent reader. I loathe that an author withholds information from me, presumably to avoid 'cheating' by the student in the classroom.
+По мере того, как я начинал понимать математику и теорию, возникало все больше трудностей. Автор книги или статьи делает какое-то утверждение о факте и представляет график в качестве доказательства. К сожалению, мне непонятно, почему это утверждение верно, равно как и способ сделать этот сюжет очевидным. Или, может быть, мне интересно: "Верно ли это, если R = 0?" Или автор предоставляет псевдокод на таком высоком уровне, что реализация неочевидна. Некоторые книги предлагают код Matlab, но у меня нет лицензии на этот дорогой пакет. Наконец, многие книги заканчивают каждую главу множеством полезных упражнений. Упражнения, которые вам нужно понять, если вы хотите реализовать фильтры Калмана для себя, но упражнения без ответов. Если вы используете книгу в классе, возможно, это нормально, но это ужасно для независимого читателя. Мне неприятно, что автор утаивает от меня информацию, предположительно, чтобы избежать "обмана" со стороны ученика в классе.
 
-From my point of view none of this is necessary. Certainly if you are designing a Kalman filter for an aircraft or missile you must thoroughly master all of the mathematics and topics in a typical Kalman filter textbook. I just want to track an image on a screen, or write some code for an Arduino project. I want to know how the plots in the book are made, and chose different parameters than the author chose. I want to run simulations. I want to inject more noise in the signal and see how a filter performs. There are thousands of opportunities for using Kalman filters in everyday code, and yet this fairly straightforward topic is the provenance of rocket scientists and academics.
+С моей точки зрения, в этом нет необходимости. Конечно, если вы разрабатываете фильтр Калмана для самолета или ракеты, вы должны тщательно изучить всю математику и темы в типичном учебнике по фильтрам Калмана. Я просто хочу отследить изображение на экране или написать какой-нибудь код для проекта Arduino. Я хочу знать, как создаются сюжеты в книге, и выбрал параметры, отличные от выбранных автором. Я хочу провести моделирование. Я хочу добавить больше шума в сигнал и посмотреть, как работает фильтр. Существуют тысячи возможностей для использования фильтров Калмана в повседневном коде, и все же эта довольно простая тема - происхождение ученых-ракетчиков и академиков.
 
-I wrote this book to address all of those needs. This is not the book for you if you program navigation computers for Boeing or design radars for Raytheon. Go get an advanced degree at Georgia Tech, UW, or the like, because you'll need it. This book is for the hobbyist, the curious, and the working engineer that needs to filter or smooth data.
+Я написал эту книгу, чтобы удовлетворить все эти потребности. Эта книга не для вас, если вы программируете навигационные компьютеры для Boeing или разрабатываете радары для Raytheon. Иди и получи ученую степень в Технологическом институте Джорджии, Калифорнийском университете или что-то в этом роде, потому что тебе это понадобится. Эта книга предназначена для любителей, любознательных и работающих инженеров, которым необходимо фильтровать или сглаживать данные.
 
-This book is interactive. While you can read it online as static content, I urge you to use it as intended. It is written using Jupyter Notebook, which allows me to combine text, math, Python, and Python output in one place. Every plot, every piece of data in this book is generated from Python that is available to you right inside the notebook. Want to double the value of a parameter? Click on the Python cell, change the parameter's value, and click 'Run'. A new plot or printed output will appear in the book.
+Эта книга интерактивна. Хотя вы можете прочитать его онлайн как статический контент, я настоятельно призываю вас использовать его по назначению. Он написан с использованием Jupyter Notebook, который позволяет мне объединять текст, математику, Python и вывод на Python в одном месте. Каждый график, каждая часть данных в этой книге генерируются с помощью Python, который доступен вам прямо в записной книжке. Хотите удвоить значение параметра? Щелкните по ячейке Python, измените значение параметра и нажмите "Выполнить". В книге появится новый сюжет или печатная продукция.
 
-This book has exercises, but it also has the answers. I trust you. If you just need an answer, go ahead and read the answer. If you want to internalize this knowledge, try to implement the exercise before you read the answer.
+В этой книге есть упражнения, но в ней также есть ответы. Я доверяю тебе. Если вам просто нужен ответ, продолжайте и прочитайте ответ. Если вы хотите усвоить эти знания, попробуйте выполнить упражнение, прежде чем читать ответ.
 
-This book has supporting libraries for computing statistics, plotting various things related to filters, and for the various filters that we cover. This does require a strong caveat; most of the code is written for didactic purposes. It is rare that I chose the most efficient solution (which often obscures the intent of the code), and in the first parts of the book I did not concern myself with numerical stability. This is important to understand - Kalman filters in aircraft are carefully designed and implemented to be numerically stable; the naive implementation is not stable in many cases. If you are serious about Kalman filters this book will not be the last book you need. My intention is to introduce you to the concepts and mathematics, and to get you to the point where the textbooks are approachable.
+В этой книге есть вспомогательные библиотеки для вычисления статистики, построения графиков различных объектов, связанных с фильтрами, а также для различных фильтров, которые мы рассматриваем. Это требует серьезного предостережения; большая часть кода написана в дидактических целях. Редко бывает, чтобы я выбирал наиболее эффективное решение (которое часто скрывает смысл кода), и в первых частях книги я не заботился о числовой стабильности. Это важно понимать - фильтры Калмана в самолетах тщательно разработаны и реализованы, чтобы быть численно стабильными; наивная реализация во многих случаях нестабильна. Если вы серьезно относитесь к фильтрам Калмана, эта книга будет не последней книгой, которая вам нужна. Мое намерение состоит в том, чтобы познакомить вас с концепциями и математикой, а также довести вас до того момента, когда учебники станут доступными.
 
-Finally, this book is free. The cost for the books required to learn Kalman filtering is somewhat prohibitive even for a Silicon Valley engineer like myself; I cannot believe they are within the reach of someone in a depressed economy, or a financially struggling student. I have gained so much from free software like Python, and free books like those from Allen B. Downey [here](http://www.greenteapress.com/). It's time to repay that. So, the book is free, it is hosted on free servers, and it uses only free and open software such as IPython and MathJax to create the book.
+Наконец, эта книга бесплатна. Стоимость книг, необходимых для изучения фильтрации Калмана, несколько непомерно высока даже для такого инженера из Силиконовой долины, как я; я не могу поверить, что они доступны кому-то в условиях депрессии или студенту, испытывающему финансовые трудности. Я так много получил от свободного программного обеспечения, такого как Python, и бесплатных книг, таких как книги Аллена Б. Дауни [здесь](http://www.greenteapress.com/). Пришло время отплатить за это. Итак, книга бесплатна, она размещена на бесплатных серверах, и для ее создания используется только бесплатное и открытое программное обеспечение, такое как IPython и MathJax.
 
 
-## Reading Online
+## Чтение онлайн
 
-The book is written as a collection of Jupyter Notebooks, an interactive, browser based system that allows you to combine text, Python, and math into your browser. There are multiple ways to read these online, listed below.
+Книга написана как сборник записных книжек Jupyter, интерактивной браузерной системы, которая позволяет вам комбинировать текст, Python и математику в вашем браузере. Существует несколько способов прочитать их онлайн, перечисленных ниже.
 
 ### binder
 
-binder serves interactive notebooks online, so you can run the code and change the code within your browser without downloading the book or installing Jupyter.
+binder обслуживает интерактивные записные книжки онлайн, поэтому вы можете запускать код и изменять код в своем браузере, не загружая книгу и не устанавливая Jupyter.
 
 [![Binder](http://mybinder.org/badge.svg)](https://beta.mybinder.org/v2/gh/rlabbe/Kalman-and-Bayesian-Filters-in-Python/master)
 
 
 ### nbviewer
 
-The website http://nbviewer.org provides a Jupyter Notebook server that renders notebooks stored at github (or elsewhere). The rendering is done in real time when you load the book. You may use [*this nbviewer link*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb) to access my book via nbviewer. If you read my book today, and then I make a change tomorrow, when you go back tomorrow you will see that change. Notebooks are rendered statically - you can read them, but not modify or run the code.
+Веб-сайт http://nbviewer.org предоставляет сервер ноутбуков Jupyter, который отображает записные книжки, хранящиеся на github (или где-либо еще). Рендеринг выполняется в режиме реального времени, когда вы загружаете книгу. Вы можете использовать [*эту nbviewer ссылку*](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/table_of_contents.ipynb), чтобы получить доступ к моей книге через nbviewer. Если вы прочтете мою книгу сегодня, а завтра я внесу изменения, то, когда вы вернетесь завтра, вы увидите эти изменения. Записные книжки отображаются статически - вы можете читать их, но не изменять или запускать код.
 
-nbviewer seems to lag the checked in version by a few days, so you might not be reading the most recent content.
+nbviewer, похоже, отстает от проверенной версии на несколько дней, так что вы, возможно, будете читать не самое последнее содержимое.
 
 
 ### GitHub
 
-GitHub is able to render the notebooks directly. The quickest way to view a notebook is to just click on them above. However, it renders the math incorrectly, and I cannot recommend using it if you are doing more than just dipping into the book.
+GitHub может отображать записные книжки напрямую. Самый быстрый способ просмотреть записную книжку - это просто нажать на них выше. Однако он неправильно отображает математику, и я не могу рекомендовать использовать его, если вы делаете больше, чем просто погружаетесь в книгу.
 
 
-PDF Version
+PDF версия
 -----
 
-A PDF version of the book is available [here]https://drive.google.com/file/d/0By_SW19c1BfhSVFzNHc0SjduNzg/view?usp=sharing&resourcekey=0-41olC9ht9xE3wQe2zHZ45A)
+Доступна PDF-версия книги [здесь](https://drive.google.com/file/d/0By_SW19c1BfhSVFzNHc0SjduNzg/view?usp=sharing&resourcekey=0-41olC9ht9xE3wQe2zHZ45A)
 
 
-The PDF will usually lag behind what is in github as I don't update it for every minor check in.
+PDF-файл обычно отстает от того, что есть в github, поскольку я не обновляю его при каждой незначительной регистрации.
 
 
-## Downloading and Running the Book
+## Загрузка и запуск книги
 
-However, this book is intended to be interactive and I recommend using it in that form. It's a little more effort to set up, but worth it. If you install IPython and some supporting libraries on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
+Однако эта книга задумана как интерактивная, и я рекомендую использовать ее в такой форме. Настройка требует немного больше усилий, но оно того стоит. Если вы установите IPython и некоторые вспомогательные библиотеки на свой компьютер, а затем клонируете эту книгу, вы сможете самостоятельно запускать весь код из книги. Вы можете проводить эксперименты, видеть, как фильтры реагируют на разные данные, видеть, как разные фильтры реагируют на одни и те же данные, и так далее. Я нахожу такого рода немедленную обратную связь жизненно важной и бодрящей. Вам не нужно задаваться вопросом "что произойдет, если". Попробуйте и посмотрите!
 
-The book and supporting software can be downloaded from GitHub by running this command on  the command line:
+Книгу и вспомогательное программное обеспечение можно загрузить с GitHub, выполнив эту команду в командной строке:
 
     git clone --depth=1 https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python.git
     pip install filterpy
 
-Instructions for installation of the IPython ecosystem can be found in the Installation appendix, found [here](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Appendix-A-Installation.ipynb).
+Инструкции по установке экосистемы Python можно найти в приложении к установке, которое находится [здесь](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Appendix-A-Installation.ipynb).
 
-Once the software is installed you can navigate to the installation directory and run Juptyer notebook with the command line instruction
+После установки программного обеспечения вы можете перейти в каталог установки и запустить Jupyter notebook с помощью инструкции командной строки
 
     jupyter notebook
 
-This will open a browser window showing the contents of the base directory. The book is organized into chapters, each contained within one IPython Notebook (these notebook files have a .ipynb file extension). For example, to read Chapter 2, click on the file *02-Discrete-Bayes.ipynb*. Sometimes there are supporting notebooks for doing things like generating animations that are displayed in the chapter. These are not intended to be read by the end user, but of course if you are curious as to how an animation is made go ahead and take a look. You can find these notebooks in the folder named *Supporting_Notebooks*.
+Это откроет окно браузера, показывающее содержимое базового каталога. Книга разделена на главы, каждая из которых содержится в одной записной книжке IPython (файлы этих записных книжек имеют расширение .ipynb). Например, чтобы прочитать главу 2, нажмите на файл *02-Discrete-Bayes.ipynb*. Иногда существуют вспомогательные записные книжки для выполнения таких действий, как создание анимаций, которые отображаются в главе. Они не предназначены для чтения конечным пользователем, но, конечно, если вам интересно, как создается анимация, продолжайте и посмотрите. Вы можете найти эти записные книжки в папке с именем *Supporting_Notebooks*.
 
-This is admittedly a somewhat cumbersome interface to a book; I am following in the footsteps of several other projects that are somewhat repurposing Jupyter Notebook to generate entire books. I feel the slight annoyances have a huge payoff - instead of having to download a separate code base and run it in an IDE while you try to read a book, all of the code and text is in one place. If you want to alter the code, you may do so and immediately see the effects of your change. If you find a bug, you can make a fix, and push it back to my repository so that everyone in the world benefits. And, of course, you will never encounter a problem I face all the time with traditional books - the book and the code are out of sync with each other, and you are left scratching your head as to which source to trust.
+По общему признанию, это несколько громоздкий интерфейс к книге; Я иду по стопам нескольких других проектов, которые несколько перепрофилируют Jupyter Notebook для создания целых книг. Я чувствую, что небольшие неприятности приносят огромную пользу - вместо того, чтобы загружать отдельную базу кода и запускать ее в IDE, пока вы пытаетесь читать книгу, весь код и текст находятся в одном месте. Если вы хотите изменить код, вы можете сделать это и сразу увидеть последствия вашего изменения. Если вы обнаружите ошибку, вы можете исправить ее и отправить обратно в мой репозиторий, чтобы все в мире получили выгоду. И, конечно же, вы никогда не столкнетесь с проблемой, с которой я постоянно сталкиваюсь с традиционными книгами - книга и код не синхронизированы друг с другом, и вам остается ломать голову над тем, какому источнику доверять.
 
 
-Companion Software
+Сопутствующее программное обеспечение
 -----
 
 [![Latest Version](http://img.shields.io/pypi/v/filterpy.svg)](http://pypi.python.org/pypi/filterpy)
 
-I wrote an open source Bayesian filtering Python library called **FilterPy**. I have made the project available on PyPi, the Python Package Index.  To install from PyPi, at the command line issue the command
+Я написал библиотеку Python с байесовской фильтрацией с открытым исходным кодом под названием **FilterPy**. Я сделал проект доступным в PyPI, индексе пакетов Python. Чтобы установить из PyPI, в командной строке введите команду
 
     pip install filterpy
 
-If you do not have pip, you may follow the instructions here: https://pip.pypa.io/en/latest/installing.html.
+Если у вас нет pip, вы можете следовать приведенным здесь инструкциям: https://pip.pypa.io/en/latest/installing.html.
 
-All of the filters used in this book as well as others not in this book are implemented in my Python library FilterPy, available [here](https://github.com/rlabbe/filterpy). You do not need to download or install this to read the book, but you will likely want to use this library to write your own filters. It includes Kalman filters, Fading Memory filters, H infinity filters, Extended and Unscented filters, least square filters, and many more.  It also includes helper routines that simplify the designing the matrices used by some of the filters, and other code such as Kalman based smoothers.
+Все фильтры, используемые в этой книге, а также другие, не описанные в этой книге, реализованы в моей библиотеке Python FilterPy, доступной [здесь](https://github.com/rlabbe/filterpy). Вам не нужно загружать или устанавливать это, чтобы прочитать книгу, но вы, вероятно, захотите использовать эту библиотеку для написания своих собственных фильтров. Он включает в себя фильтры Калмана, фильтры с затухающей памятью, фильтры H infinity, расширенные фильтры и фильтры без запаха, фильтры наименьших квадратов и многое другое. Он также включает вспомогательные процедуры, которые упрощают проектирование матриц, используемых некоторыми фильтрами, и другой код, такой как сглаживатели на основе Калмана.
 
 
-FilterPy is hosted on github at (https://github.com/rlabbe/filterpy).  If you want the bleeding edge release you will want to grab a copy from github, and follow your Python installation's instructions for adding it to the Python search path. This might expose you to some instability since you might not get a tested release, but as a benefit you will also get all of the test scripts used to test the library. You can examine these scripts to see many examples of writing and running filters while not in the Jupyter Notebook environment.
+Filter Py размещен на github по адресу (https://github.com/rlabbe/filterpy).  Если вам нужна версия bleeding edge, вам нужно будет получить копию с github и следовать инструкциям по установке вашего Python, чтобы добавить ее в путь поиска Python. Это может привести к некоторой нестабильности, поскольку вы можете не получить протестированную версию, но в качестве преимущества вы также получите все тестовые сценарии, используемые для тестирования библиотеки. Вы можете изучить эти сценарии, чтобы увидеть множество примеров написания и запуска фильтров вне среды Jupyter Notebook.
 
-Alternative Way of Running the Book in Conda environment
+Альтернативный способ запуска книги в среде Conda
 ----
-If you have conda or miniconda installed, you can create an environment by
+Если у вас установлена conda или miniconda, вы можете создать среду с помощью
 
     conda env update -f environment.yml
 
-and use
+и активировать её
 
     conda activate kf_bf
 
-and
+чтобы деактивировать, выполните команду ниже
 
     conda deactivate kf_bf
-
-to activate and deactivate the environment.
 
 
 Issues or Questions
 ------
 
-If you have comments, you can write an issue at GitHub so that everyone can read it along with my response. Please don't view it as a way to report bugs only. Alternatively I've created a gitter room for more informal discussion. [![Join the chat at https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Если у вас есть комментарии, вы можете написать вопрос на GitHub, чтобы все могли прочитать его вместе с моим ответом. Пожалуйста, не рассматривайте это только как способ сообщить об ошибках. В качестве альтернативы я создал комнату gitter для более неформального обсуждения. [![Join the chat at https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rlabbe/Kalman-and-Bayesian-Filters-in-Python?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-License
+Лицензия
 -----
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Kalman and Bayesian Filters in Python</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python" property="cc:attributionName" rel="cc:attributionURL">Roger R. Labbe</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
@@ -166,7 +164,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.TION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Contact
+Контакты
 -----
 
 rlabbejr at gmail.com
