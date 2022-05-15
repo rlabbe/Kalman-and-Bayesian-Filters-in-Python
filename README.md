@@ -27,7 +27,7 @@ In simple cases the solution is obvious. If my scale gives slightly different re
 
 This book teaches you how to solve these sorts of filtering problems. I use many different algorithms, but they are all based on Bayesian probability. In simple terms Bayesian probability determines what is likely to be true based on past information.
 
-If I asked you the heading of my car at this moment you would have no idea. You'd proffer a number between 1° and 360° degrees, and have a 1 in 360 chance of being right. Now suppose I told you that 2 seconds ago its heading was 243°. In 2 seconds my car could not turn very far, so you could make a far more accurate prediction. You are using past information to more accurately infer information about the present or future.
+If I asked you the heading of my car at this moment you would have no idea. You'd prefer a number between 1° and 360° degrees, and have a 1 in 360 chance of being right. Now suppose I told you that 2 seconds ago its heading was 243°. In 2 seconds my car could not turn very far, so you could make a far more accurate prediction. You are using past information to more accurately infer information about the present or future.
 
 The world is also noisy. That prediction helps you make a better estimate, but it also subject to noise. I may have just braked for a dog or swerved around a pothole. Strong winds and ice on the road are external influences on the path of my car. In control literature we call this noise though you may not think of it that way.
 
