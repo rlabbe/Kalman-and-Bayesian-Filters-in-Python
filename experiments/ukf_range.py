@@ -36,7 +36,7 @@ class RadarSim(object):
         self.alt = self.alt + .1*randn()
         self.pos = self.pos + self.vel*self.dt
 
-        # add measurment noise
+        # add measurement noise
         err = self.pos * 0.05*randn()
         slant_dist = math.sqrt(self.pos**2 + self.alt**2)
 

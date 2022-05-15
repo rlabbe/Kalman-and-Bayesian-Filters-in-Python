@@ -35,7 +35,7 @@ def transmitter_range(pos, transmitter_pos):
 
 
 
-# compute measurement of where you are with respect to seach sensor
+# compute measurement of where you are with respect to search sensor
 
 
 rz= transmitter_range(user_pos, t_pos) # $B21,22
