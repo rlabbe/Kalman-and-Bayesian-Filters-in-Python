@@ -36,7 +36,7 @@ class gaussian(object):
 
 
     def __str__(self):
-        return "(%f, %f)" %(self.mean, self.sigma)
+        return "(%f, %f)" %(self.mean, self.variance)
 
     def stddev(self):
         return math.sqrt (self.variance)
