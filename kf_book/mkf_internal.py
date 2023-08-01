@@ -373,7 +373,7 @@ def plot_3d_sampled_covariance(mean, cov):
 def plot_3_covariances():
     P = [[2, 0], [0, 2]]
     plt.subplot(131)
-    plt.gca().grid(b=False)
+    plt.gca().grid(False)
     plt.gca().set_xticks([0, 1, 2, 3, 4])
     plot_covariance_ellipse((2, 7), cov=P, facecolor='g', alpha=0.2,
                             title='|2 0|\n|0 2|', std=[3], axis_equal=False)
@@ -381,7 +381,7 @@ def plot_3_covariances():
     plt.gca().set_aspect('equal', adjustable='box')
 
     plt.subplot(132)
-    plt.gca().grid(b=False)
+    plt.gca().grid(False)
     plt.gca().set_xticks([0, 1, 2, 3, 4])
     P = [[2, 0], [0, 6]]
     plt.ylim((0, 15))
@@ -390,7 +390,7 @@ def plot_3_covariances():
                             std=[3], axis_equal=False, title='|2 0|\n|0 6|')
 
     plt.subplot(133)
-    plt.gca().grid(b=False)
+    plt.gca().grid(False)
     plt.gca().set_xticks([0, 1, 2, 3, 4])
     P = [[2, 1.2], [1.2, 2]]
     plt.ylim((0, 15))

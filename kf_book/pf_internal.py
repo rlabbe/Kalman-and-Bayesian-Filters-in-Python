@@ -143,14 +143,14 @@ def plot_monte_carlo_ukf():
     fxs, fys = f(xs, ys)
 
     plt.subplot(121)
-    plt.gca().grid(b=False)
+    plt.gca().grid(False)
 
     plt.scatter(xs, ys, marker='.', alpha=.2, color='k')
     plt.xlim(-25, 25)
     plt.ylim(-25, 25)
 
     plt.subplot(122)
-    plt.gca().grid(b=False)
+    plt.gca().grid(False)
 
     plt.scatter(fxs, fys, marker='.', alpha=0.2, color='k')
 
