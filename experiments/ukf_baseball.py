@@ -30,7 +30,7 @@ class BaseballPath(object):
         x0,y0            initial position
         launch_angle_deg angle ball is travelling respective to
                          ground plane
-        velocity_ms      speeed of ball in meters/second
+        velocity_ms      speed of ball in meters/second
         noise            amount of noise to add to each position
                          in (x,y)
         """
