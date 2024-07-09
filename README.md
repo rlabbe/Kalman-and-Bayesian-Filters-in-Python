@@ -139,7 +139,11 @@ and
 
     conda deactivate kf_bf
 
-to activate and deactivate the environment.
+to activate and deactivate the environment.  Within the environment, run
+
+    jupyter notebook
+
+to launch the notebook and see the chapters along the left-hand side.
 
 
 Issues or Questions
