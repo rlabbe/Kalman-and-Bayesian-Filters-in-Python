@@ -5,3 +5,4 @@ sympy
 numpy
 scipy
 matplotlib
+looseversion

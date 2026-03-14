@@ -47,7 +47,7 @@ def test_installation():
     except:
         print("Please install matplotlib before continuing. See chapter 0 for instructions.")
 
-    from distutils.version import LooseVersion
+    from looseversion import LooseVersion
 
     v = filterpy.__version__
     min_version = "1.4.4"
