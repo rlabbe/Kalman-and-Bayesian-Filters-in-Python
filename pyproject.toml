@@ -1,0 +1,15 @@
+[project]
+name = "kalman-and-bayesian-filters-in-python"
+version = "0.1.0"
+description = "Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions."
+readme = "README.md"
+requires-python = ">=3.8, <3.9"
+dependencies = [
+    "filterpy>=1.4.5",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.6.0,<3.7.0",
+    "notebook>=7.3.3",
+    "numpy>=1.24.4,<2.0.0",
+    "scipy>=1.10.1",
+    "sympy>=1.13.3",
+]

@@ -91,12 +91,21 @@ The PDF will usually lag behind what is in github as I don't update it for every
 
 ## Downloading and Running the Book
 
-However, this book is intended to be interactive and I recommend using it in that form. It's a little more effort to set up, but worth it. If you install IPython and some supporting libraries on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
+However, this book is intended to be interactive and I recommend using it in that form. It's a little more effort to set up, but worth it. If you install the supporting libraries on your computer and then clone this book you will be able to run all of the code in the book yourself. You can perform experiments, see how filters react to different data, see how different filters react to the same data, and so on. I find this sort of immediate feedback both vital and invigorating. You do not have to wonder "what happens if". Try it and see!
 
-The book and supporting software can be downloaded from GitHub by running this command on  the command line:
+The book and supporting software can be downloaded from GitHub by running this command on the command line:
 
     git clone --depth=1 https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python.git
-    pip install filterpy
+
+### Recommended: uv
+
+If you have [uv](https://docs.astral.sh/uv/) installed, you can run the book directly with:
+
+    uv run jupyter notebook
+
+This is the recommended way to start the notebooks now.
+
+### Legacy: original IPython setup
 
 Instructions for installation of the IPython ecosystem can be found in the Installation appendix, found [here](http://nbviewer.ipython.org/github/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/Appendix-A-Installation.ipynb).
 
