@@ -1,0 +1,4 @@
+# Docs build only; running the notebooks needs ../requirements.txt
+sphinx>=9.1
+shibuya-page @ git+https://github.com/arsenovic/shibuya-page
+myst-nb

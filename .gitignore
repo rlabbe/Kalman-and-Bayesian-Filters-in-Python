@@ -15,3 +15,5 @@ Kalman_and_Bayesian_Filters_in_Python.pdf
 book_files
 tmp
 .pylint.d
+# Sphinx build output
+_build/
